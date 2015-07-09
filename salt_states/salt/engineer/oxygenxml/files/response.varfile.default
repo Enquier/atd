@@ -1,0 +1,13 @@
+#install4j response file for Oxygen XML Editor 16.0
+#Thu Sep 25 08:35:07 PDT 2014
+sys.adminRights$Boolean=true
+sys.programGroupDisabled$Boolean=false
+createDesktopLinkAction$Boolean=true
+autoVersionChecking=true
+reportProblem=true
+downloadResources=true
+sys.languageId=en
+sys.installationDir=/opt/local/oxygen_xml
+createQuicklaunchIconAction$Boolean=false
+sys.symlinkDir=/root
+executeLauncherAction$Boolean=true

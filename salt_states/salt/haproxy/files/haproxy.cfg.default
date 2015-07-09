@@ -1,0 +1,228 @@
+{% set farm = grains['farm_name'] %}
+{% set myID = grains['id'] %}
+
+#---------------------------------------------------------------------
+# Example configuration for a possible web application.  See the
+# full configuration options online.
+#
+#   http://haproxy.1wt.eu/download/1.4/doc/configuration.txt
+#
+#---------------------------------------------------------------------
+
+#---------------------------------------------------------------------
+# Global settings
+#---------------------------------------------------------------------
+global
+    # to have these messages end up in /var/log/haproxy.log you will
+    # need to:
+    #
+    # 1) configure syslog to accept network log events.  This is done
+    #    by adding the '-r' option to the SYSLOGD_OPTIONS in
+    #    /etc/sysconfig/syslog
+    #
+    # 2) configure local2 events to go to the /var/log/haproxy.log
+    #   file. A line like the following can be added to
+    #   /etc/sysconfig/syslog
+    #
+    #    local2.*                       /var/log/haproxy.log
+    #
+    log         127.0.0.1 local2
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    option		    tcp-smart-accept
+    option		    tcp-smart-connect
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
+
+    compression algo gzip
+    compression type text/html text/html;charset=utf-8 text/plain text/css text/javascript application/x-javascript application/javascript application/ecmascript application/rss+xml application/atomsvc+xml application/atom+xml application/atom+xml;type=entry application/atom+xml;type=feed application/cmisquery+xml application/cmisallowableactions+xml application/cmisatom+xml application/cmistree+xml application/cmisacl+xml application/msword application/vnd.ms-excel application/vnd.ms-powerpoint
+
+#---------------------------------------------------------------------
+# main frontend which proxys to the backends
+#---------------------------------------------------------------------
+#frontend  main *:5000
+#    acl url_static       path_beg       -i /static /images /javascript /stylesheets
+#    acl url_static       path_end       -i .jpg .gif .png .css .js
+
+#    use_backend static          if url_static
+#    default_backend             app
+
+#---------------------------------------------------------------------
+# static backend for serving up images, stylesheets and such
+#---------------------------------------------------------------------
+#backend static
+#    balance     roundrobin
+#    server      static 127.0.0.1:4331 check
+
+#---------------------------------------------------------------------
+# round robin balancing between the various backends
+#---------------------------------------------------------------------
+#backend app
+#    balance     roundrobin
+#    server  app1 127.0.0.1:5001 check
+#    server  app2 127.0.0.1:5002 check
+#    server  app3 127.0.0.1:5003 check
+#    server  app4 127.0.0.1:5004 check
+
+#---------------------------------------------------------------------
+# Frontend for http
+#---------------------------------------------------------------------
+frontend http
+ ## Listen on all IP's
+  bind 0.0.0.0:80
+
+ ## Define hostnames for server clusters. 
+ acl host_emsStage hdr(host) -i ems-stg
+ acl host_emsCommunity hdr(host) -i emscommunity
+
+# ACL for backend mapping based on url paths
+# acl robots path_reg ^/robots.txt$
+ acl alfresco_path path_reg ^/alfresco/.*
+# acl share_path path_reg ^/share/.*/proxy/alfresco/api/solr/.*
+ acl share_redirect path_reg ^$|^/$
+
+ # Changes to header responses
+ rspadd Strict-Transport-Security:\ max-age=15768000
+
+# Redirects
+ redirect location /share/ if share_redirect emsStage
+ 
+ option http-server-close
+
+ ## set backend for defaults
+ default_backend www
+ ## set backends for domains
+ use_backend emsStageCluster if host_emsStage
+ use_backend emsCommunityCluster if host_emsCommunity
+
+#---------------------------------------------------------------------
+## Frontend for https
+##---------------------------------------------------------------------
+frontend https
+  ## Listen on all IP's 
+  bind 0.0.0.0:443 ssl crt /etc/ssl/ems-stg.pem
+  reqadd X-Forwarded-Proto:\ https
+  capture request header X-Forwarded-For len 64
+  capture request header User-agent len 256
+  capture request header Cookie len 64
+  capture request header Accept-Language len 65
+
+  ## Define hostnames for server clusters. 
+  acl host_emsStageSSL hdr(host) -i ems-stg
+  acl host_emsCommunitySSL hdr(host) -i emscommunity
+
+ ##
+ option http-server-close
+
+ ## set backends for domains
+ use_backend emsStageClusterSSL if host_emsStage
+ use_backend emsCommunityClusterSSL if host_emsCommunity
+
+
+#---------------------------------------------------------------------
+# backend for http
+#---------------------------------------------------------------------
+backend www
+
+ ## populate servers here for port 80
+#{% for server, addrs in salt['mine.get']('node_type:alfresco', 'network.ip_addrs', expr_form='grain').items() %}
+#server {{ server }} {{ addrs[0] }}:80 check
+#{% endfor %}
+
+ ## Provide a "this server down" page if all hosts are down currently. 
+ server load1 localhost:8080 backup
+
+ ## Set backends for different domains. 
+backend emsStageCluster
+balance leastconn
+cookie JSESSIONID prefix
+
+{% for host, ip in salt['mine.get']('G@node_type:alfresco', 'network.ip_addrs', expr_form='compound').items() %}
+{% if grains['farm_name'] in myID and host.startswith('europaEMSstage' and grains['ENABLE_LOADBALANCE'] == "True") %}
+#Configure Nodes in the same farm with the same URL.
+server {{ host }} {{ ip[0] }}:80 cookie  check inter 5000
+{% endif %}
+{% endfor %}
+
+backend emsCommunityCluster
+{% for host, ip in salt['mine.get']('G@node_type:alfresco or G@node_type:allinone', 'network.ip_addrs', expr_form='compound').items() %}
+{% if grains['farm_name'] in myID and host.startswith('CommunityMMS' and grains['ENABLE_LOADBALANCE'] == "True") %}
+#Configure Nodes in the same farm with the same URL.
+server {{ host }} {{ ip[0] }}:80 check
+{% endif %}
+{% endfor %}
+
+#---------------------------------------------------------------------
+## backend for https
+##---------------------------------------------------------------------
+
+ ## Set backends for different domains. 
+backend emsStageClusterSSL
+redirect scheme https if !{ ssl_fc }
+balance leastconn
+option httpclose
+option forwardfor
+cookie JSESSIONID prefix
+
+{% for host, ip in salt['mine.get']('G@node_type:alfresco', 'network.ip_addrs', expr_form='compound').items() %}
+{% if grains['farm_name'] in myID and host.startswith('europaEMSstage') %}
+#Configure Nodes in the same farm with the same URL.
+server {{ host }} {{ ip[0] }}:443 check
+{% endif %}
+{% endfor %}
+
+backend emsCommunityClusterSSL
+redirect scheme https if !{ ssl_fc }}
+balance leastconn
+option httpclose
+option forwardfor
+cookie JSESSIONID prefix
+
+{% for host, ip in salt['mine.get']('G@node_type:alfresco or G@node_type:allinone', 'network.ip_addrs', expr_form='compound').items() %}
+{% if grains['farm_name'] in myID and host.startswith('CommunityMMS') %}
+#Configure Nodes in the same farm with the same URL.
+server {{ host }} {{ ip[0] }}:443 check
+{% endif %}
+{% endfor %}
+
+#---------------------------------------------------------------------
+## haproxy status page
+#---------------------------------------------------------------------
+listen stats :1936  
+   mode http  
+   stats enable  
+   stats scope http  
+   stats scope www  
+   stats scope static  
+   stats scope static_httpclose  
+   stats realm Haproxy\ Statistics  
+   stats uri /  
+   stats auth haproxy:YOURPASSWORDHERE 

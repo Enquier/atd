@@ -1,0 +1,27 @@
+### This is the default .gitignore file used to make sure we do not unintentionally leak licenses or other data via github. 
+### Make sure to rename this to .gitignore if this is your first time checking out the repo. 
+### Add more files to this that you do not want to be placed into the git repository. 
+
+## Ignore key files for salt-master. These should not get into the repo. 
+salt_cfg/pki/
+
+## Ignore "large files" We have a bunch of huge files that will cause possible issues with git. 
+## they should be downloaded using salt/script to the master to be distributed to the minions. 
+## Or ideally the minion should download them from a local source if possible. 
+salt_states/large_files_store/
+
+## Ignore some of the LDAP files. We dont want to leak keys/certs
+salt_states/salt/ldap/files/cacerts/
+salt_states/salt/ldap/files/certs/
+salt_states/salt/ldap/files/sssd.conf.default
+salt_states/salt/ldap/files/ldap.conf.default
+
+## Ignore license files. These will get leaked otherwise. 
+salt_states/salt/engineer/oxygenxml/files/license_server.xml.default
+salt_states/salt/alfresco/files/alfresco_enterprise_license.lic
+
+## Ignore LDAP files for alfresco. Can cause data leaking! 
+salt_states/salt/alfresco/files/ldap-authentication.properties.default
+
+## Ignore the ssl certificates files.
+salt_states/salt/apache/files/certs/**

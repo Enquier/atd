@@ -1,0 +1,75 @@
+! Configuration File for keepalived
+
+{% if grains['farm_role_index'] == 1 %}
+{%- set masternode = salt['mine.get']('G@node_type:loadbalancer and G@farm_role_index:1', 'network.ip_addrs', expr_form='compound') %}
+{% for host, ip in masternode.items() %}
+{% set masterip = ip[0] %}
+
+global_defs {
+  router_id {{ host }}
+}
+
+vrrp_script chk_haproxy {           # Requires keepalived-1.1.13
+        script "killall -0 haproxy"     # cheaper than pidof
+        interval 2                      # check every 2 seconds
+        weight 2                        # add 2 points of prio if OK
+}
+vrrp_instance VI_1 {
+        interface eth0
+        state MASTER
+        virtual_router_id 51
+        priority 101                    # 101 on master, 100 on backup
+        virtual_ipaddress {
+            {{ masterip }}
+        }
+        track_script {
+            chk_haproxy
+        }
+} 
+{% endfor %}
+
+{% endif %}
+
+{% if grains['farm_role_index'] == 2 %}
+
+{% set slavenode = salt['mine.get']('G@node_type:loadbalancer and G@farm_role_index:2', 'network.ip_addrs', expr_form='compound') %}
+
+{% for host, ip in slavenode.items() %}
+
+global_defs {
+  router_id {{ host }}
+}
+
+{% endfor %}
+
+{% endif %}
+
+{% if grains['farm_role_index'] == 2 %}
+
+{%- set masternode = salt['mine.get']('G@node_type:loadbalancer and G@farm_role_index:1', 'network.ip_addrs', expr_form='compound') %}
+{% for host, ip in masternode.items() %}
+
+{% set masterip = ip[0] %}
+
+vrrp_script chk_haproxy {           # Requires keepalived-1.1.13
+        script "killall -0 haproxy"     # cheaper than pidof
+        interval 2                      # check every 2 seconds
+        weight 2                        # add 2 points of prio if OK
+}
+
+vrrp_instance VI_1 {
+        interface eth0
+        state MASTER
+        virtual_router_id 51
+        priority 100                    # 101 on master, 100 on backup
+        virtual_ipaddress {
+            {{ masterip }}
+        }
+        track_script {
+            chk_haproxy
+        }
+}
+
+{% endfor %}
+{% endif %}
+
