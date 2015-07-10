@@ -21,46 +21,17 @@ include:
     - group: tomcat
     - makedirs: True
 
-{% if 'Europa' in grains['farm_name'] or 'europa' in grains['farm_name'] %}
- 
- {# Europa Branding #}
+{% if 'nomagic' in grains['farm_name'] %}
 
-/opt/local/apache-tomcat/webapps/alfresco/scripts/vieweditor/images/europa-icon.png:
-  file.managed:
-    - source: salt://alfresco/files/branding/europa-icon.png
-    - user: tomcat
-    - group: tomcat
-
-/opt/local/apache-tomcat/webapps/share/scripts/vieweditor/images/europa-icon.png:
-  file.managed:
-    - source: salt://alfresco/files/branding/europa-icon.png
-    - user: tomcat
-    - group: tomcat
-
-/opt/local/apache-tomcat/webapps/alfresco/scripts/vieweditor/images/europa-bg.png:
-  file.managed:
-    - source: salt://alfresco/files/branding/europa-bg.png
-    - user: tomcat
-    - group: tomcat
-
-/opt/local/apache-tomcat/webapps/share/scripts/vieweditor/images/europa-bg.png:
-  file.managed:
-    - source: salt://alfresco/files/branding/europa-bg.png
-    - user: tomcat
-    - group: tomcat
- 
-{% elif 'Mars' in grains['farm_name'] %}
-
- {# Update branding for mars 2020 server #}
-
-bg_diabled_login:
+ {# Update branding for nomagic server #}
+turn_off_bg_image:
   file.replace:
     - name: /opt/local/apache-tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - path: /opt/local/apache-tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: "var style = \"background-image: url(${url.context}/scripts/vieweditor/images/europa-bg.png)*"
     - repl: "//var style = \"background-image: url(${url.context}/scripts/vieweditor/images/europa-bg.png);"
 
-bg_diabled_login2:
+disable_bg_color:
   file.replace:
     - name: /opt/local/apache-tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - path: /opt/local/apache-tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
@@ -69,20 +40,13 @@ bg_diabled_login2:
 
 update_tile_box:
     file.replace:
-    - name: /opt/local/apache-tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - path: /opt/local/apache-tomcat/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: '<b>  Europa EMS</b>'
-    - repl: '<b>M2020 EMS</b>'
+    - repl: '<b>No Magic MBEA</b>'
 
 /opt/local/apache-tomcat/webapps/alfresco/scripts/vieweditor/images/europa-icon.png:
   file.managed:
-    - source: salt://alfresco/files/branding/Mars_2020_icon.jpeg
-    - user: tomcat
-    - group: tomcat
-
-/opt/local/apache-tomcat/webapps/share/scripts/vieweditor/images/europa-icon.png:
-  file.managed:
-    - source: salt://alfresco/files/branding/Mars_2020_icon.jpeg
+    - source: salt://alfresco/files/branding/No_Magic_logo.png
     - user: tomcat
     - group: tomcat
 

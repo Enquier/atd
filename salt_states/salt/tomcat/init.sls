@@ -23,7 +23,7 @@ apache_tomcat_7_startup:
     - dead
     - name: tomcat
     - enable: True
-    - onlyif: test ! -e /etc/init.d/tomcat
+    - onlyif: test ! -e /usr/lib/systemd/system/tomcat.service
     - require:
         - file: /etc/init.d/tomcat
         - user: tomcat
@@ -33,21 +33,20 @@ apache_tomcat7_unpack:
   archive:
     - extracted
     - name: /opt/local
-    - source: salt://tomcat/files/apache-tomcat-7.0.54.tar.gz
+    - source: salt://tomcat/files/apache-tomcat-7.0.64.tar.gz
     - archive_format: tar
     - if_missing: /opt/local/apache-tomcat/webapps
 
-tomcat_env:
-  file.append:
-    - name: /etc/profile
-    - text:
-      - TOMCAT_HOME=/opt/local/apache-tomcat
-      - export TOMCAT_HOME
+/etc/profile.d/tomcat.sh:
+  file.managed:
+    - contents: |
+      TOMCAT_HOME=/opt/local/apache-tomcat
+      export TOMCAT_HOME
 
 tomcat_sym:
   file.symlink:
     - name: /opt/local/apache-tomcat
-    - target: /opt/local/apache-tomcat-7.0.54
+    - target: /opt/local/apache-tomcat-7.0.64
     - user: tomcat
     - group: tomcat
     - recurse:
@@ -56,7 +55,7 @@ tomcat_sym:
 
 tomcat_owner:
   file.directory:
-    - name: /opt/local/apache-tomcat-7.0.54
+    - name: /opt/local/apache-tomcat-7.0.64
     - user: tomcat
     - group: tomcat
     - recurse: 
@@ -65,7 +64,7 @@ tomcat_owner:
 
 {% if grains['JAVA_VERSION'] == 8 %}
 
-/etc/init.d/tomcat:
+/usr/lib/systemd/system/tomcat.service:
   file.managed:
     - order: 1
     - source: salt://tomcat/files/tomcat.initd_java8
@@ -76,7 +75,7 @@ tomcat_owner:
 {% elif grains ['JAVA_VERSION'] == 7 %}
 
 
-/etc/init.d/tomcat:
+/usr/lib/systemd/system/tomcat.service:
   file.managed:
     - order: 1
     - source: salt://tomcat/files/tomcat.initd_java7
@@ -88,10 +87,10 @@ tomcat_owner:
 {% endif %}
 
 
-add_tomcat_chkconfig:
+add_tomcat_systemd
   cmd.run:
     - order: 1
-    - name: chkconfig --add tomcat
+    - name: systemctl enable tomcat.service
 
 {# This makes tomcat/alfresco use properties files outside of the
    exploded wars. Maybe move to alfresco?

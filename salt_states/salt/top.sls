@@ -77,10 +77,10 @@ base:
    - match: grain
 #   - accounts
 {% if grains['MMS_RELEASE_INSTALLED'] == False or grains['MMS_RELEASE_INSTALLED'] == false %}
-   - mounted_dirs.europa_nfs_homes 
+#   - mounted_dirs.europa_nfs_homes 
    - java
    - utils.alfresco_deps
-   - utils.logrotate-tomcat
+#   - utils.logrotate-tomcat
    - activemq
    - apache
    - apache.mod_jk
@@ -168,7 +168,7 @@ engineer:
  'node_type:engineer':
    - match: grain
 #   - accounts
-   - mounted_dirs.europa_nfs_homes 
+#   - mounted_dirs.europa_nfs_homes 
    - firewall
    - firewall.scalr_salt
    - firewall.httpd

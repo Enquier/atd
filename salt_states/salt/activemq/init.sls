@@ -23,9 +23,9 @@ apache_activemq_7_startup:
     - dead
     - name: activemq
     - enable: True
-    - onlyif: test ! -e /etc/init.d/activemq
+    - onlyif: test ! -e /usr/lib/systemd/service/activemq.service
     - require:
-        - file: /etc/init.d/activemq
+        - file: /usr/lib/systemd/system/activemq.service
         - user: activemq
         - group: activemq
 
@@ -33,14 +33,14 @@ apache_activemq7_unpack:
   archive:
     - extracted
     - name: /opt/local
-    - source: salt://activemq/files/apache-activemq-5.10.0-bin.tar.gz
+    - source: salt://activemq/files/apache-activemq-5.10.2-bin.tar.gz
     - archive_format: tar
     - if_missing: /opt/local/apache-activemq/webapps
 
 activemq_sym:
   file.symlink:
     - name: /opt/local/apache-activemq
-    - target: /opt/local/apache-activemq-5.10.0
+    - target: /opt/local/apache-activemq-5.10.2
     - user: activemq
     - group: activemq
     - recurse:
@@ -49,17 +49,17 @@ activemq_sym:
 
 activemq_owner:
   file.directory:
-    - name: /opt/local/apache-activemq-5.10.0
+    - name: /opt/local/apache-activemq-5.10.2
     - user: activemq
     - group: activemq
     - recurse: 
       - user
       - group
 
-/etc/init.d/activemq:
+/usr/lib/systemd/system/activemq.service:
   file.managed:
     - order: 1
-    - source: salt://activemq/files/activemq.initd
+    - source: salt://activemq/files/activemq.service
     - user: root
     - group: root
     - mode: 755
@@ -67,4 +67,4 @@ activemq_owner:
 add_activemq_chkconfig:
   cmd.run:
     - order: 1
-    - name: chkconfig --add activemq
+    - name: systemctl enable activemq.service

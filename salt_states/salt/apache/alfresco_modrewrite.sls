@@ -13,6 +13,7 @@ Developed for JPL/NASA Summer 2014
 
 {% endif %}
 
+{% set myDomain = grains['domain']
 include:
   - apache
   - apache.mod_jk
@@ -28,9 +29,9 @@ update_httpd_modRewrite:
         #####################
         RewriteEngine On
         RewriteCond %{REQUEST_URI} ^/$
-        RewriteRule (.*) https://{{ myURL }}.jpl.nasa.gov/alfresco/mmsapp/mms.html#/workspaces/master [NE,R=301,L]
+        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html#/workspaces/master [NE,R=301,L]
         RewriteCond %{HTTPS} !=on
-        RewriteRule ^/?(.*) https://{{ myURL }}.jpl.nasa.gov/$1 [R,L]
+        RewriteRule ^/?(.*) https://{{ myURL }}.{{ myDomain }}/$1 [R,L]
         ## Turn off LDAP verify on certs
         #####################
         LDAPVerifyServerCert Off

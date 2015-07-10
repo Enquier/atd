@@ -1,0 +1,13 @@
+[Unit]
+Description=ActiveMQ
+
+[Service]
+ExecStart=/opt/local/apache-activemq start
+ExecStop=/opt/local/apache-activemq stop
+ExecReload=/opt/local/apache-activemq stop
+ExecReload=/opt/local/apache-activemq start
+User=activemq
+Group=activemq
+
+[Install]
+WantedBy=multi-user.target
