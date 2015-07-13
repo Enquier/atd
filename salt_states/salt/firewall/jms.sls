@@ -12,7 +12,7 @@ jms_iptables:
     - marker_end: '## END :: SALT :: Firewall Rules. Do not edit Manually'
     - text: |
         # Allow access to JMS
-        -A JPL-INPUT-LOCAL-ACCEPT -p tcp -m state --state NEW -m tcp --dport 61616 -j ACCEPT
+        -A MBEE-INPUT-LOCAL-ACCEPT -p tcp -m state --state NEW -m tcp --dport 61616 -j ACCEPT
     - require_in:
         - file: salt_iptables
 

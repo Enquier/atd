@@ -17,13 +17,13 @@ java_8_jdk_unpack:
 java_create_sym:
   file.symlink:
     - name: /opt/local/jre
-    - target: /opt/local/jdk1.8.0_05
+    - target: /opt/local/jdk1.8.0_45
     - require:
       - file: /opt/local/jre.gz
 
 /opt/local/jre.gz:
   file.managed:
-    - source: salt://java/files/server-jre-8u5-linux-x64.gz
+    - source: salt://java/files/server-jre-8u45-linux-x64.gz
     - user: root
     - group: root
     - mode: 644
@@ -52,13 +52,13 @@ java_unlink:
 java_create_sym:
   file.symlink:
     - name: /opt/local/jre
-    - target: /opt/local/jdk1.7.0_60
+    - target: /opt/local/jdk1.7.0_80
     - require:
       - file: /opt/local/jre.gz
 
 /opt/local/jre.gz:
   file.managed:
-    - source: salt://java/files/server-jre-7u60-linux-x64.gz
+    - source: salt://java/files/server-jre-7u80-linux-x64.gz
     - user: root
     - group: root
     - mode: 644

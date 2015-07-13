@@ -1,6 +1,6 @@
 {#
 Salt Formula by Ian Weaklim weaklim@jpl.nasa.gov ianw@uwyo.edu
-Developed for JPL/NASA Summer 2014
+Developed for MBEE/NASA Summer 2014
 #}
 include:
   - firewall
@@ -15,7 +15,7 @@ tomcat_dev_iptables:
     - marker_end: '## END :: SALT :: Firewall Rules. Do not edit Manually'
     - text: |
         # Allow access to Tomcat Dev Port (TCP 8080)
-        -A JPL-INPUT-LOCAL-ACCEPT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT
+        -A MBEE-INPUT-LOCAL-ACCEPT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT
     - require_in:
         - file: salt_iptables
 

@@ -1,55 +1,55 @@
 #
-# Standard Firewall configuration for JPLIT Linux servers.
+# Standard Firewall configuration for MBEEIT Linux servers.
 # 
 *filter
 :INPUT DROP [0:0]
 :FORWARD DROP [0:0]
 :OUTPUT DROP [0:0]
-:JPL-INPUT - [0:0]
-:JPL-INPUT-LOCAL-ACCEPT - [0:0]
-:JPL-OUTPUT - [0:0]
--A INPUT -j JPL-INPUT
--A OUTPUT -j JPL-OUTPUT
--A FORWARD -j JPL-INPUT
+:MBEE-INPUT - [0:0]
+:MBEE-INPUT-LOCAL-ACCEPT - [0:0]
+:MBEE-OUTPUT - [0:0]
+-A INPUT -j MBEE-INPUT
+-A OUTPUT -j MBEE-OUTPUT
+-A FORWARD -j MBEE-INPUT
 
 # Allow Loopback localhost
--A JPL-INPUT -i lo -j ACCEPT
--A JPL-INPUT -i lo -j ACCEPT
--A JPL-OUTPUT -o lo -j ACCEPT
+-A MBEE-INPUT -i lo -j ACCEPT
+-A MBEE-INPUT -i lo -j ACCEPT
+-A MBEE-OUTPUT -o lo -j ACCEPT
 
 # Allow ICMP
--A JPL-INPUT -p icmp -j ACCEPT
+-A MBEE-INPUT -p icmp -j ACCEPT
 
 # Allow established connections
--A JPL-INPUT -m state --state INVALID -j DROP
--A JPL-INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
--A JPL-INPUT-LOCAL-ACCEPT -m state --state RELATED,ESTABLISHED -j ACCEPT
--A JPL-OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A MBEE-INPUT -m state --state INVALID -j DROP
+-A MBEE-INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A MBEE-INPUT-LOCAL-ACCEPT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A MBEE-OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 # Allow applications to "poke holes" in the firewall
--A JPL-INPUT -p ALL -j JPL-INPUT-LOCAL-ACCEPT
+-A MBEE-INPUT -p ALL -j MBEE-INPUT-LOCAL-ACCEPT
 
-# SSH Server: allow connections from JPL subnets
--A JPL-INPUT-LOCAL-ACCEPT -p tcp --dport 22 --syn -s 128.149.0.0/16 -j ACCEPT
--A JPL-INPUT-LOCAL-ACCEPT -p tcp --dport 22 --syn -s 137.78.0.0/16 -j ACCEPT
--A JPL-INPUT-LOCAL-ACCEPT -p tcp --dport 22 --syn -s 137.79.0.0/16 -j ACCEPT
--A JPL-INPUT-LOCAL-ACCEPT -p tcp --dport 22 --syn -s 137.228.0.0/16 -j ACCEPT
+# SSH Server: allow connections from MBEE subnets
+# -A MBEE-INPUT-LOCAL-ACCEPT -p tcp --dport 22 --syn -s 128.149.0.0/16 -j ACCEPT
+# -A MBEE-INPUT-LOCAL-ACCEPT -p tcp --dport 22 --syn -s 137.78.0.0/16 -j ACCEPT
+# -A MBEE-INPUT-LOCAL-ACCEPT -p tcp --dport 22 --syn -s 137.79.0.0/16 -j ACCEPT
+# -A MBEE-INPUT-LOCAL-ACCEPT -p tcp --dport 22 --syn -s 137.228.0.0/16 -j ACCEPT
 
 # Allow BigFix:
--A JPL-INPUT-LOCAL-ACCEPT -p udp -m state --state NEW -m udp --dport 52311 -j ACCEPT
+-A MBEE-INPUT-LOCAL-ACCEPT -p udp -m state --state NEW -m udp --dport 52311 -j ACCEPT
 
 # Allow Security Scans
--A JPL-INPUT-LOCAL-ACCEPT -p ALL -s 137.78.237.0/24 -j ACCEPT
+# -A MBEE-INPUT-LOCAL-ACCEPT -p ALL -s 137.78.237.0/24 -j ACCEPT
 
 # Allow everything outbound:
--A JPL-OUTPUT -d 0/0 -j ACCEPT
+-A MBEE-OUTPUT -d 0/0 -j ACCEPT
 
 ## START :: SALT :: Firewall Rules. Do not edit Manually
 
 ## END :: SALT :: Firewall Rules. Do not edit Manually
 
 # Reject everything else inbound:
--A JPL-INPUT -j REJECT
+-A MBEE-INPUT -j REJECT
 
 COMMIT
 

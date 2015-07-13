@@ -99,10 +99,11 @@ base:
    - firewall.tomcat
    - firewall.tomcat_dev
    - firewall.postgresql
-   - firewall.nfs
+#   - firewall.nfs
    - firewall.jms
-   - engineer.x2go
+#   - engineer.x2go
    - alfresco
+   - alfresco.copy
    - alfresco.deploy
    - alfresco.amps_deploy
    - alfresco.configure
@@ -137,7 +138,7 @@ base:
    - firewall.postgresql
    - firewall.nfs
    - firewall.jms
-   - engineer.x2go
+#   - engineer.x2go
    - alfresco
 #   - alfresco.copy
    - alfresco.deploy

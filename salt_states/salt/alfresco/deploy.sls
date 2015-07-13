@@ -4,7 +4,7 @@ Developed for JPL/NASA Summer 2014
 #}
 include:
  - alfresco
- - mounted_dirs
+# - mounted_dirs
 # - mounted_dirs.europa_nfs_alf_data
 
 {% set farm = grains['farm_name'] %}

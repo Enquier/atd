@@ -1,3 +1,5 @@
+{% set alf_ver = grains['ALFRESCO_VERSION'] %}
+
 #!/bin/bash
 
 # This script grabs all the latest artifacts from Artifactory as necessary
@@ -6,8 +8,8 @@ if [ -a /opt/local/apache-tomcat ]; then
     export path="/opt/local/apache-tomcat/amps"
     export owner="tomcat:jpl"
 else
-    if [ -a /opt/local/alfresco-4.2.e ]; then
-        export path="/opt/local/alfresco-4.2.e/amps"
+    if [ -a /opt/local/alfresco-{{ alf_ver }} ]; then
+        export path="/opt/local/alfresco-{{ alf_ver }}/amps"
         export owner="alfresco:jpl"
     else
         export path="."

@@ -2,22 +2,23 @@
 Salt Formula by Ian Weaklim weaklim@jpl.nasa.gov ianw@uwyo.edu
 Developed for JPL/NASA Summer 2014
 #}
+{% set alf_ver = grains['ALFRESCO_VERSION'] %}
 {% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' %}
 
 alfresco_zip_unpack:
   module.run:
     - name: archive.unzip
-    - zipfile: /tmp/alfresco-community-4.2.e.zip
+    - zipfile: /tmp/alfresco-community-{{ alf_ver }}.zip
     - options: u
     - dest: /usr/src/alfresco_deploy
     - onlyif: test ! -e /opt/local/apache-tomcat/webapps/alfresco.war
     - require:
-      - file: /tmp/alfresco-community-4.2.e.zip
+      - file: /tmp/alfresco-community-{{ alf_ver }}.zip
 
-/tmp/alfresco-community-4.2.e.zip:
+/tmp/alfresco-community-{{ alf_ver }}.zip:
   file.managed:
     - order: 1
-    - source: salt://alfresco/files/alfresco-community-4.2.e.zip
+    - source: salt://alfresco/files/alfresco-community-{{ alf_ver }}.zip
     - user: root
     - group: root
     - mode: 644
@@ -28,17 +29,17 @@ alfresco_zip_unpack:
 alfresco_zip_unpack:
   module.run:
     - name: archive.unzip
-    - zipfile: /tmp/alfresco-enterprise-4.2.2.zip
+    - zipfile: /tmp/alfresco-enterprise-{{ alf_ver }}.zip
     - options: u
     - dest: /usr/src/alfresco_deploy
     - onlyif: test ! -e /opt/local/apache-tomcat/webapps/alfresco.war
     - require:
-      - file: /tmp/alfresco-enterprise-4.2.2.zip
+      - file: /tmp/alfresco-enterprise-{{ alf_ver }}.zip
 
-/tmp/alfresco-enterprise-4.2.2.zip:
+/tmp/alfresco-enterprise-{{ alf_ver }}.zip:
   file.managed:
     - order: 1
-    - source: salt://alfresco/files/alfresco-enterprise-4.2.2.zip
+    - source: salt://alfresco/files/alfresco-enterprise-{{ alf_ver }}.zip
     - user: root
     - group: root
     - mode: 644

@@ -1,3 +1,5 @@
+{% set alf_ver = grains['ALFRESCO_VERSION'] %}
+
 # downloads latest artifacts and deploys them as necessary
 
 function setPaths() {
@@ -5,9 +7,9 @@ function setPaths() {
         ampPath="/opt/local/apache-tomcat/amps"
         webappPath="/opt/local/apache-tomcat/webapps"
     else
-        if [ -a /opt/local/alfresco-4.2.e ]; then
-            ampPath="/opt/local/alfresco-4.2.e/amps"
-            webappPath="/opt/local/alfresco-4.2.e/tomcat/webapps"
+        if [ -a /opt/local/alfresco-{{ alf_ver }} ]; then
+            ampPath="/opt/local/alfresco-{{ alf_ver }}/amps"
+            webappPath="/opt/local/alfresco-{{ alf_ver }}/tomcat/webapps"
         else
             cwd=`pwd`
             ampPath="$cwd/amps"

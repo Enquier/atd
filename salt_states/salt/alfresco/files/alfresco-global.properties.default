@@ -1,7 +1,9 @@
 {% set farm = grains['farm_name'] %}
+{% set domain = grains['domain'] %}
 {% set environment = grains['node_env'] %}
 {% set alf_type = grains['ALFRESCO_LICENSE_TYPE'] %}
 {% set myID = grains['id'] %}
+{% set alf_ver = grains['ALFRESCO_VERSION'] %}
 
 ###############################
 ## Common Alfresco Properties #
@@ -12,11 +14,10 @@ dir.root=/mnt/alf_data
 alfresco.context=alfresco
 
 {% if grains['farm_role_index'] == 1 %}
-alfresco.host={{ farm }}.jpl.nasa.gov
+alfresco.host={{ farm }}.{{ domain }}
 
 {% elif grains ['farm_role_index'] == 2 %}
-alfresco.host={{ farm }}-b.jpl.nasa.gov
-
+alfresco.host={{ farm }}-b.{{ domain }}
 {% endif %}
 
 alfresco.port=8443
@@ -81,14 +82,14 @@ deployment.rmi.service.port=0
 ooo.exe=/usr/lib64/libreoffice/program/soffice.bin
 ooo.enabled=true
 ooo.port=8100
-img.root=/opt/local/alfresco-4.2.e/common
+img.root=/opt/local/alfresco-{{ alf_ver }}/common
 img.dyn=${img.root}/lib
 img.exe=/usr/bin/convert
 swf.exe=/usr/local/bin/pdf2swf
-swf.languagedir=/opt/local/alfresco-4.2.e/common/japanese
+swf.languagedir=/opt/local/alfresco-{{ alf_ver }}/common/japanese
 
 jodconverter.enabled=false
-jodconverter.officeHome=/opt/local/alfresco-4.2.e/libreoffice
+jodconverter.officeHome=/opt/local/alfresco-{{ alf_ver }}/libreoffice
 jodconverter.portNumbers=8100
 
 ### Initial admin password ###
@@ -98,7 +99,7 @@ alfresco_user_store.adminpassword=becedb42ec3c5c7f965255338be4453c
 notification.email.siteinvite=false
 
 ### License location ###
-#dir.license.external=/opt/local/alfresco-4.2.e
+#dir.license.external=/opt/local/alfresco-{{ alf_ver }}
 
 ### Solr indexing ###
 index.subsystem.name=lucene
@@ -156,11 +157,11 @@ cifs.enabled=false
 {% if grains['node_env'] == 'dev' %} 
 ###############################################################################
 # [CYL]  Override the SMTP defaults - no need to authenticate to send email messages, so null out username
-#mail.host = smtp.jpl.nasa.gov
-mail.testmessage.send = false
-#mail.testmessage.to = mbee-dev-admin@jpl.nasa.gov
+#mail.host = mail.securence.com
+mail.testmessage.send = true
+#mail.testmessage.to = cgaley@nomagic.com
 #mail.username =
-# mail.from.default = {{ salt['cmd.run']('hostname') }}@{{ salt['cmd.run']('hostname') }}.jpl.nasa.gov
+# mail.from.default = {{ salt['cmd.run']('hostname') }}@{{ salt['cmd.run']('hostname') }}.nomagic.com
 activities.feed.notifier.enabled=false
 
 {% elif grains['node_env'] == 'stage' %}
@@ -189,12 +190,12 @@ activities.feed.notifier.enabled=false
 
 {% elif grains['node_env'] == 'prod' %}
 # [CYL]  Override the SMTP defaults - no need to authenticate to send email messages, so null out username
-mail.host = smtp.jpl.nasa.gov
+mail.host = mail.securence.com
 mail.testmessage.send = true
-#mail.testmessage.to = mbee-dev-admin@jpl.nasa.gov
-mail.testmessage.to = swong@jpl.nasa.gov
+mail.testmessage.to = cgaley@nomagic.com
 mail.username =
-mail.from.default = {{ salt['cmd.run']('hostname') }}@{{ salt['cmd.run']('hostname') }}.jpl.nasa.gov
+mail.from.default = {{ salt['cmd.run']('hostname') }}@{{ salt['cmd.run']('hostname') }}.nomagic.com
+activities.feed.notifier.enabled=false
 
 activities.feed.notifier.enabled = false
 
