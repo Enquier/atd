@@ -10,12 +10,13 @@ base:
    - match: grain
 #   - java
 #   - dns
-   - build 
-   - apache
-   - apache.mod_jk
-   - apache.enable_modjk
-   - apache.artifactory_modrewrite
-   - tomcat.apache_apr
+#   - build 
+#   - apache
+#   - apache.mod_jk
+#   - apache.enable_modjk
+#   - apache.artifactory_modrewrite
+#   - tomcat.apache_apr
+   - tomcat.artifactory_ssl
 
  'node_type:allinone':
    - match: grain

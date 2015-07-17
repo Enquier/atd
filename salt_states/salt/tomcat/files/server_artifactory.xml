@@ -1,0 +1,21 @@
+<Server port="8015" shutdown="SHUTDOWN">
+
+    <Service name="Catalina">
+        <Connector port="8081" protocol="HTTP/1.1"/>
+
+        <!-- This is the optional AJP connector -->
+        <Connector port="8019" protocol="AJP/1.3"  redirectPort="8443" />
+        <!--START :: SALT :: configure_ssl_connector DO NOT EDIT MANUALLY -->
+        <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
+                SSLCertificateFile="/etc/pki/tls/certs/{{ pillar['ssl_cert_name'] }}.crt"
+                SSLCertificateKeyFile="/etc/pki/tls/private/server.key"
+                SSLCertificateChainFile="/etc/pki/tls/certs/{{ pillar['ssl_bundle_name'] }}.crt"
+                SSLVerifyClient="optional" SSLProtocol="all"
+        />
+        <!--END :: SALT :: configure_ssl_connector DO NOT EDIT MANUALLY -->    
+        <Engine name="Catalina" defaultHost="localhost">
+            <Host name="localhost" appBase="webapps"/>
+        </Engine>
+
+    </Service>
+</Server>
