@@ -13,6 +13,8 @@ Developed for JPL/NASA Summer 2014
 
 {% endif %}
 
+{% set myDomain = grains['domain'] %}
+
 include:
  - apache
  - apache.mod_jk
@@ -67,8 +69,8 @@ update_httpd_ssl_modJk:
         ## ModRewrite rules. 
         RewriteEngine On
         RewriteCond %{REQUEST_URI} ^/$
-        RewriteRule (.*) https://{{ myURL }}.jpl.nasa.gov/alfresco/mmsapp/mms.html#/workspaces/master [NE,R=301,L]
-        RewriteRule /alfresco/mmsapp/ve.html https://{{ myURL }}.jpl.nasa.gov/alfresco/mmsapp/mms.html$1 [L]
-        RewriteRule /alfresco/mmsapp/docweb.html https://{{ myURL }}.jpl.nasa.gov/alfresco/mmsapp/mms.html$1 [L]
+        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html#/workspaces/master [NE,R=301,L]
+        RewriteRule /alfresco/mmsapp/ve.html https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html$1 [L]
+        RewriteRule /alfresco/mmsapp/docweb.html https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html$1 [L]
         RewriteRule /alfresco/mmsapp/portal.html https://{{ myURL }}.jpl.nasa.gov/alfresco/mmsapp/mms.html$1 [L]
 

@@ -13,7 +13,7 @@ Developed for JPL/NASA Summer 2014
 
 {% endif %}
 
-{% set myDomain = grains['domain']
+{% set myDomain = grains['domain' ] %}
 include:
   - apache
   - apache.mod_jk

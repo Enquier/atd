@@ -28,7 +28,7 @@ mod_jk_install:
   cmd.run:
     - order: 1
     - cwd: /usr/src/mod_jk/native
-    - name: /usr/src/mod_jk/native/buildconf.sh && /usr/src/mod_jk/native/configure --with-apxs=/usr/sbin/apxs && make && make install
+    - name: /usr/src/mod_jk/native/buildconf.sh && /usr/src/mod_jk/native/configure --with-apxs=/usr/bin/apxs && make && make install
     - onlyif: test ! -e /usr/lib64/httpd/modules/mod_jk.so
     - require:
       - pkg: mod_jk_deps

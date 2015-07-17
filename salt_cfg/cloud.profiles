@@ -1,0 +1,3 @@
+test:
+ provider: nminc_aws-aio
+  

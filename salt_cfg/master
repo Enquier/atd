@@ -11,7 +11,7 @@
 #default_include: master.d/*.conf
 
 # The address of the interface to bind to
-interface: 0.0.0.0
+interface: 172.31.36.15
 
 # Whether the master should listen for IPv6 connections. If this is set to True,
 # the interface option must be adjusted too (for example: "interface: '::'")
@@ -130,7 +130,7 @@ pidfile: /var/run/salt-master.pid
 # authentication, this is only intended for highly secure environments or for
 # the situation where your keys end up in a bad state. If you run in open mode
 # you do so at your own risk!
-#open_mode: False
+#open_mode: True
 
 # Enable auto_accept, this setting will automatically accept all incoming
 # public keys from the minions. Note that this is insecure.

@@ -14,17 +14,23 @@ configure_minion_postgresql:
       - "postgres.user: 'postgres'"
       - "postgres.pass: ''"
       - "postgres.maintenance_db: 'postgres'"
-
+{#
 create_alfresco_db:
   module.run:
     - name: postgres.db_create
     - m_name: alfresco
+    - template: template1
+#}
+
+create_alfresco_db:
+  postgres_database.present:
+    - name: alfresco
     - template: template1
 
 create_alfresco_user:
   postgres_user.present:
     - name: alfresco
     - createdb: alfresco
-    - runas: postgres
+    - user: postgres
     - password: alfresco
 
