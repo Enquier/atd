@@ -52,9 +52,9 @@ update_ssl_bundle_name:
     - marker_end: '## END :: SALT :: ssl_bundle_name settings. Do not edit Manually'
     - content: SSLCertificateChainFile /etc/pki/certs/{{ pillar['ssl_bundle_name'] }}.crt   
 
-/etc/httpd/worker.properties:
+/etc/httpd/workers.properties:
   file.managed:
-    - source: salt://apache/files/worker.properties
+    - source: salt://apache/files/workers.properties
     - user: root
     - group: root
     - mode: 644

@@ -81,8 +81,15 @@ update_worker_properties:
     - marker_start: '## START :: SALT :: mod_jk settings. Do not edit Manually'
     - marker_end: '## END :: SALT :: mod_jk settings. Do not edit Manually'
     - content: |
-        workers.tomcat_home=/opt/apache-tomcat
+        workers.tomcat_home=/opt/apache-tomcat/
+        workers.java_home=/opt/jre
+        ps=/
+        worker.list=worker1
+
         worker.default.port=8009
+        worker.default.host=localhost
+        worker.default.type=ajp13
+        worker.default.lbfactor=1
 
 {% elif grains ['node_type'] == 'build' %}
 update_httpd_modJk_WorkerSettings:
@@ -103,9 +110,9 @@ update_httpd_modJk_WorkerSettings:
         JkOptions +ForwardKeySize -ForwardDirectories
         # JkRequestLogFormat set the request format
         JkRequestLogFormat "%w %V %T"
-        # Send servlet for context /alfresco to your repository
+        # Send servlet for context /artifactory to your repository
         JkMount /artifactory worker1
-        # Send JSPs for context /alfresco/* to your repository
+        # Send JSPs for context /artifactory/* to your repository
         JkMount /artifactory/* worker1
         
 update_httpd_ssl_modJk:
@@ -130,7 +137,15 @@ update_worker_properties:
     - marker_end: '## END :: SALT :: mod_jk settings. Do not edit Manually'
     - content: |
         workers.tomcat_home=/opt/jfrog/artifactory/tomcat/
+        workers.java_home=/opt/jre
+        ps=/
+        worker.list=worker1
+
         worker.default.port=8019
+        worker.default.host=localhost
+        worker.default.type=ajp13
+        worker.default.lbfactor=1
+        
 
 
 {% endif %}
