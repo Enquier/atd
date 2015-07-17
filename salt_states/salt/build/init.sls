@@ -7,7 +7,7 @@ artifactory:
   pkg.installed:
     - sources:
 	    - artifactory-3.9.2: https://bintray.com/artifact/download/jfrog/artifactory-rpms/artifactory-3.9.2.rpm
-	  
+            	  
 artifactory_startup:
   service:
     - dead
