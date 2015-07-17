@@ -8,7 +8,7 @@ init.sls
 
 Placeholder file. Currenlty not used. 
 
-copy.sls
+!!!!DEPRECIATED!!! copy.sls
 ===
 
 Copies the alfresco zip file release to the remote host. 
@@ -24,19 +24,13 @@ deploy.sls
 
 Creates the /opt/apache-tomcat/endorsed and /opt/apache-tomcat/licenses directories in the tomcat server home. 
 
-Copies the required files from the /usr/src/alfresco_deploy directory into the tomcat server. (file list below). 
-
-1. postgresql-9.0-802.jdbc4.jar
-2. serializer.jar
-3. xalan.jar
-4. alfresco-mmt.jar
-5. apply_amps.sh
+Copies the unpackaed alfresco files from the salt file server directory into the tomcat server. (file list below). 
 
 If the ALFRESCO_LICENSE_TYPE is set to "enterprise" then the license file is also installed to:
 
 /opt/apache-tomcat/shared/classes/alfresco/extension/license/alfresco_enterprise_license.lic:
 
-
+MIGHT BE MOVED:
 The alf_data directory is also created by pulling the following data from the environment. 
 
 1. environment (stage, prod, test, qa, etc...)
