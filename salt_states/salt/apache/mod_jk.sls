@@ -12,7 +12,7 @@ decompress_modjk:
     - name: /usr/src/
     - source: http://apache.cs.utah.edu/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.40-src.tar.gz
     - archive_format: tar
-    - if_missing: /usr/src/mod_jk
+    - if_missing: /usr/src/tomcat-connectors-1.2.40-src
     - source_hash: md5=7e6f4e4dbf5261f42ddd1fdbb9ac3e32
 
 mod_jk_deps:
@@ -27,8 +27,8 @@ mod_jk_deps:
 mod_jk_install:
   cmd.run:
     - order: 1
-    - cwd: /usr/src/mod_jk/native
-    - name: /usr/src/mod_jk/native/buildconf.sh && /usr/src/mod_jk/native/configure --with-apxs=/usr/bin/apxs && make && make install
+    - cwd: /usr/src/tomcat-connectors-1.2.40-src/native
+    - name: ./buildconf.sh && ./configure --with-apxs=/usr/bin/apxs && make && make install
     - onlyif: test ! -e /usr/lib64/httpd/modules/mod_jk.so
     - require:
       - pkg: mod_jk_deps
