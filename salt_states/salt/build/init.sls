@@ -15,5 +15,6 @@ artifactory_startup:
     - enable: True
     - onlyif: test ! -e /etc/init.d/artifactory
     - require:
+      - pkg: artifactory
       - user: artifactory
       - group: artifactory
