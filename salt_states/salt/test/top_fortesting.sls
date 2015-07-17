@@ -1,14 +1,14 @@
 base:
- '*':
-   - edit
-   - utils
-   - utils.epel_repo
-#   - ldap
-   - sshd
+# '*':
+#   - edit
+#   - utils
+#   - utils.epel_repo
+##   - ldap
+#   - sshd
  'node_type:build':
    -match: grain
-   - java
-   - dns
+#   - java
+#   - dns
    - build
  
  
