@@ -22,7 +22,7 @@ apache:
     - pkg: apache
     - file: /etc/httpd/conf/httpd.conf
     - file: /etc/httpd/conf.d/ssl.conf
-    - file: /etc/httpd/worker.properties
+    - file: /etc/httpd/workers.properties
 
 /etc/httpd/conf/httpd.conf:
   file.managed:
