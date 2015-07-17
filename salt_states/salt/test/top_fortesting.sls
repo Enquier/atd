@@ -3,6 +3,7 @@ base:
 #   - edit
 #   - utils
 #   - utils.epel_repo
+   - utils.selinux
 ##   - ldap
 #   - sshd
 
