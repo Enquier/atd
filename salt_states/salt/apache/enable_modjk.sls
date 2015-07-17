@@ -75,9 +75,9 @@ update_httpd_ssl_modJk:
         RewriteRule /alfresco/mmsapp/docweb.html https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html$1 [L]
         RewriteRule /alfresco/mmsapp/portal.html https://{{ myURL }}.jpl.nasa.gov/alfresco/mmsapp/mms.html$1 [L]
 
-update_worker_properties:
+update_workers_properties:
   file.blockreplace:
-    - name: /etc/httpd/worker.properties
+    - name: /etc/httpd/workers.properties
     - marker_start: '## START :: SALT :: mod_jk settings. Do not edit Manually'
     - marker_end: '## END :: SALT :: mod_jk settings. Do not edit Manually'
     - content: |
@@ -130,9 +130,9 @@ update_httpd_ssl_modJk:
         RewriteCond %{REQUEST_URI} ^/$
         RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
 
-update_worker_properties:
+update_workers_properties:
   file.blockreplace:
-    - name: /etc/httpd/worker.properties
+    - name: /etc/httpd/workers.properties
     - marker_start: '## START :: SALT :: mod_jk settings. Do not edit Manually'
     - marker_end: '## END :: SALT :: mod_jk settings. Do not edit Manually'
     - content: |
