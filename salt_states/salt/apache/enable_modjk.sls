@@ -126,9 +126,9 @@ update_httpd_ssl_modJk:
         JkMount /artifactory worker1
         JkMount /artifactory/* worker1
         ## ModRewrite rules. 
-        RewriteEngine On
-        RewriteCond %{REQUEST_URI} ^/$
-        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
+        ##RewriteEngine On
+        ##RewriteCond %{REQUEST_URI} ^/$
+        ##RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
 
 update_workers_properties:
   file.blockreplace:

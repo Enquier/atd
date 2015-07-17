@@ -27,11 +27,11 @@ update_httpd_modRewrite:
     - content: |
         ## Rewrite rules
         #####################
-        RewriteEngine On
-        RewriteCond %{REQUEST_URI} ^/$
-        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
-        RewriteCond %{HTTPS} !=on
-        RewriteRule ^/?(.*) https://{{ myURL }}.{{ myDomain }}/$1 [R,L]
+        ##RewriteEngine On
+        ##RewriteCond %{REQUEST_URI} ^/$
+        ##RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
+        ##RewriteCond %{HTTPS} !=on
+        ##RewriteRule ^/?(.*) https://{{ myURL }}.{{ myDomain }}/$1 [R,L]
         ## Turn off LDAP verify on certs
         #####################
         LDAPVerifyServerCert Off
