@@ -7,11 +7,10 @@ base:
 #   - sshd
 
  'node_type:build':
-   -match: grain
+   - match: grain
 #   - java
 #   - dns
-   - build
- 
+   - build 
  
  'node_type:allinone':
    - match: grain
