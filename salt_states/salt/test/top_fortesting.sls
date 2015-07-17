@@ -15,6 +15,7 @@ base:
    - apache.mod_jk
    - apache.enable_modjk
    - apache.artifactory_modrewrite
+   - tomcat.apache_apr
 
  'node_type:allinone':
    - match: grain
