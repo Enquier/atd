@@ -8,7 +8,7 @@ Developed for JPL/NASA Summer 2014
 alfresco_zip_unpack:
   archive.extracted:
     - name: /usr/src/alfresco_deploy
-    - source: salt://alfresco/files/alfresco-community:wq-{{ alf_ver }}.zip
+    - source: salt://alfresco/files/alfresco-community-{{ alf_ver }}.zip
     - archive_format: zip
     - onlyif: test ! -e /opt/local/apache-tomcat/webapps/alfresco.war
 
