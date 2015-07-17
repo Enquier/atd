@@ -25,4 +25,5 @@ base:
 #   - database.postgresqlAlfDBcreate
 #   - alfresco
 #   - alfresco.copy
-   - alfresco.deploy
+#   - alfresco.deploy
+   - alfresco.amps_deploy
