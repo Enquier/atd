@@ -17,7 +17,8 @@ artifactory_startup:
     - require:
       - pkg: artifactory
       
-      
+
+     
 add_activemq_chkconfig:
   cmd.run:
     - order: 1

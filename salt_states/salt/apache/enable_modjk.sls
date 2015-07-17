@@ -86,10 +86,10 @@ update_workers_properties:
         ps=/
         worker.list=worker1
 
-        worker.default.port=8009
-        worker.default.host=localhost
-        worker.default.type=ajp13
-        worker.default.lbfactor=1
+        worker.worker1.port=8009
+        worker.worker1.host=localhost
+        worker.worker1.type=ajp13
+        worker.worker1.lbfactor=1
 
 {% elif grains ['node_type'] == 'build' %}
 update_httpd_modJk_WorkerSettings:
@@ -141,10 +141,10 @@ update_workers_properties:
         ps=/
         worker.list=worker1
 
-        worker.default.port=8019
-        worker.default.host=localhost
-        worker.default.type=ajp13
-        worker.default.lbfactor=1
+        worker.worker1.port=8019
+        worker.worker1.host=localhost
+        worker.worker1.type=ajp13
+        worker.worker1.lbfactor=1
         
 
 
