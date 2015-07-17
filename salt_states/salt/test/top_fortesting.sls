@@ -11,10 +11,10 @@ base:
 #   - java
 #   - dns
 #   - build 
-#   - apache
-#   - apache.mod_jk
-#   - apache.enable_modjk
-#   - apache.artifactory_modrewrite
+   - apache
+   - apache.mod_jk
+   - apache.enable_modjk
+   - apache.artifactory_modrewrite
 #   - tomcat.apache_apr
    - tomcat.artifactory_ssl
 

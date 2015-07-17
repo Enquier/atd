@@ -10,7 +10,7 @@ decompress_modjk:
     - order: 1
     - extracted
     - name: /usr/src/
-    - source: salt://apache/files/source/mod_jk.tar.gz
+    - source: http://apache.cs.utah.edu/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.40-src.tar.gz
     - archive_format: tar
     - if_missing: /usr/src/mod_jk
     - source_hash: md5=297add5f2643329b04f62a16578c0cab
