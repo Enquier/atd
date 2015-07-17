@@ -1,11 +1,17 @@
 base:
-# '*':
-#   - edit
-#   - utils
-#   - utils.epel_repo
-#    - ldap
-#   - sshd
-
+ '*':
+   - edit
+   - utils
+   - utils.epel_repo
+#   - ldap
+   - sshd
+ 'node_type:build':
+   -match: grain
+   - java
+   - dns
+   - build
+ 
+ 
  'node_type:allinone':
    - match: grain
 #   - java
@@ -26,4 +32,4 @@ base:
 #   - alfresco
 #   - alfresco.copy
 #   - alfresco.deploy
-   - alfresco.amps_deploy
+#   - alfresco.amps_deploy

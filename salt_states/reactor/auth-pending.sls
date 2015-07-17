@@ -1,5 +1,5 @@
 {# server faild to authenticate -- remove accepted key #}
-{% if not data['result'] and data['id'].endswith('jpl.nasa.gov') %}
+{% if not data['result'] and data['id'].endswith('nminc.co') %}
 minion_remove:
   wheel.key.delete:
     - match: {{ data['id'] }} minion_rejoin:
@@ -10,7 +10,7 @@ minion_remove:
 {% endif %}
 
 {# server is sending new key -- accept this key #}
-{% if 'act' in data and data['act'] == 'pend' and data['id'].endswith('europa.jpl.nasa.gov') %}
+{% if 'act' in data and data['act'] == 'pend' and data['id'].endswith('nminc.co') %}
 minion_add:
   wheel.key.accept:
     - match: {{ data['id'] }}
