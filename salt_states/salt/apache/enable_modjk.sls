@@ -28,6 +28,7 @@ update_httpd_modJk_LoadModule:
         #Load mod_jk apache-tomcat connector module
         LoadModule jk_module modules/mod_jk.so
 
+{% if grains ['node_type'] == 'allinone' %}
 
 update_httpd_modJk_WorkerSettings:
   file.blockreplace:
@@ -74,3 +75,62 @@ update_httpd_ssl_modJk:
         RewriteRule /alfresco/mmsapp/docweb.html https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html$1 [L]
         RewriteRule /alfresco/mmsapp/portal.html https://{{ myURL }}.jpl.nasa.gov/alfresco/mmsapp/mms.html$1 [L]
 
+update_worker_properties:
+  file.blockreplace:
+    - name: /etc/httpd/worker.properties
+    - marker_start: ## START :: SALT :: mod_jk settings. Do not edit Manually
+    - marker_end: ## END :: SALT :: mod_jk settings. Do not edit Manually
+    - content: |
+        workers.tomcat_home=/opt/apache-tomcat
+        worker.default.port=8009
+
+{% elif grains ['node_type'] == 'build' %}
+update_httpd_modJk_WorkerSettings:
+  file.blockreplace:
+    - name: /etc/httpd/conf/httpd.conf
+    - marker_start: '## START :: SALT :: mod_jk worker settings. Do not edit Manually'
+    - marker_end: '## END :: SALT :: mod_jk worker settings. Do not edit Manually'
+    - content: |
+        # Settings required for mod_jk
+        JkWorkersFile /etc/httpd/worker.properties
+        # Where to put jk logs
+        JkLogFile /var/log/httpd/mod_jk.log
+        # Set the jk log level [debug/error/info]
+        JkLogLevel info
+        # Select the log format
+        JkLogStampFormat "[%a %b %d %H:%M:%S %Y] "
+        # JkOptions indicate to send SSL KEY SIZE,
+        JkOptions +ForwardKeySize -ForwardDirectories
+        # JkRequestLogFormat set the request format
+        JkRequestLogFormat "%w %V %T"
+        # Send servlet for context /alfresco to your repository
+        JkMount /artifactory worker1
+        # Send JSPs for context /alfresco/* to your repository
+        JkMount /artifactory/* worker1
+        
+update_httpd_ssl_modJk:
+  file.blockreplace:
+    - name: /etc/httpd/conf.d/ssl.conf
+    - marker_start: '## START :: SALT :: mod_jk mountpoint settings. Do not edit Manually'
+    - marker_end: '## END :: SALT :: mod_jk mountpoint settings. Do not edit Manually'
+    - content: |
+        ## Settings to allow artifactory to be served HTTPS. 
+        JkMountCopy On
+        JkMount /artifactory worker1
+        JkMount /artifactory/* worker1
+        ## ModRewrite rules. 
+        RewriteEngine On
+        RewriteCond %{REQUEST_URI} ^/$
+        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
+
+update_worker_properties:
+  file.blockreplace:
+    - name: /etc/httpd/worker.properties
+    - marker_start: ## START :: SALT :: mod_jk settings. Do not edit Manually
+    - marker_end: ## END :: SALT :: mod_jk settings. Do not edit Manually
+    - content: |
+        workers.tomcat_home=/opt/jfrog/artifactory/tomcat/
+        worker.default.port=8019
+
+
+{% endif %}

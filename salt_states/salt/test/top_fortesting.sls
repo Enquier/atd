@@ -11,7 +11,10 @@ base:
 #   - java
 #   - dns
    - build 
- 
+   - apache
+   - apache.mod_jk
+   - apache.enable_modjk
+
  'node_type:allinone':
    - match: grain
 #   - java
