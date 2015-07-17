@@ -78,8 +78,8 @@ update_httpd_ssl_modJk:
 update_worker_properties:
   file.blockreplace:
     - name: /etc/httpd/worker.properties
-    - marker_start: ## START :: SALT :: mod_jk settings. Do not edit Manually
-    - marker_end: ## END :: SALT :: mod_jk settings. Do not edit Manually
+    - marker_start: '## START :: SALT :: mod_jk settings. Do not edit Manually'
+    - marker_end: '## END :: SALT :: mod_jk settings. Do not edit Manually'
     - content: |
         workers.tomcat_home=/opt/apache-tomcat
         worker.default.port=8009
@@ -126,8 +126,8 @@ update_httpd_ssl_modJk:
 update_worker_properties:
   file.blockreplace:
     - name: /etc/httpd/worker.properties
-    - marker_start: ## START :: SALT :: mod_jk settings. Do not edit Manually
-    - marker_end: ## END :: SALT :: mod_jk settings. Do not edit Manually
+    - marker_start: '## START :: SALT :: mod_jk settings. Do not edit Manually'
+    - marker_end: '## END :: SALT :: mod_jk settings. Do not edit Manually'
     - content: |
         workers.tomcat_home=/opt/jfrog/artifactory/tomcat/
         worker.default.port=8019
