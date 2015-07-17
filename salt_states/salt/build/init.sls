@@ -16,3 +16,9 @@ artifactory_startup:
     - onlyif: test ! -e /etc/init.d/artifactory
     - require:
       - pkg: artifactory
+      
+      
+add_activemq_chkconfig:
+  cmd.run:
+    - order: 1
+    - name: chkconfig --add artifactory
