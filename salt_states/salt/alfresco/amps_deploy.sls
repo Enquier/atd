@@ -8,6 +8,7 @@ include:
 #  - alfresco.deploy
 
 {% set mms_version = grains['MMS_RELEASE_VERSION'] %}
+{% set alfresco_ver = grains['ALFRESCO_VERSION'] %}
 
 {# 
 copy the alfresco.war and share.war. the deploy script
@@ -27,8 +28,22 @@ copy_share_war:
     - cwd: /opt/local/apache-tomcat/webapps
     - name: cp share.war share.war-`date +%s`.bak
 
-run_deploy_script:
-  cmd.run:
+copy_deploy_scripts:
+  file.recurse:
+    - name: /tmp/atd/salt_states/salt/alfresco/files/scripts
+    - source: salt://salt/alfresco/files/scripts
+    - user: tomcat
+    - group: tomcat
+    - recurse:
+      - user
+      - group
+
+set_alf_version:
+  file.blockreplace:
+    - name: /tmp/atd/salt_states/salt/alfresco/files/scripts/redeployLatest.sh
+    - marker_start: "###START ALFRESCO VERSION SET BY SALT DO NOT EDIT####"
+    - marker_end: "####END ALFRESCO VERSION SET BY SALT DO NOT EDIT####"
+    - text: "alf_ver={{ alfresco_ver }}"
     - cwd: /tmp/atd/salt_states/salt/alfresco/files/scripts
     - name: ./redeployLatest.sh {{ mms_version }}
 

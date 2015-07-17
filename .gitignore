@@ -4,7 +4,7 @@
 
 ## Ignore key files for salt-master. These should not get into the repo. 
 salt_cfg/pki/
-salt_cfg/cloud.providers.d/nminc_allinone.conf
+salt_cfg/cloud.providers.d/nminc_aws.conf
 
 ## Ignore "large files" We have a bunch of huge files that will cause possible issues with git. 
 ## they should be downloaded using salt/script to the master to be distributed to the minions. 
