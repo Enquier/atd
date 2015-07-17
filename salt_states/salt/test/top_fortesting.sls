@@ -5,8 +5,9 @@ base:
    - utils.epel_repo
 #   - ldap
    - sshd
+
  'node_type:build':
-   -match: grain
+   - match: grain
    - java
    - dns
    - build
