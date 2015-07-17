@@ -13,7 +13,7 @@ decompress_modjk:
     - source: http://apache.cs.utah.edu/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.40-src.tar.gz
     - archive_format: tar
     - if_missing: /usr/src/mod_jk
-    - source_hash: md5=297add5f2643329b04f62a16578c0cab
+    - source_hash: md5=7e6f4e4dbf5261f42ddd1fdbb9ac3e32
 
 mod_jk_deps:
   pkg.installed:
