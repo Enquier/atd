@@ -8,7 +8,7 @@
     
 configure_ssl_connector:
   file.blockreplace:
-    - name: /opt/jfrog/artifactory/tomcat/conf/server.xml:
+    - name: /opt/jfrog/artifactory/tomcat/conf/server.xml
     - marker_start: "<!--START :: SALT :: configure_ssl_connector DO NOT EDIT MANUALLY -->"
     - marker_end: "<!--END :: SALT :: configure_ssl_connector DO NOT EDIT MANUALLY -->"
     - content: |
