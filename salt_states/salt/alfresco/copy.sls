@@ -6,7 +6,6 @@ Developed for JPL/NASA Summer 2014
 {% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' %}
 
 alfresco_zip_unpack:
-alfresco_zip_unpack:
   archive.extracted:
     - name: /usr/src/alfresco_deploy
     - zipfile: salt://alfresco/files/alfresco-community:wq-{{ alf_ver }}.zip

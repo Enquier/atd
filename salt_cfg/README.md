@@ -60,6 +60,12 @@ Default Paths you may find useful.
 * /var/log/salt
 * /srv/large_files_store
 
+Install wget if not already installed
+
+```
+sudo yum install wget
+```
+
 Install EPEL/Remi if they are not already installed. 
 ===
 
@@ -93,7 +99,7 @@ yum install git salt-master salt -y
 ```
 Enable salt-master to start at boot. 
 ```
-chkconfig salt-master on
+sudo systemctl enable salt-master.service
 ```
 
 Checkout git-repo on new saltmaster host. 
