@@ -5,7 +5,9 @@ Developed for JPL/NASA Summer 2014
 iptables:
   pkg: 
    - installed
-   - name: iptables
+   - pkgs: 
+     - iptables
+     - iptables-services 
   service:
    - name: iptables
    - running

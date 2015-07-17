@@ -5,28 +5,17 @@ After=network.target
 
 [Service]
 Type=forking
-PIDFile=/var/run/tomcat.pid
+PIDFile=/var/run/tomcat/tomcat.pid
 User=tomcat
 Group=tomcat
-Environment=JAVA_HOME=`echo $JRE_HOME`
-Environment=JAVA_OPTS="-Dfile.encoding=UTF-8 \
-  -Dcatalina.logbase=/var/log/tomcat7 \
-  -Dnet.sf.ehcache.skipUpdateCheck=true \
-  -XX:+DoEscapeAnalysis \
-  -XX:+UseConcMarkSweepGC \
-  -XX:+CMSClassUnloadingEnabled \
-  -XX:+UseParNewGC \
-  -XX:MaxPermSize=2048m -Xms32768m -Xmx32768m"
-Environment=TOMCAT_HOME='echo $TOMCAT_HOME' 
 
 Restart=on-failure
- 
 
-ExecStart=$TOMCAT_HOME/bin/startup.sh
-ExecStop=$TOMCAT_HOME/bin/shutdown.sh
+ExecStart=/opt/local/apache-tomcat/bin/startup.sh
+ExecStop=/opt/local/apache-tomcat/bin/shutdown.sh
 
-ExecReload=$TOMCAT_HOME/bin/shutdown.sh
-ExecReload=$TOMCAT_HOME/bin/startup.sh
+ExecReload=/opt/local/apache-tomcat/bin/shutdown.sh
+ExecReload=/opt/local/apache-tomcat/bin/startup.sh
 
 
 [Install]

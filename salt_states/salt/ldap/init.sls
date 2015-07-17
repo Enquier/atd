@@ -12,7 +12,7 @@ install_openldap:
       - sssd
       - sssd-client
       - sssd-tools
-
+{#
 /etc/openldap/ldap.conf:
   file.managed:
     - source: salt://ldap/files/ldap.conf.default
@@ -37,3 +37,4 @@ install_openldap:
     - user: root
     - group: root
     - mode: 0600
+#}

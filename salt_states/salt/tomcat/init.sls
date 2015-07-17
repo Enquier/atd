@@ -7,10 +7,10 @@ Modified by Sophie Wong
 tomcat:
   group:
     - present
-    - gid: 504
+    - gid: 506
   user:
     - present
-    - uid: 504
+    - uid: 506
     - groups: 
       - tomcat
     - require:
@@ -25,7 +25,7 @@ apache_tomcat_7_startup:
     - enable: True
     - onlyif: test ! -e /usr/lib/systemd/system/tomcat.service
     - require:
-        - file: /etc/init.d/tomcat
+        - file: /usr/lib/systemd/system/tomcat.service
         - user: tomcat
         - group: tomcat
 
@@ -33,20 +33,22 @@ apache_tomcat7_unpack:
   archive:
     - extracted
     - name: /opt/local
-    - source: salt://tomcat/files/apache-tomcat-7.0.64.tar.gz
+    - source: salt://tomcat/files/apache-tomcat-7.0.63.tar.gz
     - archive_format: tar
+    - tar_options: z
     - if_missing: /opt/local/apache-tomcat/webapps
 
 /etc/profile.d/tomcat.sh:
   file.managed:
-    - contents: |
-      TOMCAT_HOME=/opt/local/apache-tomcat
-      export TOMCAT_HOME
+    - source: salt://tomcat/files/tomcat.sh
+    - user: root
+    - group: root
+    - mode: 644
 
 tomcat_sym:
   file.symlink:
     - name: /opt/local/apache-tomcat
-    - target: /opt/local/apache-tomcat-7.0.64
+    - target: /opt/local/apache-tomcat-7.0.63
     - user: tomcat
     - group: tomcat
     - recurse:
@@ -55,42 +57,58 @@ tomcat_sym:
 
 tomcat_owner:
   file.directory:
-    - name: /opt/local/apache-tomcat-7.0.64
+    - name: /opt/local/apache-tomcat-7.0.63
     - user: tomcat
     - group: tomcat
     - recurse: 
       - user
       - group
 
-{% if grains['JAVA_VERSION'] == 8 %}
-
 /usr/lib/systemd/system/tomcat.service:
   file.managed:
     - order: 1
-    - source: salt://tomcat/files/tomcat.initd_java8
+    - source: salt://tomcat/files/tomcat.service
+    - user: root
+    - group: root
+    - mode: 755
+
+/var/run/tomcat/tomcat.pid:
+  file.managed:
+    - order: 1
+    - user: tomcat
+    - group: tomcat
+    - mode: 755
+    - makedirs: True
+
+{% if grains['JAVA_VERSION'] == 8 %}
+
+/opt/local/apache-tomcat/bin/setenv.sh:
+  file.managed:
+    - order: 1
+    - source: salt://tomcat/files/setenv.sh_java8
     - user: root
     - group: root
     - mode: 755
 
 {% elif grains ['JAVA_VERSION'] == 7 %}
 
-
-/usr/lib/systemd/system/tomcat.service:
+/opt/local/apache-tomcat/bin/setenv.sh:
   file.managed:
     - order: 1
-    - source: salt://tomcat/files/tomcat.initd_java7
+    - source: salt://tomcat/files/setenv.sh_java7
     - user: root
     - group: root
     - mode: 755
 
-
 {% endif %}
 
 
-add_tomcat_systemd
+add_tomcat_systemd:
   cmd.run:
     - order: 1
-    - name: systemctl enable tomcat.service
+    - name: systemctl daemon-reload && systemctl enable tomcat.service
+    - user: root
+    - group: root
 
 {# This makes tomcat/alfresco use properties files outside of the
    exploded wars. Maybe move to alfresco?

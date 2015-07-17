@@ -12,6 +12,7 @@ apache:
    - pkgs:
      - httpd
      - mod_ssl
+     - mod_ldap
  service:
   - name: httpd
   - running
@@ -36,6 +37,20 @@ apache:
     - user: root
     - group: root
     - mode: 644
+
+update_ssl_certificate_name:
+  file.blockreplace:
+    - name: /etc/httpd/conf.d/ssl.conf
+    - marker_start: '## START :: SALT :: ssl_cert_name settings. Do not edit Manually'
+    - marker_end: '## END :: SALT :: ssl_cert_name settings. Do not edit Manually'
+    - content: SSLCertificateFile /etc/pki/certs/{{ pillar['ssl_cert_name'] }}.crt
+
+update_ssl_bundle_name:
+  file.blockreplace:
+    - name: /etc/httpd/conf.d/ssl.conf
+    - marker_start: '## START :: SALT :: ssl_bundle_name settings. Do not edit Manually'
+    - marker_end: '## END :: SALT :: ssl_bundle_name settings. Do not edit Manually'
+    - content: SSLCertificateChainFile /etc/pki/certs/{{ pillar['ssl_bundle_name'] }}.crt   
 
 /etc/httpd/worker.properties:
   file.managed:

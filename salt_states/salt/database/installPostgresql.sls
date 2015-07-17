@@ -14,7 +14,7 @@ postgresql:
 
 postgres_initdb:
   cmd.run:
-   - name: service postgresql-9.3 initdb
+   - name: /usr/pgsql-9.3/bin/postgresql93-setup initdb
    - onlyif: test ! -e /var/lib/pgsql/9.3/data/pg_hba.conf
 
 postgresql-server:
@@ -24,6 +24,8 @@ postgresql-server:
   service:
    - name: postgresql-9.3
    - running
+   - user: postgres
+   - group: postgres
    - enable: True
    - reload: True
    - watch:

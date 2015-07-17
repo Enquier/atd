@@ -4,73 +4,35 @@ Developed for JPL/NASA Summer 2014
 #}
 
 {% if grains['JAVA_VERSION'] == 8 %}
-java_8_jdk_unpack:
-  module.run:
-    - name: archive.tar
-    - options: xf
-    - tarfile: /opt/local/jre.gz
-    - dest: /opt/local/
-    - onlyif: test ! -e /opt/local/jre/bin/java
-    - require:
-      - file: /opt/local/jre.gz
 
-java_create_sym:
-  file.symlink:
-    - name: /opt/local/jre
-    - target: /opt/local/jdk1.8.0_45
-    - require:
-      - file: /opt/local/jre.gz
 
-/opt/local/jre.gz:
-  file.managed:
-    - source: salt://java/files/server-jre-8u45-linux-x64.gz
-    - user: root
-    - group: root
-    - mode: 644
+java_8_jdk:
+  pkg.latest:
+    - name: java-1.8.0-openjdk
+
+java_8_jdk_develop:
+  pkg.latest:
+    - name: java-1.8.0-openjdk-devel
 
 {% elif grains['JAVA_VERSION'] == 7 %}
 
+java_7_jdk:
+  pkg.latest:
+    - name: java-1.7.0-openjdk
+
 java_7_jdk_develop:
-  pkg.installed:
-    - name: java-1.7.0-openjdk-devel.x86_64
+  pkg.latest:
+    - name: java-1.7.0-openjdk-devel
 
-{# CYL not sure why we downloaded the JRE gz
-java_7_jdk_unpack:
-  module.run:
-    - name: archive.tar
-    - options: xf
-    - tarfile: /opt/local/jre.gz
-    - dest: /opt/local/
-    - onlyif: test ! -e /opt/local/jre/bin/java
-    - require:
-      - file: /opt/local/jre.gz
-
-java_unlink:
-  cmd.run:
-    - name: unlink /opt/local/jre
-
-java_create_sym:
-  file.symlink:
-    - name: /opt/local/jre
-    - target: /opt/local/jdk1.7.0_80
-    - require:
-      - file: /opt/local/jre.gz
-
-/opt/local/jre.gz:
-  file.managed:
-    - source: salt://java/files/server-jre-7u80-linux-x64.gz
-    - user: root
-    - group: root
-    - mode: 644
 #}
 
 {% endif %}
 
 java_env_vars:
   file.append:
-    - name: /etc/profile
+    - name: /etc/profile.d/java.sh
     - text:
-      - JAVA_HOME=/usr
-      - JRE_HOME=/usr
+      - JAVA_HOME=/usr/lib/jvm/java
+      - JRE_HOME=/usr/lib/jvm/jre
       - export JAVA_HOME JRE_HOME
 

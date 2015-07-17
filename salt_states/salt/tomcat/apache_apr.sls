@@ -23,4 +23,4 @@ decompress_apache_apr:
 compile_apr:
   cmd.run:
     - cwd: /usr/src/tomcat-native-1.1.31-src
-    - name: cd /usr/src/tomcat-native-1.1.31-src/jni/native; ./configure --with-apr=/usr/bin/apr-1-config --with-java-home=/usr --with-ssl=yes --prefix=/usr; make && make install
+    - name: cd /usr/src/tomcat-native-1.1.31-src/jni/native; ./configure --with-apr=/usr/bin/apr-1-config --with-java-home=/usr/lib/jvm/java --with-ssl=yes --prefix=/usr; make && make install

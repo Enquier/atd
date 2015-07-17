@@ -17,7 +17,7 @@ activemq:
       - group: activemq
     - shell: /sbin/nologin
     - createhome: False
-
+{#
 apache_activemq_7_startup:
   service:
     - dead
@@ -28,19 +28,21 @@ apache_activemq_7_startup:
         - file: /usr/lib/systemd/system/activemq.service
         - user: activemq
         - group: activemq
+#}
 
 apache_activemq7_unpack:
-  archive:
-    - extracted
-    - name: /opt/local
-    - source: salt://activemq/files/apache-activemq-5.10.2-bin.tar.gz
+  archive.extracted:
+    - name: /opt/local/
+    - source: salt://activemq/files/apache-activemq-5.11.1-bin.tar.gz
+    #- source: http://mirrors.ibiblio.org/apache/activemq/5.11.1/apache-activemq-5.11.1-bin.tar.gz
     - archive_format: tar
+    - tar_options: z
     - if_missing: /opt/local/apache-activemq/webapps
-
+{#
 activemq_sym:
   file.symlink:
     - name: /opt/local/apache-activemq
-    - target: /opt/local/apache-activemq-5.10.2
+    - target: /opt/local/apache-activemq-5.11.1
     - user: activemq
     - group: activemq
     - recurse:
@@ -49,7 +51,7 @@ activemq_sym:
 
 activemq_owner:
   file.directory:
-    - name: /opt/local/apache-activemq-5.10.2
+    - name: /opt/local/apache-activemq-5.11.1
     - user: activemq
     - group: activemq
     - recurse: 
@@ -68,3 +70,4 @@ add_activemq_chkconfig:
   cmd.run:
     - order: 1
     - name: systemctl enable activemq.service
+#}
