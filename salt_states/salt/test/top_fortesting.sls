@@ -23,5 +23,6 @@ base:
 #   - database.postgresqlREPO
 #   - database.installPostgresql
 #   - database.postgresqlAlfDBcreate
-   - alfresco
-   - alfresco.copy
+#   - alfresco
+#   - alfresco.copy
+   - alfresco.deploy
