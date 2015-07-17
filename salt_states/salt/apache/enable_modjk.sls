@@ -99,7 +99,7 @@ update_httpd_modJk_WorkerSettings:
     - marker_end: '## END :: SALT :: mod_jk worker settings. Do not edit Manually'
     - content: |
         # Settings required for mod_jk
-        JkWorkersFile /etc/httpd/worker.properties
+        JkWorkersFile /etc/httpd/workers.properties
         # Where to put jk logs
         JkLogFile /var/log/httpd/mod_jk.log
         # Set the jk log level [debug/error/info]
