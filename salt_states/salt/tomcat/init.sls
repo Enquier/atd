@@ -80,28 +80,6 @@ tomcat_owner:
     - mode: 755
     - makedirs: True
 
-{% if grains['JAVA_VERSION'] == 8 %}
-
-/opt/local/apache-tomcat/bin/setenv.sh:
-  file.managed:
-    - order: 1
-    - source: salt://tomcat/files/setenv.sh_java8
-    - user: root
-    - group: root
-    - mode: 755
-
-{% elif grains ['JAVA_VERSION'] == 7 %}
-
-/opt/local/apache-tomcat/bin/setenv.sh:
-  file.managed:
-    - order: 1
-    - source: salt://tomcat/files/setenv.sh_java7
-    - user: root
-    - group: root
-    - mode: 755
-
-{% endif %}
-
 
 add_tomcat_systemd:
   cmd.run:
@@ -110,6 +88,14 @@ add_tomcat_systemd:
     - user: root
     - group: root
 
+/opt/local/apache-tomcat/bin/setenv.sh:
+  file.managed:
+    - order: 1
+    - source: salt://tomcat/files/setenv.sh
+    - user: root
+    - group: root
+    - mode: 755
+    
 {# This makes tomcat/alfresco use properties files outside of the
    exploded wars. Maybe move to alfresco?
    Sophie Wong 8/26/2014

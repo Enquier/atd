@@ -112,8 +112,10 @@ update_httpd_modJk_WorkerSettings:
         JkRequestLogFormat "%w %V %T"
         # Send servlet for context /artifactory to your repository
         JkMount /artifactory worker1
+        JkMount /jenkins worker1
         # Send JSPs for context /artifactory/* to your repository
         JkMount /artifactory/* worker1
+        JkMount /jenkins/* worker1
         
 update_httpd_ssl_modJk:
   file.blockreplace:
@@ -124,11 +126,14 @@ update_httpd_ssl_modJk:
         ## Settings to allow artifactory to be served HTTPS. 
         JkMountCopy On
         JkMount /artifactory worker1
+        JkMount /jenkins worker1
         JkMount /artifactory/* worker1
+        JkMount /jenkins/* worker1
         ## ModRewrite rules. 
-        ##RewriteEngine On
-        ##RewriteCond %{REQUEST_URI} ^/$
-        ##RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
+        RewriteEngine On
+        RewriteCond %{REQUEST_URI} ^/$
+        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
+        RewriteRule ^jenkins.{{ myDomain }} https://{{ myURL }}.{{ myDomain }}/jenkins [NE,R=301,L]
 
 update_workers_properties:
   file.blockreplace:

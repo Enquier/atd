@@ -1,4 +1,9 @@
-/opt/jfrog/artifactory/tomcat/conf/server.xml:
+include:
+  - tomcat
+  - tomcat.setenv
+  - tomcat.apache_apr
+
+/opt/local/apache-tomcat/conf/server.xml:
   file.managed:
     - source: salt://tomcat/files/server_artifactory.xml
     - user: root
@@ -8,7 +13,7 @@
     
 configure_ssl_connector:
   file.blockreplace:
-    - name: /opt/jfrog/artifactory/tomcat/conf/server.xml
+    - name: /opt/local/apache-tomcat/conf/server.xml
     - marker_start: "<!--START :: SALT :: configure_ssl_connector DO NOT EDIT MANUALLY -->"
     - marker_end: "<!--END :: SALT :: configure_ssl_connector DO NOT EDIT MANUALLY -->"
     - content: |

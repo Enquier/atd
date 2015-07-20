@@ -29,7 +29,8 @@ update_httpd_modRewrite:
         #####################
         ##RewriteEngine On
         ##RewriteCond %{REQUEST_URI} ^/$
-        ##RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
+        RewriteCond %{lowercase:%{HTTP_HOST}} ^jenkins\.{{ myDomain }}$
+        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/jenkins [NE,R=301,L]
         ##RewriteCond %{HTTPS} !=on
         ##RewriteRule ^/?(.*) https://{{ myURL }}.{{ myDomain }}/$1 [R,L]
         ## Turn off LDAP verify on certs

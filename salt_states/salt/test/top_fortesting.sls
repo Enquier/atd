@@ -9,15 +9,19 @@ base:
 
  'node_type:build':
    - match: grain
-#   - java
-#   - dns
-#   - build 
+   - java
+   - dns
    - apache
    - apache.mod_jk
    - apache.enable_modjk
-   - apache.artifactory_modrewrite
-#   - tomcat.apache_apr
-   - tomcat.artifactory_ssl
+   - apache.build_modrewrite
+   - tomcat
+   - tomcat.apache_apr
+   - tomcat.setenv
+   - tomcat.build_ssl
+   - build 
+   
+   
 
  'node_type:allinone':
    - match: grain
@@ -30,7 +34,9 @@ base:
 #   - apache.enable_modjk
 #   - apache.alfresco_modrewrite
 #   - tomcat
+#   - tomcat.setenv
 #   - tomcat.apache_apr
+#   - tomcat.alfresco_ssl
 #   - utils.swftools
 #   - database
 #   - database.postgresqlREPO
