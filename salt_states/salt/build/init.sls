@@ -35,11 +35,13 @@ copy_artifactory_war:
     
 /var/opt/jfrog/artifactory:
   file.directory:
+    - makedirs: True
     - user: tomcat
     - group: tomcat
     
 /var/opt/jenkins:
   file.directory:
+    - makedirs: True
     - user: tomcat
     - group: tomcat
 
@@ -58,4 +60,3 @@ configure_build_env:
     - require:
       - file: /var/opt/jenkins
       - file: /var/opt/jfrog/artifactory
-      - file: /opt/local/apache-tomcat/bin/setenv.sh
