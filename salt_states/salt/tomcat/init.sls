@@ -79,6 +79,9 @@ tomcat_owner:
     - group: tomcat
     - mode: 755
     - makedirs: True
+    - require:
+      - user: tomcat
+      - group: tomcat
 
 
 add_tomcat_systemd:
@@ -95,15 +98,20 @@ add_tomcat_systemd:
     - user: root
     - group: root
     - mode: 755
+    - require
+      - file: /usr/lib/systemd/system/tomcat.service
+      - user: tomcat
+      - group: tomcat
     
 {# This makes tomcat/alfresco use properties files outside of the
    exploded wars. Maybe move to alfresco?
    Sophie Wong 8/26/2014
 #}
+{% if grains['node_type'] != 'build %}
 add_alfresco_shared_loader:
   module.run:
     - name: file.replace
     - path: /opt/local/apache-tomcat/conf/catalina.properties
     - pattern: shared.loader=.*$
     - repl: shared.loader=${catalina.base}/shared/classes
-
+{% endif %}

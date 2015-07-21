@@ -5,7 +5,7 @@ include:
 
 /opt/local/apache-tomcat/conf/server.xml:
   file.managed:
-    - source: salt://tomcat/files/server_artifactory.xml
+    - source: salt://tomcat/files/server_build.xml
     - user: root
     - group: root
     - mode: 644
