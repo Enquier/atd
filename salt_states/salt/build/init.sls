@@ -9,6 +9,7 @@ artifactory:
   archive.extracted:
     - name: /opt/src/
     - source: https://bintray.com/artifact/download/jfrog/artifactory/artifactory-3.9.2.zip
+    - source_hash: sha1=245aeb7b2d77830462067d5a19c3bd32ae014ddf
     - archive_format: zip
     - if_missing: /opt/src/artifactory-3.9.2/
     
@@ -25,7 +26,7 @@ copy_artifactory_war:
 
 /opt/apache-tomcat/webapps/jenkins.war:
   file.managed:
-    - source: https://updates.jenkins-ci.org/download/war/1.620/jenkins.war
+    - source: salt://build/files/jenkins.war
     - user: tomcat
     - group: tomcat
     
