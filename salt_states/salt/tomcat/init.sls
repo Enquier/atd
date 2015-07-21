@@ -107,7 +107,7 @@ add_tomcat_systemd:
    exploded wars. Maybe move to alfresco?
    Sophie Wong 8/26/2014
 #}
-{% if grains['node_type'] != 'build %}
+{% if grains['node_type'] != 'build' %}
 add_alfresco_shared_loader:
   module.run:
     - name: file.replace
