@@ -49,14 +49,11 @@ configure_build_env:
   file.blockreplace:
     - name: /opt/local/apache-tomcat/bin/setenv.sh
     - marker_start: "### START :: SALT :: configure_build_env Generated Automatically DO NOT EDIT!!###"
-    - maker_end: "### END :: SALT :: configure_build_env Generated Automatically DO NOT EDIT!!###"
+    - marker_end: "### END :: SALT :: configure_build_env Generated Automatically DO NOT EDIT!!###"
     - content: |
         export JAVA_OPTS="$JAVA_OPTS -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true" 
         export JAVA_OPTS="$JAVA_OPTS -Djruby.compile.invokedynamic=false -Dfile.encoding=UTF8"
         ARTIFACTORY_HOME=/var/opt/jfrog/artifactory
-    - user: root
-    - group: root
-    - mode: 755
     - require:
       - file: /var/opt/jenkins
       - file: /var/opt/jfrog/artifactory
