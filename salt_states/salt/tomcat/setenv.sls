@@ -67,7 +67,7 @@ set_java_mem:
     - name: /opt/local/apache-tomcat/bin/setenv.sh
     - marker_start: "### START :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
-    - content: export JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=2048m -Xms8192m -Xmx8192m"
+    - content: export JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=2048m -Xms6144m -Xmx6144m"
 
 {% endif %}  
 
