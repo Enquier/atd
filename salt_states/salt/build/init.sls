@@ -53,8 +53,8 @@ configure_build_env:
     - content: |
         export JAVA_OPTS="$JAVA_OPTS -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true" 
         export JAVA_OPTS="$JAVA_OPTS -Djruby.compile.invokedynamic=false -Dfile.encoding=UTF8"
-        ARTIFACTORY_HOME=/var/opt/jfrog/artifactory
-        JENKINS_HOME=/var/opt/jenkins
+        export CATALINA_OPTS="-DARTIFACTORY_HOME=/var/opt/jfrog/artifactory"
+        export CATALINA_OPTS="$CATALINA_OPTS -DJENKINS_HOME=/var/opt/jenkins"
     - require:
       - file: /var/opt/jenkins
       - file: /var/opt/jfrog/artifactory

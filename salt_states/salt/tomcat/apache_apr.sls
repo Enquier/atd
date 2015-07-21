@@ -28,3 +28,8 @@ compile_apr:
   cmd.run:
     - cwd: /usr/src/tomcat-native-1.1.31-src
     - name: cd /usr/src/tomcat-native-1.1.31-src/jni/native; ./configure --with-apr=/usr/bin/apr-1-config --with-java-home=/usr/lib/jvm/java --with-ssl=yes --prefix=/usr; make && make install
+
+set_ld_env:
+  file.append:
+    - name: /etc/profile.d/libtcnative.sh:
+    - text: export LD_LIBRARY_PATH=/usr/lib
