@@ -27,7 +27,7 @@ copy_artifactory_war:
   file.managed:
     - source: https://updates.jenkins-ci.org/download/war/1.620/jenkins.war
     - user: tomcat
-	  - group: tomcat
+    - group: tomcat
     
 /var/opt/jfrog/artifactory:
   file.directory:
