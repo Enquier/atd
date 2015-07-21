@@ -98,7 +98,7 @@ add_tomcat_systemd:
     - user: root
     - group: root
     - mode: 755
-    - require
+    - require:
       - file: /usr/lib/systemd/system/tomcat.service
       - user: tomcat
       - group: tomcat
