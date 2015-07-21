@@ -17,14 +17,17 @@ artifactory:
 
 copy_artifactory_war:
   file.copy:
-    - name: /opt/src/artifactory-3.9.2/webapps/artifactory.war
+    - name: /opt/local/apache-tomcat/webapps/artifactory.war
+    - source: /opt/src/artifactory-3.9.2/webapps/artifactory.war
     - user: tomcat
     - group: tomcat
+    - require:
+      - archive: artifactory
     
 
 
 
-/opt/apache-tomcat/webapps/jenkins.war:
+/opt/local/apache-tomcat/webapps/jenkins.war:
   file.managed:
     - source: salt://build/files/jenkins.war
     - user: tomcat
