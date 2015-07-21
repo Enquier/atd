@@ -31,5 +31,5 @@ compile_apr:
 
 set_ld_env:
   file.append:
-    - name: /etc/profile.d/libtcnative.sh:
+    - name: /etc/profile.d/libtcnative.sh
     - text: export LD_LIBRARY_PATH=/usr/lib
