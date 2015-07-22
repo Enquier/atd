@@ -25,6 +25,5 @@ system:
 hostname:
   cmd.run:
     - name: hostnamectl set-hostname {{ myURL }}.{{ myDomain }}
-    - unless: test "{{ myURL }}.{{ myDomain }} == $(hostname)"
     - user: root
     - group: root
