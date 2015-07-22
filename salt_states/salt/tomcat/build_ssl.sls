@@ -19,7 +19,7 @@ configure_ssl_connector:
     - content: |
         <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
                 SSLCertificateFile="/etc/pki/certs/{{ pillar['ssl_cert_name'] }}.crt"
-                SSLCertificateKeyFile="/etc/pki/server.key"
+                SSLCertificateKeyFile="/etc/pki/certs/server.key"
                 SSLCertificateChainFile="/etc/pki/certs/{{ pillar['ssl_bundle_name'] }}.crt"
                 SSLVerifyClient="optional" SSLProtocol="all"
         />
