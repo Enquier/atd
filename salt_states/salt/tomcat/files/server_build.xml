@@ -1,5 +1,6 @@
 <Server port="8015" shutdown="SHUTDOWN">
-
+    <!--APR library loader. Documentation at /docs/apr.html -->
+    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
     <Service name="Catalina">
         <Connector port="8081" protocol="HTTP/1.1"/>
 
