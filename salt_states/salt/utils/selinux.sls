@@ -2,6 +2,13 @@
 Salt Formula by Ian Weaklim weaklim@jpl.nasa.gov ianw@uwyo.edu
 Developed for JPL/NASA Summer 2014
 #}
+
+selinux_pkgs:
+  pkg.latest:
+    - pkgs:
+      - policycoreutils
+      - policycoreutils-python
+
 /etc/sysconfig/selinux:
   file.managed:
     - source: salt://utils/files/selinux.default
@@ -11,3 +18,5 @@ Developed for JPL/NASA Summer 2014
 disable_selinux_cmd:
   selinux.mode:
     - name: permissive 
+    - require:
+      - pkg: selinux_pkgs
