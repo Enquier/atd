@@ -9,5 +9,5 @@ Developed for JPL/NASA Summer 2014
     - group: root
 
 disable_selinux_cmd:
-  cmd.run:
-    - name: setenforce 0
+  selinux.mode
+    - name: permissive 
