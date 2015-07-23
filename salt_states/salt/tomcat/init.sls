@@ -72,8 +72,8 @@ tomcat_owner:
     - group: root
     - mode: 755
 
-/var/run/tomcat/tomcat.pid:
-  file.managed:
+/var/run/tomcat/:
+  file.directory:
     - order: 1
     - user: tomcat
     - group: tomcat
@@ -98,6 +98,7 @@ add_tomcat_systemd:
     - user: root
     - group: root
     - mode: 755
+    - replace: False
     - require:
       - file: /usr/lib/systemd/system/tomcat.service
       - user: tomcat
