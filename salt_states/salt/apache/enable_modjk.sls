@@ -130,10 +130,10 @@ update_httpd_ssl_modJk:
         JkMount /artifactory/* worker1
         JkMount /jenkins/* worker1
         ## ModRewrite rules. 
-        RewriteEngine On
-        RewriteCond %{REQUEST_URI} ^/$
-        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
-        RewriteRule ^jenkins.{{ myDomain }} https://{{ myURL }}.{{ myDomain }}/jenkins [NE,R=301,L]
+        ##RewriteEngine On
+        ##RewriteCond %{REQUEST_URI} ^/$
+        ##RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
+        ##RewriteRule ^jenkins.{{ myDomain }} https://{{ myURL }}.{{ myDomain }}/jenkins [NE,R=301,L]
 
 update_workers_properties:
   file.blockreplace:
@@ -141,7 +141,7 @@ update_workers_properties:
     - marker_start: '## START :: SALT :: mod_jk settings. Do not edit Manually'
     - marker_end: '## END :: SALT :: mod_jk settings. Do not edit Manually'
     - content: |
-        workers.tomcat_home=/opt/jfrog/artifactory/tomcat/
+        workers.tomcat_home=/opt/local/apache-tomcat/
         workers.java_home=/opt/jre
         ps=/
         worker.list=worker1

@@ -77,7 +77,7 @@ tomcat_owner:
     - order: 1
     - user: tomcat
     - group: tomcat
-    - mode: 755
+    - mode: 644
     - makedirs: True
     - require:
       - user: tomcat

@@ -7,3 +7,5 @@ sysutils:
     - names:
       - unzip
       - xpdf.x86_64
+      - git
+      - wget

@@ -11,9 +11,7 @@ artifactory:
     - source: https://bintray.com/artifact/download/jfrog/artifactory/artifactory-3.9.2.zip
     - source_hash: sha1=245aeb7b2d77830462067d5a19c3bd32ae014ddf
     - archive_format: zip
-    - if_missing: /opt/src/artifactory-3.9.2/
-    
-    
+    - if_missing: /opt/src/artifactory-3.9.2/    
 
 copy_artifactory_war:
   file.copy:
@@ -23,9 +21,6 @@ copy_artifactory_war:
     - group: tomcat
     - require:
       - archive: artifactory
-    
-
-
 
 /opt/local/apache-tomcat/webapps/jenkins.war:
   file.managed:
@@ -53,7 +48,7 @@ configure_build_env:
     - content: |
         export JAVA_OPTS="$JAVA_OPTS -Dorg.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH=true" 
         export JAVA_OPTS="$JAVA_OPTS -Djruby.compile.invokedynamic=false -Dfile.encoding=UTF8"
-        export CATALINA_OPTS="-DARTIFACTORY_HOME=/var/opt/jfrog/artifactory"
+        export CATALINA_OPTS="-Dartifactory.home=/var/opt/jfrog/artifactory"
         export CATALINA_OPTS="$CATALINA_OPTS -DJENKINS_HOME=/var/opt/jenkins"
     - require:
       - file: /var/opt/jenkins
