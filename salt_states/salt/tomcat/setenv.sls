@@ -12,7 +12,8 @@ set_java_opts:
         -XX:+DoEscapeAnalysis \
         -XX:+UseConcMarkSweepGC \
         -XX:+CMSClassUnloadingEnabled \
-        -XX:+UseParNewGC"
+        -XX:+UseParNewGC \
+        -Djava.net.preferIPv4Stack=true"
 
 {% if grains['node_type'] == 'allinone' %}
 
@@ -49,7 +50,8 @@ set_java_opts:
         -XX:+DoEscapeAnalysis \
         -XX:+UseConcMarkSweepGC \
         -XX:+CMSClassUnloadingEnabled \
-        -XX:+UseParNewGC"
+        -XX:+UseParNewGC \
+        -Djava.net.preferIPv4Stack=true"
 
 {% if grains['node_type'] == 'allinone' %}
 
