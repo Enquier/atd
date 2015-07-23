@@ -5,10 +5,8 @@ After=network.target
 
 [Service]
 Type=forking
-PIDFile=/var/run/tomcat/tomcat.pid
 User=tomcat
 Group=tomcat
-
 
 ExecStart=/opt/local/apache-tomcat/bin/startup.sh
 ExecStop=/opt/local/apache-tomcat/bin/shutdown.sh
