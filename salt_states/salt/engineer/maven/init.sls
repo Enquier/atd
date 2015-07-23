@@ -7,16 +7,16 @@ extract_maven:
   archive:
     - extracted
     - name: /opt/local
-    - source: http://apache.mirrors.hoobly.com/maven/maven-3/3.2.2/binaries/apache-maven-3.2.2-bin.tar.gz
+    - source: http://mirror.cogentco.com/pub/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz
     - archive_format: tar
-    - if_missing: /opt/local/apache-maven-3.2.2
-    - source_hash: md5=87e5cc81bc4ab9b83986b3e77e6b3095
+    - if_missing: /opt/local/apache-maven-3.3.3
+    - source_hash: md5=794b3b7961200c542a7292682d21ba36
 
 add_mvn_to_path:
   alternatives.install:
     - name: mvn
     - link: /usr/bin/mvn
-    - path: /opt/local/apache-maven-3.2.2/bin/mvn
+    - path: /opt/local/apache-maven-3.3.3/bin/mvn
     - priority: 50
 
 
@@ -24,7 +24,7 @@ add_mvnDebug_to_path:
   alternatives.install:
     - name: mvnDebug
     - link: /usr/bin/mvnDebug
-    - path: /opt/local/apache-maven-3.2.2/bin/mvnDebug
+    - path: /opt/local/apache-maven-3.3.3/bin/mvnDebug
     - priority: 50
 
 
@@ -32,13 +32,13 @@ add_mvnyjp_to_path:
   alternatives.install:
     - name: mvnyjp
     - link: /usr/bin/mvnyjp
-    - path: /opt/local/apache-maven-3.2.2/bin/mvnyjp
+    - path: /opt/local/apache-maven-3.3.3/bin/mvnyjp
     - priority: 50
     
 add_maven_symlink:
   file.symlink:
     - name: /opt/local/apache-maven
-    - target: /opt/local/apache-maven-3.2.2
+    - target: /opt/local/apache-maven-3.3.3
 
 mvn_env_vars:
   file.append:
