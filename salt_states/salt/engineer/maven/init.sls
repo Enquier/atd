@@ -34,3 +34,15 @@ add_mvnyjp_to_path:
     - link: /usr/bin/mvnyjp
     - path: /opt/local/apache-maven-3.2.2/bin/mvnyjp
     - priority: 50
+    
+add_maven_symlink:
+  file.symlink:
+    - name: /opt/local/apache-maven
+    - target: /opt/local/apache-maven-3.2.2
+
+mvn_env_vars:
+  file.append:
+    - name: /etc/profile.d/maven.sh
+    - text:
+      - export M2_HOME=/opt/local/maven
+      - export PATH=${M2_HOME}/bin:${PATH}
