@@ -25,7 +25,7 @@ install_development_tools:
       - subversion
       - swig
       - systemtap
-	  
+
 install_nodesource_rpm:
   cmd.run:
     name: curl -sL https://rpm.nodesource.com/setup | bash -
