@@ -1,11 +1,11 @@
 base:
  '*':
-   - edit
-   - utils
-   - utils.epel_repo
-   - utils.selinux
+#   - edit
+#   - utils
+#   - utils.epel_repo
+#   - utils.selinux
 ##   - ldap
-   - sshd
+#   - sshd
 
  'node_type:build':
    - match: grain
@@ -47,7 +47,9 @@ base:
 #   - database.postgresqlREPO
 #   - database.installPostgresql
 #   - database.postgresqlAlfDBcreate
-#   - alfresco
+   - alfresco
 #   - alfresco.copy
-#   - alfresco.deploy
+   - alfresco.deploy
+#   - alfresco.amps_deploy
+#   - alfresco.configure
 #   - alfresco.amps_deploy
