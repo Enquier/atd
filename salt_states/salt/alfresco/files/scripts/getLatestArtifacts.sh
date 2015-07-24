@@ -1,4 +1,3 @@
-{% set alf_ver = grains['ALFRESCO_VERSION'] %}
 
 #!/bin/bash
 
@@ -8,9 +7,9 @@ if [ -a /opt/local/apache-tomcat ]; then
     export path="/opt/local/apache-tomcat/amps"
     export owner="tomcat:tomcat"
 else
-    if [ -a /opt/local/alfresco-{{ alf_ver }} ]; then
-        export path="/opt/local/alfresco-{{ alf_ver }}/amps"
-        export owner="alfresco:jpl"
+    if [ -a /opt/local/alfresco-4.2.e ]; then
+        export path="/opt/local/alfresco-4.2.e/amps"
+        export owner="alfresco:alfresco"
     else
         export path="."
     fi
@@ -31,9 +30,9 @@ function main() {
   mainMmsVersion=$2
 
   # always grab the alfresco extensions
-  getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/repo" "javascript-console-repo" "jar"
-  getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/share" "javascript-console-share" "jar"
-  getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/share" "media-viewers" "jar"
+   getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/repo" "javascript-console-repo" "jar"
+   getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/share" "javascript-console-share" "jar"
+   getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/share" "media-viewers" "jar"
   
   # docbookgen is needed for configuration
   getLatestArtifact "libs-release-local" "gov/nasa/jpl/mbee/docbookgen" "docbookgen" "tgz"

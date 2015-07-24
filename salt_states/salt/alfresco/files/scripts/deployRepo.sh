@@ -50,7 +50,7 @@ function main() {
 
   # add in all the Repository/Share updates
   if [[ $explodedWarDir = *alfresco ]]; then
-    installJar $path/javascript-console-repo-0.5.1.jar
+    #installJar $path/javascript-console-repo-0.5.1.jar
 
     # grab the correct patched repository jar
     if hash salt-call 2>/dev/null; then
@@ -58,17 +58,17 @@ function main() {
     else
       alf_license=""
     fi
-    if [[ $alf_license == enterprise ]]; then
-      installJar $path/alfresco-repository-4.2.3.3.jar
-    else
-      installJar $path/alfresco-repository-4.2.e.jar
-    fi
+  #  if [[ $alf_license == enterprise ]]; then
+  #    installJar $path/alfresco-repository-4.2.3.3.jar
+  #  else
+  #    installJar $path/alfresco-repository-4.2.e.jar
+  #  fi
     hname=`hostname`
     updateRepo $hname
-  elif [[ $explodedWarDir = *share ]]; then
-    installJar $path/javascript-console-share-0.5.1.jar
-    installJar $path/media-viewers-2.5.1.jar
-    updateShare
+  #elif [[ $explodedWarDir = *share ]]; then
+  #  installJar $path/javascript-console-share-0.5.1.jar
+  #  installJar $path/media-viewers-2.5.1.jar
+  #  updateShare
   fi
   
   cd -

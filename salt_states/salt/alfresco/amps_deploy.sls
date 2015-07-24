@@ -6,6 +6,11 @@ include:
   - alfresco
 #  - alfresco.copy
 #  - alfresco.deploy
+{% if grains['node_env'] == 'prod' %}
+  {% set release = 'release' %}
+{% else %}
+  {% set release = '' %}
+{% endif %}
 
 {% set mms_version = grains['MMS_RELEASE_VERSION'] %}
 {% set alfresco_ver = grains['ALFRESCO_VERSION'] %}
@@ -35,9 +40,11 @@ copy_deploy_scripts:
     - makedirs: True
     - user: tomcat
     - group: tomcat
+    - mode: 755
     - recurse:
       - user
       - group
+      - mode
 
 set_alf_version:
   file.blockreplace:
@@ -49,7 +56,7 @@ set_alf_version:
 deploy_script:    
   cmd.run:
     - cwd: /tmp/atd/salt_states/salt/alfresco/files/scripts
-    - name: ./redeployLatest.sh {{ mms_version }}
+    - name: ./redeployLatest.sh {{ release }} {{ mms_version }}
     - user: root
     - group: root
     - require:
