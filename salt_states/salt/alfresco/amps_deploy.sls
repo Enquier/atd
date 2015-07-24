@@ -61,6 +61,7 @@ deploy_script:
     - group: root
     - require:
       - file: set_alf_version
+      - file: copy_deploy_scripts
 
 change_tomcat_ownership:
   file.directory:
