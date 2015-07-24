@@ -31,7 +31,7 @@ copy_share_war:
 copy_deploy_scripts:
   file.recurse:
     - name: /tmp/atd/salt_states/salt/alfresco/files/scripts
-    - source: salt://salt/alfresco/files/scripts
+    - source: salt://alfresco/files/scripts
     - makedirs: True
     - user: tomcat
     - group: tomcat
