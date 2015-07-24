@@ -44,12 +44,14 @@ set_alf_version:
     - name: /tmp/atd/salt_states/salt/alfresco/files/scripts/redeployLatest.sh
     - marker_start: "###START ALFRESCO VERSION SET BY SALT DO NOT EDIT####"
     - marker_end: "####END ALFRESCO VERSION SET BY SALT DO NOT EDIT####"
-    - text: "alf_ver={{ alfresco_ver }}"
+    - content: "alf_ver={{ alfresco_ver }}"
 
 deploy_script:    
   cmd.run:
     - cwd: /tmp/atd/salt_states/salt/alfresco/files/scripts
     - name: ./redeployLatest.sh {{ mms_version }}
+    - require:
+      - file: set_alf_version
 
 change_tomcat_ownership:
   file.directory:
