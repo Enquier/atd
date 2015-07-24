@@ -6,7 +6,7 @@
 
 if [ -a /opt/local/apache-tomcat ]; then
     export path="/opt/local/apache-tomcat/amps"
-    export owner="tomcat:jpl"
+    export owner="tomcat:tomcat"
 else
     if [ -a /opt/local/alfresco-{{ alf_ver }} ]; then
         export path="/opt/local/alfresco-{{ alf_ver }}/amps"
@@ -21,7 +21,7 @@ if [ ! -a $path ]; then
   mkdir $path
 fi
 
-ARTIFACTORY_URL='http://europambee-build.jpl.nasa.gov:8082/artifactory'
+ARTIFACTORY_URL='https://build.nminc.co/artifactory'
 
 # @param releaseOrSnapshot  Specify release or snapshot to download
 # @param mmsVersion   Specify mms version (e.g., 2.0)
@@ -48,7 +48,7 @@ function main() {
   # find the artifact name (based on enterprise)
   repoName="mms-repo"
   shareName="mms-share"
-  alfrescoRepoJarVersion="4.2.e"
+  alfrescoRepoJarVersion="4.2.f"
   if hash salt-call 2>/dev/null; then
     alf_license=`salt-call -g | awk '/ALFRESCO_LICENSE_TYPE/{getline; print}' | awk '{$1=$1}1'`
   else
