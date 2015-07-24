@@ -28,10 +28,10 @@ install_development_tools:
 
 install_nodesource_rpm:
   cmd.run:
-    name: curl -sL https://rpm.nodesource.com/setup | bash -
-    user: root
-    group: root
-    require:
+    - name: curl -sL https://rpm.nodesource.com/setup | bash -
+    - user: root
+    - group: root
+    - require:
       - pkg: install_development_tools
       
 node_js_pkg:
