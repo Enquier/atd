@@ -50,8 +50,8 @@ deploy_script:
   cmd.run:
     - cwd: /tmp/atd/salt_states/salt/alfresco/files/scripts
     - name: ./redeployLatest.sh {{ mms_version }}
-    - user: tomcat
-    - group: tomcat
+    - user: root
+    - group: root
     - require:
       - file: set_alf_version
 
