@@ -44,5 +44,5 @@ mvn_env_vars:
   file.append:
     - name: /etc/profile.d/maven.sh
     - text:
-      - export M2_HOME=/opt/local/maven
+      - export M2_HOME=/opt/local/apache-maven
       - export PATH=${M2_HOME}/bin:${PATH}

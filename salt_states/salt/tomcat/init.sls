@@ -16,7 +16,7 @@ tomcat:
     - require:
       - group: tomcat
     - shell: /sbin/nologin
-    - createhome: False
+    - createhome: True
 
 apache_tomcat_7_startup:
   service:
