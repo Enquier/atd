@@ -1,4 +1,3 @@
-{% set alf_ver = grains['ALFRESCO_VERSION'] %}
 
 #!/bin/bash
 
@@ -48,9 +47,9 @@ installDocbookgen=$d/installDocbookgen.sh
 
 tomcatDir=/opt/local/apache-tomcat
 if [ ! -d $tomcatDir ]; then
-  tomcatDir=/opt/local/alfresco-{{ alf_ver }}/tomcat
+  tomcatDir=/opt/local/alfresco-4.2.e/tomcat
   if [ ! -d $tomcatDir ]; then
-    tomcatDir=/Applications/alfresco-{{ alf_ver }}/tomcat
+    tomcatDir=/Applications/alfresco-4.2.e/tomcat
   fi
 fi
 webappDir=${tomcatDir}/webapps
