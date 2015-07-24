@@ -1,5 +1,5 @@
 install_development_tools:
-  pkg.latest:
+  pkg.installed:
     - pkgs:
       - bison
       - byacc
@@ -25,6 +25,7 @@ install_development_tools:
       - subversion
       - swig
       - systemtap
+    - unless: rpm -q nodejs
 
 install_nodesource_rpm:
   cmd.run:
@@ -40,5 +41,6 @@ node_js_pkg:
     - name: nodejs
     
 npm@latest:
-  npm:
-    - installed
+  npm.installed:
+    - require: 
+      - pkg: nodejs
