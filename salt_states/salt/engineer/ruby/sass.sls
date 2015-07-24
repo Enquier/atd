@@ -4,7 +4,7 @@ Developed for JPL/NASA Summer 2014
 #}
 
 include:
-  - ruby
+  - engineer.ruby
 
 required_for_grunt:
   gem.installed:

@@ -22,6 +22,9 @@ base:
    - build 
    - engineer.maven
    - engineer.node_js
+   - engineer.npm.grunt
+   - engineer.npm.bower
+   - engineer.ruby.sass
    
    
 
