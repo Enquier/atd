@@ -38,10 +38,10 @@ function main() {
 
   if [ -a /opt/local/apache-tomcat ]; then
     export path="/opt/local/apache-tomcat/amps"
-    export owner="tomcat:jpl"
+    export owner="tomcat:tomcat"
   elif [ -a /opt/local/alfresco-{{ alf_ver }} ]; then
     export path="/opt/local/alfresco-{{ alf_ver }}/amps"
-    export owner="alfresco:jpl"
+    export owner="alfresco:alfresco"
   elif [ -a /Applications/alfresco-{{ alf_ver }} ]; then
     export path="/Applications/alfresco-{{ alf_ver }}/amps"
   else

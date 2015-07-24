@@ -37,14 +37,14 @@ copy_deploy_scripts:
   file.recurse:
     - name: /tmp/atd/salt_states/salt/alfresco/files/scripts
     - source: salt://alfresco/files/scripts
+    - clean: True
     - makedirs: True
     - user: tomcat
     - group: tomcat
-    - mode: 755
+    - file_mode: 755
     - recurse:
       - user
       - group
-      - mode
 
 set_alf_version:
   file.blockreplace:
