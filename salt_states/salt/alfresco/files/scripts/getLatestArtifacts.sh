@@ -194,8 +194,8 @@ function getNonMavenLatestArtifacts() {
   downloadArtifact $repository $package $artifactId $artifactType $latestVersion
 
   # get europa next
-  latestVersion=`curl -sL $ARTIFACTORY_URL/$repository/$package/$artifactId/ | grep "$versionSearch" | grep '<a href' | cut -d '>' -f2 | grep -v href | grep europa | cut -d '/' -f1 | sort | tail -1`
-  downloadArtifact $repository $package $artifactId $artifactType $latestVersion
+  #latestVersion=`curl -sL $ARTIFACTORY_URL/$repository/$package/$artifactId/ | grep "$versionSearch" | grep '<a href' | cut -d '>' -f2 | grep -v href | grep europa | cut -d '/' -f1 | sort | tail -1`
+  #downloadArtifact $repository $package $artifactId $artifactType $latestVersion
 }
 
 
