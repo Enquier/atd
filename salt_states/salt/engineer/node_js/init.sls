@@ -31,6 +31,7 @@ install_nodesource_rpm:
     - name: curl -sL https://rpm.nodesource.com/setup | bash -
     - user: root
     - group: root
+    - unless: rpm -q nodejs
     - require:
       - pkg: install_development_tools
       
