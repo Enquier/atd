@@ -38,3 +38,7 @@ install_nodesource_rpm:
 node_js_pkg:
   pkg.installed:
     - name: nodejs
+    
+npm@latest:
+  npm:
+    - installed

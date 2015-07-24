@@ -4,8 +4,8 @@ Developed for JPL/NASA Summer 2014
 #}
 
 include:
-  - npm
+  - engineer.node_js
 
-grunt:
+grunt-cli:
   npm:
     - installed

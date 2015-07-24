@@ -20,6 +20,8 @@ base:
    - tomcat.setenv
    - tomcat.build_ssl
    - build 
+   - engineer.maven
+   - engineer.node_js
    
    
 
