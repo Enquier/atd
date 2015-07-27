@@ -9,6 +9,7 @@ include:
 
 {% set farm = grains['farm_name'] %}
 {% set environment = grains['node_env'] %}
+{% set tomcat_home = pillar['tomcat_home'] %}
 {% set alf_type = grains['ALFRESCO_LICENSE_TYPE'] %}
 {% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' %}
   {% set edition = "alfresco-community" %}
@@ -16,7 +17,7 @@ include:
   {% set edition = "alfresco-enterprise" %}
 {% endif %}
 
-{% if 1 == salt['cmd.retcode']('test -f pillar['tomcat_home']/webapps/alfresco.war') %}
+{% if 1 == salt['cmd.retcode']('test -f {{ tomcat_home }}/webapps/alfresco.war') %}
 alfresco_copy_bins:
   file.recurse:
     - name: {{ pillar['tomcat_home'] }}/bin
