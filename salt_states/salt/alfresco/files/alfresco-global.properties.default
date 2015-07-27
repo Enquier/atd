@@ -4,6 +4,7 @@
 {% set alf_type = grains['ALFRESCO_LICENSE_TYPE'] %}
 {% set myID = grains['id'] %}
 {% set alf_ver = grains['ALFRESCO_VERSION'] %}
+{% set email = grains['ALERT_EMAIL'] %}
 
 ###############################
 ## Common Alfresco Properties #
@@ -157,9 +158,9 @@ cifs.enabled=false
 {% if grains['node_env'] == 'dev' %} 
 ###############################################################################
 # [CYL]  Override the SMTP defaults - no need to authenticate to send email messages, so null out username
-#mail.host = mail.securence.com
+#mail.host = {{ pillar['mail_host'] }}
 mail.testmessage.send = true
-#mail.testmessage.to = cgaley@nomagic.com
+#mail.testmessage.to = {{ email }}
 #mail.username =
 # mail.from.default = {{ salt['cmd.run']('hostname') }}@{{ salt['cmd.run']('hostname') }}.nomagic.com
 activities.feed.notifier.enabled=false
@@ -168,9 +169,9 @@ activities.feed.notifier.enabled=false
 ## Disable by default. 
 ###############################################################################
 # [CYL]  Override the SMTP defaults - no need to authenticate to send email messages, so null out username
-#mail.host = smtp.jpl.nasa.gov
+#mail.host = {{ pillar['mail_host'] }}
 mail.testmessage.send = false
-#mail.testmessage.to = mbee-dev-admin@jpl.nasa.gov
+#mail.testmessage.to = {{ email }}
 #mail.username =
 #mail.from.default = swong@sheldon.jpl.nasa.gov
 # mail.from.default = {{ salt['cmd.run']('hostname') }}@{{ salt['cmd.run']('hostname') }}.jpl.nasa.gov
@@ -180,9 +181,9 @@ activities.feed.notifier.enabled=false
 ## Disable by default. 
 ################################################################################
 ## [CYL]  Override the SMTP defaults - no need to authenticate to send email messages, so null out username
-##mail.host = smtp.jpl.nasa.gov
+##mail.host = {{ pillar['mail_host'] }}
 mail.testmessage.send = false
-##mail.testmessage.to = mbee-dev-admin@jpl.nasa.gov
+##mail.testmessage.to = {{ email }}
 ##mail.username =
 ##mail.from.default = swong@sheldon.jpl.nasa.gov
 ## mail.from.default = {{ salt['cmd.run']('hostname') }}@{{ salt['cmd.run']('hostname') }}.jpl.nasa.gov
@@ -190,11 +191,15 @@ activities.feed.notifier.enabled=false
 
 {% elif grains['node_env'] == 'prod' %}
 # [CYL]  Override the SMTP defaults - no need to authenticate to send email messages, so null out username
-mail.host = mail.securence.com
+mail.host = {{ pillar['mail_host'] }}
 mail.testmessage.send = true
-mail.testmessage.to = cgaley@nomagic.com
-mail.username =
-mail.from.default = {{ salt['cmd.run']('hostname') }}@{{ salt['cmd.run']('hostname') }}.nomagic.com
+mail.testmessage.to = {{ email }}
+mail.username = {{ pillar['mail_user'] }}
+mail.from.default = {{ pillar['mail_user'] }}
+mail.password = {{ pillar['mail_password'] }}
+
+mail.testmessage.subject=Outbound SMTP
+mail.testmessage.text=The Outbound SMTP email subsystem is working
 activities.feed.notifier.enabled=false
 
 activities.feed.notifier.enabled = false
