@@ -13,7 +13,7 @@ include:
 disable_sync:
   module.run:
     - name: file.replace
-    - path: /opt/local/apache-tomcat/shared/classes/alfresco-global.properties
+    - path: {{ pillar['tomcat_home'] }}/shared/classes/alfresco-global.properties
     - pattern: synchronization.syncOnStartup=true
     - repl: synchronization.syncOnStartup=false
 

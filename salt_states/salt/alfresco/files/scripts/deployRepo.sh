@@ -36,8 +36,8 @@ function main() {
   explodedWarDir=$1
   cd $explodedWarDir
 
-  if [ -a /opt/local/apache-tomcat ]; then
-    export path="/opt/local/apache-tomcat/amps"
+  if [ -a {{ pillar['tomcat_home'] }} ]; then
+    export path="{{ pillar['tomcat_home'] }}/amps"
     export owner="tomcat:tomcat"
   elif [ -a /opt/local/alfresco-{{ alf_ver }} ]; then
     export path="/opt/local/alfresco-{{ alf_ver }}/amps"

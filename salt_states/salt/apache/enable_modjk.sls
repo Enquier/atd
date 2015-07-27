@@ -17,7 +17,7 @@ Developed for JPL/NASA Summer 2014
 
 include:
  - apache
- - apache.mod_jk
+ - apache.mod_j
 
 update_httpd_modJk_LoadModule:
   file.blockreplace:
@@ -27,6 +27,13 @@ update_httpd_modJk_LoadModule:
     - content: |
         #Load mod_jk apache-tomcat connector module
         LoadModule jk_module modules/mod_jk.so
+
+/etc/httpd/workers.properties:
+  file.managed:
+    - source: salt://apache/files/workers.properties
+    - user: root
+    - group: root
+    - mode: 644
 
 {% if grains ['node_type'] == 'allinone' %}
 
@@ -54,6 +61,8 @@ update_httpd_modJk_WorkerSettings:
         # Send JSPs for context /alfresco/* to your repository
         JkMount /share/* worker1
         JkMount /alfresco/* worker1
+     - require:
+       - file: /etc/httpd/workers.properties
         
 update_httpd_ssl_modJk:
   file.blockreplace:
@@ -86,7 +95,7 @@ update_workers_properties:
         ps=/
         worker.list=worker1
 
-        worker.worker1.port=8009
+        worker.worker1.port={{ pillar['tomcat_ajp'] }}
         worker.worker1.host=localhost
         worker.worker1.type=ajp13
         worker.worker1.lbfactor=1
@@ -116,6 +125,8 @@ update_httpd_modJk_WorkerSettings:
         # Send JSPs for context /artifactory/* to your repository
         JkMount /artifactory/* worker1
         JkMount /jenkins/* worker1
+     - require:
+       - file: /etc/httpd/workers.properties        
         
 update_httpd_ssl_modJk:
   file.blockreplace:
@@ -141,12 +152,12 @@ update_workers_properties:
     - marker_start: '## START :: SALT :: mod_jk settings. Do not edit Manually'
     - marker_end: '## END :: SALT :: mod_jk settings. Do not edit Manually'
     - content: |
-        workers.tomcat_home=/opt/local/apache-tomcat/
+        workers.tomcat_home={{ pillar['tomcat_home'] }}/
         workers.java_home=/opt/jre
         ps=/
         worker.list=worker1
 
-        worker.worker1.port=8019
+        worker.worker1.port={{ pillar['tomcat_ajp'] }}
         worker.worker1.host=localhost
         worker.worker1.type=ajp13
         worker.worker1.lbfactor=1

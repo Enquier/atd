@@ -9,16 +9,16 @@ include:
 decompress_alfresco:
   module.run:
     - name: archive.unzip
-    - zipfile: /opt/local/apache-tomcat/webapps/alfresco.war
+    - zipfile: {{ pillar['tomcat_home'] }}/webapps/alfresco.war
     - options: u
-    - dest: /opt/local/apache-tomcat/webapps/alfresco
-    - onlyif: test ! -e /opt/local/apache-tomcat/webapps/alfresco
+    - dest: {{ pillar['tomcat_home'] }}/webapps/alfresco
+    - onlyif: test ! -e {{ pillar['tomcat_home'] }}/webapps/alfresco
 
 decompress_alfresco_share:
   module.run:
     - name: archive.unzip
-    - zipfile: /opt/local/apache-tomcat/webapps/share.war
+    - zipfile: {{ pillar['tomcat_home'] }}/webapps/share.war
     - options: u
-    - dest: /opt/local/apache-tomcat/webapps/share
-    - onlyif: test ! -e /opt/local/apache-tomcat/webapps/share
+    - dest: {{ pillar['tomcat_home'] }}/webapps/share
+    - onlyif: test ! -e {{ pillar['tomcat_home'] }}/webapps/share
 

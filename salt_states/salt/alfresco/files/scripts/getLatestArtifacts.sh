@@ -3,8 +3,8 @@
 
 # This script grabs all the latest artifacts from Artifactory as necessary
 
-if [ -a /opt/local/apache-tomcat ]; then
-    export path="/opt/local/apache-tomcat/amps"
+if [ -a {{ pillar['tomcat_home'] }} ]; then
+    export path="{{ pillar['tomcat_home'] }}/amps"
     export owner="tomcat:tomcat"
 else
     if [ -a /opt/local/alfresco-4.2.e ]; then

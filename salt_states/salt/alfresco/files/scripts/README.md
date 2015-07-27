@@ -17,7 +17,7 @@
 ### Separate Installations of Tomcat, Alfresco, Postgresql
 
 #### Directory structure
-+ _/opt/local/apache-tomcat_
++ _{{ pillar['tomcat_home'] }}_
   + _shared/classes/alfresco-global.properties_ (specifies dir.root where ALF files are)
 + _/mnt/alf_data_
 + _/var/lib/pgsql/9.3/data_ 
@@ -101,7 +101,7 @@ Manual Installation
 %%% on the machine you want to deploy to
 %> sudo su
 %> /etc/init.d/tomcat stop
-%> cd /opt/local/apache-tomcat/webapps
+%> cd {{ pillar['tomcat_home'] }}/webapps
 %> java -jar ../bin/alfresco-mmt.jar uninstall mms-repo-ent alfresco.war
 %> java -jar ../bin/alfresco-mmt.jar install $YOUR_PATH/mms-repo-ent.amp alfresco.war -force
 %> rm -rf alfresco

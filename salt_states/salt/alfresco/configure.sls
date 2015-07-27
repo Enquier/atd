@@ -6,7 +6,7 @@ include:
  - alfresco
 # - alfresco.deploy
 
-/opt/local/apache-tomcat/shared/classes/alfresco-global.properties:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco-global.properties:
   file.managed:
     - source: salt://alfresco/files/alfresco-global.properties.default
     - template: jinja
@@ -14,31 +14,31 @@ include:
     - group: tomcat
 
 {% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' %}
-/opt/local/apache-tomcat/shared/classes/alfresco/extension/subsystems/Authentication/ldap/common-ldap-context.xml:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/common-ldap-context.xml:
   file.managed:
     - source: salt://alfresco/files/common-ldap-context.xml.default
     - makedirs: True
 
-/opt/local/apache-tomcat/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication.properties:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication.properties:
   file.managed:
     - source: salt://alfresco/files/ldap-authentication.properties.default
     - makedirs: True
 
-/opt/local/apache-tomcat/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication-context.xml:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication-context.xml:
   file.managed:
     - source: salt://alfresco/files/ldap-authentication-context.xml.default
     - makedirs: True
 
-cp -rp /opt/local/apache-tomcat/webapps/alfresco/WEB-INF/classes/alfresco/subsystems/Authentication/alfrescoNtlm /opt/local/apache-tomcat/shared/classes/alfresco/extension/subsystems/Authentication:
+cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/subsystems/Authentication/alfrescoNtlm {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication:
   cmd.run
 {% endif %}
 
-cp -rp /opt/local/apache-tomcat/webapps/alfresco/WEB-INF/classes/alfresco/keystore /mnt/alf_data:
+cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/keystore /mnt/alf_data:
   cmd.run
 
 update_tomcat_permissions:
   file.directory:
-    - name: /opt/local/apache-tomcat/shared/classes/alfresco/extension
+    - name: {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension
     - user: tomcat
     - group: tomcat
     - recurse:

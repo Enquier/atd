@@ -15,14 +15,14 @@ artifactory:
 
 copy_artifactory_war:
   file.copy:
-    - name: /opt/local/apache-tomcat/webapps/artifactory.war
+    - name: {{ pillar['tomcat_home'] }}/webapps/artifactory.war
     - source: /opt/src/artifactory-3.9.2/webapps/artifactory.war
     - user: tomcat
     - group: tomcat
     - require:
       - archive: artifactory
 
-/opt/local/apache-tomcat/webapps/jenkins.war:
+{{ pillar['tomcat_home'] }}/webapps/jenkins.war:
   file.managed:
     - source: salt://build/files/jenkins.war
     - user: tomcat
@@ -42,7 +42,7 @@ copy_artifactory_war:
 
 configure_build_env:
   file.blockreplace:
-    - name: /opt/local/apache-tomcat/bin/setenv.sh
+    - name: {{ pillar['tomcat_home'] }}/bin/setenv.sh
     - marker_start: "### START :: SALT :: configure_build_env Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: configure_build_env Generated Automatically DO NOT EDIT!!###"
     - content: |

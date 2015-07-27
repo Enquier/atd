@@ -1,11 +1,18 @@
-<Server port="8015" shutdown="SHUTDOWN">
+<?xml version='1.0' encoding='utf-8'?>
+<Server port="{{ pillar['tomcat_shutdown'] }}" shutdown="{{ pillar['tomcat_shutdown_cmd'] }}">       
+
+
     <!--APR library loader. Documentation at /docs/apr.html -->
     <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
     <Service name="Catalina">
-        <Connector port="8081" URIEncoding="UTF-8" protocol="HTTP/1.1"/>
+        <!--START :: SALT :: configure_http_connector DO NOT EDIT MANUALLY -->
+        
+        <!--END :: SALT :: configure_http_connector DO NOT EDIT MANUALLY -->
 
         <!-- This is the optional AJP connector -->
+        <!--START :: SALT :: configure_ajp_connector DO NOT EDIT MANUALLY -->
         
+        <!--END :: SALT :: configure_ajp_connector DO NOT EDIT MANUALLY -->
         <!--START :: SALT :: configure_ssl_connector DO NOT EDIT MANUALLY -->
         
         <!--END :: SALT :: configure_ssl_connector DO NOT EDIT MANUALLY -->    

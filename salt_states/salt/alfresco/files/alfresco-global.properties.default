@@ -61,7 +61,7 @@ db.url=jdbc:postgresql://localhost:5432/${db.name}
 ## Install Enterprise license if this is an enterprise host. 
 {% if grains['ALFRESCO_LICENSE_TYPE'] == 'enterprise' %}
 ## License file pulled from SaltMaster
-dir.license.external=/opt/local/apache-tomcat/shared/classes/alfresco/extension/license/
+dir.license.external={{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/license/
 
 {% endif %}
 

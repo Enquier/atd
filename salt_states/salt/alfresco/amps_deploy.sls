@@ -25,12 +25,12 @@ for this file
 
 copy_alfresco_war:
   cmd.run:
-    - cwd: /opt/local/apache-tomcat/webapps
+    - cwd: {{ pillar['tomcat_home'] }}/webapps
     - name: cp alfresco.war alfresco.war-`date +%s`.bak
 
 copy_share_war:
   cmd.run:
-    - cwd: /opt/local/apache-tomcat/webapps
+    - cwd: {{ pillar['tomcat_home'] }}/webapps
     - name: cp share.war share.war-`date +%s`.bak
 
 copy_deploy_scripts:
@@ -39,6 +39,7 @@ copy_deploy_scripts:
     - source: salt://alfresco/files/scripts
     - clean: True
     - makedirs: True
+    - template: jinja
     - user: tomcat
     - group: tomcat
     - file_mode: 755
@@ -65,7 +66,7 @@ deploy_script:
 
 change_tomcat_ownership:
   file.directory:
-    - name: /opt/local/apache-tomcat
+    - name: {{ pillar['tomcat_home'] }}
     - user: tomcat
     - group: tomcat
     - recurse:

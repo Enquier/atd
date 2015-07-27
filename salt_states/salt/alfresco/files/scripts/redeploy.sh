@@ -45,7 +45,7 @@ deployMmsappCmd=$d/deployMmsapp.sh
 deployRepoCmd=$d/deployRepo.sh
 installDocbookgen=$d/installDocbookgen.sh
 
-tomcatDir=/opt/local/apache-tomcat
+tomcatDir={{ pillar['tomcat_home'] }}
 if [ ! -d $tomcatDir ]; then
   tomcatDir=/opt/local/alfresco-4.2.e/tomcat
   if [ ! -d $tomcatDir ]; then
@@ -230,7 +230,7 @@ $installDocbookgen
 
 
 # bkp catalina.out, otherwise waitOnServer.py will see old startup
-mv /opt/local/apache-tomcat/logs/catalina.out /opt/local/apache-tomcat/logs/catalina.out.$(date +%s)
+mv {{ pillar['tomcat_home'] }}/logs/catalina.out {{ pillar['tomcat_home'] }}/logs/catalina.out.$(date +%s)
 
 #start server
 if [[ -n "$ampFile" || -n "$shareAmpFile" ]]; then
@@ -248,8 +248,8 @@ cd $d
 date
 # wait for server to start then initialize the caches
 # TODO: investigate why this causes tomcat to stop...
-#echo "python waitOnServer.py -f /opt/local/apache-tomcat/catalina.out"
-#python $d/waitOnServer.py -f /opt/local/apache-tomcat/logs/catalina.out
+#echo "python waitOnServer.py -f {{ pillar['tomcat_home'] }}/catalina.out"
+#python $d/waitOnServer.py -f {{ pillar['tomcat_home'] }}/logs/catalina.out
 #
 #date
 #echo "python initialize_caches.py -user mmsAdmin:letmein"

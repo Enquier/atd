@@ -15,19 +15,19 @@ shutdown_tomcat:
 
 remove_old_alfresco:
   file.absent:
-    - name: /opt/local/apache-tomcat/webapps/alfresco
+    - name: {{ pillar['tomcat_home'] }}/webapps/alfresco
 
 remove_old_alfresco_war:
   file.absent:
-    - name: /opt/local/apache-tomcat/webapps/alfresco.war
+    - name: {{ pillar['tomcat_home'] }}/webapps/alfresco.war
 
 remove_old_share:
   file.absent:
-    - name: /opt/local/apache-tomcat/webapps/share
+    - name: {{ pillar['tomcat_home'] }}/webapps/share
 
 remove_old_share.war:
   file.absent:
-    - name: /opt/local/apache-tomcat/webapps/share.war
+    - name: {{ pillar['tomcat_home'] }}/webapps/share.war
 
 remove_zip_deployments:
   file.absent:

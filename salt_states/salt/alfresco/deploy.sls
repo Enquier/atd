@@ -16,35 +16,35 @@ include:
   {% set edition = "alfresco-enterprise" %}
 {% endif %}
 
-{% if 1 == salt['cmd.retcode']('test -f /opt/local/apache-tomcat/webapps/alfresco.war') %}
+{% if 1 == salt['cmd.retcode']('test -f {{ pillar['tomcat_home'] }}/webapps/alfresco.war') %}
 alfresco_copy_bins:
   file.recurse:
-    - name: /opt/local/apache-tomcat/bin
+    - name: {{ pillar['tomcat_home'] }}/bin
     - source: salt://alfresco/files/{{ edition }}/bin
 
 alfresco_copy_licenses:
   file.recurse:
-    - name: /opt/local/apache-tomcat/licenses
+    - name: {{ pillar['tomcat_home'] }}/licenses
     - source: salt://alfresco/files/{{ edition }}/licenses
 
 alfresco_copy_endorsed:
   file.recurse:
-    - name: /opt/local/apache-tomcat/endorsed
+    - name: {{ pillar['tomcat_home'] }}/endorsed
     - source: salt://alfresco/files/{{ edition }}/web-server/endorsed
 
 alfresco_copy_lib:
   file.recurse:
-    - name: /opt/local/apache-tomcat/lib
+    - name: {{ pillar['tomcat_home'] }}/lib
     - source: salt://alfresco/files/{{ edition }}/web-server/lib
 
 alfresco_copy_shared:
   file.recurse:
-    - name: /opt/local/apache-tomcat/shared
+    - name: {{ pillar['tomcat_home'] }}/shared
     - source: salt://alfresco/files/{{ edition }}/web-server/shared
 
 alfresco_copy_webapps:
   file.recurse:
-    - name: /opt/local/apache-tomcat/webapps
+    - name: {{ pillar['tomcat_home'] }}/webapps
     - source: salt://alfresco/files/{{ edition }}/web-server/webapps
 {% endif %}
 
@@ -59,24 +59,24 @@ update_owners:
 
 
 {% if grains['ALFRESCO_LICENSE_TYPE'] == 'enterprise' %}
-/opt/local/apache-tomcat/shared/classes/alfresco/extension/license:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/license:
   file.directory:
     - user: tomcat
     - group: tomcat
     - makedirs: True
 
-/opt/local/apache-tomcat/shared/classes/alfresco/extension/license/alfresco_enterprise_license.lic:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/license/alfresco_enterprise_license.lic:
   file.managed:
     - source: salt://alfresco/files/alfresco_enterprise_license.lic
     - user: tomcat
     - group: tomcat
-    - onlyif:  test ! -e /opt/local/apache-tomcat/shared/classes/alfresco/extension/license/alfresco_enterprise_license.lic.installed 
+    - onlyif:  test ! -e {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/license/alfresco_enterprise_license.lic.installed 
 
 {% endif %}
 
 update_permissions:
   file.directory:
-    - name: /opt/local/apache-tomcat
+    - name: {{ pillar['tomcat_home'] }}
     - user: tomcat
     - group: tomcat
     - recurse:

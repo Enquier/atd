@@ -36,7 +36,7 @@ apache_tomcat7_unpack:
     - source: salt://tomcat/files/apache-tomcat-7.0.63.tar.gz
     - archive_format: tar
     - tar_options: z
-    - if_missing: /opt/local/apache-tomcat/webapps
+    - if_missing: {{ pillar['tomcat_home'] }}/webapps
 
 /etc/profile.d/tomcat.sh:
   file.managed:
@@ -47,8 +47,8 @@ apache_tomcat7_unpack:
 
 tomcat_sym:
   file.symlink:
-    - name: /opt/local/apache-tomcat
-    - target: /opt/local/apache-tomcat-7.0.63
+    - name: {{ pillar['tomcat_home'] }}
+    - target: {{ pillar['tomcat_home'] }}-7.0.63
     - user: tomcat
     - group: tomcat
     - recurse:
@@ -57,7 +57,7 @@ tomcat_sym:
 
 tomcat_owner:
   file.directory:
-    - name: /opt/local/apache-tomcat-7.0.63
+    - name: {{ pillar['tomcat_home'] }}-7.0.63
     - user: tomcat
     - group: tomcat
     - recurse: 
@@ -68,6 +68,7 @@ tomcat_owner:
   file.managed:
     - order: 1
     - source: salt://tomcat/files/tomcat.service
+    - template: jinja
     - user: root
     - group: root
     - mode: 755
@@ -91,10 +92,11 @@ add_tomcat_systemd:
     - user: root
     - group: root
 
-/opt/local/apache-tomcat/bin/setenv.sh:
+{{ pillar['tomcat_home'] }}/bin/setenv.sh:
   file.managed:
     - order: 1
     - source: salt://tomcat/files/setenv.sh
+    - template: jinja
     - user: root
     - group: root
     - mode: 755
@@ -112,7 +114,7 @@ add_tomcat_systemd:
 add_alfresco_shared_loader:
   module.run:
     - name: file.replace
-    - path: /opt/local/apache-tomcat/conf/catalina.properties
+    - path: {{ pillar['tomcat_home'] }}/conf/catalina.properties
     - pattern: shared.loader=.*$
     - repl: shared.loader=${catalina.base}/shared/classes
 {% endif %}

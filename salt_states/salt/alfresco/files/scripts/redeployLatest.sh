@@ -6,9 +6,9 @@
 # downloads latest artifacts and deploys them as necessary
 
 function setPaths() {
-    if [ -a /opt/local/apache-tomcat ]; then
-        ampPath="/opt/local/apache-tomcat/amps"
-        webappPath="/opt/local/apache-tomcat/webapps"
+    if [ -a {{ pillar['tomcat_home'] }} ]; then
+        ampPath="{{ pillar['tomcat_home'] }}/amps"
+        webappPath="{{ pillar['tomcat_home'] }}/webapps"
     else
         if [ -a /opt/local/alfresco-$alf_ver ]; then
             ampPath="/opt/local/alfresco-$alf_ver/amps"

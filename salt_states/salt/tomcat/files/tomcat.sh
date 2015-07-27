@@ -1,2 +1,2 @@
-TOMCAT_HOME=/opt/local/apache-tomcat
+TOMCAT_HOME={{ pillar['tomcat_home'] }}
 export TOMCAT_HOME
