@@ -1,3 +1,6 @@
+include:
+  - tomcat
+
 {% if grains['JAVA_VERSION'] == 8 %}
 
 set_java_opts:

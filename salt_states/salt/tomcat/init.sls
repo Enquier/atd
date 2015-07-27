@@ -102,6 +102,7 @@ add_tomcat_systemd:
     - mode: 755
     - replace: False
     - require:
+      - file: tomcat_sym
       - file: /usr/lib/systemd/system/tomcat.service
       - user: tomcat
       - group: tomcat
