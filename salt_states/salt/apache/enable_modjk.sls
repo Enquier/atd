@@ -17,7 +17,7 @@ Developed for JPL/NASA Summer 2014
 
 include:
  - apache
- - apache.mod_j
+ - apache.mod_jk
 
 update_httpd_modJk_LoadModule:
   file.blockreplace:
