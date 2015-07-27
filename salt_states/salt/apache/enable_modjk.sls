@@ -63,8 +63,6 @@ update_httpd_modJk_WorkerSettings:
         # Send JSPs for context /alfresco/* to your repository
         JkMount /share/* worker1
         JkMount /alfresco/* worker1
-     - require:
-       - file: /etc/httpd/workers.properties
         
 update_httpd_ssl_modJk:
   file.blockreplace:
