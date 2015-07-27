@@ -42,6 +42,8 @@ update_httpd_modJk_WorkerSettings:
     - name: /etc/httpd/conf/httpd.conf
     - marker_start: '## START :: SALT :: mod_jk worker settings. Do not edit Manually'
     - marker_end: '## END :: SALT :: mod_jk worker settings. Do not edit Manually'
+    - require:
+      - file: /etc/httpd/workers.properties    
     - content: |
         # Settings required for mod_jk
         JkWorkersFile /etc/httpd/worker.properties
@@ -106,6 +108,8 @@ update_httpd_modJk_WorkerSettings:
     - name: /etc/httpd/conf/httpd.conf
     - marker_start: '## START :: SALT :: mod_jk worker settings. Do not edit Manually'
     - marker_end: '## END :: SALT :: mod_jk worker settings. Do not edit Manually'
+    - require:
+      - file: /etc/httpd/workers.properties 
     - content: |
         # Settings required for mod_jk
         JkWorkersFile /etc/httpd/workers.properties
@@ -124,9 +128,7 @@ update_httpd_modJk_WorkerSettings:
         JkMount /jenkins worker1
         # Send JSPs for context /artifactory/* to your repository
         JkMount /artifactory/* worker1
-        JkMount /jenkins/* worker1
-     - require:
-       - file: /etc/httpd/workers.properties        
+        JkMount /jenkins/* worker1       
         
 update_httpd_ssl_modJk:
   file.blockreplace:
