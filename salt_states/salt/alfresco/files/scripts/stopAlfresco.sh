@@ -23,6 +23,11 @@ if [ -e /etc/init.d/alfresco ]; then
   #if [[ "$test_mms" -eq "0" ]]; then
     $killCommand
   #fi
+elif [ -e /etc/systemd/system/multi-user.target.wants/tomcat.service]; then
+  echo "systemctl stop tomcat"
+  if [[ "$test_mms" -eq "0" ]]; then
+    systemctl stop tomcat 
+  fi
 else
   echo "/etc/init.d/tomcat stop"
   if [[ "$test_mms" -eq "0" ]]; then

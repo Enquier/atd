@@ -51,5 +51,5 @@ base:
 #   - alfresco.copy
    - alfresco.deploy
    - alfresco.amps_deploy
-#   - alfresco.configure
-#   - alfresco.amps_deploy
+   - alfresco.configure
+   - alfresco.start

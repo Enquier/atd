@@ -20,10 +20,15 @@ if [ -n "$pid" ]; then
   exit 1
 fi
 
-if [ -e /etc/init.d/alfresco ]; then
-  echo /etc/init.d/alfresco start
+if [ -e /etc/systemd/system/multi-user.target.wants/alfresco.service ]; then
+  echo systemctl start alfresco
   if [[ "$test_mms" -eq "0" ]]; then
-    /etc/init.d/alfresco start
+    systemctl start alfresco
+  fi
+elif [ -e /etc/systemd/system/multi-user.target.wants/tomcat.service ]; then
+  echo systemctl start tomcat
+  if [[ "$test_mms" -eq "0" ]]; then
+    systemctl start tomcat
   fi
 else
   echo /etc/init.d/tomcat start
