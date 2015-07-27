@@ -6,10 +6,10 @@ base:
   
   'node_type:build':
     - match: grains
-    - tomcat.init
+    - tomcat
     - smtp
 
   'node_type:allinone':
     - match: grains
-    - tomcat.init
+    - tomcat
     - smtp
