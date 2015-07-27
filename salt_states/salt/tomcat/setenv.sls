@@ -63,7 +63,7 @@ set_java_mem:
     - name: {{ pillar['tomcat_home'] }}/bin/setenv.sh
     - marker_start: "### START :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
-    - content: export JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=2048m -Xms15360m -Xmx15360m"
+    - content: export JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=2048m -Xms14336m -Xmx14336m"
 
 {% elif grains['node_type'] == 'build' %}
 
