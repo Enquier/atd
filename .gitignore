@@ -26,3 +26,7 @@ salt_states/salt/alfresco/files/ldap-authentication.properties.default
 
 ## Ignore the ssl certificates files.
 salt_states/salt/apache/files/certs/**
+
+
+## Ignore SMTP authentication
+salt_states/pillar/smtp/init.sls
