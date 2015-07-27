@@ -21,7 +21,7 @@ include:
     - group: tomcat
     - makedirs: True
 
-{% if 'nomagic' in grains['farm_name'] %}
+{% if 'ea' in grains['farm_name'] %}
 
  {# Update branding for nomagic server #}
 turn_off_bg_image:
