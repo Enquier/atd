@@ -18,7 +18,7 @@ base:
    - tomcat
    - tomcat.apache_apr
    - tomcat.setenv
-   - tomcat.build_ssl
+   - tomcat.server_config
    - build 
    - engineer.maven
    - engineer.node_js
@@ -41,7 +41,7 @@ base:
    - tomcat
    - tomcat.setenv
    - tomcat.apache_apr
-   - tomcat.alfresco_ssl
+   - tomcat.server_config
    - utils.swftools
    - database
    - database.postgresqlREPO
