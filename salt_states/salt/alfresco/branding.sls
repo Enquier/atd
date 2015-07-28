@@ -27,20 +27,18 @@ include:
 turn_off_bg_image:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: "var style = \"background-image: url(${url.context}/scripts/vieweditor/images/europa-bg.png)*"
     - repl: "//var style = \"background-image: url(${url.context}/scripts/vieweditor/images/europa-bg.png);"
 
 disable_bg_color:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: "elems\\[ii\\]\\.setAttribute*"
     - repl: "//elems[ii].setAttribute"
 
 update_tile_box:
     file.replace:
-    - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
+    - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: '<b>  Europa EMS</b>'
     - repl: '<b>No Magic MBEA</b>'
 
