@@ -7,10 +7,6 @@ Developed for NMInc
 
  {% set myURL = grains['nodename'] %}
 
-{% elif grains['farm_role_index'] == 2 %}
-
- {% set myURL = grains['nodename']-b %}
-
 {% endif %}
 
 {% set myDomain = grains['domain'] %}
@@ -24,6 +20,6 @@ system:
 
 hostname:
   cmd.run:
-    - name: hostnamectl set-hostname {{ nodename }}
+    - name: hostnamectl set-hostname {{ myURL }}
     - user: root
     - group: root
