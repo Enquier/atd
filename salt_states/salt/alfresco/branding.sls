@@ -72,7 +72,7 @@ update_tile_box:
     file.replace:
     - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: '<b>  Europa EMS</b>'
-    - repl: '<b>Community EMS</b>'
+    - repl: '<b>OpenMBEE Live Demo</b>'
 
 {{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/europa-icon.png:
   file.managed:
