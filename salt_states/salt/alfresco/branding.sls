@@ -24,11 +24,6 @@ include:
 {% if 'ea' in grains['farm_name'] %}
 
  {# Update branding for nomagic server #}
-turn_off_bg_image:
-  file.replace:
-    - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - pattern: "var style = \"background-image: url(${url.context}/scripts/vieweditor/images/europa-bg.png)*"
-    - repl: "//var style = \"background-image: url(${url.context}/scripts/vieweditor/images/europa-bg.png);"
 
 disable_bg_color:
   file.replace:
@@ -39,17 +34,24 @@ disable_bg_color:
 update_tile_box:
     file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - pattern: '<b>  Europa EMS</b>'
-    - repl: '<b>No Magic MBEA</b>'
+    - pattern: '<b>  EMS</b>'
+    - repl: '<b>No Magic Model Based Enterprise Architecture</b>'
 
-{{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/europa-icon.png:
+{{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/icon.png:
   file.managed:
     - source: salt://alfresco/files/branding/No_Magic_logo.png
     - replace: True
     - user: tomcat
     - group: tomcat
+    
+{{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/bg.png:
+  file.managed:
+    - source: salt://alfresco/files/branding/openmbee.png
+    - replace: True
+    - user: tomcat
+    - group: tomcat
 
-{% elif 'community' in grains['farm_name'] %}
+{% elif 'openmbee' in grains['farm_name'] %}
 
  {# Update branding for community server #}
 turn_off_bg_image:
