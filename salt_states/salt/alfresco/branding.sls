@@ -37,14 +37,14 @@ update_tile_box:
     - pattern: '<b>  EMS</b>'
     - repl: '<b>No Magic Model Based Enterprise Architecture</b>'
 
-{{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/icon.png:
+{{ pillar['tomcat_home'] }}/webapps/share/scripts/vieweditor/images/icon.png:
   file.managed:
     - source: salt://alfresco/files/branding/No_Magic_logo.png
     - replace: True
     - user: tomcat
     - group: tomcat
     
-{{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/bg.png:
+{{ pillar['tomcat_home'] }}/webapps/share/scripts/vieweditor/images/bg.png:
   file.managed:
     - source: salt://alfresco/files/branding/openmbee.png
     - replace: True
