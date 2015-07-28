@@ -5,11 +5,11 @@ Developed for JPL/NASA Summer 2014
 
 {% if grains['farm_role_index'] == 1 %}
 
- {% set myURL = grains['farm_name'] %}
+ {% set myURL = grains['nodename'] %}
 
 {% elif grains['farm_role_index'] == 2 %}
 
- {% set myURL = grains['farm_name']-b %}
+ {% set myURL = grains['nodename']-b %}
 
 {% endif %}
 
@@ -29,9 +29,9 @@ update_httpd_modRewrite:
         #####################
         RewriteEngine On
         RewriteCond %{REQUEST_URI} ^/$
-        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html#/workspaces/master [NE,R=301,L]
+        RewriteRule (.*) https://{{ myURL }}/alfresco/mmsapp/mms.html#/workspaces/master [NE,R=301,L]
         RewriteCond %{HTTPS} !=on
-        RewriteRule ^/?(.*) https://{{ myURL }}.{{ myDomain }}/$1 [R,L]
+        RewriteRule ^/?(.*) https://{{ myURL }}/$1 [R,L]
         ## Turn off LDAP verify on certs
         #####################
         LDAPVerifyServerCert Off

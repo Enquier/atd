@@ -7,7 +7,6 @@ include:
 # - mounted_dirs
 # - mounted_dirs.europa_nfs_alf_data
 
-{% set farm = grains['farm_name'] %}
 {% set environment = grains['node_env'] %}
 {% set tomcat_home = pillar['tomcat_home'] %}
 {% set alf_type = grains['ALFRESCO_LICENSE_TYPE'] %}

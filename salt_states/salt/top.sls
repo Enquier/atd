@@ -107,6 +107,7 @@ base:
    - alfresco.deploy
    - alfresco.amps_deploy
    - alfresco.configure
+   - alfresco.branding
    - alfresco.start
    - sleep
    - alfresco.disable_ldap_sync

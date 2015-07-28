@@ -5,11 +5,7 @@ Developed for JPL/NASA Summer 2014
 
 {% if grains['farm_role_index'] == 1 %}
 
- {% set myURL = grains['farm_name'] %}
-
-{% elif grains['farm_role_index'] == 2 %}
-
- {% set myURL = grains['farm_name']-b %}
+ {% set myURL = grains['nodename'] %}
 
 {% endif %}
 
@@ -30,9 +26,9 @@ update_httpd_modRewrite:
         ##RewriteEngine On
         ##RewriteCond %{REQUEST_URI} ^/$
         ##RewriteCond %{lowercase:%{HTTP_HOST}} ^jenkins\.{{ myDomain }}$
-        ##RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/jenkins [NE,R=301,L]
+        ##RewriteRule (.*) https://{{ myURL }}/jenkins [NE,R=301,L]
         ##RewriteCond %{HTTPS} !=on
-        ##RewriteRule ^/?(.*) https://{{ myURL }}.{{ myDomain }}/$1 [R,L]
+        ##RewriteRule ^/?(.*) https://{{ myURL }}/$1 [R,L]
         ## Turn off LDAP verify on certs
         #####################
         LDAPVerifyServerCert Off

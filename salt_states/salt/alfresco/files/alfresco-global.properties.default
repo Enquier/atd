@@ -1,4 +1,9 @@
+{% if grains['farm_name'] == 'openmbee' %}
+{% set farm = 'www' %}
+{% else %}
 {% set farm = grains['farm_name'] %}
+{% endif %}
+
 {% set domain = grains['domain'] %}
 {% set environment = grains['node_env'] %}
 {% set alf_type = grains['ALFRESCO_LICENSE_TYPE'] %}

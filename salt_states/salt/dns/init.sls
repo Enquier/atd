@@ -5,11 +5,11 @@ Developed for NMInc
 
 {% if grains['farm_role_index'] == 1 %}
 
- {% set myURL = grains['farm_name'] %}
+ {% set myURL = grains['nodename'] %}
 
 {% elif grains['farm_role_index'] == 2 %}
 
- {% set myURL = grains['farm_name']-b %}
+ {% set myURL = grains['nodename']-b %}
 
 {% endif %}
 
@@ -18,12 +18,12 @@ Developed for NMInc
 system:
   network.system:
     - enabled: True
-    - hostname: {{ myURL }}.{{ myDomain }}
+    - hostname: {{ myURL }}
     - nisdomain: {{ myDomain }}
     - require_reboot: True
 
 hostname:
   cmd.run:
-    - name: hostnamectl set-hostname {{ myURL }}.{{ myDomain }}
+    - name: hostnamectl set-hostname {{ nodename }}
     - user: root
     - group: root

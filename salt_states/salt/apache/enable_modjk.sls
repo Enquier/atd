@@ -5,11 +5,7 @@ Developed for JPL/NASA Summer 2014
 
 {% if grains['farm_role_index'] == 1 %}
 
- {% set myURL = grains['farm_name'] %}
-
-{% elif grains['farm_role_index'] == 2 %}
-
- {% set myURL = grains['farm_name']-b %}
+ {% set myURL = grains['nodename'] %}
 
 {% endif %}
 
@@ -79,10 +75,10 @@ update_httpd_ssl_modJk:
         ## ModRewrite rules. 
         RewriteEngine On
         RewriteCond %{REQUEST_URI} ^/$
-        RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html#/workspaces/master [NE,R=301,L]
-        RewriteRule /alfresco/mmsapp/ve.html https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html$1 [L]
-        RewriteRule /alfresco/mmsapp/docweb.html https://{{ myURL }}.{{ myDomain }}/alfresco/mmsapp/mms.html$1 [L]
-        RewriteRule /alfresco/mmsapp/portal.html https://{{ myURL }}.jpl.nasa.gov/alfresco/mmsapp/mms.html$1 [L]
+        RewriteRule (.*) https://{{ myURL }}/alfresco/mmsapp/mms.html#/workspaces/master [NE,R=301,L]
+        RewriteRule /alfresco/mmsapp/ve.html https://{{ myURL }}/alfresco/mmsapp/mms.html$1 [L]
+        RewriteRule /alfresco/mmsapp/docweb.html https://{{ myURL }}/alfresco/mmsapp/mms.html$1 [L]
+        RewriteRule /alfresco/mmsapp/portal.html https://{{ myURL }}/alfresco/mmsapp/mms.html$1 [L]
 
 update_workers_properties:
   file.blockreplace:
@@ -143,8 +139,8 @@ update_httpd_ssl_modJk:
         ## ModRewrite rules. 
         ##RewriteEngine On
         ##RewriteCond %{REQUEST_URI} ^/$
-        ##RewriteRule (.*) https://{{ myURL }}.{{ myDomain }}/artifactory [NE,R=301,L]
-        ##RewriteRule ^jenkins.{{ myDomain }} https://{{ myURL }}.{{ myDomain }}/jenkins [NE,R=301,L]
+        ##RewriteRule (.*) https://{{ myURL }}/artifactory [NE,R=301,L]
+        ##RewriteRule ^jenkins.{{ myDomain }} https://{{ myURL }}/jenkins [NE,R=301,L]
 
 update_workers_properties:
   file.blockreplace:
