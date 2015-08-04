@@ -53,3 +53,7 @@ base:
    - alfresco.amps_deploy
    - alfresco.configure
    - alfresco.start
+   
+ 'node_type:ns':
+   - match: grain
+   - dns.server

@@ -10,7 +10,7 @@
 {% set myID = grains['id'] %}
 {% set alf_ver = grains['ALFRESCO_VERSION'] %}
 {% set email = grains['ALERT_EMAIL'] %}
-
+{% set auth = grains['LDAP'] %}
 ###############################
 ## Common Alfresco Properties #
 ###############################
@@ -126,7 +126,7 @@ system.workflow.engine.jbpm.enabled=false
 #-------------
 
 ######AUTHENTIFICATION CHAIN####
-authentication.chain=ldap1:ldap,alfrescoNtlm1:alfrescoNtlm
+authentication.chain=ldap1:{{ auth }},alfrescoNtlm1:alfrescoNtlm
 
 ###### SYNCHRONISATION SETTINGS ####
 # http://docs.alfresco.com/4.0/index.jsp?topic=%2Fcom.alfresco.enterprise.doc%2Fconcepts%2Fauth-ldap-intro.html
