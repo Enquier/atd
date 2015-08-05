@@ -27,7 +27,7 @@ install_bind:
     
 {% if grains['node_type'] == 'ns-master' %}    
 
-{% set slave, otherIP = salt.mine.get('node_type:ns-slave', 'internal_ip_addrs', expr_form='grain').items() %}
+{% for slave, otherIP in salt.mine.get('node_type:ns-slave', 'internal_ip_addrs', expr_form='grain').items() %}
 
   set_master_transfer:
     file.blockreplace:
@@ -35,7 +35,7 @@ install_bind:
       - marker_start: "// START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
       - marker_end: "// END::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
       - template: jinja
-      - content: allow-transfer { localhost; {{ otherIP['ns2'] }} }
+      - content: allow-transfer { localhost; {{ otherIP }} }
   
   set_zones:
     file.blockreplace:
@@ -76,9 +76,9 @@ install_bind:
           ; Resolve nameserver hostnames to IP.
           ns1		IN	A		{{ myIP }}
           ns2		IN	A		{{ otherIP }}
-   
-{% elif grains['node_type'] == 'ns-master' %}
-{% set otherIP = salt.mine.get('ns1*', 'internal_ip_addrs', expr_form='glob') %}
+{% endfor %}   
+{% elif grains['node_type'] == 'ns-slave' %}
+{% for master, otherIP in salt.mine.get('node_type:ns-master', 'internal_ip_addrs', expr_form='grain').items() %}
   
   set_zones:
     file.blockreplace:
@@ -119,6 +119,6 @@ install_bind:
           ; Resolve nameserver hostnames to IP.
           ns1		IN	A		{{ otherIP }}
           ns2		IN	A		{{ myIP }}
-
+{% endfor %}
 {% endif %}
 
