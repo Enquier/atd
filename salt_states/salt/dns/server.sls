@@ -27,7 +27,7 @@ install_bind:
     
 {% if grains['node_type'] == 'ns-master' %}    
 
-{% set otherIP = salt['grains.item']('ns2*')['fqdn_ip4'] %}
+{% set otherIP = salt('ns2*').grains.item['fqdn_ip4'] %}
 
   set_master_transfer:
     file.blockreplace:
