@@ -3,6 +3,7 @@
 #}
 
 {% set myDomain = grains['domain'] %}
+{% set name = grains['farm_name'] %}
 {% set myIP = salt.network.ip_addrs('eth0' 'cidr="172.31.0.0/16"') %}
 
 install_bind:
@@ -26,7 +27,7 @@ install_bind:
     
 {% if grains['node_type'] == 'ns-master' %}    
 
-{% set otherIP['ns2'] = salt.mine.get('ns2*', 'internal_ip_addrs', expr_form='glob') %}
+{% set slave, otherIP in salt.mine.get('node_type:ns-slave', 'internal_ip_addrs', expr_form='grain').items() %}
 
   set_master_transfer:
     file.blockreplace:
@@ -57,7 +58,7 @@ install_bind:
       - template: jinja
       - content: |
           $TTL 86400
-          @   IN  SOA     ns1.{{ myDomain }}. root.{{ myDomain }}. (
+          @   IN  SOA     {{ name }}.{{ myDomain }}. root.{{ myDomain }}. (
             2013042201  ;Serial
             3600        ;Refresh
             1800        ;Retry
