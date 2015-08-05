@@ -27,7 +27,7 @@ install_bind:
     
 {% if grains['node_type'] == 'ns-master' %}    
 
-{% set otherIP = salt.mine.get('ns2*', 'internal_ip_addrs' %}
+{% set otherIP = salt.mine.get('ns2*', 'internal_ip_addrs', expr_form='pillar') %}
 
   set_master_transfer:
     file.blockreplace:
