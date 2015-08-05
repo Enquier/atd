@@ -35,7 +35,7 @@ install_bind:
       - marker_start: "// START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
       - marker_end: "// END::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
       - template: jinja
-      - content: allow-transfer { localhost; {{ otherIP[2] }} }
+      - content: allow-transfer { localhost; {{ otherIP[1] }} }
   
   set_zones:
     file.blockreplace:
