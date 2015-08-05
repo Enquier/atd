@@ -1,11 +1,14 @@
 base:
  '*':
+   - update
    - edit
    - utils
    - utils.epel_repo
    - utils.selinux
 ##   - ldap
    - sshd
+   - mine
+   
 
  'node_type:build':
    - match: grain

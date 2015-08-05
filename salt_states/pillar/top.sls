@@ -1,7 +1,8 @@
 base:
   '*':
     - magicdraw
-    - soapui   
+    - soapui
+    - ipmine
     
   'node_type:build':
     - match: grain

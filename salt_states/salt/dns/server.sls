@@ -3,7 +3,7 @@
 #}
 
 {% set myDomain = grains['domain'] %}
-{% set myIP = grains['fqdn_ip4'] %}
+{% set myIP = salt.network.interface_ip('eth0') %}
 
 
 install_bind:
@@ -27,7 +27,7 @@ install_bind:
     
 {% if grains['node_type'] == 'ns-master' %}    
 
-{% set otherIP = salt('ns2*').grains.item['fqdn_ip4'] %}
+{% set otherIP = salt.mine.get('ns2*', 'internal_ip_addrs' %}
 
   set_master_transfer:
     file.blockreplace:

@@ -11,6 +11,7 @@ base:
 #   - ldap # Ian commented out
 #   - ldap.enable_sssd # Ian commented out
    - sshd
+   - mine
 
  'node_type:basic':
    - match: grain
