@@ -3,7 +3,7 @@
 #}
 
 {% set myDomain = grains['domain'] %}
-{% set myIP = grains['privateIpAddress'] %}
+{% set myIP = grains['fqdn_ip4'] %}
 
 
 install_bind:
