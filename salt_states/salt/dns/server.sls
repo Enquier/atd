@@ -26,7 +26,7 @@ install_bind:
     
 {% if grains['node_type'] == 'ns-master' %}    
 
-{% set otherIP = salt.mine.get('ns2*', 'internal_ip_addrs', expr_form='glob') %}
+{% set otherIP['ns2'] = salt.mine.get('ns2*', 'internal_ip_addrs', expr_form='glob') %}
 
   set_master_transfer:
     file.blockreplace:
@@ -34,7 +34,7 @@ install_bind:
       - marker_start: "// START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
       - marker_end: "// END::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
       - template: jinja
-      - content: allow-transfer { localhost; {{ otherIP['ns2.nminc.co'] }} }
+      - content: allow-transfer { localhost; {{ otherIP['ns2'] }} }
   
   set_zones:
     file.blockreplace:
