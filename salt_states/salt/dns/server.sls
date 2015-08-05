@@ -2,8 +2,8 @@
 
 #}
 
-{ set myD = grains['domain'] }
-{ set myIP = grians['privateIpAddress'] }
+{% set myDomain = grains['domain'] %}
+{% set myIP = grians['privateIpAddress'] %}
 
 
 install_bind:
@@ -18,16 +18,16 @@ install_bind:
     - user: root
     - group: root
     
-/var/named/{{ myD}}.zone:
+/var/named/{{ myDomain }}.zone:
   file.managed:
-    - source: salt://dns/files/{{ myD }}.zone
+    - source: salt://dns/files/{{ myDomain }}.zone
     - template: jinja
     - user: root
     - group: root
     
-{ if grains['node_type'] == 'ns-master' }    
+{% if grains['node_type'] == 'ns-master' %}    
 
-{ set otherIP = salt['cloud.get_instance']('ns2*')['privateIpAddress'] }
+{% set otherIP = salt['cloud.get_instance']('ns2*')['privateIpAddress'] %}
 
   set_master_transfer:
     file.blockreplace:
@@ -43,22 +43,22 @@ install_bind:
       - marker_start: "// START::SALT::DNS::SERVER set_zones Configured Automatically By Salt DO NOT EDIT!!"
       - marker_end: "// END::SALT::DNS::SERVER set_zones Configured Automatically By Salt DO NOT EDIT!!"
       - content: |
-          zone "{{ myD }}" IN {
+          zone "{{ myDomain }}" IN {
                 type master;
-                file "{{ myD }}.zone";
+                file "{{ myDomain }}.zone";
                 allow-update { none; };
           };
           
           
   set_soa:
     file.blockreplace:
-      - name: /var/named/{{ myD }}.zone
+      - name: /var/named/{{ myDomain }}.zone
       - marker_start: "; START::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT"
       - marker_end: "; END::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT"
       - template: jinja
       - content: |
           $TTL 86400
-          @   IN  SOA     ns1.{{ myD }}. root.{{ myD }}. (
+          @   IN  SOA     ns1.{{ myDomain }}. root.{{ myDomain }}. (
             2013042201  ;Serial
             3600        ;Refresh
             1800        ;Retry
@@ -68,7 +68,7 @@ install_bind:
 
   set_nsips:
     file.blockreplace:
-      - name: /var/named/{{ myD }}.zone
+      - name: /var/named/{{ myDomain }}.zone
       - marker_start: "; START::SALT::DNS::SERVER set_nsips Automatically Created By SALT DO NOT EDIT"
       - marker_end: "; END::SALT::DNS::SERVER set_nsips Automatically Created By SALT DO NOT EDIT"
       - template: jinja
@@ -77,8 +77,8 @@ install_bind:
           ns1		IN	A		{{ myIP }}
           ns2		IN	A		{{ otherIP }}
    
-{ elseif grains['node_type'] == 'ns-master' }
-  { set otherIP = salt['cloud.get_instance']('ns1*')['privateIpAddress'] }
+{% elseif grains['node_type'] == 'ns-master' %}
+{% set otherIP = salt['cloud.get_instance']('ns1*')['privateIpAddress'] %}
   
   set_zones:
     file.blockreplace:
@@ -86,22 +86,22 @@ install_bind:
       - marker_start: "// START::SALT::DNS::SERVER set_zones Configured Automatically By Salt DO NOT EDIT!!"
       - marker_end: "// END::SALT::DNS::SERVER set_zones Configured Automatically By Salt DO NOT EDIT!!"
       - content: |
-          zone "{{ myD }}" IN {
+          zone "{{ myDomain }}" IN {
                 type slave;
                 masters { {{ otherIP }}; };
-                file "{{ myD }}.zone";
+                file "{{ myDomain }}.zone";
           };
           
           
   set_soa:
     file.blockreplace:
-      - name: /var/named/{{ myD }}.zone
+      - name: /var/named/{{ myDomain }}.zone
       - marker_start: "; START::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT"
       - marker_end: "; END::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT"
       - template: jinja
       - content: |
           $TTL 86400
-          @   IN  SOA     ns1.{{ myD }}. root.{{ myD }}. (
+          @   IN  SOA     ns1.{{ myDomain }}. root.{{ myDomain }}. (
             2013042201  ;Serial
             3600        ;Refresh
             1800        ;Retry
@@ -111,7 +111,7 @@ install_bind:
 
   set_nsips:
     file.blockreplace:
-      - name: /var/named/{{ myD }}.zone
+      - name: /var/named/{{ myDomain }}.zone
       - marker_start: "; START::SALT::DNS::SERVER set_nsips Automatically Created By SALT DO NOT EDIT"
       - marker_end: "; END::SALT::DNS::SERVER set_nsips Automatically Created By SALT DO NOT EDIT"
       - template: jinja
@@ -120,5 +120,5 @@ install_bind:
           ns1		IN	A		{{ otherIP }}
           ns2		IN	A		{{ myIP }}
 
-{ endif }
+{% endif %}
 

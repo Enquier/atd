@@ -1,7 +1,7 @@
 include:
   - dns.server
   
-{ set myDomain = grains['domain'] } 
+{% set myDomain = grains['domain'] %} 
 
 set_records:
   file.blockreplace:
