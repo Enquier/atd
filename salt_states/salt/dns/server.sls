@@ -21,8 +21,6 @@ install_bind:
 /var/named/{{ myDomain }}.zone:
   file.managed:
     - source: salt://dns/files/{{ myDomain }}.zone
-    - user: root
-    - group: root
     
 {% if grains['node_type'] == 'ns-master' %}    
 
