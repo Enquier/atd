@@ -77,7 +77,7 @@ install_bind:
           ns1		IN	A		{{ myIP }}
           ns2		IN	A		{{ otherIP }}
    
-{% elseif grains['node_type'] == 'ns-master' %}
+{% elif grains['node_type'] == 'ns-master' %}
 {% set otherIP = salt['cloud.get_instance']('ns1*')['privateIpAddress'] %}
   
   set_zones:
