@@ -56,4 +56,6 @@ base:
    
  'node_type:ns':
    - match: grain
+   - dns
    - dns.server
+   - dns.records
