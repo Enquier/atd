@@ -5,4 +5,4 @@ mine_functions:
     cidr: 172.31.0.0/16
   hostname:
     mine_function: grains.item
-    args: farm_name
+    - farm_name
