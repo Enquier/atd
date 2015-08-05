@@ -4,5 +4,5 @@ mine_functions:
     interface: eth0
     cidr: 172.31.0.0/16
   hostname:
-    mine_function: 
-      grains.item: farm_name
+    mine_function: grains.item
+    args: farm_name
