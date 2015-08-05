@@ -8,7 +8,7 @@
 
 install_bind:
   pkg.installed:
-    pkgs:
+    - names:
       - bind
       - bind-utils
   
