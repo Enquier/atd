@@ -27,7 +27,7 @@ install_bind:
     
 {% if grains['node_type'] == 'ns-master' %}    
 
-{% set otherIP = salt['cloud.get_instance']('ns2*')['privateIpAddress'] %}
+{% set otherIP = salt['grains.item']('ns2*')['fqdn_ip4'] %}
 
   set_master_transfer:
     file.blockreplace:
@@ -78,7 +78,7 @@ install_bind:
           ns2		IN	A		{{ otherIP }}
    
 {% elif grains['node_type'] == 'ns-master' %}
-{% set otherIP = salt['cloud.get_instance']('ns1*')['privateIpAddress'] %}
+{% set otherIP = salt['grains.item']('ns1*')['fqdn_ip4'] %}
   
   set_zones:
     file.blockreplace:
