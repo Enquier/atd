@@ -54,7 +54,7 @@ base:
    - alfresco.configure
    - alfresco.start
    
- 'node_type:ns':
+ 'node_type:ns*':
    - match: grain
    - dns
    - dns.server
