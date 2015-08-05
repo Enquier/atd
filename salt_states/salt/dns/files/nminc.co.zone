@@ -1,4 +1,5 @@
 {% set myDomain = grains['domain'] %}
+
 ; START::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT
 $TTL 86400
 @   IN  SOA     ns1.{{ myDomain }}. root.{{ myDomain }}. (

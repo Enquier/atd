@@ -60,12 +60,6 @@ logging {
 
 // START::SALT::DNS::SERVER set_zones Configured Automatically By Salt DO NOT EDIT!!
 
-zone "mydomain.com" IN {
-                type master;
-                file "mydomain.com.zone";
-                allow-update { none; };
-        };
-
 // END::SALT::DNS::SERVER set_zones Configured Automatically By Salt DO NOT EDIT!!
 
 include "/etc/named.rfc1912.zones";
