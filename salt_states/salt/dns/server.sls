@@ -4,7 +4,7 @@
 
 {% set myDomain = grains['domain'] %}
 {% set name = grains['farm_name'] %}
-{% set myIP = salt.network.ip_addrs('eth0' 'cidr="172.31.0.0/16"') %}
+{% set myIP = salt.network.ip_addrs('eth0', 'cidr="172.31.0.0/16"') %}
 
 install_bind:
   pkg.installed:
