@@ -5,7 +5,6 @@
 {% set myDomain = grains['domain'] %}
 {% set myIP = salt.network.ip_addrs('eth0' 'cidr="172.31.0.0/16"') %}
 
-
 install_bind:
   pkg.installed:
     pkgs:
@@ -35,7 +34,7 @@ install_bind:
       - marker_start: "// START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
       - marker_end: "// END::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
       - template: jinja
-      - content: allow-transfer { localhost; {{ otherIP['ns1.nminc.co'] }} }
+      - content: allow-transfer { localhost; {{ otherIP['ns2'] }} }
   
   set_zones:
     file.blockreplace:
