@@ -18,10 +18,9 @@ install_bind:
     - user: root
     - group: root
     
-/var/named/nminc.co.zone:
+/var/named/{{ myDomain }}.zone:
   file.managed:
     - source: salt://dns/files/{{ myDomain }}.zone
-    - template: jinja
     - user: root
     - group: root
     

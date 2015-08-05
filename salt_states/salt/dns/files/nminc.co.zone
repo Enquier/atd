@@ -1,28 +1,14 @@
-{% set myDomain = grains['domain'] %}
-
 ; START::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT
-$TTL 86400
-@   IN  SOA     ns1.{{ myDomain }}. root.{{ myDomain }}. (
-        2013042201  ;Serial
-        3600        ;Refresh
-        1800        ;Retry
-        604800      ;Expire
-        86400       ;Minimum TTL
-)
+
 ; END::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT
 
-; Specify our two nameservers
-		IN	NS		ns1.{{ myDomain }}.
-		IN	NS		ns2.{{ myDomain }}.
 		
 ; START::SALT::DNS::SERVER set_nsips Automatically Created By SALT DO NOT EDIT		
-; Resolve nameserver hostnames to IP.
-ns1		IN	A		1.1.1.1
-ns2		IN	A		2.2.2.2
+
+
 ; END::SALT::DNS::SERVER set_nsips Automatically Created By SALT DO NOT EDIT
 
 ; START::SALT::DNS::SERVER set_records Automatically Created By SALT DO NOT EDIT	
-; Define hostname -> IP pairs which you wish to resolve
-@		IN	A		3.3.3.3
-www		IN	A		3.3.3.3
+
+
 ; END::SALT::DNS::SERVER set_records Automatically Created By SALT DO NOT EDIT
