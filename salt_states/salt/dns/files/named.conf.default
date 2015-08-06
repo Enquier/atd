@@ -24,6 +24,7 @@ options {
         statistics-file "/var/named/data/named_stats.txt";
         memstatistics-file "/var/named/data/named_mem_stats.txt";
         allow-query     { localhost; };
+        forwarders      { 10.91.55.245; };
         
         
         // START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!
