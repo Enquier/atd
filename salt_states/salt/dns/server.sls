@@ -19,6 +19,7 @@ install_bind:
 /var/named/{{ myDomain }}.zone:
   file.managed:
     - source: salt://dns/files/{{ myDomain }}.zone
+    - template: jinja
     
 {% if grains['node_type'] == 'ns-master' %}    
 
@@ -48,8 +49,8 @@ set_zones:
 set_soa:
   file.blockreplace:
     - name: /var/named/{{ myDomain }}.zone
-    - marker_start: "; START::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT"
-    - marker_end: "; END::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT"
+    - marker_start: "; START::SALT::DNS::SERVER {{ myDomain }}_soa Automatically Created By SALT DO NOT EDIT"
+    - marker_end: "; END::SALT::DNS::SERVER {{ myDomain }}_soa Automatically Created By SALT DO NOT EDIT"
     - template: jinja
     - content: |
         $TTL 86400
@@ -91,8 +92,8 @@ set_zones:
 set_soa:
   file.blockreplace:
     - name: /var/named/{{ myDomain }}.zone
-    - marker_start: "; START::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT"
-    - marker_end: "; END::SALT::DNS::SERVER set_soa Automatically Created By SALT DO NOT EDIT"
+    - marker_start: "; START::SALT::DNS::SERVER {{ myDomain }}_soa Automatically Created By SALT DO NOT EDIT"
+    - marker_end: "; END::SALT::DNS::SERVER {{ myDomain }}_soa Automatically Created By SALT DO NOT EDIT"
     - template: jinja
     - content: |
         $TTL 86400
