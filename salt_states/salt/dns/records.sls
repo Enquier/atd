@@ -36,6 +36,4 @@ named:
   service.running:
     - enable: True
     - reload: True
-    - require:
-      - file: set_records-accumulated-{{ ip[0] }}
    
