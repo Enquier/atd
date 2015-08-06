@@ -45,7 +45,7 @@ options {
         */
         allow-recursion { trusted; };
 
-        dnssec-enable yes;
+        dnssec-enable no;
         dnssec-validation yes;
         dnssec-lookaside auto;
 
