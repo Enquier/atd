@@ -3,8 +3,6 @@ include:
   
 {% set myDomain = grains['domain'] %} 
 
-{% for %}
-{%
 set_records:
   file.blockreplace:
     - name: /var/named/{{ myDomain }}.zone
@@ -22,8 +20,11 @@ set_records:
  set_records-accumulated1:
    file.accumulated:
      - filename: /var/named/{{ myDomain }}.zone
+     - name: set_records
      - template: jinja
      - text: "{{ hostname }}  IN  A {{ ip[0] }}"
+     - require_in: 
+       - file: set_records
      
 {% endfor %}
      

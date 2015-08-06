@@ -69,7 +69,7 @@ set_nsips:
     - template: jinja
     - content: |
         ; Resolve nameserver hostnames to IP.
-        ns1		IN	A		{{ myIP }}
+        ns1		IN	A		{{ myIP[0] }}
         ns2		IN	A		{{ otherIP[0] }}
 {% endfor %}   
 {% elif grains['node_type'] == 'ns-slave' %}
@@ -83,7 +83,7 @@ set_zones:
     - content: |
         zone "{{ myDomain }}" IN {
               type slave;
-              masters { {{ otherIP }}; };
+              masters { {{ otherIP[0] }}; };
               file "{{ myDomain }}.zone";
         };
           
@@ -112,8 +112,8 @@ set_nsips:
     - template: jinja
     - content: |
         ; Resolve nameserver hostnames to IP.
-        ns1		IN	A		{{ otherIP }}
-        ns2		IN	A		{{ myIP }}
+        ns1		IN	A		{{ otherIP[0] }}
+        ns2		IN	A		{{ myIP[0] }}
 {% endfor %}
 {% endif %}
 
