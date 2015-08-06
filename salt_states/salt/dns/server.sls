@@ -31,7 +31,7 @@ set_master_transfer:
     - marker_start: "// START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
     - marker_end: "// END::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
     - template: jinja
-    - content: "       allow-transfer { localhost; {{ otherIP[0] }}; };"
+    - content: "       allow-transfer { localhost; {{ otherIP[0] }}; 10.91.55.245; };"
   
 set_zones:
   file.blockreplace:
@@ -54,7 +54,7 @@ set_soa:
     - template: jinja
     - content: |
         $TTL 86400
-        @		IN	SOA		{{ name }}.{{ myDomain }} root.{{ myDomain }}		(
+        @		IN	SOA		{{ name }}.{{ myDomain }}. root.{{ myDomain }}.		(
           2013042201  ;Serial
           3600        ;Refresh
           1800        ;Retry
@@ -70,8 +70,8 @@ set_nsips:
     - template: jinja
     - content: |
         ; Resolve nameserver hostnames to IP.
-          		IN	NS		ns1.{{ myDomain }}
-          		IN	NS		ns2.{{ myDomain }}
+          		IN	NS		ns1.{{ myDomain }}.
+          		IN	NS		ns2.{{ myDomain }}.
         ; Resolve nameserver hostnames to IP.
         ns1		IN	A		{{ myIP[0] }}
         ns2		IN	A		{{ otherIP[0] }}

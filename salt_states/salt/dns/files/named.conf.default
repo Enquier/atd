@@ -9,9 +9,15 @@
 //
 // See /usr/share/doc/bind*/sample/ for example named configuration files.
 //
-
+acl "trusted" {
+     10.3.0.0/16;
+     172.31.0.0/16;
+     10.91.55.0/24;
+     localhost;
+ };
+ 
 options {
-        listen-on port 53 { 127.0.0.1; };
+        listen-on port 53 { trusted; };
         listen-on-v6 port 53 { ::1; };
         directory       "/var/named";
         dump-file       "/var/named/data/cache_dump.db";
@@ -36,7 +42,7 @@ options {
            attacks. Implementing BCP38 within your network would greatly
            reduce such attack surface 
         */
-        recursion no;
+        allow-recursion { trusted; };
 
         dnssec-enable yes;
         dnssec-validation yes;
