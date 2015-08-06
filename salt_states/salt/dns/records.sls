@@ -12,11 +12,11 @@
 {% for server, ip in salt.mine.get('*', 'internal_ip_addrs', expr_form='glob').items() %}
 
 {% set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() %}
-
+{% set host = hostdict[loop.index1] %}
 log_files-{{ ip[0] }}:
   cmd.run:
     - name: |
-        echo "{{ hostdict[1]['farm_name'] }} {{ ip }}"
+        echo "{{ hostdict[loop.index1] }} {{ ip }}"
 
 {# {{ myDomain }}_records-accumulated1:
    file.accumulated:
