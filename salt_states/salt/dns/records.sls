@@ -13,20 +13,21 @@
 
 {% set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() %}
 
-log_files-{{ ip[0] }}:
+{# log_files-{{ ip[0] }}:
   cmd.run:
     - name: |
         echo "{{ hostdict[0][1]['farm_name'] }} {{ ip }}"
+#}
 
-{# {{ myDomain }}_records-accumulated1:
+{{ myDomain }}_records-accumulated-{{ ip[0] }}:
    file.accumulated:
      - filename: /var/named/{{ myDomain }}.zone
      - name: {{ myDomain }}-records-accumulator
      - template: jinja
-     - text: "{{ hostname }}  IN  A {{ ip[0] }}"
+     - text: "{{ hostdict[0][1]['farm_name'] }}  IN  A {{ ip[0] }}"
      - require_in: 
        - file: {{ myDomain }}_records
-#}     
+     
 {% endfor %}
      
    
@@ -36,5 +37,5 @@ named:
     - enable: True
     - reload: True
     - require:
-      - file: set_records-accumulated1
+      - file: set_records-accumulated-{{ ip[0] }}
    
