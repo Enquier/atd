@@ -13,11 +13,9 @@
 
 {% set hostdict = salt.mine.get(server, 'grains.item', expr_form='grain').items() %}
 
-/var/named/salt-{{ ip[0] }}.log:
-  file.managed:
-    - create: True
-    - template: jinja
-    - contents: "Context is: {{ show_full_context() }}"
+log_files:
+  cmd.run:
+    - name: echo "{{ hostdict }} {{ server }} {{ ip }}"
 
 {# {{ myDomain }}_records-accumulated1:
    file.accumulated:
