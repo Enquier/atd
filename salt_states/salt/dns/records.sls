@@ -13,7 +13,7 @@
 
 {% set hostdict = salt.mine.get(server, 'grains.item', expr_form='grain').items() %}
 
-log_files:
+log_files-{{ ip[0] }}:
   cmd.run:
     - name: echo "{{ hostdict }} {{ server }} {{ ip }}"
 
