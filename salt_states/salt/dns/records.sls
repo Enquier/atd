@@ -13,7 +13,7 @@
 
 {% set hostdict = salt.mine.get(server, 'grains.item', expr_form='grain').items() %}
 
-var/named/salt-{{ ip[0] }}.log:
+/var/named/salt-{{ ip[0] }}.log:
   file.managed:
     - create: True
     - template: jinja
