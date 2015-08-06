@@ -30,7 +30,7 @@ set_master_transfer:
     - marker_start: "// START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
     - marker_end: "// END::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
     - template: jinja
-    - content: allow-transfer { localhost; {{ otherIP }} }
+    - content: allow-transfer { localhost; {{ otherIP[0] }} }
   
 set_zones:
   file.blockreplace:
@@ -70,7 +70,7 @@ set_nsips:
     - content: |
         ; Resolve nameserver hostnames to IP.
         ns1		IN	A		{{ myIP }}
-        ns2		IN	A		{{ otherIP }}
+        ns2		IN	A		{{ otherIP[0] }}
 {% endfor %}   
 {% elif grains['node_type'] == 'ns-slave' %}
 {% for master, otherIP in salt.mine.get('node_type:ns-master', 'internal_ip_addrs', expr_form='grain').items() %}
