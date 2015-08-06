@@ -24,7 +24,7 @@
      - filename: /var/named/{{ myDomain }}.zone
      - name: {{ myDomain }}-records-accumulator
      - template: jinja
-     - text: "{{ hostdict[0][1]['farm_name'] }}  IN  A {{ ip[0] }}"
+     - text: "{{ hostdict[0][1]['farm_name'] }}		IN   A		{{ ip[0] }}"
      - require_in: 
        - file: {{ myDomain }}_records
      
