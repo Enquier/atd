@@ -19,9 +19,9 @@ var/named/salt.log:
     - template: jinja
     - contents: "Context is: {{ show_full_context() }}"
 
-{% set hostname = hostdict.grains.farm_name %}
+#{% set hostname = hostdict.grains.farm_name %}
 
- {{ myDomain }}_records-accumulated1:
+{# {{ myDomain }}_records-accumulated1:
    file.accumulated:
      - filename: /var/named/{{ myDomain }}.zone
      - name: {{ myDomain }}-records-accumulator
@@ -29,7 +29,7 @@ var/named/salt.log:
      - text: "{{ hostname }}  IN  A {{ ip[0] }}"
      - require_in: 
        - file: {{ myDomain }}_records
-     
+#}     
 {% endfor %}
      
    
