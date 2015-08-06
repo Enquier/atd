@@ -13,7 +13,7 @@
 
 {% set hostdict = salt.mine.get('node_type:ns-slave', 'grains.item', expr_form='grain').items() %}
 
-{% set hostname = hostdict.server %}
+{% set hostname = hostdict'.'server %}
 
  {{ myDomain }}_records-accumulated1:
    file.accumulated:
