@@ -19,8 +19,6 @@ var/named/salt.log:
     - template: jinja
     - contents: "Context is: {{ show_full_context() }}"
 
-# {% set hostname = hostdict.grains.farm_name %}
-
 {# {{ myDomain }}_records-accumulated1:
    file.accumulated:
      - filename: /var/named/{{ myDomain }}.zone
