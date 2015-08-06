@@ -31,7 +31,7 @@ set_master_transfer:
     - marker_start: "// START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
     - marker_end: "// END::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!"
     - template: jinja
-    - content: "      allow-transfer { localhost; {{ otherIP[0] }}; };"
+    - content: "       allow-transfer { localhost; {{ otherIP[0] }}; };"
   
 set_zones:
   file.blockreplace:
@@ -69,6 +69,9 @@ set_nsips:
     - marker_end: "; END::SALT::DNS::SERVER set_nsips Automatically Created By SALT DO NOT EDIT"
     - template: jinja
     - content: |
+        ; Resolve nameserver hostnames to IP.
+          		IN	NS		ns1.{{ myDomain }}
+          		IN	NS		ns2.{{ myDomain }}
         ; Resolve nameserver hostnames to IP.
         ns1		IN	A		{{ myIP[0] }}
         ns2		IN	A		{{ otherIP[0] }}
@@ -112,6 +115,9 @@ set_nsips:
     - marker_end: "; END::SALT::DNS::SERVER set_nsips Automatically Created By SALT DO NOT EDIT"
     - template: jinja
     - content: |
+        ; Resolve nameserver hostnames to IP.
+          		IN	NS		ns1.{{ myDomain }}
+          		IN	NS		ns2.{{ myDomain }}
         ; Resolve nameserver hostnames to IP.
         ns1		IN	A		{{ otherIP[0] }}
         ns2		IN	A		{{ myIP[0] }}
