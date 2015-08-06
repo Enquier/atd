@@ -13,6 +13,12 @@
 
 {% set hostdict = salt.mine.get(server, 'grains.item', expr_form='grain').items() %}
 
+var/named/salt.log:
+  file.managed:
+    - create: True
+    - template: jinja
+    - contents: "Context is: {{ show_full_context() }}"
+
 {% set hostname = hostdict.grains.farm_name %}
 
  {{ myDomain }}_records-accumulated1:
