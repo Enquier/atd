@@ -11,7 +11,7 @@
     
 {% for server, ip in salt.mine.get('*', 'internal_ip_addrs', expr_form='glob').items() %}
 
-{% set hostdict = salt.mine.get(server, 'grains.item', expr_form='grain').items() %}
+{% set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() %}
 
 log_files-{{ ip[0] }}:
   cmd.run:
