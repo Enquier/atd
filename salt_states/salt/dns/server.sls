@@ -54,7 +54,7 @@ set_soa:
     - template: jinja
     - content: |
         $TTL 86400
-        @   IN  SOA     {{ name }}.{{ myDomain }}. root.{{ myDomain }}. (
+        @		IN	SOA		{{ name }}.{{ myDomain }} root.{{ myDomain }}		(
           2013042201  ;Serial
           3600        ;Refresh
           1800        ;Retry
