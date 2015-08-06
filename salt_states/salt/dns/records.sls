@@ -1,5 +1,3 @@
-include:
-  - dns.server
   
 {% set myDomain = grains['domain'] %} 
 
