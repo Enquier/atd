@@ -16,7 +16,7 @@
 log_files-{{ ip[0] }}:
   cmd.run:
     - name: |
-        echo "{{ hostdict[0][server]['farm_name'] }} {{ ip }}"
+        echo "{{ hostdict[0][loop.index1]['farm_name'] }} {{ ip }}"
 
 {# {{ myDomain }}_records-accumulated1:
    file.accumulated:
