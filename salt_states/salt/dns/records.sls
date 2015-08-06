@@ -9,7 +9,7 @@
     - append_if_not_found: True
     - content: "; Resolve nameserver hostnames to IP."
     
-{% for server, ip in salt.mine.get('*', 'internal_ip_addrs', expr_form='grain').items() %}
+{% for server, ip in salt.mine.get('*', 'internal_ip_addrs', expr_form='glob').items() %}
 
 {% set hostdict = salt.mine.get('node_type:ns-slave', 'grains.item', expr_form='grain').items() %}
 
