@@ -33,6 +33,5 @@ named:
     - enable: True
     - reload: True
     - require:
-      - file: /var/named/{{ myDomain }}.zone
-      - file: /etc/named.conf
+      - file: set_records-accumulated1
    
