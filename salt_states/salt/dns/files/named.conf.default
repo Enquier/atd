@@ -23,7 +23,7 @@ options {
         dump-file       "/var/named/data/cache_dump.db";
         statistics-file "/var/named/data/named_stats.txt";
         memstatistics-file "/var/named/data/named_mem_stats.txt";
-        allow-query     { localhost; };
+        allow-query     { trusted; };
         forwarders      { 10.91.55.245; 8.8.8.8; 8.8.4.4; };
         
         
@@ -43,7 +43,7 @@ options {
            attacks. Implementing BCP38 within your network would greatly
            reduce such attack surface 
         */
-        allow-recursion { trusted; };
+        allow-recursion-on { trusted; };
 
         dnssec-enable no;
         dnssec-validation yes;
