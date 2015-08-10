@@ -15,14 +15,16 @@ Developed for NMInc
 {% set myDomain = grains['domain'] %}
 
 
-/etc/hosts:
+set_hosts:
   file.managed:
+    - name: /etc/hosts
     - contents: |
         127.0.0.1       localhost
         {{ myIP[0] }}       {{ grains['farm_name'] }}.{{ myDomain }} {{ grains['farm_name'] }}
 
 /etc/hostname:
   file.managed:
+    - name: /etc/hostname
     - contents: "{{ grains['farm_name'] }}"
     
 update_hostname:
@@ -31,5 +33,5 @@ update_hostname:
     - user: root
     - group: root
     - require:
-      - file: /etc/hosts
-      - file: /etc/hostname
+      - file: set_hosts
+      - file: set_hostname
