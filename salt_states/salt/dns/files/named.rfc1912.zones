@@ -22,7 +22,7 @@ zone "0.in-addr.arpa" IN {
 	allow-update { none; };
 };
 
-{%- set type = grains['dns_type'] %}
+{% set type = grains['dns_type'] %}
 {%- set reverse = grains['dns_reverse'] %}
 {%- set myDomain = grains['domain'] -%}
 zone "{{ myDomain }}" IN {

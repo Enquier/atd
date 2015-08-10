@@ -1,7 +1,13 @@
 {%- set myDomain = grains['domain'] %}
+{%- if grains['dns_type'] == 'master' %}    
+{%- set masterhost = grains['farm_name'] %}
+{%- elif grains['dns_type'] == 'slave' %}
+{%- set hostdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
+{%- set masterhost = hostdict[0][1]['farm_name'] %}
+{%- endif -%}
 {%- set reverse = grains['dns_reverse'] -%}
 $TTL 3H
-@		IN	SOA		root.{{ myDomain }}. (
+@		IN	SOA		{{ masterhost }}.{{ myDomain }} root.{{ myDomain }}. (
                 2    ; serial
                 3H   ; refresh
                 1H   ; retry
