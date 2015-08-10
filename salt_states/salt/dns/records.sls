@@ -14,7 +14,8 @@ include:
   file.managed:
     - source: salt://dns/files/reverse.zone
     - template: jinja
-    
+{% endif %}
+   
 {% if salt['service.disabled']('named') %}
 service.enable:
   module.run
