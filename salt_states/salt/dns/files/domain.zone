@@ -1,6 +1,6 @@
 {%- set myDomain = grains['domain'] %}
 {%- if grains['dns_type'] == 'master' %}    
-{%- set masterhost = name %}
+{%- set masterhost = grains['farm_name'] %}
 {%- elif grains['dns_type'] == 'slave' %}
 {%- set hostdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
 {%- set masterhost = hostdict[0][1]['farm_name'] %}
@@ -14,7 +14,7 @@ $TTL 86400
           86400       ;Minimum TTL
         )
 {%- if grains['dns_type'] == 'master' %}    
-{%- set masterhost = name %}
+{%- set masterhost = grains['farm_name'] %}
 {%- elif grains['dns_type'] == 'slave' %}
 {%- set masterdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
 {%- set masterhost = masterdict[0][1]['farm_name'] %}          
