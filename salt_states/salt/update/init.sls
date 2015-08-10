@@ -1,3 +1,4 @@
 update_os:
-  pkg.uptodate
-    - kwargs: "--skip-broken"
+  pkg.uptodate:
+    - kwargs:
+      - skip-broken
