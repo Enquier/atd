@@ -17,13 +17,13 @@ Developed for NMInc
 
 /etc/hosts:
   file.managed:
-    - content: |
+    - contents: |
         127.0.0.1       localhost
-        {{ myIP }}       {{ fqdn }} {{ hostname }}
+        {{ myIP }}       {{ grains['farm_name'] }}.{{ myDomain }} {{ grains['farm_name'] }}
 
 /etc/hostname:
   file.managed:
-    - content: "{{ hostname }}"
+    - contents: "{{ grains['farm_name'] }}"
     
 update_hostname:
   cmd.run:
