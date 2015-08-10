@@ -32,13 +32,13 @@ zone "{{ myDomain }}" IN {
 	allow-update { none; };
 	allow-transfer { 
 {%- for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() -%}
-{{ otherIP[0] }};
+{{ otherIP[0] }}; 
 {%- endfor -%} 10.91.55.245; };
 {%- elif type == 'slave' %}
 	file "slaves/{{ myDomain }}";
 	masters { 
 {%- for server, otherIP in salt.mine.get('dns_type:master', 'internal_ip_addrs', expr_form='grain').items() -%}
-{{ otherIP[0] }};
+{{ otherIP[0] }}; 
 {%- endfor -%} };
 {% endif %}
 	};
@@ -50,13 +50,13 @@ zone "{{ reverse }}.in-addr.arpa" IN {
 	allow-update { none; };
 	allow-transfer { 
 {%- for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() -%}
-{{ otherIP[0] }};
+{{ otherIP[0] }}; 
 {%- endfor -%} 10.91.55.245; };
 {%- elif type == 'slave' %}
 	file "slaves/{{ reverse }}";
 	masters { 
 {%- for server, otherIP in salt.mine.get('dns_type:master', 'internal_ip_addrs', expr_form='grain').items() -%}
-{{ otherIP[0] }};
+{{ otherIP[0] }}; 
 {%- endfor -%} };
 {% endif %}
 	};
