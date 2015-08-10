@@ -1,5 +1,5 @@
-{% set myDomain = grains['domain'] %}
-{% set reverse = grains['dns_reverse'] %}
+{%- set myDomain = grains['domain'] %}
+{%- set reverse = grains['dns_reverse'] %}
 $TTL 3H
 @   IN SOA  @ root.{{ myDomain }}. (
                 2    ; serial
@@ -18,8 +18,8 @@ $TTL 3H
 {%- if salt['nminc_utils.strsplit'](reverse,'.')|length == 1 %}
 {{ ipdict[3] }}.{{ ipdict[2] }}.{{ ipdict[1] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
 {%- elif salt['nminc_utils.strsplit'](reverse,'.')|length == 2 %}
-{{ ipdict[3] }}.{{ ipdict[2] }}	IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
+{{ ipdict[3] }}.{{ ipdict[2] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
 {%- elif salt['nminc_utils.strsplit'](reverse,'.')|length == 3 %}
-{{ ipdict[3] }}	IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
+{{ ipdict[3] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
 {% endif -%}
 {% endfor -%}
