@@ -1,7 +1,7 @@
 {%- set myDomain = grains['domain'] %}
 {%- set reverse = grains['dns_reverse'] %}
 $TTL 3H
-@   IN SOA  @ root.{{ myDomain }}. (
+@		IN	SOA		root.{{ myDomain }}. (
                 2    ; serial
                 3H   ; refresh
                 1H   ; retry
