@@ -17,21 +17,18 @@ include:
 {% endif %}
    
 {% if salt['service.disabled']('named') %}
-enable_named:
+service.enable:
   module.run
-    - m_name: service.enable
     - name: named
 {% endif %}
 
 {% if salt['service.status']('named') %}
-reload_named:
+service.reload:
   module.run:
-    - m_name: service.restart
     - name: named
 {% else %}
-start_named:
+service.start:
   module.run:
-    - m_name: service.start
     - name: named
 {% endif %}
 
