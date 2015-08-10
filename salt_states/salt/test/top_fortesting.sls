@@ -1,6 +1,6 @@
 base:
  '*':
-   - update
+ #  - update
    - edit
    - utils
    - utils.epel_repo
