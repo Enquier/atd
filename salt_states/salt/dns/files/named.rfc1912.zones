@@ -6,7 +6,7 @@ zone "{{ myDomain }}" IN {
     allow-update { none; };
 {% if type == 'master' %}	
 {% for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() %}
-{% set slave = otherIP[0]
+{% set slave = otherIP[0] %}
 {% endfor %}
 	allow-transfer { {{ slave }}; 10.91.55.245; };
 {% endif %}
