@@ -14,7 +14,7 @@ include:
   file.managed:
     - source: salt://dns/files/reverse.zone
     - template: jinja
-{% endif %}
+
 named:
   service.running:
     - enable: True
@@ -22,4 +22,13 @@ named:
     - require:
       - file: /etc/named.conf
       - file: /var/named/{{ myDomain }}.zone
+{% else %}
+named:
+  service.running:
+    - enable: True
+    - reload: True
+    - require:
+      - file: /etc/named.conf
+{% endif %}
+
    
