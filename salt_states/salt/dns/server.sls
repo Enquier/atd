@@ -22,8 +22,8 @@ install_bind:
 set_trusted:
   file.blockreplace:
     - name: /etc/named.conf
-    - marker_start: "// START::SALT::DNS:SERVER set_trusted Automatically Created by SALT DO NOT EDIT!"
-    - marker_end: "// END::SALT::DNS:SERVER set_trusted Automatically Created by SALT DO NOT EDIT!"
+    - marker_start: "/* START::SALT::DNS:SERVER set_trusted Automatically Created by SALT DO NOT EDIT! */"
+    - marker_end: "/* END::SALT::DNS:SERVER set_trusted Automatically Created by SALT DO NOT EDIT! */"
     - content: ""
 
 {% for trusted in grains['dns_trusted'] %} 
