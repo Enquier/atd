@@ -4,7 +4,7 @@
 include:
   - dns
   - dns.server
-{% if grains['dns_type'] == master %}
+{% if grains['dns_type'] == "master" %}
 /var/named/{{ myDomain }}.zone:
   file.managed:
     - source: salt://dns/files/domain.zone
