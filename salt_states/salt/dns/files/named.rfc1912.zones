@@ -1,16 +1,17 @@
-{% set type = grains['dns_type'] %}
-{% set reverse = grains['dns_reverse'] %}
-{% set myDomain = grains['domain'] %}
+{%- set type = grains['dns_type'] %}
+{%- set reverse = grains['dns_reverse'] %}
+{%- set myDomain = grains['domain'] -%}
 zone "{{ myDomain }}" IN {
      type {{ type }};
 	file "{{ myDomain }}.zone";
     allow-update { none; };
-{% if type == 'master' %}	
+{%- if type == 'master' %}	
 	allow-transfer { 
 	{%- for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() -%}
 		{{ otherIP[0] }};
 	{%- endfor -%} 10.91.55.245; };
-{% endif %}
+{% endif -%}
+	};
 	  
 zone "{{ reverse }}.in-addr.arpa" {
 	type {{ type }};

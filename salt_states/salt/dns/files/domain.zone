@@ -1,15 +1,10 @@
-{% set myDomain = grains['domain'] %}
-
-{% if grains['dns_type'] == 'master' %}    
-
-{% set masterhost = name %}
-
-{% elif grains['dns_type'] == 'slave' %}
-
-{% set hostdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
-{% set masterhost = hostdict[0][1]['farm_name'] %}
-          
-{% endif %}
+{%- set myDomain = grains['domain'] %}
+{%- if grains['dns_type'] == 'master' %}    
+{%- set masterhost = name %}
+{%- elif grains['dns_type'] == 'slave' %}
+{%- set hostdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
+{%- set masterhost = hostdict[0][1]['farm_name'] %}
+{%- endif -%}
 $TTL 86400
 @		IN	SOA		{{ masterhost }}.{{ myDomain }}. root.{{ myDomain }}.		(
           2013042201  ;Serial
