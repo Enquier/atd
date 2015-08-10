@@ -22,7 +22,7 @@ set_hosts:
         127.0.0.1       localhost
         {{ myIP[0] }}       {{ grains['farm_name'] }}.{{ myDomain }} {{ grains['farm_name'] }}
 
-/etc/hostname:
+set_hostname:
   file.managed:
     - name: /etc/hostname
     - contents: "{{ grains['farm_name'] }}"
