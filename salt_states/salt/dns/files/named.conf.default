@@ -11,12 +11,11 @@
 //
 
 
-// START::SALT::DNS:SERVER set_trusted Automatically Created by SALT DO NOT EDIT!
-     10.3.0.0/16;
-     172.31.0.0/16;
-     10.91.55.0/24;
-     localhost;
-// END::SALT::DNS:SERVER set_trusted Automatically Created by SALT DO NOT EDIT!
+acl "trusted" {
+{% for trusted in grains['dns_trusted'] %}\
+        {{ trusted }};
+{% endfor %}
+};
 
  
 options {
