@@ -21,7 +21,7 @@ $TTL 86400
 {% endif %}  
 ; Resolve nameserver hostnames.
 {% for ns, host in salt.mine.get('node_type:ns', 'grains.item', expr_form='grain').items() %}
-@		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}         
+@		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}
 {% endfor %}
 ; Resolve nameserver hostnames to IP.   
 {% for server, ip in salt.mine.get('*', 'internal_ip_addrs', expr_form='glob').items() %}
