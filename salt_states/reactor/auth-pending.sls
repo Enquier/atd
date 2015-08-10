@@ -1,5 +1,5 @@
 {# server faild to authenticate -- remove accepted key #}
-{% if not data['result'] and data['id'].endswith('nminc.co') %}
+{% if not data['result'] and ( data['id'].endswith('nminc.co') or data['id'].endswith('openmbee.com') ) %}
 minion_remove:
   wheel.key.delete:
     - match: {{ data['id'] }} minion_rejoin:
@@ -14,36 +14,8 @@ minion_remove:
 minion_add:
   wheel.key.accept:
     - match: {{ data['id'] }}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('ems') %}
-minion_add_demofarm:
-  wheel.key.accept:
-    - match: {{ data['id'] }}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('ehm') %}
-minion_add_demofarm:
-  wheel.key.accept:
-    - match: {{ data['id'] }}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('Europa') %}
-minion_add_demofarm:
-  wheel.key.accept:
-    - match: {{ data['id'] }}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('europa') %}
-minion_add_demofarm:
-  wheel.key.accept:
-    - match: {{ data['id'] }}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('mbee') %}
-minion_add_demofarm:
-  wheel.key.accept:
-    - match: {{ data['id'] }}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('rn') %}
-minion_add_demofarm:
-  wheel.key.accept:
-    - match: {{ data['id'] }}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('msmems') %}
-minion_add_demofarm:
-  wheel.key.accept:
-    - match: {{ data['id'] }}
-{% elif 'act' in data and data['act'] == 'pend' and data['id'].startswith('mmos') %}
-minion_add_demofarm:
+{% elif 'act' in data and data['act'] == 'pend' and data['id'].endswith('openmbee.com') %}
+minion_add:
   wheel.key.accept:
     - match: {{ data['id'] }}
 {% endif %}
