@@ -19,18 +19,18 @@ include:
 {% if salt['service.disabled']('named') %}
 enable_bind:
   module.run
-    - name: service.enable
-    - args: named
+    - m_name: service.enable
+    - name: named
 {% endif %}
 
 {% if salt['service.status']('named') %}
 named:
   module.run:
-    - name: service.restart
+    - m_name: service.restart
 {% else %}
 named:
   module.run:
-    - name: service.start
+    - m_name: service.start
 {% endif %}
 
    
