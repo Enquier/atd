@@ -17,7 +17,7 @@ include:
 {% elif grains['dns_type'] == 'slave' %}
 
 {% set masterdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
-{% set masterhost = masterdict[0][1]['farm_name'] %}
+{% set masterhost = masterdict[1]['farm_name'] %}
           
 {% endif %}  
 
