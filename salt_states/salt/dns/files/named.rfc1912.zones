@@ -7,11 +7,9 @@ zone "{{ myDomain }}" IN {
     allow-update { none; };
 {% if type == 'master' %}	
 	allow-transfer { 
-	{% for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() %}
+	{%- for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() -%}
 		{{ otherIP[0] }};
-	{% endfor %}
-	 	10.91.55.245; };
-	};
+	{%- endfor -%} 10.91.55.245; };
 {% endif %}
 	  
 zone "{{ reverse }}.in-addr.arpa" {
