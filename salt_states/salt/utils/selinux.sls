@@ -15,8 +15,5 @@ selinux_pkgs:
     - user: root
     - group: root
 
-disable_selinux_cmd:
-  selinux.mode:
-    - name: permissive 
-    - require:
-      - pkg: selinux_pkgs
+permissive:
+  selinux.mode
