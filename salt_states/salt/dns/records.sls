@@ -4,7 +4,7 @@
 include:
   - dns
   - dns.server
-
+{% if grains['dns_type'] == master %}
 /var/named/{{ myDomain }}.zone:
   file.managed:
     - source: salt://dns/files/domain.zone
@@ -14,7 +14,7 @@ include:
   file.managed:
     - source: salt://dns/files/reverse.zone
     - template: jinja
-
+{% endif %}
 named:
   service.running:
     - enable: True
