@@ -26,7 +26,7 @@ include:
     - name: /var/named/{{ myDomain }}.zone
     - marker_start: "; START::SALT::DNS::RECORDS {{ myDomain }}_ns Automatically Created By SALT DO NOT EDIT"
     - marker_end: "; END::SALT::DNS::RECORDS {{ myDomain }}_ns Automatically Created By SALT DO NOT EDIT"
-    - content: "; Resolve nameserver hostnames.
+    - content: "; Resolve nameserver hostnames."
 
 {% for ns, host in salt.mine.get('node_type:ns', 'grains.item', expr_form='grain').items() %}
       
