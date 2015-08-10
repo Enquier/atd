@@ -4,7 +4,7 @@ base:
    - edit
    - utils
    - utils.epel_repo
-   - utils.selinux
+ #  - utils.selinux
 ##   - ldap
    - sshd
    - mine
