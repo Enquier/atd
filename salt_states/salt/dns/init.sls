@@ -27,7 +27,7 @@ Developed for NMInc
     
 update_hostname:
   cmd.run:
-    - name: "sudo hostname -F /etc/hostname"
+    - name: "hostname -F /etc/hostname"
     - user: root
     - group: root
     - require:
