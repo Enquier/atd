@@ -2,7 +2,6 @@
 Generic DNS Server configuration created by Charles Galey
 NMINC
 #}
-{% set myDomain = grains['domain'] %} 
 
 include:
   - dns
@@ -29,7 +28,7 @@ set_trusted:
 {% for trusted in grains['dns_trusted'] %} 
 trusted-accumulated-{{ trusted }}:
    file.accumulated:
-     - filename: /var/named/{{ myDomain }}.zone
+     - filename: /etc/named.conf
      - name: trusted-accumulator
      - template: jinja
      - text: "{{ trusted }};"
