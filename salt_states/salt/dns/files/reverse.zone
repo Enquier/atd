@@ -18,6 +18,7 @@ $TTL 3H
 {% for server, ip in salt.mine.get('*', 'internal_ip_addrs', expr_form='glob').items() %}
 {% set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() %}
 {% set ipdict = salt['nminc_utils.strsplit'](ip[0],'.') %}
+{{ salt['nminc_utils.strsplit'](ip[0],'.')|length }}
 {% if salt['nminc_utils.strsplit'](ip[0],'.')|length == 1 %}
 {{ ipdict[3] }}.{{ ipdict[2] }}.{{ ipdict[1] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
 {% elif salt['nminc_utils.strsplit'](ip[0],'.')|length == 2 %}
