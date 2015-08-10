@@ -35,7 +35,8 @@ include:
      - filename: /var/named/{{ myDomain }}.zone
      - name: {{ myDomain }}-records-accumulator
      - template: jinja
-     - text: "<arara> @		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}"
+     - text: |
+         @		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}
      - require_in: 
        - file: {{ myDomain }}_ns              
 {% endfor %}
