@@ -9,7 +9,10 @@ include:
     - source: salt://dns/files/domain.zone
     - template: jinja
       
-
+/var/named/{{ reverse }}.zone:
+  file.managed:
+    - source: salt://dns/files/reverse.zone
+    - template: jinja
 
 named:
   service.running:

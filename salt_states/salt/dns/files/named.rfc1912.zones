@@ -16,5 +16,5 @@ zone "{{ myDomain }}" IN {
 	  
 zone "{{ reverse }}.in-addr.arpa" {
 	type {{ type }};
-	file "{{ reverse }}.inadr.arpa"
+	file "{{ reverse }}.zone"
 	};
