@@ -1,3 +1,27 @@
+zone "localhost" IN {
+	type master;
+	file "named.localhost";
+	allow-update { none; };
+};
+
+zone "1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa" IN {
+	type master;
+	file "named.loopback";
+	allow-update { none; };
+};
+
+zone "1.0.0.127.in-addr.arpa" IN {
+	type master;
+	file "named.loopback";
+	allow-update { none; };
+};
+
+zone "0.in-addr.arpa" IN {
+	type master;
+	file "named.empty";
+	allow-update { none; };
+};
+
 {%- set type = grains['dns_type'] %}
 {%- set reverse = grains['dns_reverse'] %}
 {%- set myDomain = grains['domain'] -%}
@@ -16,10 +40,10 @@ zone "{{ myDomain }}" IN {
 {%- for server, otherIP in salt.mine.get('dns_type:master', 'internal_ip_addrs', expr_form='grain').items() -%}
 {{ otherIP[0] }};
 {%- endfor -%} };
-{% endif -%}
+{% endif %}
 	};
 	  
-zone "{{ reverse }}.in-addr.arpa" {
+zone "{{ reverse }}.in-addr.arpa" IN {
 	type {{ type }};
 {%- if type == 'master' %}
 	file "{{ reverse }}.zone";
@@ -34,5 +58,5 @@ zone "{{ reverse }}.in-addr.arpa" {
 {%- for server, otherIP in salt.mine.get('dns_type:master', 'internal_ip_addrs', expr_form='grain').items() -%}
 {{ otherIP[0] }};
 {%- endfor -%} };
-{% endif -%}
+{% endif %}
 	};
