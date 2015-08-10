@@ -1,0 +1,28 @@
+{% set myDomain = grains['domain'] %}
+
+{% if grains['dns_type'] == 'master' %}    
+
+{% set masterhost = name %}
+
+{% elif grains['dns_type'] == 'slave' %}
+
+{% set hostdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
+{% set masterhost = hostdict[0][1]['farm_name'] %}
+          
+{% endif %}
+$TTL 86400
+@		IN	SOA		{{ masterhost }}.{{ myDomain }}. root.{{ myDomain }}.		(
+          2013042201  ;Serial
+          3600        ;Refresh
+          1800        ;Retry
+          604800      ;Expire
+          86400       ;Minimum TTL
+        )
+; END::SALT::DNS::RECORDS {{ myDomain }}_ns Automatically Created By SALT DO NOT EDIT
+
+; END::SALT::DNS::RECORDS {{ myDomain }}_ns Automatically Created By SALT DO NOT EDIT
+
+; START::SALT::DNS::RECORDS {{ myDomain }}_records Automatically Created By SALT DO NOT EDIT	
+
+
+; END::SALT::DNS::RECORDS {{ myDomain }}_records Automatically Created By SALT DO NOT EDIT

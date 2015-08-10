@@ -9,11 +9,15 @@
 //
 // See /usr/share/doc/bind*/sample/ for example named configuration files.
 //
+
+
 acl "trusted" {
+// START::SALT::DNS:SERVER set_trusted Automatically Created by SALT DO NOT EDIT!
      10.3.0.0/16;
      172.31.0.0/16;
      10.91.55.0/24;
      localhost;
+// END::SALT::DNS:SERVER set_trusted Automatically Created by SALT DO NOT EDIT!
  };
  
 options {
@@ -24,15 +28,9 @@ options {
         statistics-file "/var/named/data/named_stats.txt";
         memstatistics-file "/var/named/data/named_mem_stats.txt";
         allow-query     { trusted; };
-        forwarders      { 10.91.55.245; 8.8.8.8; 8.8.4.4; };
-        
-        
-        // START::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!
-        
-        // END::SALT::DNS::SERVER set_master_transfer Configured Automatically By Salt DO NOT EDIT!!
-        
-        
-        
+        allow-transfer { none; };
+        auth-nxdomain no;    # conform to RFC1035
+       
         /* 
          - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
          - If you are building a RECURSIVE (caching) DNS server, you need to enable 
@@ -43,10 +41,11 @@ options {
            attacks. Implementing BCP38 within your network would greatly
            reduce such attack surface 
         */
-        allow-recursion-on { trusted; };
+        recursion yes;
+        allow-recursion { trusted; };
 
         dnssec-enable no;
-        dnssec-validation yes;
+        dnssec-validation auto;
         dnssec-lookaside auto;
 
         /* Path to ISC DLV key */
@@ -65,9 +64,10 @@ logging {
         };
 };
 
-// START::SALT::DNS::SERVER set_zones Configured Automatically By Salt DO NOT EDIT!!
-
-// END::SALT::DNS::SERVER set_zones Configured Automatically By Salt DO NOT EDIT!!
+zone "." IN {
+    type hint;
+    file "named.ca";
+};
 
 include "/etc/named.rfc1912.zones";
 include "/etc/named.root.key";
