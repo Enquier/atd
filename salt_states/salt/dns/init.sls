@@ -19,7 +19,7 @@ Developed for NMInc
   file.managed:
     - contents: |
         127.0.0.1       localhost
-        {{ myIP }}       {{ grains['farm_name'] }}.{{ myDomain }} {{ grains['farm_name'] }}
+        {{ myIP[0] }}       {{ grains['farm_name'] }}.{{ myDomain }} {{ grains['farm_name'] }}
 
 /etc/hostname:
   file.managed:
