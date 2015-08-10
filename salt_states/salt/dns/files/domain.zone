@@ -20,7 +20,7 @@ $TTL 86400
 {%- set masterhost = masterdict[0][1]['farm_name'] %}          
 {% endif %}  
 ; Resolve nameserver hostnames.
-{% for ns, host in salt.mine.get('node_type:ns', 'grains.item', expr_form='grain').items() %}
+{% for ns, host in salt.mine.get('node_type:ns', 'grains.item', expr_form='grain').items() -%}
 @		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}
 {% endfor %}
 ; Resolve nameserver hostnames to IP.   
