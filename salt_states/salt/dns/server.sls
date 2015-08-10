@@ -2,9 +2,11 @@
 Generic DNS Server configuration created by Charles Galey
 NMINC
 #}
+{% set myDomain = grains['domain'] %} 
 
 include:
   - dns
+
 
 install_bind:
   pkg.installed:
