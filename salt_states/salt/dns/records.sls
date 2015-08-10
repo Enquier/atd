@@ -1,4 +1,5 @@
 {% set myDomain = grains['domain'] %} 
+{% set reverse = grains['dns_reverse'] %}
 
 include:
   - dns
