@@ -17,7 +17,7 @@ include:
 {% elif grains['dns_type'] == 'slave' %}
 
 {% set masterdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
-{% set masterhost = masterdict[1]['farm_name'] %}
+{% set masterhost = masterdict[0][1]['farm_name'] %}
           
 {% endif %}  
 
@@ -35,7 +35,7 @@ include:
      - filename: /var/named/{{ myDomain }}.zone
      - name: {{ myDomain }}-records-accumulator
      - template: jinja
-     - text: "@		IN	NS		{{ host[0][1]['farm_name'] }}.{{ myDomain }}"
+     - text: "@		IN	NS		{{ host[1]['farm_name'] }}.{{ myDomain }}"
      - require_in: 
        - file: {{ myDomain }}_ns              
 {% endfor %}
