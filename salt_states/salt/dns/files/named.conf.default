@@ -9,7 +9,7 @@
 
 
 acl "trusted" {
-{%- for trusted in grains['dns_trusted'] %}\
+{%- for trusted in grains['dns_trusted'] %}
         {{ trusted }};
 {% endfor -%}
 };
