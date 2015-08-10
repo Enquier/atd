@@ -29,7 +29,7 @@ set_hostname:
     
 update_hostname:
   cmd.run:
-    - name: "bash -c "hostname -F /etc/hostname""
+    - name: "hostname -F /etc/hostname"
     - user: root
     - group: root
     - require:
