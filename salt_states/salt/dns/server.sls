@@ -17,3 +17,9 @@ install_bind:
   file.managed:
     - source: salt://dns/files/named.conf.default
     - template: jinja
+    
+    
+/etc/named.rfc1912.zones:
+  file.managed:
+    - source: salt://dns/files/named.rfc1912.zones
+    - template: jinja

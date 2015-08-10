@@ -1,5 +1,5 @@
 {% set type = grains['dns_type'] %}
-{% set reverse = grains['reverse']
+{% set reverse = grains['reverse'] %}
 zone "{{ myDomain }}" IN {
      type {{ type }};
 	file "{{ myDomain }}.zone";

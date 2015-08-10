@@ -1,0 +1,28 @@
+{% set myDomain = grains['domain'] %}
+{% set reverse = grains['dns_reverse'] %}
+$TTL 3H
+@   IN SOA  @ root.{{ myDomain }}. (
+                2    ; serial
+                3H   ; refresh
+                1H   ; retry
+                1W   ; expire
+                3H ) ; minimum
+; Resolve nameserver hostnames.
+
+{% for ns, host in salt.mine.get('node_type:ns', 'grains.item', expr_form='grain').items() %}
+@		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}         
+{% endfor %}
+
+; Resolve nameserver hostnames to IP.
+    
+{% for server, ip in salt.mine.get('*', 'internal_ip_addrs', expr_form='glob').items() %}
+{% set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() %}
+{% set ipdict = salt['nminc_utils.strsplit(ip[0],'.') %}
+{% if salt['nminc_utils.strsplit(ip[0],'.')|length = 1 %}
+{{ ipdict[3] }}.{{ ipdict[2] }}.{{ ipdict[1] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
+{% elif salt['nminc_utils.strsplit(ip[0],'.')|length = 2 %}
+{{ ipdict[3] }}.{{ ipdict[2] }}	IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
+{% elif salt['nminc_utils.strsplit(ip[0],'.')|length = 3 %}
+{{ ipdict[3] }}	IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}.
+{% endif %}
+{% endfor %}
