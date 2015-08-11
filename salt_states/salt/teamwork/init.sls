@@ -87,7 +87,7 @@ add_teamwork_systemd:
 
 {% if salt['service.disabled']('teamwork') %}
 enable_teamwork:
-  module.run
+  module.run:
     - name: service.enable
     - m_name: teamwork
 {% endif %}
