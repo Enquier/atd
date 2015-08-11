@@ -3,12 +3,7 @@
 
 domain:
   grains.present:
-   - value: 
-   {%- for node in nodedict -%}
-   {%- if not loop.first -%}
-   {{ nodedict[loop.index0] }}.
-   {%- endif -%}
-   {%- endfor %}
+   - value: {% for node in nodedict %}{% if not loop.first %}{{ nodedict[loop.index0] }}.{% endif %}{% endfor %}
    
 nodename:
   grains.present:
