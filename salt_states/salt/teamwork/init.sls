@@ -107,12 +107,12 @@ start_teamwork:
 
 copy_lic_key:
   file.managed:
-    name: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
-    source: salt://teamwork/files/lic/{{ pillar['tw_lic'] }}
-    makedirs: True
-    mode: 400
-    user: teamwork
-    group: teamwork
+    - name: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
+    - source: salt://teamwork/files/lic/{{ pillar['tw_lic'] }}
+    - makedirs: True
+    - mode: 400
+    - user: teamwork
+    - group: teamwork
 
 #enable_license
     
