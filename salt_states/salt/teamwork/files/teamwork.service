@@ -8,11 +8,11 @@ Type=forking
 User=teamwork
 Group=teamwork
 
-ExecStart=bin/bash -c '$TEAMWORK_HOME/bin/teamwork_server'
-ExecStop=bin/bash -c '$TEAMWORK_HOME/bin/stop_teamwork_server'
+ExecStart=bin/bash -c '/opt/local/teamwork/bin/teamwork_server'
+ExecStop=bin/bash -c '/opt/local/teamwork/bin/stop_teamwork_server'
 
-ExecReload=bin/bash -c '$TEAMWORK_HOME/bin/stop_teamwork_server'
-ExecReload=bin/bash -c '$TEAMWORK_HOME/bin/teamwork_server'
+ExecReload=bin/bash -c '/opt/local/teamwork/bin/stop_teamwork_server'
+ExecReload=bin/bash -c '/opt/local/teamwork/bin/teamwork_server'
 
 
 [Install]
