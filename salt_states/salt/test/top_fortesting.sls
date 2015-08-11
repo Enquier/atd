@@ -59,13 +59,13 @@ base:
    - alfresco.configure
    - alfresco.start
    
- 'node_type:ns*':
+ 'node_type:ns':
    - match: grain
    - dns
    - dns.server
    - dns.records
  
- 'node_type:teamwork'
+ 'node_type:teamwork':
    - match: grain
    - java
    - teamwork
