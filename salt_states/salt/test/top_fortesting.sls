@@ -1,6 +1,7 @@
 base:
  '*':
  #  - update
+   - grains
    - edit
    - utils
    - utils.epel_repo
@@ -8,6 +9,7 @@ base:
 ##   - ldap
    - sshd
    - mine
+   - 
    
 
  'node_type:build':
@@ -62,3 +64,9 @@ base:
    - dns
    - dns.server
    - dns.records
+ 
+ 'node_type:teamwork'
+   - match: grain
+   - java
+   - teamwork
+   
