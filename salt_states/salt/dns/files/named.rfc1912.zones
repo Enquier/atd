@@ -28,7 +28,7 @@ zone "0.in-addr.arpa" IN {
 zone "{{ myDomain }}" IN {
     type {{ type }};
 {%- if type == 'master' %}
-	file "{{ myDomain }}.zone";
+	file "{{ myDomain }}zone";
 	allow-update { none; };
 	allow-transfer { 
 {%- for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() -%}
