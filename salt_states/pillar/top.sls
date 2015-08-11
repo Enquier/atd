@@ -15,3 +15,7 @@ base:
     - ssl_certs
     - tomcat
     - smtp
+
+  'node_type:teamwork':
+    - match: grain
+    - teamwork
