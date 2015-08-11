@@ -33,6 +33,16 @@ teamwork_sym:
       - user: teamwork
       - archive: teamwork_zip_deploy
 
+replace_props:
+  file.managed:
+    - name: /opt/local/teamwork/bin/teamwork_server.properties
+    - source: salt://teamwork/files/teamwork_server.properties.default
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - user: teamwork
+      - archive: teamwork_sym
+    
 set_java_home:
   file.blockreplace:
     - name: /opt/local/teamwork/bin/teamwork_server_nogui.properties
@@ -41,6 +51,7 @@ set_java_home:
     - content: "JAVA_HOME= {{ salt.cmd.run("echo $JAVA_HOME") }}"
     - require:
       - file: teamwork_sym
+      - file: replace_props
 
 
 tw_env_vars:
