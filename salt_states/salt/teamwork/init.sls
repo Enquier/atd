@@ -114,5 +114,5 @@ copy_lic_key:
     user: teamwork
     group: teamwork
 
-enable_license
+#enable_license
     
