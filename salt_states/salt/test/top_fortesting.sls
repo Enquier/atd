@@ -9,7 +9,6 @@ base:
 ##   - ldap
    - sshd
    - mine
-   - 
    
 
  'node_type:build':
