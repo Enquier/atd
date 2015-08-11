@@ -64,7 +64,7 @@ tw_env_vars:
 
 server_execute:
   file.managed:
-    - name: /opt/local/teamwork/bin/teamwork_server_nogui
+    - name: /opt/local/teamwork/bin/teamwork_server
     - mode: 755
     - user: teamwork
     - group: teamwork
