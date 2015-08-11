@@ -19,6 +19,17 @@ teamwork_zip_deploy:
     - source: salt://teamwork/files/MagicDraw_{{ md_ver }}_teamwork_server_no_install.zip
     - archive_format: zip
     - onlyif: test ! -e /opt/local/teamwork/bin/teamwork_server.properties
+
+set_permissions:
+  file.directory:
+    - name: /opt/local/teamwork-{{ md_ver }}
+    - user: teamwork
+    - group: teamwork
+    - recurse:
+      - user
+      - group
+    - require:
+      - archive: teamwork_zip_deploy
     
 teamwork_sym:
   file.symlink:
