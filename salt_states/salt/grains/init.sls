@@ -6,7 +6,7 @@ domain:
    - value: 
    {%- for node in nodedict -%}
    {%- if not loop.first -%}
-   {{ nodedict[loop.index] }}.
+   {{ nodedict[loop.index0] }}.
    {%- endif -%}
    {%- endfor %}
    
