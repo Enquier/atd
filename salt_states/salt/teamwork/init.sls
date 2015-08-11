@@ -9,7 +9,7 @@ teamwork:
     - groups: 
       - teamwork
     - require:
-      - group: tomcat
+      - group: teamwork
     - shell: /sbin/nologin
     - createhome: True
 
