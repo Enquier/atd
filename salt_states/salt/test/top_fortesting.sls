@@ -66,6 +66,7 @@ base:
  
  'node_type:teamwork':
    - match: grain
+   - dns
    - java
    - teamwork
    
