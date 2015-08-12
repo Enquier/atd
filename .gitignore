@@ -28,5 +28,6 @@ salt_states/salt/alfresco/files/ldap-authentication.properties.default
 salt_states/salt/apache/files/certs/**
 
 
-## Ignore SMTP authentication
+## Ignore authentication
 salt_states/pillar/smtp/init.sls
+salt_states/pillar/alfresco/init.sls
