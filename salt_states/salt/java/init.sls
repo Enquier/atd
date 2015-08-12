@@ -24,7 +24,7 @@ java_7_jdk_develop:
   pkg.latest:
     - name: java-1.7.0-openjdk-devel
 
-#}
+
 
 {% endif %}
 

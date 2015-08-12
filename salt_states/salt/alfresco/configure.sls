@@ -36,6 +36,11 @@ cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/sub
 cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/keystore /mnt/alf_data:
   cmd.run
 
+{{ pillar['tomcat_home] }}/webapps/alfresco/WEB-INF/classes/alfresco/module/view-repo/context/service-context.xml:
+  file.replace:
+    - pattern: "\${adminpassword}"
+    - repl: {{ pillar['alfresco_server_user'] }}
+
 update_tomcat_permissions:
   file.directory:
     - name: {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension
