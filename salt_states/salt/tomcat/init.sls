@@ -41,6 +41,7 @@ apache_tomcat7_unpack:
 /etc/profile.d/tomcat.sh:
   file.managed:
     - source: salt://tomcat/files/tomcat.sh
+    - template: jinja
     - user: root
     - group: root
     - mode: 644
@@ -51,6 +52,7 @@ tomcat_sym:
     - target: {{ pillar['tomcat_home'] }}-7.0.63
     - user: tomcat
     - group: tomcat
+    - onlyif: test ! -e /usr/lib/systemd/system/tomcat.service
     - recurse:
       - user
       - group
