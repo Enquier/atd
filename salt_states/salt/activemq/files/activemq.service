@@ -2,10 +2,10 @@
 Description=ActiveMQ
 
 [Service]
-ExecStart=/opt/local/apache-activemq start
-ExecStop=/opt/local/apache-activemq stop
-ExecReload=/opt/local/apache-activemq stop
-ExecReload=/opt/local/apache-activemq start
+ExecStart=/opt/local/apache-activemq/bin/activemq start
+ExecStop=/opt/local/apache-activemq/bin/activemq stop
+ExecReload=/opt/local/apache-activemq/bin/activemq stop
+ExecReload=/opt/local/apache-activemq/bin/activemq start
 User=activemq
 Group=activemq
 
