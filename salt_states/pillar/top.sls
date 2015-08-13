@@ -12,6 +12,7 @@ base:
 
   'node_type:allinone':
     - match: grain
+    - alfresco
     - ssl_certs
     - tomcat
     - smtp
