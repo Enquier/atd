@@ -17,7 +17,7 @@ activemq:
       - group: activemq
     - shell: /sbin/nologin
     - createhome: False
-{#
+
 apache_activemq_7_startup:
   service:
     - dead
@@ -28,7 +28,6 @@ apache_activemq_7_startup:
         - file: /usr/lib/systemd/system/activemq.service
         - user: activemq
         - group: activemq
-#}
 
 apache_activemq7_unpack:
   archive.extracted:
@@ -38,7 +37,7 @@ apache_activemq7_unpack:
     - archive_format: tar
     - tar_options: z
     - if_missing: /opt/local/apache-activemq/webapps
-{#
+
 activemq_sym:
   file.symlink:
     - name: /opt/local/apache-activemq
@@ -70,4 +69,4 @@ add_activemq_chkconfig:
   cmd.run:
     - order: 1
     - name: systemctl enable activemq.service
-#}
+
