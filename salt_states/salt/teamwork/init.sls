@@ -52,8 +52,17 @@ replace_props:
     - group: teamwork
     - require:
       - user: teamwork
-      - archive: teamwork_sym
-    
+      - file: teamwork_sym
+
+add_muserver_props:
+  file.managed:
+    - name: /opt/local/teamwork/data/muserver.properties
+    - source: salt://teamwork/files/muserver.properties.default
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - file: teamwork_sym
+      
 set_java_home:
   file.blockreplace:
     - name: /opt/local/teamwork/bin/teamwork_server_nogui.properties
