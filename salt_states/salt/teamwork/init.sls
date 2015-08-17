@@ -65,7 +65,7 @@ add_muserver_props:
       
 set_java_home:
   file.blockreplace:
-    - name: /opt/local/teamwork/bin/teamwork_server_nogui.properties
+    - name: /opt/local/teamwork/bin/teamwork_server.properties
     - marker_start: "#START::SALT::TEAMWORK set_java_home Created Automatically by SALT DO NOT EDIT!!"
     - marker_end: "#END::SALT::TEAMWORK set_java_home Created Automatically by SALT DO NOT EDIT!!"
     - content: "JAVA_HOME= {{ salt.cmd.run("echo $JAVA_HOME") }}"
