@@ -48,6 +48,7 @@ replace_props:
   file.managed:
     - name: /opt/local/teamwork/bin/teamwork_server.properties
     - source: salt://teamwork/files/teamwork_server.properties.default
+    - template: jinja
     - user: teamwork
     - group: teamwork
     - require:
@@ -58,20 +59,11 @@ add_muserver_props:
   file.managed:
     - name: /opt/local/teamwork/data/muserver.properties
     - source: salt://teamwork/files/muserver.properties.default
+    - template: jinja
     - user: teamwork
     - group: teamwork
     - require:
       - file: teamwork_sym
-      
-set_java_home:
-  file.blockreplace:
-    - name: /opt/local/teamwork/bin/teamwork_server.properties
-    - marker_start: "#START::SALT::TEAMWORK set_java_home Created Automatically by SALT DO NOT EDIT!!"
-    - marker_end: "#END::SALT::TEAMWORK set_java_home Created Automatically by SALT DO NOT EDIT!!"
-    - content: "JAVA_HOME= {{ salt.cmd.run("echo $JAVA_HOME") }}"
-    - require:
-      - file: teamwork_sym
-      - file: replace_props
 
 
 tw_env_vars:
