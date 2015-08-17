@@ -52,6 +52,7 @@ replace_props:
     - user: teamwork
     - group: teamwork
     - require:
+      - archive: teamwork_zip_deploy
       - user: teamwork
       - file: teamwork_sym
 
@@ -63,6 +64,8 @@ add_muserver_props:
     - user: teamwork
     - group: teamwork
     - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
       - file: teamwork_sym
 
 
