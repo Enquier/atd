@@ -33,7 +33,7 @@ zone "{{ myDomain }}" IN {
 	allow-transfer { 
 {%- for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() -%}
 {{ otherIP[0] }}; 
-{%- endfor -%} 10.91.55.245; 10.2.2.1; 10.2.2.2; };
+{%- endfor -%} 10.91.55.245; 10.2.2.1; 10.2.2.2; 10.1.2.31; };
 {%- elif type == 'slave' %}
 	file "slaves/{{ myDomain }}";
 	masters { 
@@ -51,7 +51,7 @@ zone "{{ reverse }}.in-addr.arpa" IN {
 	allow-transfer { 
 {%- for server, otherIP in salt.mine.get('dns_type:slave', 'internal_ip_addrs', expr_form='grain').items() -%}
 {{ otherIP[0] }}; 
-{%- endfor -%} 10.91.55.245; 10.2.2.1; 10.2.2.2; };
+{%- endfor -%} 10.91.55.245; 10.2.2.1; 10.2.2.2; 10.1.2.31; };
 {%- elif type == 'slave' %}
 	file "slaves/{{ reverse }}";
 	masters { 
