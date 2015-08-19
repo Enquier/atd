@@ -14,6 +14,7 @@ base:
     - match: grain
     - alfresco
     - ssl_certs
+    - ldap
     - tomcat
     - smtp
 

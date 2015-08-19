@@ -37,6 +37,7 @@ base:
    - java
    - utils.alfresco_deps
    - dns
+   - ldap
    - activemq
    - apache
    - apache.mod_jk

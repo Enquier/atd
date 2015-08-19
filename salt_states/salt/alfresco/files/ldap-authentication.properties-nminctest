@@ -23,7 +23,7 @@ ldap.authentication.userNameFormat=uid\=%s,ou\=personnel,dc\=dir,dc\=jpl,dc\=nas
 ldap.authentication.java.naming.factory.initial=com.sun.jndi.ldap.LdapCtxFactory
 
 # The URL to connect to the LDAP server 
-ldap.authentication.java.naming.provider.url=ldaps://ldap.jpl.nasa.gov:636
+ldap.authentication.java.naming.provider.url=ldaps://dc01.us.nomagic.com:389
 
 
 # The authentication mechanism to use for password validation
@@ -40,7 +40,7 @@ ldap.authentication.escapeCommasInBind=false
 ldap.authentication.escapeCommasInUid=false
 
 # Comma separated list of user names who should be considered administrators by default
-ldap.authentication.defaultAdministratorUserNames=cinyoung,dlam,cldelp,swong,lho,bclement,raffi,gcgandhi,cgaley
+ldap.authentication.defaultAdministratorUserNames=Administrator,cgaley,wQuery
 
 # This flag enables use of this LDAP subsystem for user and group
 # synchronization. It may be that this subsytem should only be used for 
@@ -51,10 +51,10 @@ ldap.synchronization.active=true
 ldap.synchronization.java.naming.security.authentication=simple
 
 # The default principal to use (only used for LDAP sync)
-ldap.synchronization.java.naming.security.principal=uid\=QMetry,ou\=applications,dc\=dir,dc\=jpl,dc\=nasa,dc\=gov
+ldap.synchronization.java.naming.security.principal=cn\={{ pillar['ldap_queryname'] }},ou\=applications,dc\=nminc,dc\=local
 
 # The password for the default principal (only used for LDAP sync)
-ldap.synchronization.java.naming.security.credentials=prUs5$wx
+ldap.synchronization.java.naming.security.credentials={{ pillar['ldap_querypw'] }}
 
 # If positive, this property indicates that RFC 2696 paged results should be
 # used to split query results into batches of the specified size. This
@@ -67,26 +67,22 @@ ldap.synchronization.queryBatchSize=0
 ldap.synchronization.attributeBatchSize=0
 
 # The query to select all objects that represent the groups to import.
-#ldap.synchronization.groupQuery=(objectclass\=groupOfNames)
-#ldap.synchronization.groupQuery=(&(objectclass\=groupOfUniqueNames)(|(cn\=mbee*)(cn\=europa*)))
-ldap.synchronization.groupQuery=(&(objectclass\=groupOfUniqueNames)(cn\=europa*))
+ldap.synchronization.groupQuery=(&(objectclass\=group)(cn\=nminc*))
 
 # The query to select objects that represent the groups to import that have changed since a certain time.
-#ldap.synchronization.groupDifferentialQuery=(&(objectclass\=groupOfNames)(!(modifyTimestamp<\={0})))
-#ldap.synchronization.groupDifferentialQuery=(&(objectclass\=groupOfUniqueNames)(|(cn\=europa*)(cn\=sscae.*))(!(modifyTimestamp<\={0})))
-ldap.synchronization.groupDifferentialQuery=(&(objectclass\=groupOfUniqueNames)(cn\=europa*)(!(modifyTimestamp<\={0})))
+ldap.synchronization.groupDifferentialQuery=(&(objectclass\=group)(cn\=nminc*)(!(modifyTimestamp<\={0})))
 
 # The query to select all objects that represent the users to import.
-ldap.synchronization.personQuery=(objectclass\=inetOrgPerson)
+ldap.synchronization.personQuery=(objectclass\=person)
 
 # The query to select objects that represent the users to import that have changed since a certain time.
-ldap.synchronization.personDifferentialQuery=(&(objectclass\=inetOrgPerson)(!(modifyTimestamp<\={0})))
+ldap.synchronization.personDifferentialQuery=(&(objectclass\=person)(!(modifyTimestamp<\={0})))
 
 # The group search base restricts the LDAP group query to a sub section of tree on the LDAP server.
-ldap.synchronization.groupSearchBase=ou\=personnel,dc\=dir,dc\=jpl,dc\=nasa,dc\=gov
+#ldap.synchronization.groupSearchBase=ou\=personnel,dc\=dir,dc\=jpl,dc\=nasa,dc\=gov
 
 # The user search base restricts the LDAP user query to a sub section of tree on the LDAP server.
-ldap.synchronization.userSearchBase=ou\=personnel,dc\=dir,dc\=jpl,dc\=nasa,dc\=gov
+ldap.synchronization.userSearchBase=ou\=personnel,dc\=nminc,dc\=local
 
 # The name of the operational attribute recording the last update time for a group or user.
 ldap.synchronization.modifyTimestampAttributeName=modifyTimestamp
@@ -95,7 +91,7 @@ ldap.synchronization.modifyTimestampAttributeName=modifyTimestamp
 ldap.synchronization.timestampFormat=yyyyMMddHHmmss'Z'
 
 # The attribute name on people objects found in LDAP to use as the uid in Alfresco
-ldap.synchronization.userIdAttributeName=uid
+ldap.synchronization.userIdAttributeName=userPrincipalName
 
 # The attribute on person objects in LDAP to map to the first name property in Alfresco
 ldap.synchronization.userFirstNameAttributeName=givenName
@@ -109,7 +105,7 @@ ldap.synchronization.userEmailAttributeName=mail
 # The attribute on person objects in LDAP to map to the organizational id  property in Alfresco
 #ldap.synchronization.userOrganizationalIdAttributeName=o
 #ldap.synchronization.userOrganizationalIdAttributeName=employeeType
-ldap.synchronization.userOrganizationalIdAttributeName=jpldepartmentname
+ldap.synchronization.userOrganizationalIdAttributeName=o
 
 # The default home folder provider to use for people created via LDAP import
 #ldap.synchronization.defaultHomeFolderProvider=largeHomeFolderProvider
@@ -127,13 +123,13 @@ ldap.synchronization.groupIdAttributeName=cn
 ldap.synchronization.groupDisplayNameAttributeName=description
 
 # The group type in LDAP
-ldap.synchronization.groupType=groupOfUniqueNames
+ldap.synchronization.groupType=group
 
 # The person type in LDAP
-ldap.synchronization.personType=inetOrgPerson
+ldap.synchronization.personType=person
 
 # The attribute in LDAP on group objects that defines the DN for its members
-ldap.synchronization.groupMemberAttributeName=uniquemember
+ldap.synchronization.groupMemberAttributeName=member
 
 # If true progress estimation is enabled. When enabled, the user query has to be run twice in order to count entries.
 ldap.synchronization.enableProgressEstimation=true

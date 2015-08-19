@@ -22,6 +22,11 @@ zone "0.in-addr.arpa" IN {
 	allow-update { none; };
 };
 
+zone "us.nomagic.com" IN {
+	type slave;
+	file "slaves/us.nomagic.com"
+	masters { 10.91.55.245; }
+
 {% set type = grains['dns_type'] %}
 {%- set reverse = grains['dns_reverse'] %}
 {%- set myDomain = grains['domain'] -%}
@@ -60,3 +65,4 @@ zone "{{ reverse }}.in-addr.arpa" IN {
 {%- endfor -%} };
 {% endif %}
 	};
+	
