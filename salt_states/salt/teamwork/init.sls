@@ -68,7 +68,18 @@ add_muserver_props:
       - user: teamwork
       - file: teamwork_sym
 
-
+add_tw_console_props:
+  file.managed:
+    - name: /opt/local/teamwork/data/teamwork_console.properties
+    - source: salt://teamwork/files/teamwork_console.properties.default
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+      
 tw_env_vars:
   file.append:
     - name: /etc/profile.d/teamwork.sh
@@ -89,6 +100,15 @@ server_execute:
 stop_execute:
   file.managed:
     - name: /opt/local/teamwork/bin/stop_teamwork_server
+    - mode: 755
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - file: teamwork_sym
+      
+console_execute:
+  file.managed:
+    - name: /opt/local/teamwork/bin/teamwork_console
     - mode: 755
     - user: teamwork
     - group: teamwork

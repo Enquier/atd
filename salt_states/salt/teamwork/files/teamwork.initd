@@ -1,0 +1,56 @@
+# chkconfig: - 91 60
+# description: MagicDraw TeamWork Server
+### BEGIN INIT INFO
+# Provides: teamwork
+# Required-Start: $local_fs $network $named $remote_fs $syslog
+# Required-Stop: $local_fs $network $named $remote_fs $syslog
+# Short-Description: MagicDraw TeamWork Server
+# Description: This script is used to start MagicDraw TeamWork Server ### END INIT INFO
+RETVAL=0 TEAMWORK_HOME="/var/MagicDraw_Teamwork_Server/bin" prog="teamwork_server_nogui" prog_stop="stop_teamwork_server"
+desc="MagicDraw Teamwork Server"
+args="SERVICE"
+check() {
+if [ -f /var/lock/$prog ]; then
+if ps -p $(cat /var/lock/$prog 2>/dev/null) >/dev/null; then
+return 0 fi
+fi return 3 }
+status() {
+check
+if [ $? -eq 0 ]; then
+echo $"${desc} is running..."
+return 0
+fi
+echo $"${desc} is stopped" return 3
+}
+start() {
+check
+if [ $? -eq 0 ]; then
+echo $"${desc} is already started..."
+return 2 fi
+echo -n $"Starting $desc ($prog): " $TEAMWORK_HOME/$prog $args & RETVAL=$?
+SCRIPT_PID=$!
+COUNT=0
+while [ "$COUNT" -le 15 ] && [ -z $JAVA_PID ] do
+JAVA_PID=$(pgrep -P $SCRIPT_PID java) let COUNT=COUNT+1
+sleep 1
+done
+[ $RETVAL -eq 0 ] && echo $JAVA_PID >/var/lock/$prog echo
+}
+stop() {
+echo -n $"Shutting down $desc ($prog): " $TEAMWORK_HOME/$prog_stop
+RETVAL=$?
+[ $RETVAL -eq 0 ] && rm -f /var/lock/$prog return $RETVAL
+}
+             case "$1" in
+               start)
+start RETVAL=$? ;;
+stop) stop
+;; restart)
+stop start RETVAL=$? ;;
+status)
+status teamwork RETVAL=$?
+;;
+*)
+echo $"Usage: $0 {start|stop|restart|status}" exit 3
+esac
+exit $RETVAL
