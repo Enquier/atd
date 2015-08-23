@@ -4,16 +4,16 @@ After=syslog.target
 After=network.target
 
 [Service]
-Type=forking
 User=teamwork
 Group=teamwork
+WorkingDirectory=/opt/local/teamwork/
+ExecStart=/opt/local/teamwork/bin/teamwork_server SERVICE
+ExecStop=/opt/local/teamwork/bin/stop_teamwork_server
 
-ExecStart=/bin/bash -c '/opt/local/teamwork/bin/teamwork_server SERVICE'
-ExecStop=/bin/bash -c '/opt/local/teamwork/bin/stop_teamwork_server SERVICE'
+ExecReload=/opt/local/teamwork/bin/stop_teamwork_server SERVICE
+ExecReload=/opt/local/teamwork/bin/teamwork_server
 
-ExecReload=/bin/bash -c '/opt/local/teamwork/bin/stop_teamwork_server SERVICE'
-ExecReload=/bin/bash -c '/opt/local/teamwork/bin/teamwork_server SERVICE'
-
+StandardOutput=syslog
 
 [Install]
 WantedBy=multi-user.target

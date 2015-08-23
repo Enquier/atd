@@ -21,3 +21,7 @@ base:
   'node_type:teamwork':
     - match: grain
     - teamwork
+  
+  'node_type:cloud':
+    - match: grain
+    - schedule.backup
