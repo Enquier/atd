@@ -1,5 +1,5 @@
 include: 
-  - teawmwork
+  - teamwork
 
 {% if salt['service.disabled']('teamwork') %}
 enable_teamwork:
