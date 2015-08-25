@@ -23,7 +23,7 @@ start_teamwork:
     - name: service.start
     - m_name: teamwork
 	- require:
-	  - file: copy_lic_key
+    - file: copy_lic_key
 {% endif %}
 
 copy_lic_key:
