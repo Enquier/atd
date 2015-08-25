@@ -80,7 +80,7 @@ lmutil_unpack:
     - if_missing: /opt/local/lmutil/lmutil
     
     
-lmgrd_sym:
+lmutil_sym:
   file.symlink:
     - name: /opt/local/lmutil
     - target: /opt/local/lmutil-x64_lsb-11.12.1.0_v6
