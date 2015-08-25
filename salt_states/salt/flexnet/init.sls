@@ -40,7 +40,7 @@ lmadmin_sym:
 lmgrd_unpack:
   archive.extracted:
     - name: /opt/local/
-    - source: salt://flexnet/files/lmgrd-x64-lsb-11.12.1.0_v6.tar.gz
+    - source: salt://flexnet/files/lmgrd-x64_lsb-11.12.1.0_v6.tar.gz
     - archive_format: tar
     - tar_options: z
     - if_missing: /opt/local/lmgrd/lmgrd
