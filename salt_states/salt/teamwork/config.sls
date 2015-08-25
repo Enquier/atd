@@ -6,7 +6,7 @@ enable_teamwork:
   module.run:
     - name: service.enable
     - m_name: teamwork
-	  - require:
+    - require:
       - file: copy_lic_key
 {% endif %}
 
@@ -15,14 +15,14 @@ reload_teamwork:
   module.run:
     - name: service.reload
     - m_name: teamwork
-	  - require:
+    - require:
       - file: copy_lic_key
 {% else %}
 start_teamwork:
   module.run:
     - name: service.start
     - m_name: teamwork
-	  - require:
+    - require:
       - file: copy_lic_key
 {% endif %}
 
