@@ -12,7 +12,10 @@ flexlm:
       - group: flexlm
     - shell: /sbin/nologin
     - createhome: False
-  
+ 
+redhat-lsb-core:
+  pkg:
+    - installed
 
 {#
 lmadmin_copy:
