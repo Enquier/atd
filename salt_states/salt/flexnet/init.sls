@@ -18,7 +18,7 @@ flexlm:
 lmadmin_copy:
   file.managed:
     - name: /opt/src/lmadmin-i86_lsb-11_12_1_1.bin
-    - source: salt://teamwork/files/lmadmin-i86_lsb-11_12_1_1.bin
+    - source: salt://flexnet/files/lmadmin-i86_lsb-11_12_1_1.bin
     - mode: 755
     - user: root
     - group: root
@@ -40,7 +40,7 @@ lmadmin_sym:
 lmgrd_unpack:
   archive.extracted:
     - name: /opt/local/
-    - source: salt://teamwork/files/lmgrd-x64-lsb-11.12.1.0_v6.tar.gz
+    - source: salt://flexnet/files/lmgrd-x64-lsb-11.12.1.0_v6.tar.gz
     - archive_format: tar
     - tar_options: z
     - if_missing: /opt/local/lmgrd/lmgrd
@@ -74,7 +74,7 @@ lmgrd_execute:
 lmutil_unpack:
   archive.extracted:
     - name: /opt/local/
-    - source: salt://teamwork/files/lmutil-x64-lsb-11.12.1.0_v6.tar.gz
+    - source: salt://flexnet/files/lmutil-x64-lsb-11.12.1.0_v6.tar.gz
     - archive_format: tar
     - tar_options: z
     - if_missing: /opt/local/lmutil/lmutil
