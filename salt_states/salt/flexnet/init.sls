@@ -39,7 +39,7 @@ lmadmin_sym:
 
 lmgrd_unpack:
   archive.extracted:
-    - name: /opt/local/
+    - name: /opt/local/lmgrd-x64_lsb-11.12.1.0_v6
     - source: salt://flexnet/files/lmgrd-x64_lsb-11.12.1.0_v6.tar.gz
     - archive_format: tar
     - tar_options: z
@@ -82,7 +82,7 @@ lmgrd_execute:
     
 lmutil_unpack:
   archive.extracted:
-    - name: /opt/local/
+    - name: /opt/local/lmutil-x64_lsb-11.12.1.0v6
     - source: salt://flexnet/files/lmutil-x64_lsb-11.12.1.0v6.tar.gz
     - archive_format: tar
     - tar_options: z
