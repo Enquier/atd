@@ -6,8 +6,8 @@ enable_teamwork:
   module.run:
     - name: service.enable
     - m_name: teamwork
-	- require:
-	  - file: copy_lic_key
+	  - require:
+	    - file: copy_lic_key
 {% endif %}
 
 {% if salt['service.status']('teamwork') %}
@@ -15,15 +15,15 @@ reload_teamwork:
   module.run:
     - name: service.reload
     - m_name: teamwork
-	- require:
-	  - file: copy_lic_key
+	  - require:
+	    - file: copy_lic_key
 {% else %}
 start_teamwork:
   module.run:
     - name: service.start
     - m_name: teamwork
-	- require:
-    - file: copy_lic_key
+	  - require:
+      - file: copy_lic_key
 {% endif %}
 
 copy_lic_key:
