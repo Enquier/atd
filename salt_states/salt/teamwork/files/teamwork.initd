@@ -5,7 +5,9 @@
 # Required-Start: $local_fs $network $named $remote_fs $syslog
 # Required-Stop: $local_fs $network $named $remote_fs $syslog
 # Short-Description: MagicDraw TeamWork Server
-# Description: This script is used to start MagicDraw TeamWork Server ### END INIT INFO
+# Description: This script is used to start MagicDraw TeamWork Server 
+### END INIT INFO
+
 RETVAL=0 TEAMWORK_HOME="/var/MagicDraw_Teamwork_Server/bin" prog="teamwork_server_nogui" prog_stop="stop_teamwork_server"
 desc="MagicDraw Teamwork Server"
 args="SERVICE"

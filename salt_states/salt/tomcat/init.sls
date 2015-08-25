@@ -52,7 +52,6 @@ tomcat_sym:
     - target: {{ pillar['tomcat_home'] }}-7.0.63
     - user: tomcat
     - group: tomcat
-    - onlyif: test ! -e /usr/lib/systemd/system/tomcat.service
     - recurse:
       - user
       - group
