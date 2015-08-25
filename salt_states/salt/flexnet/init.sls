@@ -55,6 +55,8 @@ lmgrd_sym:
     - recurse:
       - user
       - group
+    - require:
+      - archive: lmgrd_unpack
 
 lmgrd_bin:
   file.symlink:
@@ -62,6 +64,10 @@ lmgrd_bin:
     - target: /opt/local/lmgrd/lmgrd
     - user: root
     - group: root
+    - require:
+      - archive: lmgrd_unpack
+      - file: lmgrd_sym
+      - file: lmgrd_execute
       
 lmgrd_execute:
   file.managed:
@@ -69,26 +75,32 @@ lmgrd_execute:
     - mode: 755
     - user: flexlm
     - group: flexlm
+    - require:
+      - archive: lmgrd_unpack
+      - file: lmgrd_sym
  
     
 lmutil_unpack:
   archive.extracted:
     - name: /opt/local/
-    - source: salt://flexnet/files/lmutil-x64-lsb-11.12.1.0_v6.tar.gz
+    - source: salt://flexnet/files/lmutil-x64_lsb-11.12.1.0v6.tar.gz
     - archive_format: tar
     - tar_options: z
     - if_missing: /opt/local/lmutil/lmutil
     
     
+    
 lmutil_sym:
   file.symlink:
     - name: /opt/local/lmutil
-    - target: /opt/local/lmutil-x64_lsb-11.12.1.0_v6
+    - target: /opt/local/lmutil-x64_lsb-11.12.1.0v6
     - user: flexlm
     - group: flexlm
     - recurse:
       - user
       - group
+    - require:
+      - archive: lmutil_unpack
       
 lmutil_bin:
   file.symlink:
@@ -96,6 +108,10 @@ lmutil_bin:
     - target: /opt/local/lmutil/lmutil
     - user: root
     - group: root
+    - require:
+      - archive: lmutil_unpack
+      - file: lmutil_sym
+      - file: lmutil_execute
       
 lmutil_execute:
   file.managed:
@@ -103,3 +119,6 @@ lmutil_execute:
     - mode: 755
     - user: flexlm
     - group: flexlm
+    - require:
+      - archive: lmutil_unpack
+      - file: lmutil_sym
