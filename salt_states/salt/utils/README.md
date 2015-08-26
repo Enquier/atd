@@ -24,3 +24,8 @@ alfresco_deps.sls
 ===
 
 Ensures that dependencies required for alfresco to function are installed. 
+
+python_deps.sls
+===
+
+Ensures that dependencies required for custom python modules to function are installed. 

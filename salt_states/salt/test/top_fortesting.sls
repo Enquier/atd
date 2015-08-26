@@ -5,6 +5,7 @@ base:
    - edit
    - utils
    - utils.epel_repo
+   - utils.python_deps
  #  - utils.selinux
 ##   - ldap
    - sshd
