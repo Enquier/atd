@@ -41,3 +41,5 @@ enable_lic_key:
     - cwd: /opt/local/teamwork/bin
     - name: "./teamwork_server -key:/home/teamwork/.lic/{{ pillar['tw_lic'] }}"
     - unless: salt['service.status']('teamwork')
+    - require:
+      - file: copy_lic_key
