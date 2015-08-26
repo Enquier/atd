@@ -37,9 +37,7 @@ copy_lic_key:
     - group: teamwork
     
 enable_lic_key:
-  cmd.run:
-    - cwd: /opt/local/teamwork/bin
-    - name: "./teamwork_server -key:/home/teamwork/.lic/{{ pillar['tw_lic'] }}"
-    - unless: salt['service.status']('teamwork')
-    - require:
-      - file: copy_lic_key
+  module.run:
+    - name: nminc_utils.install_teamwork
+    - lic_dir: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
+    - tw_dir: /opt/local/teamwork
