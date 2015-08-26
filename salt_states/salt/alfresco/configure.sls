@@ -21,7 +21,7 @@ include:
 
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication.properties:
   file.managed:
-    - source: salt://alfresco/files/ldap-authentication.properties.default
+    - source: salt://alfresco/files/ldap-authentication.properties-nminctest
     - makedirs: True
 
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication-context.xml:
