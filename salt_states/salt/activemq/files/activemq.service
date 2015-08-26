@@ -2,6 +2,7 @@
 Description=ActiveMQ
 
 [Service]
+Type=forking
 ExecStart=/opt/local/apache-activemq/bin/activemq start
 ExecStop=/opt/local/apache-activemq/bin/activemq stop
 ExecReload=/opt/local/apache-activemq/bin/activemq stop
