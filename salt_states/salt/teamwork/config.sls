@@ -24,6 +24,7 @@ start_teamwork:
     - m_name: teamwork
     - require:
       - file: copy_lic_key
+      - file: enable_lic_key
 {% endif %}
 
 copy_lic_key:
@@ -34,3 +35,9 @@ copy_lic_key:
     - mode: 400
     - user: teamwork
     - group: teamwork
+    
+enable_lic_key:
+  cmd.run:
+    - cwd: /opt/local/teamwork/bin
+    - name: "./teamwork_server -key:/home/teamwork/.lic/{{ pillar['tw_lic'] }}"
+    - onlyif: systemctl status teamwork
