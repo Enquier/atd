@@ -6,27 +6,9 @@ enable_teamwork:
   module.run:
     - name: service.enable
     - m_name: teamwork
-    - require:
-      - file: copy_lic_key
 {% endif %}
 
-{% if salt['service.status']('teamwork') %}
-reload_teamwork:
-  module.run:
-    - name: service.reload
-    - m_name: teamwork
-    - require:
-      - file: copy_lic_key
-{% else %}
-start_teamwork:
-  module.run:
-    - name: service.start
-    - m_name: teamwork
-    - require:
-      - file: copy_lic_key
-      - cmd: enable_lic_key
-{% endif %}
-
+{% if grains['TEAMWORK_LIC_INSTALLED'] == False %} 
 copy_lic_key:
   file.managed:
     - name: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
@@ -39,9 +21,7 @@ copy_lic_key:
 rm_lock_file:
   file.absent:
     - name: /opt/local/teamwork/.lock
-    - user: teamwork
-    - group: teamwork
-  
+     
 enable_lic_key:
   module.run:
     - name: nminc_utils.install_teamwork
@@ -51,3 +31,45 @@ enable_lic_key:
     - group: teamwork
     - require:
       - file: rm_lock_file
+
+stop_licensed_server:
+  cmd.run:
+    - name: /opt/local/teamwork/bin/stop_teamwork_server
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - file: enable_lic_key
+
+TEAMWORK_LIC_INSTALLED:
+  grains.present:
+    - value: True
+      
+rm_lock_file2:
+  file.absent:
+    - name: /opt/local/teamwork/.lock
+    - require:
+      - module: enable_lic_key
+      
+start_teamwork:
+  module.run:
+    - name: service.start
+    - m_name: teamwork
+    - require:
+      - file: copy_lic_key
+      - module: enable_lic_key
+      - file: rm_lock_file2
+{% else %}
+
+{% if salt['service.status']('teamwork') %}
+reload_teamwork:
+  module.run:
+    - name: service.reload
+    - m_name: teamwork
+{% else %}
+start_teamwork:
+  module.run:
+    - name: service.start
+    - m_name: teamwork
+{% endif %}
+
+{% endif %}

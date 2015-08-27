@@ -70,7 +70,7 @@ add_muserver_props:
 
 add_tw_console_props:
   file.managed:
-    - name: /opt/local/teamwork/data/teamwork_console.properties
+    - name: /opt/local/teamwork/bin/teamwork_console.properties
     - source: salt://teamwork/files/teamwork_console.properties.default
     - template: jinja
     - user: teamwork
@@ -115,8 +115,9 @@ console_execute:
     - require:
       - file: teamwork_sym
 
-/usr/lib/systemd/system/teamwork.service:
+copy_service:
   file.managed:
+    - name: /usr/lib/systemd/system/teamwork.service
     - order: 1
     - source: salt://teamwork/files/teamwork.service
     - template: jinja
@@ -127,9 +128,10 @@ console_execute:
 add_teamwork_systemd:
   cmd.run:
     - order: 1
-    - name: systemctl daemon-reload && systemctl enable teamwork.service
+    - name: systemctl daemon-reload
     - user: root
     - group: root
+    - onchanges:
+      - file: copy_service
 
-#enable_license
     
