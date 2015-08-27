@@ -41,3 +41,5 @@ enable_lic_key:
     - name: nminc_utils.install_teamwork
     - lic_dir: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
     - tw_dir: /opt/local/teamwork
+    - user: teamwork
+    - group: teamwork
