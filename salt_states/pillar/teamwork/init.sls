@@ -1,8 +1,8 @@
-{% if grains['nodename'] == 'tw.nminc.co' %}
+{% if grains['id'] == 'tw.nminc.co' %}
   tw_lic: tw-nminc-co.lic
-{% elif grains['nodename'] == 'twpub.nminc.co' %}
+{% elif grains['id'] == 'twpub.nminc.co' %}
   tw_lic: twpub-nminc-co.lic
-{% elif grains['nodename'] == 'twpub1.nminc.co' %}
+{% elif grains['id'] == 'twpub1.nminc.co' %}
   tw_lic: twpub-nminc-co.lic
 {% else %}
   tw_lic: none.lic
