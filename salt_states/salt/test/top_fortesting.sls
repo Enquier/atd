@@ -1,11 +1,11 @@
 base:
  '*':
  #  - update
-   - grains
    - edit
    - utils
    - utils.epel_repo
    - utils.python_deps
+   - grains
  #  - utils.selinux
 ##   - ldap
    - sshd
