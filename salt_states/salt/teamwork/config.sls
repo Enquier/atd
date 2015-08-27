@@ -35,7 +35,13 @@ copy_lic_key:
     - mode: 400
     - user: teamwork
     - group: teamwork
-    
+
+rm_lock_file:
+  file.absent:
+    - name: /opt/local/teamwork/.lock
+    - user: teamwork
+    - group: teamwork
+  
 enable_lic_key:
   module.run:
     - name: nminc_utils.install_teamwork
@@ -43,3 +49,5 @@ enable_lic_key:
     - tw_dir: /opt/local/teamwork
     - user: teamwork
     - group: teamwork
+    - require:
+      - file: rm_lock_file
