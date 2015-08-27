@@ -16,7 +16,6 @@ base:
    - match: grain
    - java
    - dns
-   - dns.host
    - apache
    - apache.mod_jk
    - apache.enable_modjk
@@ -39,7 +38,6 @@ base:
    - java
    - utils.alfresco_deps
    - dns
-   - dns.host
    - ldap
    - activemq
    - apache
@@ -65,14 +63,12 @@ base:
  'node_type:ns':
    - match: grain
    - dns
-   - dns.host
    - dns.server
    - dns.records
  
  'node_type:teamwork':
    - match: grain
    - dns
-   - dns.host
    - java
    - teamwork
    - teamwork.config

@@ -12,3 +12,11 @@ nodename:
 farm_name:
   grains.present:
     - value: {{ nodedict[0] }}
+    
+sync:
+  module.run:
+    - name: saltutil.sync_all
+	- require:
+	  - grains: nodename
+    - grains: farm_name
+    - grains: domain
