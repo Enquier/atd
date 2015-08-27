@@ -35,3 +35,12 @@ update_hostname:
     - require:
       - file: set_hosts
       - file: set_hostname
+
+update_hostnamectl:
+  cmd.run:
+    - name: "hostnamectl set-hostname {{ grains['farm_name'] }}"
+    - user: root
+    - group: root
+    - require:
+      - file: set_hosts
+      - file: set_hostname
