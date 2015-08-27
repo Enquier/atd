@@ -28,7 +28,7 @@ java_7_jdk_develop:
 
 java_8_jdk:
   cmd.run:
-    - cwd: /opt/src/
+    - cwd: /usr/src/
     - name:  |
         wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
          "http://download.oracle.com/otn-pub/java/jdk/8u51-b16/server-jre-8u51-linux-x64.tar.gz"
@@ -37,8 +37,8 @@ java_8_jdk:
 
 java_8_unpack:
   archive.extracted:
-    - name: /opt/local/
-    - source: /opt/src/server-jre-8u51-linux.tar.gz
+    - name: /usr/bin/
+    - source: /usr/src/server-jre-8u51-linux.tar.gz
     - archive_format: tar
     - tar_options: z
     - if_missing: /usr/bin/java
@@ -46,20 +46,20 @@ java_8_unpack:
 java_8_alternatives1:
   cmd.run:
     - name: |
-        alternatives --install /usr/bin/java java /opt/local/jdk1.8.0_51/bin/java 1
+        alternatives --install /usr/bin/java java /usr/bin/jdk1.8.0_51/bin/java 1
     - user: root
     - group: root
     - require: 
-      - file: /opt/local/jdk_1.8.0_51
+      - file: /usr/bin/jdk_1.8.0_51
      
 java_8_alternatives2:
   cmd.run:
     - name: |
-        alternatives --install /usr/bin/java java /opt/local/jdk1.8.0_51/bin/java 1
+        alternatives --install /usr/bin/java java /usr/bin/jdk1.8.0_51/bin/java 1
     - user: root
     - group: root
     - require: 
-      - file: /opt/local/jdk_1.8.0_51
+      - file: /usr/bin/jdk_1.8.0_51
           
      
 {% endif %}
