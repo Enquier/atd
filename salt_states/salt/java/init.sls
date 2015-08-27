@@ -38,7 +38,7 @@ java_8_jdk:
 java_8_unpack:
   archive.extracted:
     - name: /usr/bin/
-    - source: /usr/src/server-jre-8u51-linux.tar.gz
+    - source: /usr/src/server-jre-8u51-linux-x64.tar.gz
     - archive_format: tar
     - tar_options: z
     - if_missing: /usr/bin/java
