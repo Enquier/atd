@@ -16,7 +16,7 @@ farm_name:
 sync:
   module.run:
     - name: saltutil.sync_all
-	- require:
-	  - grains: nodename
-    - grains: farm_name
-    - grains: domain
+    - require:
+      - grains: nodename
+      - grains: farm_name
+      - grains: domain
