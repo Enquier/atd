@@ -31,6 +31,7 @@ enable_lic_key:
     - group: teamwork
     - require:
       - file: rm_lock_file
+      - file: copy_lic_key
 
 stop_licensed_server:
   cmd.run:
@@ -55,8 +56,8 @@ start_teamwork:
     - name: service.start
     - m_name: teamwork
     - require:
+      - cmd: stop_licensed_server
       - file: copy_lic_key
-      - module: enable_lic_key
       - file: rm_lock_file2
 {% else %}
 
