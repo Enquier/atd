@@ -24,7 +24,7 @@ rm_lock_file:
      
 enable_lic_key:
   module.run:
-    - name: nminc_utils.install_teamwork
+    - name: nminc_install.teamwork
     - lic_dir: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
     - tw_dir: /opt/local/teamwork
     - user: teamwork
