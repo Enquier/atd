@@ -1,5 +1,4 @@
 import re
-import pexpect
 
 def strsplit (string,char=' '):
 	try:
