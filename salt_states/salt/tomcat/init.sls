@@ -7,10 +7,10 @@ Modified by Sophie Wong
 tomcat:
   group:
     - present
-    - gid: 506
+    - gid: 508
   user:
     - present
-    - uid: 506
+    - uid: 508
     - groups: 
       - tomcat
     - require:
