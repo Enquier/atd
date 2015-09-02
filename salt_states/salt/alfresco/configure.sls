@@ -6,6 +6,9 @@ include:
  - alfresco
 # - alfresco.deploy
 
+{% let admin_pass = pillar['alfresco_server_password'] %}
+{% let admin_user = pillar['alfresco_server_user'] %}
+
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco-global.properties:
   file.managed:
     - source: salt://alfresco/files/alfresco-global.properties.default
@@ -39,13 +42,13 @@ cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/key
 {{ pillar['tomcat_home] }}/webapps/alfresco/WEB-INF/classes/alfresco/module/view-repo/context/service-context.xml:
   file.replace:
     - pattern: "\$\{adminpassword\}"
-    - repl: "{{ pillar['alfresco_server_password'] }}"
+    - repl: "{{ admin_pass }}"
 
 {{ pillar['tomcat_home] }}/webapps/alfresco/WEB-INF/classes/alfresco/module/view-repo/context/service-context.xml:
   file.replace:
     - pattern: |
         \$\{adminusername\}
-    - repl: "{{ pillar['alfresco_server_user'] }}"
+    - repl: "{{ admin_user }}"
 
 update_tomcat_permissions:
   file.directory:
