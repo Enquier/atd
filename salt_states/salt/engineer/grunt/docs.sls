@@ -15,10 +15,9 @@ update_repo:
     - user: centos
     - group: wheel
     - name: git@github.com:nomagic-com/MBEE-Webapp.git
-	
+
 "npm install && grunt ngdocs":
   cmd.run:
     - cwd: /home/centos/git/MBEE-Webapp
     - user: centos
     - group: wheel
-   
