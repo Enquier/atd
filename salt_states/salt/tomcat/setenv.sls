@@ -8,8 +8,6 @@ set_java_opts:
     - name: {{ pillar['tomcat_home'] }}/bin/setenv.sh
     - marker_start: "### START :: SALT :: set_java_opts Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: set_java_opts Generated Automatically DO NOT EDIT!!###"
-    - require: 
-      - file: {{ pillar['tomcat_home'] }}/bin/setenv.sh
     - content: |
         export JAVA_OPTS="-Dfile.encoding=UTF-8 \
         -Dcatalina.logbase=/var/log/tomcat7 \
@@ -28,8 +26,6 @@ set_java_mem:
     - marker_start: "### START :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - content: export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx16384m"
-    - require: 
-      - file: {{ pillar['tomcat_home'] }}/bin/setenv.sh
 
 {% elif grains['node_type'] == 'build' %}
 
@@ -39,8 +35,6 @@ set_java_mem:
     - marker_start: "### START :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - content: export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx4096m"
-    - require: 
-      - file: {{ pillar['tomcat_home'] }}/bin/setenv.sh
       
 {% endif %} 
 
@@ -61,8 +55,6 @@ set_java_opts:
         -XX:+CMSClassUnloadingEnabled \
         -XX:+UseParNewGC \
         -Djava.net.preferIPv4Stack=true"
-    - require: 
-      - file: {{ pillar['tomcat_home'] }}/bin/setenv.sh
 
 {% if grains['node_type'] == 'allinone' %}
 
@@ -72,8 +64,6 @@ set_java_mem:
     - marker_start: "### START :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - content: export JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=2048m -Xms14336m -Xmx14336m"
-    - require: 
-      - file: {{ pillar['tomcat_home'] }}/bin/setenv.sh
       
 {% elif grains['node_type'] == 'build' %}
 
@@ -83,8 +73,6 @@ set_java_mem:
     - marker_start: "### START :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - content: export JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=2048m -Xms6144m -Xmx6144m"
-    - require: 
-      - file: {{ pillar['tomcat_home'] }}/bin/setenv.sh
 {% endif %}  
 
 {% endif %}
