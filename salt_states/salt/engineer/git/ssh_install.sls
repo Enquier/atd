@@ -1,7 +1,7 @@
 copy_key:
   file.managed:
     - name: /home/centos/.ssh/{{ pillar['git_key'] }}
-	- source: salt://git/files/{{ pillar['git_key'] }}
+    - source: salt://git/files/{{ pillar['git_key'] }}
     - mode: 600
     - user: centos
     - group: wheel
