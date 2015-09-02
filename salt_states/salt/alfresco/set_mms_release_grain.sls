@@ -6,7 +6,12 @@ The top.sls file checks for this grain. If it is set to False, then alfresco
 will be installed.
 
 #}
-
+include:
+  - alfresco.amps_deploy
+  - tomcat
 MMS_RELEASE_INSTALLED:
   grains.present:
     - value: True
+    - require:
+      - sls: alfresco.amps_deploy
+      - sls: tomcat

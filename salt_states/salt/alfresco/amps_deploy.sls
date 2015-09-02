@@ -4,6 +4,7 @@ Developed for JPL/NASA Summer 2014
 #}
 include: 
   - alfresco
+  - tomcat
 #  - alfresco.copy
 #  - alfresco.deploy
 {% if grains['node_env'] == 'prod' %}
@@ -63,6 +64,7 @@ deploy_script:
     - require:
       - file: set_alf_version
       - file: copy_deploy_scripts
+      - sls: tomcat
 
 change_tomcat_ownership:
   file.directory:
@@ -72,4 +74,6 @@ change_tomcat_ownership:
     - recurse:
       - user
       - group
+    - require:
+      - sls: tomcat
 
