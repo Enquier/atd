@@ -52,6 +52,7 @@ tomcat_sym:
     - target: {{ pillar['tomcat_home'] }}-7.0.63
     - user: tomcat
     - group: tomcat
+    - if_missing: {{ pillar['tomcat_home'] }}/webapps
     - recurse:
       - user
       - group

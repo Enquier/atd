@@ -4,7 +4,7 @@ Developed for JPL/NASA Summer 2014
 #}
 include:
  - alfresco
-# - alfresco.deploy
+ - alfresco.amps_deploy
 
 {% set admin_pass = pillar['alfresco_server_password'] %}
 {% set admin_user = pillar['alfresco_server_user'] %}
@@ -45,6 +45,8 @@ set_admin_pass:
     - pattern: |
         \${adminpassword}
     - repl: "{{ admin_pass }}"
+    - require:
+      - cmd: deploy_script
 
 set_admin_user:
    file.replace:
@@ -52,6 +54,8 @@ set_admin_user:
     - pattern: |
         \${adminusername}
     - repl: "{{ admin_user }}"
+    - require:
+      - cmd: deploy_script
 
 update_tomcat_permissions:
   file.directory:
