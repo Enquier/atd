@@ -13,5 +13,7 @@ add_passphrase:
     - pattern: |
         Enter passphrase for key '/home/centos/.ssh/{{ pillar['git_key'] }}'
     - response: '{{ pillar['git_passphrase'] }}'
+	- user: centos
+	- group: wheel
 
   
