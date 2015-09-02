@@ -1,4 +1,4 @@
-{% if grains['domain'] == 'nminc.co' %}
+{% if grains['domain'] == 'nminc.co.' %}
   ssl_cert_dir: nminc
   ssl_cert_name: STAR_nminc_co
   ssl_bundle_name: COMODOCA
