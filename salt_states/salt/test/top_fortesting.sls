@@ -25,6 +25,7 @@ base:
    - tomcat.setenv
    - tomcat.server_config
    - build 
+   - engineer.git.ssh_install
    - engineer.maven
    - engineer.node_js
    - engineer.npm.bower
