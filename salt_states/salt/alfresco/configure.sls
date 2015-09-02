@@ -16,7 +16,7 @@ include:
     - user: tomcat
     - group: tomcat
 
-{% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' %}
+{% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' and grains['domain'] == 'nminc.co' %}
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/common-ldap-context.xml:
   file.managed:
     - source: salt://alfresco/files/common-ldap-context.xml.default
@@ -41,7 +41,7 @@ cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/key
   
 set_admin_pass:
   file.replace:
-    - nmae: {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/module/view-repo/context/service-context.xml
+    - name: {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/module/view-repo/context/service-context.xml
     - pattern: |
         \${adminpassword}
     - repl: "{{ admin_pass }}"

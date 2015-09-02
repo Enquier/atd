@@ -1,8 +1,5 @@
-{% if grains['farm_name'] == 'openmbee' %}
-{% set farm = 'www' %}
-{% else %}
 {% set farm = grains['farm_name'] %}
-{% endif %}
+
 
 {% set domain = grains['domain'] %}
 {% set environment = grains['node_env'] %}
@@ -126,8 +123,11 @@ system.workflow.engine.jbpm.enabled=false
 #-------------
 
 ######AUTHENTIFICATION CHAIN####
+{% if grains['domain'] == 'nminc.co' %}
 authentication.chain=ldap1:{{ auth }},alfrescoNtlm1:alfrescoNtlm
-
+{% else %}
+authentication.chain=alfrescoNtlm1:alfrescoNtlm
+{% endif %}
 ###### SYNCHRONISATION SETTINGS ####
 # http://docs.alfresco.com/4.0/index.jsp?topic=%2Fcom.alfresco.enterprise.doc%2Fconcepts%2Fauth-ldap-intro.html
 
