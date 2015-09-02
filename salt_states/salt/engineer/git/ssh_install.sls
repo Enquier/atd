@@ -11,7 +11,7 @@ add_passphrase:
     - name: nminc_install.gen_expect
     - m_name: 'ssh-add ~/.ssh/{{ pillar['git_key'] }}'
     - pattern: |
-	    Enter passphrase for key '/home/centos/.ssh/{{ pillar['git_key'] }}'
+        Enter passphrase for key '/home/centos/.ssh/{{ pillar['git_key'] }}'
     - response: '{{ pillar['git_passphrase'] }}'
 
   
