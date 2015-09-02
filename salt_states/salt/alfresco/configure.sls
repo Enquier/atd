@@ -6,8 +6,8 @@ include:
  - alfresco
 # - alfresco.deploy
 
-{% let admin_pass = pillar['alfresco_server_password'] %}
-{% let admin_user = pillar['alfresco_server_user'] %}
+{% set admin_pass = pillar['alfresco_server_password'] %}
+{% set admin_user = pillar['alfresco_server_user'] %}
 
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco-global.properties:
   file.managed:
