@@ -38,14 +38,13 @@ cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/key
 
 {{ pillar['tomcat_home] }}/webapps/alfresco/WEB-INF/classes/alfresco/module/view-repo/context/service-context.xml:
   file.replace:
-    - pattern: |
-        \${adminpassword}
+    - pattern: "\$\{adminpassword\}"
     - repl: "{{ pillar['alfresco_server_password'] }}"
 
 {{ pillar['tomcat_home] }}/webapps/alfresco/WEB-INF/classes/alfresco/module/view-repo/context/service-context.xml:
   file.replace:
     - pattern: |
-        \${adminusername}
+        \$\{adminusername\}
     - repl: "{{ pillar['alfresco_server_user'] }}"
 
 update_tomcat_permissions:
