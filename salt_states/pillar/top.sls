@@ -9,6 +9,7 @@ base:
     - ssl_certs
     - tomcat
     - smtp
+    - git
 
   'node_type:allinone':
     - match: grain
