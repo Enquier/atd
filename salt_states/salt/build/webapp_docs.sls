@@ -37,7 +37,7 @@ update_webapp:
       - git: update_webapp
     
 
-"cp -r ./docs/ /var/www/html/webapp/ && chown -R apache:apache /var/www/ && systemctl reload httpd"
+"cp -r ./docs/ /var/www/html/webapp/ && chown -R apache:apache /var/www/ && systemctl reload httpd":
   cmd.run:
     - cwd: /home/{{ pillar['git_user'] }}/git/MBEE-Webapp
     - user: root
@@ -63,7 +63,7 @@ update_repo:
       - git: update_repo
     
 
-"cp -r ./raml/ /var/www/html/repo/ && chown -R apache:apache /var/www/ && systemctl reload httpd"
+"cp -r ./raml/ /var/www/html/repo/ && chown -R apache:apache /var/www/ && systemctl reload httpd":
   cmd.run:
     - cwd: /home/{{ pillar['git_user'] }}/git/MBEE-Repo/src/main/web/mms/
     - user: root
