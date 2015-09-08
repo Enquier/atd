@@ -12,7 +12,7 @@ add_passphrase:
     - m_name: |
         sudo -su tomcat ssh-agent sh -c "ssh-add /home/{{ pillar['git_user'] }}/.ssh/{{ pillar['git_key'] }}"
     - pattern: |
-        Enter passphrase for key '/home/{{ pillar['git_user'] }}/.ssh/{{ pillar['git_key'] }}'
+        Enter passphrase for key '/home/{{ pillar['git_user'] }}/.ssh/{{ pillar['git_key'] }}: '
     - response: '{{ pillar['git_passphrase'] }}'
     - user: {{ pillar['git_user'] }}
     - group: {{ pillar['git_group'] }}
