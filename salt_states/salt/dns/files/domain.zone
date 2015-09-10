@@ -1,5 +1,5 @@
 {%- set myDomain = grains['domain'] %}
-{%- set listedDomain = ['domain=',grains['domain']] %}
+{%- set listedDomain = ['domain:',grains['domain']] %}
 {%- if grains['dns_type'] == 'master' %}    
 {%- set masterhost = grains['farm_name'] %}
 {%- elif grains['dns_type'] == 'slave' %}
