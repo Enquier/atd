@@ -28,6 +28,12 @@ zone "us.nomagic.com" IN {
 	masters { 10.91.55.245; };
 };
 
+zone "nminc.local" IN {
+	type slave;
+	file "slaves/nminc.local";
+	masters { 10.3.2.229; };
+};
+
 {% set type = grains['dns_type'] %}
 {%- set reverse = grains['dns_reverse'] %}
 {%- set myDomain = grains['domain'] -%}
