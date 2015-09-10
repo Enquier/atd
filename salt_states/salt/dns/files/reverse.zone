@@ -1,4 +1,5 @@
 {%- set myDomain = grains['domain'] %}
+{%- set listedDomain = ['domain:',grains['domain']] %}
 {%- if grains['dns_type'] == 'master' %}    
 {%- set masterhost = grains['farm_name'] %}
 {%- elif grains['dns_type'] == 'slave' %}
@@ -18,7 +19,7 @@ $TTL 3H
 @		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}
 {% endfor -%}
 ; Resolve nameserver hostnames to IP.
-{%- for server, ip in salt.mine.get(['domain=',myDomain]|join, 'internal_ip_addrs', expr_form='grains').items() %}
+{%- for server, ip in salt.mine.get(listedDomain|join, 'internal_ip_addrs', expr_form='grain').items() %}
 {%- set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() %}
 {%- set ipdict = salt['nminc_utils.strsplit'](ip[0],'.') %}
 {%- if salt['nminc_utils.strsplit'](reverse,'.')|length == 1 %}
