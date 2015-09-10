@@ -1,0 +1,34 @@
+{% set  md_ver = grains['MAGICDRAW_VERSION'] %}
+ldap.connection.timeout=500
+ldap.user.data.retrieval.enabled=true
+server.synchronize.scheduler.enable=true
+repository.configurations.location=projects
+ldap.addUnknownUsers=true
+muserver.ping.timeout.time=300
+secure.connection.certificate.file=
+repository.default.project.location=projects
+muserver.rmiregistry.port={{ md_ver }}01
+repository.authentication.type=Built-In
+secure.connection.certificate.password=
+muserver.ping.time=60
+repository.type=NATIVE_REPOSITORY
+secure.connection.enabled=false
+ldap.enabled=true
+ldap.authentication.mechanism=
+ldap.authentication.dn=CN\=$(login),CN\=Users,DC\=nomagic,DC\=com
+ldap.user.dn.retrieval.mode=TEMPLATE
+ldap.authentication.identity=
+single.user.authentication=false
+ldap.encryption.protocol=NONE
+ldap.user.data.dn.retrieval.mode=TEMPLATE
+ldap.authentication.realm=
+ldap.user.data.search.filter=
+ldap.user.data.search.scope=ONELEVEL
+ldap.servers=dc01.us.nomagic.com
+repository.id=Build-in
+projectserver.heap_size=600000000
+muserver.projects_directory=<config.dir>/projects
+muserver.authentication.name.casesensitive=true
+repository.administrator.account.name=Administrator
+java.rmi.server.useCodebaseOnly=true
+ld

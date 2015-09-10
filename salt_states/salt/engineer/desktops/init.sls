@@ -6,4 +6,4 @@ Developed for JPL/NASA Summer 2014
 default_gnome:
   module.run:
     - name: pkg.group_install
-    - m_name: Desktop
+    - m_name: GNOME Desktop
