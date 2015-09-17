@@ -32,9 +32,9 @@ $TTL 86400
 
 ; Resolve External Queries to IP
 {% for record, data in salt.grains.get('publicrecord').items() %}
-{%- if record == 'at' -%} 
+{%- if record == 'at' %} 
 @		IN	{{ data.type }}		{{ data.value }}
-{%- else -%}
+{%- else %}
 {{ record }}		IN	{{ data.type }}		{{ data.value }}
 {%- endif -%}
 {% endfor %}
