@@ -1,0 +1,40 @@
+{%- set myDomain = grains['domain'] %}
+{%- set listedDomain = ['domain:',grains['domain']] %}
+{%- if grains['dns_type'] == 'master' %}    
+{%- set masterhost = grains['farm_name'] %}
+{%- elif grains['dns_type'] == 'slave' %}
+{%- set hostdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
+{%- set masterhost = hostdict[0][1]['farm_name'] %}
+{%- endif -%}
+$TTL 86400
+@		IN	SOA		{{ masterhost }}.{{ myDomain }} root.{{ myDomain }}		(
+          2013042201  ;Serial
+          3600        ;Refresh
+          1800        ;Retry
+          604800      ;Expire
+          86400       ;Minimum TTL
+        )
+{%- if grains['dns_type'] == 'master' %}    
+{%- set masterhost = grains['farm_name'] %}
+{%- elif grains['dns_type'] == 'slave' %}
+{%- set masterdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
+{%- set masterhost = masterdict[0][1]['farm_name'] %}          
+{% endif %}  
+; Resolve nameserver hostnames.
+{% for ns, host in salt.mine.get('node_type:ns', 'grains.item', expr_form='grain').items() -%}
+@		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}
+{% endfor -%}
+; Resolve nameserver hostnames to IP.   
+{% for server, ip in salt.mine.get(listedDomain|join, 'internal_ip_addrs', expr_form='grain').items() %}
+{%- set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() -%}
+{{ hostdict[0][1]['farm_name'] }}		IN	A		{{ ip[0] }}
+{% endfor %}
+
+; Resolve External Queries to IP
+{% for record in salt.grains.get('publicrecord') %}
+{%- if record == 'at' %} 
+@		IN	{{ record.type }}		{{ record.value }}
+{%- else %}
+{{ record }}		IN	{{ record.type }}		{{ record.value }}
+{%- endif %}
+{% endfor %}

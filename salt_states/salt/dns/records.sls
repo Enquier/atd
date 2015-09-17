@@ -7,7 +7,7 @@ include:
 {% if grains['dns_type'] == "master" %}
 /var/named/{{ myDomain }}zone:
   file.managed:
-    - source: salt://dns/files/domain.zone
+    - source: salt://dns/files/domain.external.zone
     - template: jinja
       
 /var/named/{{ reverse }}.zone:
