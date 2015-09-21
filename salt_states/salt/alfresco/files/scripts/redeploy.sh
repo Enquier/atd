@@ -179,8 +179,8 @@ if [[ -n "$ampFile" ]]; then
       $installWarCommand $mmtJar $ampPath/javascript-console-repo-1.0.amp $warFile $existingWarFile $alfrescoWebappDir
   if [[ ( -f "$mmtJar" ) &&  ( -f "$ampFile" ) &&  ( -f "$warFile" ) &&  ( -f "$existingWarFile" ) &&  ( -d $(dirname $alfrescoWebappDir) ) ]]; then
     echo
-    echo $installWarCommand $mmtJar $ampFile $warFile $warFile $alfrescoWebappDir
-      $installWarCommand $mmtJar $ampFile $warFile $warFile $alfrescoWebappDir
+    echo $installWarCommand $mmtJar $ampFile $existingWarFile $existingWarFile $alfrescoWebappDir
+      $installWarCommand $mmtJar $ampFile $existingWarFile $existingWarFile $alfrescoWebappDir
     if [ "$?" -ne "0" ]; then
       echo "$0: ERROR! command failed! \"!!\""
       exit 1
@@ -201,8 +201,8 @@ if [[ -n "$shareAmpFile" ]]; then
       $installWarCommand $mmtJar $ampPath/javascript-console-share-1.0.amp $shareWarFile $existingShareWarFile $shareWebappDir
   if [[ ( -f "$mmtJar" ) &&  ( -f "$shareAmpFile" ) &&  ( -f "$shareWarFile" ) &&  ( -f "$existingShareWarFile" ) &&  ( -d $(dirname $shareWebappDir) ) ]]; then
     echo
-    echo $installWarCommand $mmtJar $shareAmpFile $shareWarFile $shareWarFile $shareWebappDir
-      $installWarCommand $mmtJar $shareAmpFile $shareWarFile $shareWarFile $shareWebappDir
+    echo $installWarCommand $mmtJar $shareAmpFile $existingShareWarFile $existingShareWarFile $shareWebappDir
+      $installWarCommand $mmtJar $shareAmpFile $existingShareWarFile $existingShareWarFile $shareWebappDir
     if [ "$?" -ne "0" ]; then
       echo "$0: ERROR! command failed! \"!!\""
       exit 1
