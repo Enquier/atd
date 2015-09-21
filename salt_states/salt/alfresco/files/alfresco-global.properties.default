@@ -197,7 +197,7 @@ activities.feed.notifier.enabled=false
 {% elif grains['node_env'] == 'prod' %}
 # [CYL]  Override the SMTP defaults - no need to authenticate to send email messages, so null out username
 mail.host = {{ pillar['mail_host'] }}
-{% if pillar['mail_host'] == 'smtp.google.com' %}
+{% if pillar['mail_host'] == 'smtp.gmail.com' %}
 mail.port = 465
 mail.potocol = smtps
 mail.smtps.starttls.enable = true
