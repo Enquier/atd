@@ -41,11 +41,12 @@ echo "  owner =" $owner
 # check version of AMP vs last deployed version
 jar xvf $ampFile module.properties
 ampVersion=`grep "module.version" module.properties | cut -d'=' -f2`
+ampID=`grep "module.id" module.properties | cut -d'=' -f2`
 rm module.properties
 
 if [ $ampVersion ]; then
   echo "AMP Version: $ampVersion"
-  warVersion=`find $explodedWebappDir -name "module.properties" -exec grep -H "module.version" {} \\; | grep mms | cut -d'=' -f2`
+  warVersion=`find $explodedWebappDir -name "module.properties" -exec grep -H "module.version" {} \\; | grep $ampID | cut -d'=' -f2`
   if [ $warVersion ]; then
     echo "WAR Version: $warVersion"
     if [ $ampVersion = $warVersion ]; then
@@ -78,19 +79,17 @@ if [ ! $existingWarFile -ef $warFile ]; then
   fi
 fi
 
-# check which module is to be installed
-jar xvf $ampFile module.properties
-ampID=`grep "module.id" module.properties | cut -d'=' -f2`
-rm module.properties
-
 # uninstall any previous amps from the war - do these blindly since it doesn't hurt
 # TODO: we can remove view-repo/share in future as those aren't being used
 echo
 echo "##### uninstall amp from war"
-echo java -jar $mmtJar uninstall $ampID $existingWarFile
+if [ $warVersion ]; then
+  echo java -jar $mmtJar uninstall $ampID $existingWarFile
 if [[ "$test_mms" -eq "0" ]]; then
   java -jar $mmtJar uninstall $ampID $existingWarFile
 fi
+else
+  echo "Previously Uninstalled"
 fi
 # install amp to war
 echo
