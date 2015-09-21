@@ -78,25 +78,20 @@ if [ ! $existingWarFile -ef $warFile ]; then
   fi
 fi
 
+# check which module is to be installed
+jar xvf $ampFile module.properties
+ampID=`grep "module.id" module.properties | cut -d'=' -f2`
+rm module.properties
+
 # uninstall any previous amps from the war - do these blindly since it doesn't hurt
 # TODO: we can remove view-repo/share in future as those aren't being used
 echo
 echo "##### uninstall amp from war"
-echo java -jar $mmtJar uninstall view-repo $existingWarFile
-echo java -jar $mmtJar uninstall mms-repo $existingWarFile
-echo java -jar $mmtJar uninstall mms-repo-ent $existingWarFile
-echo java -jar $mmtJar uninstall view-share $existingWarFile
-echo java -jar $mmtJar uninstall mms-share $existingWarFile
-echo java -jar $mmtJar uninstall mms-share-ent $existingWarFile
+echo java -jar $mmtJar uninstall $ampID $existingWarFile
 if [[ "$test_mms" -eq "0" ]]; then
-  java -jar $mmtJar uninstall view-repo $existingWarFile
-  java -jar $mmtJar uninstall mms-repo $existingWarFile
-  java -jar $mmtJar uninstall mms-repo-ent $existingWarFile
-  java -jar $mmtJar uninstall view-share $existingWarFile
-  java -jar $mmtJar uninstall mms-share $existingWarFile
-  java -jar $mmtJar uninstall mms-share-ent $existingWarFile
+  java -jar $mmtJar uninstall $ampID $existingWarFile
 fi
-
+fi
 # install amp to war
 echo
 echo "##### install amp to war"

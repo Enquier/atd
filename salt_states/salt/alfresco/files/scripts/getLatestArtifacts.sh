@@ -30,8 +30,8 @@ function main() {
   mainMmsVersion=$2
 
   # always grab the alfresco extensions
-   getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/repo" "javascript-console-repo" "jar"
-   getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/share" "javascript-console-share" "jar"
+   getLatestArtifact "libs-release-local" "org/sharextras" "javascript-console-repo" "amp"
+   getLatestArtifact "libs-release-local" "org/sharextras" "javascript-console-share" "amp"
    getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/share" "media-viewers" "jar"
   
   # docbookgen is needed for configuration

@@ -79,9 +79,9 @@ function main() {
 function updateShare() {
   # update the dashlets to point to the deployed host
   hname=`hostname`
-  if [[ ! $hname == *jpl.nasa.gov ]]; then
-    hname=$hname.jpl.nasa.gov
-  fi
+  #if [[ ! $hname == *jpl.nasa.gov ]]; then
+  #  hname=$hname.jpl.nasa.gov
+  #fi
 
   # remove europa branding if necessary
   if [[ ! "$hname" == *europa* ]]; then
@@ -176,6 +176,10 @@ function updateShareName() {
   elif [[ "$name" == msm* ]]; then
     shareName="Mars 2020"
     iconName='msm'
+    #removeShareHeader
+  elif [[ "$name" == www.openmbee.com ]]; then
+    shareName="OpenMBEE Community Server"
+    iconName='openmbee'
     #removeShareHeader
   else
     shareName=`echo "$name" | cut -d'-' -f1`

@@ -34,6 +34,20 @@
           <name>plugins-snapshot</name>
           <url>http://localhost:8082/artifactory/plugins-snapshot</url>
         </pluginRepository>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>central</id>
+          <name>releases</name>
+          <url>https://maven.alfresco.com/nexus/content/repositories/releases</url>
+        </pluginRepository>
+        <pluginRepository>
+          <snapshots />
+          <id>central</id>
+          <name>releases</name>
+          <url>https://maven.alfresco.com/nexus/content/repositories/snapshots</url>
+        </pluginRepository>
       </pluginRepositories>
       <id>artifactory</id>
     </profile>
