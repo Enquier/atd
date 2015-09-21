@@ -176,9 +176,9 @@ if [[ -n "$ampFile" ]]; then
   if [[ ( -f "$mmtJar" ) &&  ( -f "$ampFile" ) &&  ( -f "$warFile" ) &&  ( -f "$existingWarFile" ) &&  ( -d $(dirname $alfrescoWebappDir) ) ]]; then
     echo
     echo $installWarCommand $mmtJar $ampFile $warFile $existingWarFile $alfrescoWebappDir
-    $installWarCommand $mmtJar $ampFile $warFile $existingWarFile $alfrescoWebappDir
+      $installWarCommand $mmtJar $ampFile $warFile $existingWarFile $alfrescoWebappDir
     echo $installWarCommand $mmtJar $ampPath/javascript-console-repo-1.0.amp $warFile $existingWarFile $alfrescoWebappDir
-    $installWarCommand $mmtJar $ampPath/javascript-console-repo-1.0.amp $warFile $existingWarFile $alfrescoWebappDir
+      $installWarCommand $mmtJar $ampPath/javascript-console-repo-1.0.amp $warFile $existingWarFile $alfrescoWebappDir
     if [ "$?" -ne "0" ]; then
       echo "$0: ERROR! command failed! \"!!\""
       exit 1
