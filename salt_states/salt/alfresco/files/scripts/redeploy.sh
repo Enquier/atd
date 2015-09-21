@@ -1,5 +1,20 @@
 
 #!/bin/bash
+function setPaths() {
+    if [ -a {{ pillar['tomcat_home'] }} ]; then
+        ampPath="{{ pillar['tomcat_home'] }}/amps"
+        webappPath="{{ pillar['tomcat_home'] }}/webapps"
+    else
+        if [ -a /opt/local/alfresco-$alf_ver ]; then
+            ampPath="/opt/local/alfresco-$alf_ver/amps"
+            webappPath="/opt/local/alfresco-$alf_ver/tomcat/webapps"
+        else
+            cwd=`pwd`
+            ampPath="$cwd/amps"
+            webappPath="$cwd/tomcat/webapps"
+        fi
+    fi
+}
 
 usage() {
   echo
@@ -162,6 +177,8 @@ if [[ -n "$ampFile" ]]; then
     echo
     echo $installWarCommand $mmtJar $ampFile $warFile $existingWarFile $alfrescoWebappDir
     $installWarCommand $mmtJar $ampFile $warFile $existingWarFile $alfrescoWebappDir
+    echo $installWarCommand $mmtJar $ampPath/javascript-console-repo-1.0.amp $warFile $existingWarFile $alfrescoWebappDir
+    $installWarCommand $mmtJar $ampPath/javascript-console-repo-1.0.amp $warFile $existingWarFile $alfrescoWebappDir
     if [ "$?" -ne "0" ]; then
       echo "$0: ERROR! command failed! \"!!\""
       exit 1
@@ -182,6 +199,8 @@ if [[ -n "$shareAmpFile" ]]; then
     echo
     echo $installWarCommand $mmtJar $shareAmpFile $shareWarFile $existingShareWarFile $shareWebappDir
       $installWarCommand $mmtJar $shareAmpFile $shareWarFile $existingShareWarFile $shareWebappDir
+    echo $installWarCommand $mmtJar $ampPath/javascript-console-share-1.0.amp $shareWarFile $existingShareWarFile $shareWebappDir
+      $installWarCommand $mmtJar $ampPath/javascript-console-share-1.0.amp $shareWarFile $existingShareWarFile $shareWebappDir
     if [ "$?" -ne "0" ]; then
       echo "$0: ERROR! command failed! \"!!\""
       exit 1
@@ -259,3 +278,4 @@ echo
 echo "Success!"
 
 exit 0
+

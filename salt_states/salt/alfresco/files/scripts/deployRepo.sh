@@ -51,7 +51,6 @@ function main() {
   # add in all the Repository/Share updates
   if [[ $explodedWarDir = *alfresco ]]; then
     installJar $path/javascript-console-repo-0.5.1.jar
-
     # grab the correct patched repository jar
     if hash salt-call 2>/dev/null; then
       alf_license=`salt-call -g | awk '/ALFRESCO_LICENSE_TYPE/{getline; print}' | awk '{$1=$1}1'`

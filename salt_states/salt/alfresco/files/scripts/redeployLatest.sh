@@ -71,8 +71,8 @@ function main() {
     $d/getLatestArtifacts.sh $releaseOrSnapshot $mmsVersion
     setFileVariables $hname $releaseOrSnapshot
 
-    echo redeploy.sh $repoAmpFile $repoWarFile $shareAmpFile $shareWarFile $mmsappDir $mmsappZip
-    $d/redeploy.sh $repoAmpFile $repoWarFile $shareAmpFile $shareWarFile $mmsappDir $mmsappZip
+    echo redeploy.sh $repoAmpFile $repoWarFile $shareAmpFile $shareWarFile $mmsappDir $mmsappZip $ampPath
+    $d/redeploy.sh $repoAmpFile $repoWarFile $shareAmpFile $shareWarFile $mmsappDir $mmsappZip $ampPath
 }
 
 
