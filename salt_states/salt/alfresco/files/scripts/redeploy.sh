@@ -169,6 +169,8 @@ else
   echo "Not stopping alfresco server since no amps are being installed."
 fi
 
+setPaths
+
 # install mms-repo war files
 if [[ -n "$ampFile" ]]; then
   echo
