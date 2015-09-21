@@ -114,11 +114,14 @@ if [ -n "$owner" ]; then
   #chown tomcat:tomcat $existingWarFile
 fi
 
-if [[ ( -z "$explodedWebappDir" ) || ( ! -d $explodeParentDir  ) ]]; then
+if [[ ( -z "$explodedWebappDir" ) || ( ! -d $explodeParentDir  )]]; then
   echo
   echo "No webapp directory to explode war!  Not exploding war."
   echo
 else
+  if [[ $ampID = de* ]]; then
+    echo "$ampID Installed"
+  else
   echo
   # blast alfresco directory
   echo "##### blast alfresco directory"
@@ -159,7 +162,7 @@ else
   echo "##### get back to the directory where we were"
   echo popd
   popd
-
+  fi
 fi
 
 # set the SALT grain on minion to indicate that MMS was deployed

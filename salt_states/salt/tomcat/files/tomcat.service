@@ -14,6 +14,7 @@ ExecStop={{ pillar['tomcat_home'] }}/bin/shutdown.sh
 ExecReload={{ pillar['tomcat_home'] }}/bin/shutdown.sh
 ExecReload={{ pillar['tomcat_home'] }}/bin/startup.sh
 
+WorkingDirectory={{ pillar['tomcat_home'] }}/logs
 
 [Install]
 WantedBy=multi-user.target
