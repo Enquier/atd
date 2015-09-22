@@ -55,19 +55,12 @@ fix_mmsapp_footer:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
     - path: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
-    - pattern: "$rootScope.mms_footer = 'The technical data in this document is controlled under the U.S. Export Regulations, release to foreign persons may require an export authorization.';"
-    - repl: "$rootScope.mms_footer = 'THE TECHNICAL DATA IN THIS DOCUMENT IS NO MAGIC INC PROPRIETARY AND CONFIDENTIAL; DO NOT DISTRIBUTE WITHOUT PRIOR AUTHORIZATION';"
+    - pattern: "$rootScope.mms_footer = 'JPL/Caltech PROPRIETARY — Not for Public Release or Redistribution. No export controlled documents allowed on this server.';"
+    - repl: "$rootScope.mms_footer = 'JPL/Caltech PROPRIETARY — Not for Public Release or Redistribution. No export controlled documents allowed on this server.';"
   
-{% elif 'openmbee' in grains['farm_name'] %}
+{% elif 'www' in grains['farm_name'] %}
 
  {# Update branding for community server #}
-turn_off_bg_image:
-  file.replace:
-    - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - pattern: "var style = \"background-image: url(${url.context}/scripts/vieweditor/images/europa-bg.png)*"
-    - repl: "//var style = \"background-image: url(${url.context}/scripts/vieweditor/images/europa-bg.png);"
-
 disable_bg_color:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
@@ -86,12 +79,19 @@ update_tile_box:
     - source: salt://alfresco/files/branding/OPENMBEE_LOGO_SMALL.png
     - user: tomcat
     - group: tomcat
-
+    
+{{ pillar['tomcat_home'] }}/webapps/share/scripts/vieweditor/images/bg.png:
+  file.managed:
+    - source: salt://alfresco/files/branding/openmbee.png
+    - replace: True
+    - user: tomcat
+    - group: tomcat
+    
 fix_mmsapp_footer:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
     - path: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
-    - pattern: "$rootScope.mms_footer = 'The technical data in this document is controlled under the U.S. Export Regulations, release to foreign persons may require an export authorization.';"
+    - pattern: "$rootScope.mms_footer = 'JPL/Caltech PROPRIETARY — Not for Public Release or Redistribution. No export controlled documents allowed on this server.';"
     - repl: "$rootScope.mms_footer = 'THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE';"
     
 {% endif %}

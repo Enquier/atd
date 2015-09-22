@@ -2,8 +2,11 @@
 Salt Formula by Charles Galey cgaley@nomagic.com
 Developed for NMInc
 #}
-
+{% if grains['farm_name'] == 'www' %}
+{% set myIP = grains['fqdn_ip4'] %}
+{% else %}
 {% set myIP = salt.network.ip_addrs('eth0', 'cidr="172.31.0.0/16"') %}
+{% endif %}
 
 {% if grains['farm_role_index'] == 1 %}
 
@@ -19,7 +22,7 @@ set_hosts:
   file.managed:
     - name: /etc/hosts
     - contents: |
-        127.0.0.1       localhost
+        127.0.0.1       {{ grains['farm_name'] }}.{{ myDomain }}
         {{ myIP[0] }}       {{ grains['farm_name'] }}.{{ myDomain }} {{ grains['farm_name'] }}
 
 set_hostname:
