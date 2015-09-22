@@ -85,14 +85,13 @@ deployment.rmi.service.port=0
 ooo.exe=/usr/lib64/libreoffice/program/soffice.bin
 ooo.enabled=true
 ooo.port=8100
-img.root=/opt/local/alfresco-{{ alf_ver }}/common
+img.root=/usr/bin
 img.dyn=${img.root}/lib
 img.exe=/usr/bin/convert
 swf.exe=/usr/local/bin/pdf2swf
-swf.languagedir=/opt/local/alfresco-{{ alf_ver }}/common/japanese
 
 jodconverter.enabled=false
-jodconverter.officeHome=/opt/local/alfresco-{{ alf_ver }}/libreoffice
+jodconverter.officeHome=/usr/lib64/libreoffice
 jodconverter.portNumbers=8100
 
 ### Initial admin password ###

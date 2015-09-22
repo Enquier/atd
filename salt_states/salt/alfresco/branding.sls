@@ -50,7 +50,14 @@ update_tile_box:
     - replace: True
     - user: tomcat
     - group: tomcat
-
+    
+fix_mmsapp_footer:
+  file.replace:
+    - name: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
+    - path: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
+    - pattern: "$rootScope.mms_footer = 'The technical data in this document is controlled under the U.S. Export Regulations, release to foreign persons may require an export authorization.';"
+    - repl: "$rootScope.mms_footer = 'THE TECHNICAL DATA IN THIS DOCUMENT IS NO MAGIC INC PROPRIETARY AND CONFIDENTIAL; DO NOT DISTRIBUTE WITHOUT PRIOR AUTHORIZATION';"
+  
 {% elif 'openmbee' in grains['farm_name'] %}
 
  {# Update branding for community server #}
@@ -71,12 +78,12 @@ disable_bg_color:
 update_tile_box:
     file.replace:
     - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - pattern: '<b>  Europa EMS</b>'
-    - repl: '<b>OpenMBEE Live Demo</b>'
+    - pattern: '<b>  EMS</b>'
+    - repl: '<b>OpenMBEE Community/b>'
 
-{{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/europa-icon.png:
+{{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/icon.png:
   file.managed:
-    - source: salt://alfresco/files/branding/Community_EMS_Icon.png
+    - source: salt://alfresco/files/branding/OPENMBEE_LOGO_SMALL.png
     - user: tomcat
     - group: tomcat
 
