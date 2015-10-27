@@ -10,3 +10,4 @@ update_os:
     - refresh: True
     - require:
       - pkgrepo: install_saltrepo
+      
