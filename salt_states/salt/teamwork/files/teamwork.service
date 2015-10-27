@@ -10,9 +10,6 @@ WorkingDirectory=/opt/local/teamwork/
 ExecStart=/opt/local/teamwork/bin/teamwork_server SERVICE
 ExecStop=/opt/local/teamwork/bin/stop_teamwork_server
 
-ExecReload=/opt/local/teamwork/bin/stop_teamwork_server 
-ExecReload=/opt/local/teamwork/bin/teamwork_server SERVICE
-
 StandardOutput=syslog
 
 [Install]

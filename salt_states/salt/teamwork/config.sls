@@ -62,10 +62,15 @@ start_teamwork:
 {% else %}
 
 {% if salt['service.status']('teamwork') %}
-reload_teamwork:
+rstop_teamwork:
   module.run:
-    - name: service.reload
+    - name: service.stop
     - m_name: teamwork
+rstart_teamwork:
+  module.run:
+    - name: service.start
+    - m_name: teamwork
+    - require: rstop_teamwork
 {% else %}
 start_teamwork:
   module.run:

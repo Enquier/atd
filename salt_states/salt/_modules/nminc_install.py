@@ -12,3 +12,10 @@ def gen_expect (name,pattern,response):
 	inst = pexpect.spawn('%s' % name)
 	inst.expect('%s' % pattern)
 	inst.sendline('%s' % response)
+	
+def config_vnc (password):
+	inst = pexpect.spawn('vncserver')
+	inst.expect('.Password:')
+	inst.sendline('%s' % password)
+	inst.expect('.Verify:')
+	inst.sendline('%s' % password)
