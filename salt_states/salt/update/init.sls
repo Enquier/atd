@@ -8,7 +8,5 @@ install_saltrepo:
 update_os:
   pkg.uptodate:
     - refresh: True
-    - kwargs:
-      - skip-broken
     - require:
       - pkgrepo: install_saltrepo
