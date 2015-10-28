@@ -8,4 +8,4 @@ MAIN_CLASS=com.nomagic.teamwork.muserver.MUServerImpl
 APP_ARGS=NOGUI
 CONSOLE=false
 MAC_JAVA_ARGS="-Xdock\:name\=MagicDraw Teamwork Server" -Xdock\:icon\=bin/md.icns -Dapple.laf.useScreenMenuBar\=true
-JAVA_ARGS=-Xmx400M -Xrs -Djava.rmi.server.hostname={{ host }} -Djava.rmi.server.useCodebaseOnly\=true -Dsun.rmi.server.exceptionTrace\=true
+JAVA_ARGS=-Xmx400M -Xrs -Djava.rmi.server.hostname={{ grains['farm_name'] }}.{{ grains['domain'] }} -Djava.rmi.server.useCodebaseOnly\=true -Dsun.rmi.server.exceptionTrace\=true
