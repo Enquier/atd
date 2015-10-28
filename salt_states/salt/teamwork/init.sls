@@ -58,6 +58,18 @@ replace_props:
       - user: teamwork
       - file: teamwork_sym
 
+replace_stop_props:
+  file.managed:
+    - name: /opt/local/teamwork/bin/stop_teamwork_server.properties
+    - source: salt://teamwork/files/stop_teamwork_server.properties.default
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+
 add_muserver_props:
   file.managed:
     - name: /opt/local/teamwork/data/muserver.properties
