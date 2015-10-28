@@ -1,3 +1,6 @@
+GNOME Desktop:
+  pkg.group_installed
+    
 install_vnc:
   pkg.installed:
     - names:
