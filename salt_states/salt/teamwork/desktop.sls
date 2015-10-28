@@ -10,7 +10,7 @@ add_vnc_service:
 {% if grains['VNC_CONFIGURED'] == False %}
 setup_teamwork_vnc:
   module.run:
-    - name: nminc_install.vnc
+    - name: nminc_install.config_vnc
     - password: 'avncpassword'
     - user: teamwork
     - group: teamwork
