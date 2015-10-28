@@ -1,0 +1,11 @@
+{% set  md_ver = grains['MAGICDRAW_VERSION'] %}
+[Desktop Entry]
+Encoding=UTF-8
+Name=Teamwork Server
+Comment=Start No Magic {{ md_ver }} Teamwork Server
+Exec=sudo systemctl start teamwork
+Icon=/opt/local/teamwork/bin/md.png
+Categories=Application;
+Version={{ md_ver }}
+Type=Application
+Terminal=1

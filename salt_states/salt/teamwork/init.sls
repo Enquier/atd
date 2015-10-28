@@ -8,9 +8,11 @@ teamwork:
     - uid: 510
     - groups: 
       - teamwork
+      - wheel
+    - password: 50a4c933fed8429857b0175749a6810a86e6b738 #letmeadmintw
     - require:
       - group: teamwork
-    - shell: /sbin/nologin
+    - shell: /bin/sh
     - createhome: True
 
 teamwork_zip_deploy:

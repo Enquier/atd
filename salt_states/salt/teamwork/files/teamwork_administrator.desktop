@@ -1,0 +1,11 @@
+{% set  md_ver = grains['MAGICDRAW_VERSION'] %}
+[Desktop Entry]
+Encoding=UTF-8
+Name=Teamwork Administrator
+Comment=No Magic {{ md_ver }} Teamwork Server
+Exec=/bin/sh "/opt/local/teamwork/bin/teamwork_administrator"
+Icon=/opt/local/teamwork/bin/md.png
+Categories=Application;
+Version={{ md_ver }}
+Type=Application
+Terminal=0
