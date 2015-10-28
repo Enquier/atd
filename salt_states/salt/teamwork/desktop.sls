@@ -7,7 +7,7 @@ add_vnc_service:
     - name: /etc/systemd/system/vncserver@:5.service
     - source: salt://teamwork/files/vncserver@:5.service.teamwork
 
-{% if grains['VNC_CONFIGURED'] = False %}
+{% if grains['VNC_CONFIGURED'] == False %}
 setup_teamwork_vnc:
   module.run:
     - name: nminc_install.vnc
