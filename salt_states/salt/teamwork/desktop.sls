@@ -17,21 +17,21 @@ setup_teamwork_vnc:
     - require:
       - user: teamwork
 
-"systemctl daemon-reload"
+"systemctl daemon-reload":
   cmd.run:
     - user: root
     - group: root
     - require:
       - module: setup_teamwork_vnc
 
-"systemctl start vncserver@:5.service"
+"systemctl start vncserver@:5.service":
   cmd.run:
     - user: root
     - group: root
     - require:
       - cmd: "systemctl daemon-reload"
       
-"systemctl enable vncserver@:5.service"
+"systemctl enable vncserver@:5.service":
   cmd.run:
     - user: root
     - group: root
