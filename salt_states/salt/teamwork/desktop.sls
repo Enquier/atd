@@ -1,6 +1,6 @@
 include: 
   - vnc
-  - teamwork.config
+  - teamwork
 
 add_vnc_service:
   file.managed:
