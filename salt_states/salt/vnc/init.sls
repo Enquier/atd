@@ -1,4 +1,4 @@
-GNOME Desktop:
+"GNOME Desktop":
   pkg.group_installed
     
 install_vnc:
