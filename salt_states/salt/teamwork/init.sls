@@ -98,6 +98,15 @@ server_execute:
     - group: teamwork
     - require:
       - file: teamwork_sym
+
+admin_execute:
+  file.managed:
+    - name: /opt/local/teamwork/bin/teamwork_administrator
+    - mode: 755
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - file: teamwork_sym
     
 stop_execute:
   file.managed:
