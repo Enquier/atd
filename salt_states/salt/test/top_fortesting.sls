@@ -72,6 +72,13 @@ base:
    - match: grain
    - dns
    - java
+   - vnc
    - teamwork
    - teamwork.config
+   - 
    
+ 'node_type:cedw':
+   - match: grain
+   - dns
+   - java
+   - 
