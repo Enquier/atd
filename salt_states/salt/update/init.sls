@@ -4,7 +4,12 @@ install_saltrepo:
     - baseurl: https://repo.saltstack.com/yum/rhel7
     - keyurl: https://repo.saltstack.com/yum/rhel7/SALTSTACK-GPG-KEY.pub
 
-
+/etc/pki/rpm-gpg/SALTSTACK-GPG-KEY.pub:
+  file.managed:
+    - source: https://repo.saltstack.com/yum/rhel7/SALTSTACK-GPG-KEY.pub
+    - user: root
+    - group: root
+    
 update_os:
   pkg.uptodate:
     - refresh: True
