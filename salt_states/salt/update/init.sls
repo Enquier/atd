@@ -3,7 +3,7 @@ saltstack-repo:
     - humanname: SaltStack repo for RHEL/CentOS 7
     - baseurl: https://repo.saltstack.com/yum/rhel7
     - gpgcheck: 1
-    - gpgkey: https://repo.saltstack.com/yum/rhel6/SALTSTACK-GPG-KEY.pub
+    - gpgkey: https://repo.saltstack.com/yum/rhel7/SALTSTACK-GPG-KEY.pub
     - enabled: 1
     
 update_os:
