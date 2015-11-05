@@ -1,6 +1,5 @@
 saltstack-repo:
   pkgrepo.managed:
-    - name: SaltStack repo for RHEL/CentOS 7
     - humanname: SaltStack repo for RHEL/CentOS 7
     - baseurl: https://repo.saltstack.com/yum/rhel7
     - gpgcheck: 1
