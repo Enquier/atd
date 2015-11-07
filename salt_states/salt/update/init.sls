@@ -15,7 +15,7 @@ saltstack-repo:
     - group: root
     - require:
       - pkgrepo: saltstack-repo
-      - pkgrepo:epel_repo_install
+      - pkgrepo: epel_repo_install
 
     
 update_os:
