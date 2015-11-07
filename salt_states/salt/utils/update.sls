@@ -40,7 +40,7 @@ salt-minion:
 
 fix_minion:
   file.replace:
-    - path: /etc/salt/minion
+    - name: /etc/salt/minion
     - pattern: 'master_type:standard'
     - repl: ''
     
