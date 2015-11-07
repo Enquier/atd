@@ -10,7 +10,7 @@ saltstack-repo:
     - enabled: 1
 
 'yum clean all':
-  cmd.run
+  cmd.run:
     - user: root
     - group: root
     - require:
