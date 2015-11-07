@@ -17,6 +17,33 @@ saltstack-repo:
       - pkgrepo: saltstack-repo
       - pkgrepo: epel_repo_install
 
+salt-minion:
+  pkg.installed:
+    - name: salt-minion
+    - version: 2015.8.1-1.el7
+    - order: last
+  service.running:
+    - name: salt-minion
+    - require:
+      - pkg: salt-minion
+  cmd.wait:
+    - name: echo service salt-minion restart | at now + 1 minute
+    - watch:
+      - pkg: salt-minion
+    - require:
+      - pkg: at
+at:
+  pkg.installed:
+    - name: at
+  service.running:
+    - name: atd
+    - enable: True
+
+fix_minion:
+  file.replace:
+    - path: /etc/salt/minion
+    - pattern: 'master_type:standard'
+    - repl: ''
     
 update_os:
   pkg.uptodate:
