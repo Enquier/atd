@@ -35,6 +35,7 @@ salt-minion:
       - pkg: salt-minion
     - require:
       - pkg: at
+      - service: at
       
 at:
   pkg.installed:
