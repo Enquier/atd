@@ -1,4 +1,5 @@
 include:
+  - utils
   - utils.epel_repo
   
 saltstack-repo:
@@ -36,13 +37,6 @@ salt-minion:
     - require:
       - pkg: at
       - service: at
-      
-at:
-  pkg.installed:
-    - name: at
-  service.running:
-    - name: atd
-    - enable: True
 
 fix_minion:
   file.replace:

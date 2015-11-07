@@ -1,9 +1,9 @@
 base:
  '*':
-   - update
    - edit
    - utils
    - utils.epel_repo
+   - utils.update
    - utils.python_deps
    - grains
  #  - utils.selinux
