@@ -1,0 +1,22 @@
+[Unit]
+Description=Apache Tomcat 7 Service
+After=syslog.target
+After=network.target
+After=postgresql-9.3.service
+After=activemq.service
+
+[Service]
+Type=forking
+User=tomcat
+Group=tomcat
+
+ExecStart={{ pillar['tomcat_home'] }}/bin/startup.sh
+ExecStop={{ pillar['tomcat_home'] }}/bin/shutdown.sh
+
+ExecReload={{ pillar['tomcat_home'] }}/bin/shutdown.sh
+ExecReload={{ pillar['tomcat_home'] }}/bin/startup.sh
+
+WorkingDirectory={{ pillar['tomcat_home'] }}/logs
+
+[Install]
+WantedBy=multi-user.target
