@@ -30,7 +30,7 @@ salt-minion:
     - require:
       - pkg: salt-minion
   cmd.wait:
-    - name: echo systemctl restart salt-minion | at now + 1 minute
+    - name: 'echo systemctl restart salt-minion | at now + 1 minute'
     - watch:
       - pkg: salt-minion
     - require:
