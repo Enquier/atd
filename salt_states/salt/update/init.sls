@@ -22,16 +22,20 @@ salt-minion:
     - name: salt-minion
     - version: 2015.8.1-1.el7
     - order: last
+    - require:
+      - pkgrepo: saltstack-repo
+      - pkgrepo: epel_repo_install
   service.running:
     - name: salt-minion
     - require:
       - pkg: salt-minion
   cmd.wait:
-    - name: echo service salt-minion restart | at now + 1 minute
+    - name: echo systemctl restart salt-minion | at now + 1 minute
     - watch:
       - pkg: salt-minion
     - require:
       - pkg: at
+      
 at:
   pkg.installed:
     - name: at
@@ -50,6 +54,6 @@ update_os:
     - refresh: True
     - require:
       - cmd: 'yum clean all'
-      - pkgrepo: saltstack-repo
-      - pkgrepo: epel_repo_install
+      - pkg: salt-minion
+      
       
