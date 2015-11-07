@@ -42,7 +42,7 @@ fix_minion:
   file.replace:
     - name: /etc/salt/minion
     - pattern: 'master_type:standard'
-    - repl: ''
+    - repl: 'master_type:str'
     
 update_os:
   pkg.uptodate:
