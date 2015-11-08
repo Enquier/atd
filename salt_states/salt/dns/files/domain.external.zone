@@ -14,12 +14,7 @@ $TTL 86400
           604800      ;Expire
           86400       ;Minimum TTL
         )
-{%- if grains['dns_type'] == 'master' %}    
-{%- set masterhost = grains['farm_name'] %}
-{%- elif grains['dns_type'] == 'slave' %}
-{%- set masterdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
-{%- set masterhost = masterdict[0][1]['farm_name'] %}          
-{% endif %}  
+ 
 ; Resolve nameserver hostnames.
 {% for ns, host in salt.mine.get('node_type:ns', 'grains.item', expr_form='grain').items() -%}
 @		IN	NS		{{ host['farm_name'] }}.{{ myDomain }}
@@ -30,7 +25,7 @@ $TTL 86400
 {{ hostdict[0][1]['farm_name'] }}		IN	A		{{ ip[0] }}
 {% endfor %}
 
-{#
+
 ; Resolve External Queries to IP
 {% for record, data in salt.grains.get('publicrecord').items() %}
 {%- if record == 'at' %} 
@@ -38,4 +33,4 @@ $TTL 86400
 {%- else %}
 {{ record }}		IN	{{ data.type }}		{{ data.value }}
 {%- endif -%}
-{% endfor %} #}
+{% endfor %}
