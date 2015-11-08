@@ -20,10 +20,10 @@ $TTL 3H
 {% endfor -%}
 ; Resolve nameserver hostnames to IP.
 {%- for server, ip in salt.mine.get(listedDomain|join, 'internal_ip_addrs', expr_form='grain').items() %}
-{%- set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() %}
+{%- for server, hostdict in salt.mine.get(server, 'grains.item', expr_form='glob').items() %}
 {%- set ipdict = salt['nminc_utils.strsplit'](ip[0],'.') %}
 {%- if salt['nminc_utils.strsplit'](reverse,'.')|length == 1 %}
-{{ ipdict[3] }}.{{ ipdict[2] }}.{{ ipdict[1] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}
+{{ ipdict[3] }}.{{ ipdict[2] }}.{{ ipdict[1] }}		IN	PTR		{{ hostdict['farm_name'] }}.{{ myDomain }}
 {%- elif salt['nminc_utils.strsplit'](reverse,'.')|length == 2 %}
 {{ ipdict[3] }}.{{ ipdict[2] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}
 {%- elif salt['nminc_utils.strsplit'](reverse,'.')|length == 3 %}
