@@ -28,5 +28,6 @@ $TTL 3H
 {{ ipdict[3] }}.{{ ipdict[2] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}
 {%- elif salt['nminc_utils.strsplit'](reverse,'.')|length == 3 %}
 {{ ipdict[3] }}		IN	PTR		{{ hostdict[0][1]['farm_name'] }}.{{ myDomain }}
+{% endif -%}
 {% endfor -%}
 {% endfor -%}
