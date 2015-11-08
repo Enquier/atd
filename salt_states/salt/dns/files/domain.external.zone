@@ -23,8 +23,8 @@ $TTL 86400
 {% for server, ip in salt.mine.get(listedDomain|join, 'internal_ip_addrs', expr_form='grain').items() %}
 {%- for server, hostdict in salt.mine.get(server, 'grains.item', expr_form='glob').items() -%}
 {{ hostdict['farm_name'] }}		IN	A		{{ ip[0] }}
-{%- endfor %}
-{%- endfor %}
+{%- endfor -%}
+{% endfor %}
 
 
 ; Resolve External Queries to IP
