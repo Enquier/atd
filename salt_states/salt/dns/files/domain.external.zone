@@ -24,7 +24,7 @@ $TTL 86400
 {%- for server, hostdict in salt.mine.get(server, 'grains.item', expr_form='glob').items() -%}
 {{ hostdict['farm_name'] }}		IN	A		{{ ip[0] }}
 {%- endfor %}
-{% endfor %}
+{%- endfor %}
 
 
 ; Resolve External Queries to IP
