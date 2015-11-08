@@ -4,7 +4,7 @@
 {%- set masterhost = grains['farm_name'] %}
 {%- elif grains['dns_type'] == 'slave' %}
 {%- set hostdict = salt.mine.get('G@dns_type:master', 'grains.item', expr_form='glob').items() %}
-{%- set masterhost = hostdict[0][1]['farm_name'] %}
+{%- set masterhost = hostdict[1]['farm_name'] %}
 {%- endif -%}
 $TTL 86400
 @		IN	SOA		{{ masterhost }}.{{ myDomain }} root.{{ myDomain }}		(
@@ -22,7 +22,7 @@ $TTL 86400
 ; Resolve nameserver hostnames to IP.   
 {% for server, ip in salt.mine.get(listedDomain|join, 'internal_ip_addrs', expr_form='grain').items() %}
 {%- set hostdict = salt.mine.get(server, 'grains.item', expr_form='glob').items() -%}
-{{ hostdict[0][1]['farm_name'] }}		IN	A		{{ ip }}
+{{ hostdict[1]['farm_name'] }}		IN	A		{{ ip }}
 {% endfor %}
 
 
