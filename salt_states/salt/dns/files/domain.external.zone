@@ -30,7 +30,7 @@ $TTL 86400
 {{ hostdict[0][1]['farm_name'] }}		IN	A		{{ ip[0] }}
 {% endfor %}
 
-{%
+{#
 ; Resolve External Queries to IP
 {% for record, data in salt.grains.get('publicrecord').items() %}
 {%- if record == 'at' %} 
@@ -38,4 +38,4 @@ $TTL 86400
 {%- else %}
 {{ record }}		IN	{{ data.type }}		{{ data.value }}
 {%- endif -%}
-{% endfor %} %}
+{% endfor %} #}
