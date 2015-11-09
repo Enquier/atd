@@ -1,13 +1,15 @@
 include:
   - utils
   - utils.epel_repo
+
+{% set majver = grains['osmajorrelease'] %}
   
 saltstack-repo:
   pkgrepo.managed:
-    - humanname: SaltStack repo for RHEL/CentOS 7
-    - baseurl: https://repo.saltstack.com/yum/rhel7
+    - humanname: SaltStack repo for RHEL/CentOS {{ majver }}
+    - baseurl: https://repo.saltstack.com/yum/rhel{{ majver }}
     - gpgcheck: 1
-    - gpgkey: https://repo.saltstack.com/yum/rhel7/SALTSTACK-GPG-KEY.pub
+    - gpgkey: https://repo.saltstack.com/yum/rhel{{ majver }}/SALTSTACK-GPG-KEY.pub
     - enabled: 1
 
 'yum clean all':
@@ -21,7 +23,7 @@ saltstack-repo:
 salt-minion:
   pkg.installed:
     - name: salt-minion
-    - version: 2015.8.1-1.el7
+    - version: 2015.8.1-1.el{{ majver }}
     - order: last
     - require:
       - pkgrepo: saltstack-repo
