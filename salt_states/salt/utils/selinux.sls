@@ -15,5 +15,7 @@ selinux_pkgs:
     - user: root
     - group: root
 
-permissive:
-  selinux.mode
+"setenforce permissive":
+  cmd.run:
+    - user: root
+    - group: root
