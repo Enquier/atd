@@ -1,6 +1,6 @@
 {% if grains['os'] == 'Amazon' %}
 {% set rhel = 6 %}
-{% elseif grains['os'] == 'CentOS' %}
+{% elif grains['os'] == 'CentOS' %}
 {% set rhel = grains['osmajorrelease'] %}
 {% endif %}
 
