@@ -70,7 +70,8 @@ rstart_teamwork:
   module.run:
     - name: service.start
     - m_name: teamwork
-    - require: rstop_teamwork
+    - require: 
+      - rstop_teamwork
 {% else %}
 start_teamwork:
   module.run:
