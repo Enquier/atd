@@ -1,15 +1,19 @@
+{% if grains['os'] == 'Amazon' %}
+{% set rhel = 6 %}
+{% elseif grains['os'] == 'CentOS' %}
+{% set rhel = grains['osmajorrelease'] %}
+{% endif %}
+
 include:
   - utils
   - utils.epel_repo
-
-{% set majver = grains['osmajorrelease'] %}
-  
+ 
 saltstack-repo:
   pkgrepo.managed:
-    - humanname: SaltStack repo for RHEL/CentOS {{ majver }}
-    - baseurl: https://repo.saltstack.com/yum/rhel{{ majver }}
+    - humanname: SaltStack repo for RHEL/CentOS {{ rhel }}
+    - baseurl: https://repo.saltstack.com/yum/rhel{{ rhel }}
     - gpgcheck: 1
-    - gpgkey: https://repo.saltstack.com/yum/rhel{{ majver }}/SALTSTACK-GPG-KEY.pub
+    - gpgkey: https://repo.saltstack.com/yum/rhel{{ rhel }}/SALTSTACK-GPG-KEY.pub
     - enabled: 1
 
 'yum clean all':
@@ -23,7 +27,7 @@ saltstack-repo:
 salt-minion:
   pkg.installed:
     - name: salt-minion
-    - version: 2015.8.1-1.el{{ majver }}
+    - version: 2015.8.1-1.el{{ rhel }}
     - order: last
     - require:
       - pkgrepo: saltstack-repo
