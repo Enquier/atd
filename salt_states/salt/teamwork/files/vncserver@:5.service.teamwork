@@ -35,9 +35,11 @@ After=syslog.target network.target
 
 [Service]
 Type=forking
+User=teamwork
+Group=wheel
 # Clean any existing files in /tmp/.X11-unix environment
 ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
-ExecStart=/sbin/runuser -l teamwork -c "/usr/bin/vncserver %i"
+ExecStart=/usr/bin/vncserver %i
 PIDFile=/home/teamwork/.vnc/%H%i.pid
 ExecStop=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
 
