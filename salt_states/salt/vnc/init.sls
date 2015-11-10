@@ -1,5 +1,8 @@
 GNOME:
   pkg.group_installed
+    - skip:
+      - redhat-access-gui
+      - gvfs-obexftp:q
     
 install_vnc:
   pkg.installed:
