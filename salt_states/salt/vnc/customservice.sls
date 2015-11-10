@@ -19,13 +19,14 @@ setup_vnc_user:
     - group: {{ group }}
     - require:
       - user: {{ user }}
+      - group: {{ group }}
 
 "systemctl daemon-reload":
   cmd.run:
     - user: root
     - group: root
     - require:
-      - module: setup_vnc)_user
+      - module: setup_vnc_user
 
 "systemctl start vncserver@:5.service":
   cmd.run:
