@@ -9,6 +9,54 @@ enable_teamwork:
 {% endif %}
 
 {% if grains['TEAMWORK_LIC_INSTALLED'] == False %} 
+replace_props:
+  file.managed:
+    - name: /opt/local/teamwork/bin/teamwork_server.properties
+    - source: salt://teamwork/files/teamwork_server.properties.default
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+
+replace_stop_props:
+  file.managed:
+    - name: /opt/local/teamwork/bin/stop_teamwork_server.properties
+    - source: salt://teamwork/files/stop_teamwork_server.properties.default
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+
+add_muserver_props:
+  file.managed:
+    - name: /opt/local/teamwork/data/muserver.properties
+    - source: salt://teamwork/files/muserver.properties.default
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+
+add_tw_console_props:
+  file.managed:
+    - name: /opt/local/teamwork/bin/teamwork_console.properties
+    - source: salt://teamwork/files/teamwork_console.properties.default
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+      
 copy_lic_key:
   file.managed:
     - name: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
@@ -44,6 +92,11 @@ stop_licensed_server:
 TEAMWORK_LIC_INSTALLED:
   grains.present:
     - value: True
+    - require:
+      - file: replace_props
+      - file: replace_stop_props
+      - file: add_muserver_props
+      - file: add_tw_console_props
       
 rm_lock_file2:
   file.absent:
