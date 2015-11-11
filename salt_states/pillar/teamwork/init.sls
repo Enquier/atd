@@ -4,6 +4,8 @@
   tw_lic: twpub-nminc-co.lic
 {% elif grains['id'] == 'twpub1.nminc.co' %}
   tw_lic: twpub-nminc-co.lic
+{% elif grains['id'] == 'testtw.nminc.co' %}
+  tw_lic: twpub-nminc-co.lic
 {% else %}
   tw_lic: none.lic
 {% endif %}
