@@ -51,16 +51,22 @@ base:
    - tomcat.apache_apr
    - tomcat.server_config
    - utils.swftools
+{% if grains['MMS_INSTALLED'] == False %}   
    - database
    - database.postgresqlREPO
    - database.installPostgresql
    - database.postgresqlAlfDBcreate
+{% endif %}
+{% if grains['MMS_INSTALLED'] == False %} 
+   - alfresco.chk_version
    - alfresco
 #   - alfresco.copy
    - alfresco.deploy
    - alfresco.amps_deploy
    - alfresco.configure
    - alfresco.start
+   - alfresco.set_mms_release_grain
+{% endif %}
    
  'node_type:ns':
    - match: grain

@@ -1,4 +1,7 @@
 {% set  md_ver = grains['MAGICDRAW_VERSION'] %}
+
+#REMEMBER THAT FIREWALLD SOMEHOW GETS TURNED ON IN TEAMWORK
+
 teamwork:
   group:
     - present

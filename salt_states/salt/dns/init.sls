@@ -2,7 +2,7 @@
 Salt Formula by Charles Galey cgaley@nomagic.com
 Developed for NMInc
 #}
-{% if grains['farm_name'] == 'www' %}
+{% if grains['domain'] != 'nminc.co.' %}
 {% set myIP = grains['fqdn_ip4'] %}
 {% else %}
 {% set myIP = salt.network.ip_addrs('eth0', 'cidr="172.31.0.0/16"') %}

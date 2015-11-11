@@ -16,7 +16,7 @@ include:
   {% set edition = "alfresco-enterprise" %}
 {% endif %}
 
-{% if 1 == salt['cmd.retcode']('test -f tomcat_home/webapps/alfresco.war') %}
+{% if 1 == salt['cmd.retcode']('test -e tomcat_home/webapps/alfresco.war') %}
 alfresco_copy_bins:
   file.recurse:
     - name: {{ pillar['tomcat_home'] }}/bin

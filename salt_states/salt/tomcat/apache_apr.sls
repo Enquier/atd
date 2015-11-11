@@ -30,6 +30,7 @@ compile_apr:
     - name: cd /usr/src/tomcat-native-1.1.33-src/jni/native; ./configure --with-apr=/usr/bin/apr-1-config --with-java-home=/usr/lib/jvm/java --with-ssl=yes --prefix=/usr; make && make install
 
 set_ld_env:
-  file.append:
+  file.managed:
     - name: /etc/profile.d/libtcnative.sh
-    - text: export LD_LIBRARY_PATH=/usr/lib
+    - content: |
+        export LD_LIBRARY_PATH=/usr/lib
