@@ -18,7 +18,7 @@ include:
    
 {% if salt['service.disabled']('named') %}
 enable_named:
-  module.run
+  module.run:
     - name: service.enable
     - m_name: named
 {% endif %}
