@@ -73,7 +73,7 @@ base:
    - dns
    - java
    - vnc
-   - vnc.customservice
+   - vnc.service
    - teamwork
    - teamwork.config
    - teamwork.vnc_config
