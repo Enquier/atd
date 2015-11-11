@@ -1,5 +1,5 @@
 GNOME:
-  pkg.group_installed
+  pkg.group_installed:
     - skip:
       - redhat-access-gui
       - gvfs-obexftp:q
