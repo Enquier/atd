@@ -2,7 +2,7 @@
 {% set mms = grains['MMS_INSTALLED'] %}
 {% else %}
 {% set mms = False %}
-
+{% endif %}
 base:
  '*':
    - edit
