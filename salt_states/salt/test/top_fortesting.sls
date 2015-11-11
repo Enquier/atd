@@ -1,3 +1,8 @@
+{% if grains['node_type'] == 'allinone' %}
+{% set mms = grains['MMS_INSTALLED'] %}
+{% else %}
+{% set mms = False %}
+
 base:
  '*':
    - edit
@@ -51,14 +56,11 @@ base:
    - tomcat.apache_apr
    - tomcat.server_config
    - utils.swftools
-{% if grains['MMS_INSTALLED'] == False %}   
+{% if mms == False %}   
    - database
    - database.postgresqlREPO
    - database.installPostgresql
-   - database.postgresqlAlfDBcreate
-{% endif %}
-   - alfresco.chk_version
-{% if grains['MMS_INSTALLED'] == False %} 
+   - database.postgresqlAlfDBcreate 
    - alfresco
    - alfresco.deploy
    - alfresco.amps_deploy
