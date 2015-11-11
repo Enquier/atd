@@ -35,7 +35,7 @@ function main() {
    getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/share" "media-viewers" "jar"
   
   # docbookgen is needed for configuration
-  getLatestArtifact "libs-release-local" "gov/nasa/jpl/mbee/docbookgen" "docbookgen" "tgz"
+  getLatestArtifact "libs-release-local" "gov/nasa/jpl/mbee/docbookgen" "docbookgen" "tar.gz"
 
   if [[ $releaseOrSnapshot == release ]]; then
     repoRepository="libs-release-local"

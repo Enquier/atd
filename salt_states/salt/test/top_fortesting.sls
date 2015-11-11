@@ -57,10 +57,9 @@ base:
    - database.installPostgresql
    - database.postgresqlAlfDBcreate
 {% endif %}
-{% if grains['MMS_INSTALLED'] == False %} 
    - alfresco.chk_version
+{% if grains['MMS_INSTALLED'] == False %} 
    - alfresco
-#   - alfresco.copy
    - alfresco.deploy
    - alfresco.amps_deploy
    - alfresco.configure
