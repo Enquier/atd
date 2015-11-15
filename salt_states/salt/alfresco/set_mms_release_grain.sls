@@ -18,7 +18,7 @@ MMS_INSTALLED:
 
 MMS_RELEASE_INSTALLED:
   grains.present:
-    - value: {{ grains['MMS_RELEASE']
+    - value: {{ grains['MMS_RELEASE'] }}
     - require:
       - sls: alfresco.amps_deploy
       - sls: tomcat
