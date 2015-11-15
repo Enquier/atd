@@ -18,7 +18,7 @@ mine_set:
     - tgt: {{ data['id'] }}
     - require:
       - local: grains_set
-    - args
+    - args:
       - init.mine
 
 highstate_run:
