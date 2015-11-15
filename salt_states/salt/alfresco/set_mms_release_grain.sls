@@ -9,6 +9,7 @@ will be installed.
 include:
   - alfresco.amps_deploy
   - tomcat
+
 MMS_INSTALLED:
   grains.present:
     - value: True
@@ -18,7 +19,7 @@ MMS_INSTALLED:
 
 MMS_RELEASE_INSTALLED:
   grains.present:
-    - value: {{ grains['MMS_RELEASE'] }}
+    - value: {{ grains['MMS_RELEASE_VERSION'] }}
     - require:
       - sls: alfresco.amps_deploy
       - sls: tomcat
