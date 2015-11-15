@@ -7,10 +7,10 @@ Modified by Sophie Wong
 activemq:
   group:
     - present
-    - gid: 507
+    - gid: 509
   user:
     - present
-    - uid: 507
+    - uid: 509
     - groups: 
       - activemq
     - require:

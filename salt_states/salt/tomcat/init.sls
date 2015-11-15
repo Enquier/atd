@@ -54,6 +54,8 @@ tomcat_sym:
     - group: tomcat
     - require: 
       - archive: apache_tomcat7_unpack
+      - user: tomcat
+      - group: tomcat
     - if_missing: {{ pillar['tomcat_home'] }}/webapps
     - recurse:
       - user
@@ -95,6 +97,8 @@ add_tomcat_systemd:
     - name: systemctl daemon-reload && systemctl enable tomcat.service
     - user: root
     - group: root
+    - require:
+      - file: /usr/lib/systemd/system/tomcat.service
 
 {{ pillar['tomcat_home'] }}/bin/setenv.sh:
   file.managed:
