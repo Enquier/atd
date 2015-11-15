@@ -1,3 +1,4 @@
+{%- set myDomain = grains['domain'] %}
 {%- if grains['domain'] != 'nminc.co.' %}
 {%- set myIP = grains['fqdn_ip4'] %}
 {%- else %}
