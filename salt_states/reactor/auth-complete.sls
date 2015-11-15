@@ -1,24 +1,32 @@
 {# When an server connects, run state.highstate. #}
-grains_set:
-  cmd.state.apply:
+init_sls:
+  local.state.apply:
     - tgt: {{ data['id'] }}
     - arg:
-      - grains
+      - init
+
+grains_set:
+  local.state.apply:
+    - tgt: {{ data['id'] }}
+    - require:
+      - local: init_sls
+    - arg:
+      - init.grains
 
 highstate_run:
-  cmd.state.highstate:
+  local.state.highstate:
     - tgt: {{ data['id'] }}
     - ret: local
     - require: 
-      - cmd: grains_set
+      - local: grains_set
 
 {% if grains['node_type'] != 'ns-master' %}    
 update_dns:
-  cmd.state.apply:
+  local.state.apply:
     - tgt: 'node_type:ns-master'
     - expr_form: grain
     - arg:
       - dns.records
     - require: 
-      - cmd: grains_set
+      - local: grains_set
 {% endif %}

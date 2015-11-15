@@ -9,8 +9,6 @@ base:
    - utils
    - utils.epel_repo
    - utils.update
-   - utils.python_deps
-   - grains
  #  - utils.selinux
 ##   - ldap
    - sshd
