@@ -13,12 +13,20 @@ grains_set:
     - arg:
       - init.grains
 
+mine_set:
+  local.state.apply:
+    - tgt: {{ data['id'] }}
+    - require:
+      - local: grains_set
+    - args
+      - init.mine
+
 highstate_run:
   local.state.highstate:
     - tgt: {{ data['id'] }}
     - ret: local
     - require: 
-      - local: grains_set
+      - local: mine_set
 
 {% if grains['node_type'] != 'ns-master' %}    
 update_dns:
@@ -28,5 +36,5 @@ update_dns:
     - arg:
       - dns.records
     - require: 
-      - local: grains_set
+      - local: min_set
 {% endif %}
