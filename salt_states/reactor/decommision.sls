@@ -6,7 +6,7 @@ minion_term:
 
 update_dns:
   local.state.apply:
-    - tgt: 'dbs_type:master'
+    - tgt: 'dns_type:master'
     - expr_form: grain
     - arg:
       - dns.records
