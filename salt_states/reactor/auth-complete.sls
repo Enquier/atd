@@ -36,5 +36,5 @@ update_dns:
     - arg:
       - dns.records
     - require: 
-      - local: min_set
+      - local: mine_set
 {% endif %}
