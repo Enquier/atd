@@ -4,6 +4,7 @@ Developed for JPL/NASA Summer 2014
 #}
 include:
  - alfresco
+ - tomcat
  - alfresco.amps_deploy
 
 {% set admin_pass = pillar['alfresco_server_password'] %}
@@ -15,22 +16,30 @@ include:
     - template: jinja
     - user: tomcat
     - group: tomcat
+    - require:
+      - sls: tomcat
 
 {% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' and grains['domain'] == 'nminc.co' %}
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/common-ldap-context.xml:
   file.managed:
     - source: salt://alfresco/files/common-ldap-context.xml.default
     - makedirs: True
+    - require:
+      - sls: tomcat
 
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication.properties:
   file.managed:
     - source: salt://alfresco/files/ldap-authentication.properties-nminctest
     - makedirs: True
+    - require:
+      - sls: tomcat
 
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication-context.xml:
   file.managed:
     - source: salt://alfresco/files/ldap-authentication-context.xml.default
     - makedirs: True
+    - require:
+      - sls: tomcat
 
 cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/subsystems/Authentication/alfrescoNtlm {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication:
   cmd.run
@@ -65,6 +74,8 @@ update_tomcat_permissions:
     - recurse:
       - user
       - group
+    - require:
+      - sls: tomcat
 
 update_alf_data_permissions:
   file.directory:

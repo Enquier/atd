@@ -79,6 +79,7 @@ update_permissions:
     - name: {{ pillar['tomcat_home'] }}
     - user: tomcat
     - group: tomcat
+    - makedirs: False
     - recurse:
       - user
       - group
