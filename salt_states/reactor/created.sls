@@ -1,14 +1,13 @@
 {# When an server finishes deploying, run init then highstate. #}
-{% if grains['domain'] == '' %}
 init_sls:
   local.state.apply:
-    - tgt: {{ data['id'] }}
+    - tgt: {{ data['name'] }}
     - arg:
       - init
 
 grains_set:
   local.state.apply:
-    - tgt: {{ data['id'] }}
+    - tgt: {{ data['name'] }}
     - require:
       - local: init_sls
     - arg:
@@ -16,17 +15,15 @@ grains_set:
 
 mine_set:
   local.state.apply:
-    - tgt: {{ data['id'] }}
+    - tgt: {{ data['name'] }}
     - require:
       - local: grains_set
     - args:
       - init.mine
 
-{% endif %}
-
 highstate_run:
   local.state.highstate:
-    - tgt: {{ data['id'] }}
+    - tgt: {{ data['name'] }}
     - ret: local
     - require: 
       - local: mine_set
