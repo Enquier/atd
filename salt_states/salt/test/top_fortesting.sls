@@ -55,7 +55,6 @@ base:
    - utils.swftools
 {% if mms == False %}   
    - database
-   - database.postgresqlREPO
    - database.installPostgresql
    - database.postgresqlAlfDBcreate 
    - alfresco

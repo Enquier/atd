@@ -28,12 +28,16 @@ copy_alfresco_war:
   cmd.run:
     - cwd: {{ pillar['tomcat_home'] }}/webapps
     - name: cp alfresco.war alfresco.war-`date +%s`.bak
+    - require:
+      - sls: tomcat
 
 copy_share_war:
   cmd.run:
     - cwd: {{ pillar['tomcat_home'] }}/webapps
     - name: cp share.war share.war-`date +%s`.bak
-
+    - require:
+      - sls: tomcat
+      
 copy_deploy_scripts:
   file.recurse:
     - name: /tmp/atd/salt_states/salt/alfresco/files/scripts
@@ -71,6 +75,7 @@ change_tomcat_ownership:
     - name: {{ pillar['tomcat_home'] }}
     - user: tomcat
     - group: tomcat
+    - makedirs: False
     - recurse:
       - user
       - group

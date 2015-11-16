@@ -4,6 +4,7 @@ Developed for JPL/NASA Summer 2014
 #}
 include:
   - alfresco
+  - tomcat
 
 {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl:
   file.managed:
@@ -14,12 +15,16 @@ include:
     - user: tomcat
     - group: tomcat
     - makedirs: True
+    - require:
+      - sls: tomcat
 
 {{ pillar['tomcat_home'] }}/webapps/share/scripts/vieweditor/images:
   file.directory:    
     - user: tomcat
     - group: tomcat
     - makedirs: True
+    - require:
+      - sls: tomcat
 
 {% if 'ea' in grains['farm_name'] %}
 
@@ -58,7 +63,7 @@ fix_mmsapp_footer:
     - pattern: |
         \$rootScope.mms_footer = '.*';
     - repl: |
-        $rootScope.mms_footer = 'No Magic Inc PROPRIETARY — Not for Public Release or Redistribution';
+        $rootScope.mms_footer = 'No Magic Inc CONFDENTIAL — Not for Public Release or Redistribution';
   
 {% elif 'www' in grains['farm_name'] %}
 
