@@ -2,7 +2,7 @@
 {% if data['data']['event'] == 'destroyed instance' %}
 minion_term:
   wheel.key.delete:
-    - match: {{ data['name'] }}
+    - match: {{ name }}
 
 update_dns:
   local.state.apply:
