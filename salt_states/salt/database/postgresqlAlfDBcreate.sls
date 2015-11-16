@@ -33,4 +33,6 @@ create_alfresco_user:
     - createdb: alfresco
     - user: postgres
     - password: alfresco
+    - require:
+      - sls: database.installPostgresql
 

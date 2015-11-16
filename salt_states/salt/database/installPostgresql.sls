@@ -16,6 +16,8 @@ postgres_initdb:
   cmd.run:
    - name: /usr/pgsql-9.3/bin/postgresql93-setup initdb
    - onlyif: test ! -e /var/lib/pgsql/9.3/data/pg_hba.conf
+   - require:
+     - pkg: postgresql
 
 postgresql-server:
   pkg:
@@ -31,6 +33,9 @@ postgresql-server:
    - watch:
      - file: /var/lib/pgsql/9.3/data/pg_hba.conf
      - file: /var/lib/pgsql/9.3/data/postgresql.conf
+   - require:
+     - user: postgres
+     - group: postgres
 
 /var/lib/pgsql/9.3/data/pg_hba.conf:
   file.managed:
@@ -38,9 +43,17 @@ postgresql-server:
     - user: postgres
     - group: postgres
     - template: jinja
+    - require:
+      - user: postgres
+      - group: postgres
+      - pkg: postgresql-server
 
 /var/lib/pgsql/9.3/data/postgresql.conf:
   file.managed:
     - source: salt://database/files/postgresql.conf.default
     - user: postgres
     - group: postgres
+    - require:
+      - user: postgres
+      - group: postgres
+      - pkg: postgresql-server
