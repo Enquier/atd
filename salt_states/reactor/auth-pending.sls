@@ -1,21 +1,21 @@
 {# server faild to authenticate -- remove accepted key #}
-{% if not result and ( id.endswith('nminc.co') or id.endswith('openmbee.com') ) %}
+{% if not data['result'] and ( data['id'].endswith('nminc.co') or data['id'].endswith('openmbee.com') ) %}
 minion_remove:
   wheel.key.delete:
-    - match: {{ id }} minion_rejoin:
+    - match: {{ data['id'] }} minion_rejoin:
   cmd.cmd.run:
     - tgt: salt
     - arg:
-      - ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "{{ id }}" 'sleep 10 && /etc/init.d/salt-minion restart'
+      - ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no "{{ data['id'] }}" 'sleep 10 && /etc/init.d/salt-minion restart'
 {% endif %}
 
 {# server is sending new key -- accept this key #}
-{% if act == 'pend' and id.endswith('nminc.co') %}
+{% if data['act'] == 'pend' and data['id'].endswith('nminc.co') %}
 minion_add:
   wheel.key.accept:
-    - match: {{ id }}
-{% elif act == 'pend' and id.endswith('openmbee.com') %}
+    - match: {{ data['id'] }}
+{% elif data['act'] == 'pend' and data['id'].endswith('openmbee.com') %}
 minion_add:
   wheel.key.accept:
-    - match: {{ id }}
+    - match: {{ data['id'] }}
 {% endif %}
