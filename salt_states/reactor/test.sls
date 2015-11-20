@@ -1,7 +1,10 @@
 context_event:
-  local.module.run:
-    - tgt: ea.nminc.co
+  local.file.managed:
+    - tgt: 'farm_name: salt'
+    - expr_form: grain
     - args:
-      - name: event.fire_master 
-      - data: |
-          {"data" : "{{ show_full_context }}"}
+      - name: /var/log/salt/context
+      - user: root
+      - group: root
+      - content: |
+          {{ show_full_context }}
