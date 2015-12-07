@@ -2,7 +2,8 @@ adt/salt_states/srv/salt/utils
 ==========
 
 Salt formulas for utilities that all systems require. 
-
+includes at configuration
+disables "git://" unsecure text protocol
 
 swftools.sls
 ===
