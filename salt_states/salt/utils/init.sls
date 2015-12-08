@@ -19,7 +19,9 @@ at:
     - name: atd
     - enable: True
     
-"git config --global url."https://".insteadOf git://":
+secure_git:
   cmd.run:
+    - name: |
+        git config --global url."https://".insteadOf git://
     - user: root
     - group: root
