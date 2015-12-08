@@ -33,3 +33,4 @@ update_dns:
 {% endif %}
 
 
+sudo salt-call event.send 'myevents/test/created' '{'tag':'myevents/test/created', 'data':{'profile': 'test', '_stamp': '2015-12-08T19:06:07.003459', 'name': 'test.nminc.co', 'instance_id': 'i-e151ec57', 'provider': 'nminc_aws:ec2', 'event': 'created instance'}}'
