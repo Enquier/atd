@@ -28,7 +28,7 @@ highstate_run:
     - require: 
       - local: mine_set
 
-{% if grains['node_type'] != 'ns-master' %}    
+{% if grains['node_type'] != 'ns' %}    
 update_dns:
   local.state.apply:
     - tgt: 'dns_type:master'
