@@ -2,13 +2,13 @@
 {% if grains['init'] == True %}
 mine_set:
   local.state.apply:
-    - tgt: {{ name }}
+    - tgt: {{ data['id'] }}
     - args:
       - init.mine
 
 highstate_run:
   local.state.highstate:
-    - tgt: {{ name }}
+    - tgt: {{ data['id'] }}
     - ret: local
     
 {% endif %}

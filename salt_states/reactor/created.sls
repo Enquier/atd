@@ -1,13 +1,13 @@
 {# When a server finishes deploying, run init #} 
 init_sls:
   local.state.apply:
-    - tgt: {{ name }}
+    - tgt: {{ data['name'] }}
     - arg:
       - init
 
 grains_set:
   local.state.apply:
-    - tgt: {{ name }}
+    - tgt: {{ data['name'] }}
     - require:
       - local: init_sls
     - arg:
@@ -15,7 +15,7 @@ grains_set:
 
 flag_set:
   grains.present:
-    - tgt: {{ name }}
+    - tgt: {{ data['name'] }}
     - args:
       - init.setflag
     - require:
