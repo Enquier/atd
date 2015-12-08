@@ -6,10 +6,10 @@ Sophie Wong
 tomcat:
   group:
     - present
-    - gid: 504
+    - gid: 1000
   user:
     - present
-    - uid: 504
+    - uid: 1000
     - groups: 
       - tomcat
     - require:
@@ -20,10 +20,10 @@ tomcat:
 postgres:
   group:
     - present
-    - gid: 502
+    - gid: 2000
   user:
     - present
-    - uid: 502
+    - uid: 2000
     - groups:
       - postgres
     - require:

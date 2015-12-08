@@ -1,10 +1,10 @@
 flexlm:
   group:
     - present
-    - gid: 505
+    - gid: 5000
   user:
     - present
-    - uid: 505
+    - uid: 5000
     - groups: 
       - flexlm
       - wheel

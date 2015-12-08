@@ -5,10 +5,10 @@
 teamwork:
   group:
     - present
-    - gid: 510
+    - gid: 9000
   user:
     - present
-    - uid: 510
+    - uid: 9000
     - groups: 
       - teamwork
       - wheel

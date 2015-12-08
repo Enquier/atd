@@ -31,10 +31,10 @@ pgdg93-source:
 postgres:
   group:
     - present
-    - gid: 502
+    - gid: 2000
   user:
     - present
-    - uid: 502
+    - uid: 2000
     - groups:
       - postgres
     - require:

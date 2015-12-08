@@ -2,10 +2,10 @@
 cedw:
   group:
     - present
-    - gid: 510
+    - gid: 10000
   user:
     - present
-    - uid: 510
+    - uid: 10000
     - groups: 
       - cedw
       - wheel
