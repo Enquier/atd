@@ -2,5 +2,5 @@
   file.managed:
     - user: root
     - group: root
-    - contents: |
-        {{ show_full_context }}
+    - source: salt://utils/files/context
+    - template: jinja
