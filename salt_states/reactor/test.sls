@@ -3,4 +3,4 @@ test_log_context:
     - tgt: {{ data['id'] }}
     - arg:
       - /var/log/salt/context
-	  - args='{{ show_full_context }}'
+      - args='{{ show_full_context }}'
