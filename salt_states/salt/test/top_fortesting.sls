@@ -3,6 +3,10 @@
 {% else %}
 {% set mms = False %}
 {% endif %}
+test:
+ '*':
+   - state
+ 
 base:
  '*':
    - edit
