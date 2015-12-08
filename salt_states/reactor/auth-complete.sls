@@ -34,7 +34,7 @@ highstate_run:
 {% if grains['node_type'] != 'ns-master' %}    
 update_dns:
   local.state.apply:
-    - tgt: 'dns_type: master'
+    - tgt: 'dns_type:master'
     - expr_form: grain
     - arg:
       - dns.records
