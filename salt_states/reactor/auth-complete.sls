@@ -1,5 +1,5 @@
 {# When an server finishes deploying, run init then highstate. #}
-{% if grains['domain'] == '' %}
+{% if grains['init'] == False %}
 init_sls:
   local.state.apply:
     - tgt: {{ data['id'] }}
@@ -14,22 +14,15 @@ grains_set:
     - arg:
       - init.grains
 
-mine_set:
-  local.state.apply:
+flag_set:
+  grains.present:
     - tgt: {{ data['id'] }}
-    - require:
-      - local: grains_set
     - args:
-      - init.mine
+      - init.setflag
+    - require:
+      - local: mine_set
 
 {% endif %}
-
-highstate_run:
-  local.state.highstate:
-    - tgt: {{ data['id'] }}
-    - ret: local
-    - require: 
-      - local: mine_set
 
 {% if grains['node_type'] != 'ns' %}    
 update_dns:
@@ -41,3 +34,8 @@ update_dns:
     - require: 
       - local: mine_set
 {% endif %}
+
+highstate_run:
+  local.state.highstate:
+    - tgt: {{ data['id'] }}
+    - ret: local
