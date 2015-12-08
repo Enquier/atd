@@ -18,3 +18,8 @@ at:
   service.running:
     - name: atd
     - enable: True
+    
+git config --global url."https://".insteadOf git://
+  cmd.run
+    - user: root
+    - group: root
