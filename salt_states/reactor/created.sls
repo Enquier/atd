@@ -20,7 +20,7 @@ grains_set:
       - init.grains
 
 flag_set:
-  grains.present:
+  local.grains.present:
     - tgt: {{ data.name }}
     - args:
       - init.setflag
