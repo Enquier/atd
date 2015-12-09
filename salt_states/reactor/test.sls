@@ -1,5 +1,5 @@
 test_log_context:
   local.test.echo:
-    - tgt: {{ data['id'] }}
+    - tgt: test2.nminc.co
     - arg:
       - {{ show_full_context() }}
