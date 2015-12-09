@@ -1,5 +1,5 @@
 test_log_context:
-  local.state.apply:
+  local.test.echo:
     - tgt: {{ data['id'] }}
     - arg:
-      - utils.context
+      - {{ show_full_context() }}
