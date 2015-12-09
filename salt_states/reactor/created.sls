@@ -1,5 +1,5 @@
 {# When a server finishes deploying, run init #} 
-{% set event_data = received['data'] %}
+{% set event_data = received %}
 init_sls:
   local.state.apply:
     - tgt: {{ event_data['name'] }}
