@@ -1,14 +1,19 @@
 {# When a server finishes deploying, run init #} 
-{% set event_data = received %}
+test_log_context:
+  local.test.echo:
+    - tgt: salt.nminc.co.
+    - arg:
+      - {{ data }}
+      
 init_sls:
   local.state.apply:
-    - tgt: {{ event_data['name'] }}
+    - tgt: {{ data.name }}
     - arg:
       - init
 
 grains_set:
   local.state.apply:
-    - tgt: {{ event_data['name'] }}
+    - tgt: {{ data.name }}
     - require:
       - local: init_sls
     - arg:
@@ -16,7 +21,7 @@ grains_set:
 
 flag_set:
   grains.present:
-    - tgt: {{ event_data['name'] }}
+    - tgt: {{ data.name }}
     - args:
       - init.setflag
     - require:

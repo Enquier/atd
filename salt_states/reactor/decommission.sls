@@ -1,8 +1,8 @@
 {# Server is being terminated -- remove accepted key #}
-{% if data['data']['event'] == 'destroyed instance' %}
+{% if data.event == 'destroyed instance' %}
 minion_term:
   wheel.key.delete:
-    - match: {{ name }}
+    - match: {{ data.name }}
 
 update_dns:
   local.state.apply:
