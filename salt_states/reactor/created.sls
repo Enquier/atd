@@ -19,7 +19,7 @@ grains_set:
     - arg:
       - init.grains
 
-flag_set:
+flag_set_and_restart:
   local.grains.present:
     - tgt: {{ data.name }}
     - args:
@@ -35,5 +35,8 @@ update_dns:
     - arg:
       - dns.records
     - require: 
-      - local: mine_set
+      - local: flag_set_and_restart
 {% endif %}
+
+
+  

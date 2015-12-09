@@ -2,9 +2,12 @@
 Installs pip and dependencies for custom modules
 #}
 
-python-pip:
-  pkg.latest
-  
+install_prereqs:
+  pkg.installed:
+    - names:
+      - python-pip
+      - at
+    
 install_pexpect:
   pip.installed:
     - name: pexpect == 3.2
