@@ -1,13 +1,14 @@
 {# When a server finishes deploying, run init #} 
+{% set event_data = received['data'] %}
 init_sls:
   local.state.apply:
-    - tgt: {{ data['name'] }}
+    - tgt: {{ event_data['name'] }}
     - arg:
       - init
 
 grains_set:
   local.state.apply:
-    - tgt: {{ data['name'] }}
+    - tgt: {{ event_data['name'] }}
     - require:
       - local: init_sls
     - arg:
@@ -15,7 +16,7 @@ grains_set:
 
 flag_set:
   grains.present:
-    - tgt: {{ data['name'] }}
+    - tgt: {{ event_data['name'] }}
     - args:
       - init.setflag
     - require:
