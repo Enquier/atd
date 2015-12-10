@@ -1,21 +1,6 @@
-{# When a server finishes deploying, run init #} 
-test_log_context:
-  local.test.echo:
-    - tgt: salt.nminc.co.
-    - arg:
-      - {{ data }}
-      
-init_sls:
-  local.state.apply:
-    - tgt: {{ data.name }}
-    - arg:
-      - init
-
 grains_set:
   local.state.apply:
     - tgt: {{ data.name }}
-    - require:
-      - local: init_sls
     - arg:
       - init.grains
 
@@ -37,6 +22,3 @@ update_dns:
     - require: 
       - local: flag_set_and_restart
 {% endif %}
-
-
-  

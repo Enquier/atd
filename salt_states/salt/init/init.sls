@@ -13,3 +13,4 @@ install_pexpect:
     - name: pexpect == 3.2
     - require:
       - pkg: python-pip
+      
