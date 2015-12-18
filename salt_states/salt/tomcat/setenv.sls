@@ -28,7 +28,7 @@ set_java_mem:
     - marker_start: "### START :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - marker_end: "### END :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - content: |
-        export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx28672m"
+        export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx24576m"
     - require:
       - sls: tomcat
 
@@ -74,7 +74,7 @@ set_java_mem:
     - marker_end: "### END :: SALT :: set_java_mem Generated Automatically DO NOT EDIT!!###"
     - require:
       - sls: tomcat
-    - content: export JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=2048m -Xms28672m -Xmx28672m"
+    - content: export JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=2048m -Xms24576m -Xmx24576m"
       
 {% elif grains['node_type'] == 'build' %}
 
