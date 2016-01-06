@@ -40,7 +40,7 @@ ldap.authentication.escapeCommasInBind=false
 ldap.authentication.escapeCommasInUid=false
 
 # Comma separated list of user names who should be considered administrators by default
-ldap.authentication.defaultAdministratorUserNames=Administrator,cgaley,{{ pillar['ldap_queryname'] }}
+ldap.authentication.defaultAdministratorUserNames=Administrator,cgaley@nminc.local,{{ pillar['ldap_queryname'] }}
 
 # This flag enables use of this LDAP subsystem for user and group
 # synchronization. It may be that this subsytem should only be used for 

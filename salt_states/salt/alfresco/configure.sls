@@ -19,7 +19,7 @@ include:
     - require:
       - sls: tomcat
 
-{% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' and grains['domain'] == 'nminc.co' %}
+{% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' and grains['domain'] == 'nminc.co.' %}
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/common-ldap-context.xml:
   file.managed:
     - source: salt://alfresco/files/common-ldap-context.xml.default
