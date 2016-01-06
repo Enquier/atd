@@ -1,8 +1,8 @@
-{{ if grains['farm_name'] == 'ea' }}
-{{ set name = 'No Magic Model Based Enterprise Architecture' }}
-{{ else }}
-{{ set name = id }}
-{{ endif }}
+{% if grains['farm_name'] == 'ea' %}
+{% set name = 'No Magic Model Based Enterprise Architecture' %}
+{% else %}
+{% set name = id %}
+{% endif %}
 
 <@markup id="css" >
    <#-- CSS Dependencies -->
@@ -84,13 +84,13 @@
             </@markup>
          </form>
       </@markup>
-{{ if grains['farm_name'] == 'ea' }}
+{% if grains['farm_name'] == 'ea' %}
       <@markup id="forgot">
         <#if error>
         <div class="error"><a href=http://dc01.us.nomagic.com/AdaxesSelfService/>Forgot Password?</a></div>
         </#if>
        </@markup>       
-{{ endif }}      
+{% endif %}      
       <@markup id="footer">
          <span class="faded tiny">THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
       </@markup>
