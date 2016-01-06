@@ -3,11 +3,11 @@ include:
 
 {% if grains['JAVA_VERSION'] == 8 %}
 
-set_CATALINA_OPTS:
+set_catalina_opts:
   file.blockreplace:
     - name: {{ pillar['tomcat_home'] }}/bin/setenv.sh
-    - marker_start: "### START :: SALT :: set_CATALINA_OPTS Generated Automatically DO NOT EDIT!!###"
-    - marker_end: "### END :: SALT :: set_CATALINA_OPTS Generated Automatically DO NOT EDIT!!###"
+    - marker_start: "### START :: SALT :: set_catalina_opts Generated Automatically DO NOT EDIT!!###"
+    - marker_end: "### END :: SALT :: set_catalina_opts Generated Automatically DO NOT EDIT!!###"
     - require:
       - sls: tomcat
     - content: |
@@ -48,11 +48,11 @@ set_java_mem:
 
 {% elif grains ['JAVA_VERSION'] == 7 %}
 
-set_CATALINA_OPTS:
+set_catalina_opts:
   file.blockreplace:
     - name: {{ pillar['tomcat_home'] }}/bin/setenv.sh
-    - marker_start: "### START :: SALT :: set_CATALINA_OPTS Generated Automatically DO NOT EDIT!!###"
-    - marker_end: "### END :: SALT :: set_CATALINA_OPTS Generated Automatically DO NOT EDIT!!###"
+    - marker_start: "### START :: SALT :: set_catalina_opts Generated Automatically DO NOT EDIT!!###"
+    - marker_end: "### END :: SALT :: set_catalina_opts Generated Automatically DO NOT EDIT!!###"
     - require:
       - sls: tomcat
     - content: |
