@@ -49,7 +49,7 @@
       <#if errorDisplay == "container">
       <@markup id="error">
          <#if error>
-         <div class="error">${msg("message.loginautherror")}</div>
+         <div class="error">${msg("message.loginautherror")} {% if grains['farm_name'] == 'ea' %}<a href=http://dc01.us.nomagic.com/AdaxesSelfService/>Forgot Password?</a>{% endif %}</div>
          <#else>
          <script type="text/javascript">//<![CDATA[
             document.cookie = "_alfTest=_alfTest";
@@ -84,17 +84,16 @@
             </@markup>
          </form>
       </@markup>
-{% if grains['farm_name'] == 'ea' %}
-      <@markup id="forgot">
-        <#if error>
-        <div class="error"><a href=http://dc01.us.nomagic.com/AdaxesSelfService/>Forgot Password?</a></div>
-        </#if>
-       </@markup>       
-{% endif %}      
+      
+{%- if grains['farm_name'] == 'ea' -%}      
       <@markup id="footer">
-         <span class="faded tiny">THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
+        <span class="faded tiny">No Magic Inc CONFDENTIAL * Not for Public Release or Redistribution</span>
       </@markup>
-
+{% else %}
+    <@markup id="footer">
+        <span class="faded tiny">THIS OPENMBEE INSTANCE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES</span>  
+      </@markup>
+{% endif %}
 
       </div>
    </@>

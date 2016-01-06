@@ -17,7 +17,7 @@ ldap.authentication.allowGuestLogin=false
 # If not set, an LDAP query involving ldap.synchronization.personQuery and ldap.synchronization.userIdAttributeName will 
 # be performed to resolve the DN dynamically. This allows directories to be structured and doesn't require the user ID to
 # appear in the DN.
-ldap.authentication.userNameFormat=%s@nminc.local
+ldap.authentication.userNameFormat=%s
 
 # The LDAP context factory to use
 ldap.authentication.java.naming.factory.initial=com.sun.jndi.ldap.LdapCtxFactory
@@ -79,7 +79,7 @@ ldap.synchronization.personQuery=(objectclass\=person)
 ldap.synchronization.personDifferentialQuery=(&(objectclass\=person)(!(modifyTimestamp<\={0})))
 
 # The group search base restricts the LDAP group query to a sub section of tree on the LDAP server.
-ldap.synchronization.groupSearchBase=ou\=Security Groups,ou\=Alfresco,dc\=nminc,dc\=local
+ldap.synchronization.groupSearchBase=ou\=Personnel,dc\=nminc,dc\=local
 
 # The user search base restricts the LDAP user query to a sub section of tree on the LDAP server.
 ldap.synchronization.userSearchBase=ou\=Personnel,dc\=nminc,dc\=local
@@ -88,7 +88,7 @@ ldap.synchronization.userSearchBase=ou\=Personnel,dc\=nminc,dc\=local
 ldap.synchronization.modifyTimestampAttributeName=modifyTimestamp
 
 # The timestamp format. Unfortunately, this varies between directory servers.
-ldap.synchronization.timestampFormat=yyyyMMddHHmmss'Z'
+ldap.synchronization.timestampFormat=yyyyMMddHHmmss.sT
 
 # The attribute name on people objects found in LDAP to use as the uid in Alfresco
 ldap.synchronization.userIdAttributeName=userPrincipalName

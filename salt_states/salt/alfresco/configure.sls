@@ -20,26 +20,29 @@ include:
       - sls: tomcat
 
 {% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' and grains['domain'] == 'nminc.co.' %}
-{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/common-ldap-context.xml:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap-ad/common-ldap-context.xml:
   file.managed:
     - source: salt://alfresco/files/common-ldap-context.xml.default
+    - template: jinja
     - makedirs: True
     - require:
-      - sls: tomcat
+      - sls: alfresco.amps_deploy
 
-{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication.properties:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap-ad/ldap1/ldap-authentication.properties:
   file.managed:
     - source: salt://alfresco/files/ldap-authentication.properties-nminctest
     - makedirs: True
+    - template: jinja
     - require:
-      - sls: tomcat
+      - sls: alfresco.amps_deploy
 
-{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap/ldap1/ldap-authentication-context.xml:
+{{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication/ldap-ad/ldap1/ldap-authentication-context.xml:
   file.managed:
     - source: salt://alfresco/files/ldap-authentication-context.xml.default
     - makedirs: True
+    - template: jinja
     - require:
-      - sls: tomcat
+      - sls: alfresco.amps_deploy
 
 cp -rp {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/subsystems/Authentication/alfrescoNtlm {{ pillar['tomcat_home'] }}/shared/classes/alfresco/extension/subsystems/Authentication:
   cmd.run
@@ -55,7 +58,7 @@ set_admin_pass:
         \${adminpassword}
     - repl: "{{ admin_pass }}"
     - require:
-      - cmd: deploy_script
+      - sls: alfresco.amps_deploy
 
 set_admin_user:
    file.replace:
@@ -64,7 +67,7 @@ set_admin_user:
         \${adminusername}
     - repl: "{{ admin_user }}"
     - require:
-      - cmd: deploy_script
+      - sls: alfresco.amps_deploy
 
 update_tomcat_permissions:
   file.directory:
