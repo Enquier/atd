@@ -58,7 +58,7 @@ fix_mmsapp_footer:
     - pattern: |
         \$rootScope.mms_footer = '.*';
     - repl: |
-        $rootScope.mms_footer = 'No Magic Inc CONFDENTIAL — Not for Public Release or Redistribution';
+        $rootScope.mms_footer = 'No Magic Inc CONFDENTIAL * Not for Public Release or Redistribution';
   
 {% elif 'www' in grains['farm_name'] %}
 
