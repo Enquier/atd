@@ -1,4 +1,4 @@
-{{ if grains[['farm_name']] == 'ea' }}
+{{ if grains['farm_name'] == 'ea' }}
 {{ set name = 'No Magic Model Based Enterprise Architecture' }}
 {{ else }}
 {{ set name = id }}
