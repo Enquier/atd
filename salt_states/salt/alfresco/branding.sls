@@ -27,7 +27,7 @@ include:
     - require:
       - sls: tomcat
 
-{% if grains['farm_name']== ea %}
+{% if grains['farm_name'] == 'ea' %}
 
  {# Update branding for nomagic server #}
 
