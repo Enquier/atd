@@ -84,7 +84,7 @@
             </@markup>
          </form>
       </@markup>
-{{ if name == 'ea' }}
+{{ if grains['farm_name'] == 'ea' }}
       <@markup id="forgot">
         <#if error>
         <div class="error"><a href=http://dc01.us.nomagic.com/AdaxesSelfService/>Forgot Password?</a></div>
