@@ -65,7 +65,6 @@ fix_mmsapp_footer:
 disable_bg_color:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: "elems\\[ii\\]\\.setAttribute*"
     - repl: "//elems[ii].setAttribute"
 
