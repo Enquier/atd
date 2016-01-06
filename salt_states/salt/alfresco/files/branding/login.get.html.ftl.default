@@ -1,3 +1,9 @@
+{{ if grains[['farm_name']] == 'ea' }}
+{{ set name = 'No Magic Model Based Enterprise Architecture' }}
+{{ else }}
+{{ set name = id }}
+{{ endif }}
+
 <@markup id="css" >
    <#-- CSS Dependencies -->
    <@link href="${url.context}/res/components/guest/login.css" group="login"/>
@@ -31,10 +37,10 @@
 			<tbody>
 				<tr>
 					<td>
-						<img src="${url.context}/scripts/vieweditor/images/icon.png" width="60" height="52" alt="No Magic Model Based Enterprise Architecture" title="No Magic Model Based Enterprise Architecture">
+						<img src="${url.context}/scripts/vieweditor/images/icon.png" width="60" height="52" alt="{{ name }}" title="{{ name }}">
 					</td>
 					<td>
-					    <span style="font-size:30px;"><b>  EMS</b></span>
+					    <span style="font-size:30px;"><b>{{ name }}</b></span>
 					</td>
 				</tr>
 			</tbody>
@@ -78,12 +84,17 @@
             </@markup>
          </form>
       </@markup>
-
-<!--      
+{{ if name == 'ea' }}
+      <@markup id="forgot">
+        <#if error>
+        <div class="error"><a href=http://dc01.us.nomagic.com/AdaxesSelfService/>Forgot Password?</a></div>
+        </#if>
+       </@markup>       
+{{ endif }}      
       <@markup id="footer">
          <span class="faded tiny">THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
       </@markup>
--->
+
 
       </div>
    </@>

@@ -26,7 +26,7 @@ include:
     - require:
       - sls: tomcat
 
-{% if 'ea' in grains['farm_name'] %}
+{% if grains['farm_name']== ea %}
 
  {# Update branding for nomagic server #}
 
@@ -35,12 +35,6 @@ disable_bg_color:
     - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: "elems\\[ii\\]\\.setAttribute*"
     - repl: "//elems[ii].setAttribute"
-
-update_tile_box:
-    file.replace:
-    - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - pattern: '<b>  EMS</b>'
-    - repl: '<b>No Magic Model Based Enterprise Architecture</b>'
 
 {{ pillar['tomcat_home'] }}/webapps/share/scripts/vieweditor/images/icon.png:
   file.managed:
@@ -74,12 +68,6 @@ disable_bg_color:
     - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: "elems\\[ii\\]\\.setAttribute*"
     - repl: "//elems[ii].setAttribute"
-
-update_tile_box:
-    file.replace:
-    - path: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
-    - pattern: '<b>  EMS</b>'
-    - repl: '<b>OpenMBEE Community/b>'
 
 {{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/icon.png:
   file.managed:
