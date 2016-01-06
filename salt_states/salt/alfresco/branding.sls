@@ -86,7 +86,6 @@ disable_bg_color:
 fix_mmsapp_footer:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
-    - path: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
     - pattern: |
         \$rootScope.mms_footer = '.*';
     - repl: |
