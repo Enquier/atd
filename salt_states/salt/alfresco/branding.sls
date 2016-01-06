@@ -9,6 +9,7 @@ include:
 {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl:
   file.managed:
     - source: salt://alfresco/files/branding/login.get.html.ftl.default
+    - template: jinja
 
 {{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images:
   file.directory:

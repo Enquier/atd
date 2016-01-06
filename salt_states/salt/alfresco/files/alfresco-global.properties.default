@@ -122,7 +122,7 @@ system.workflow.engine.jbpm.enabled=false
 #-------------
 
 ######AUTHENTIFICATION CHAIN####
-{% if grains['domain'] == 'nminc.co' %}
+{% if grains['domain'] == 'nminc.co.' %}
 authentication.chain=ldap1:{{ auth }},alfrescoNtlm1:alfrescoNtlm
 {% else %}
 authentication.chain=alfrescoNtlm1:alfrescoNtlm
@@ -159,7 +159,6 @@ googledocs.googleeditable.enabled=false
 syncService.mode=OFF
 cifs.enabled=false
 
-{% elif grains['node_env'] == 'prod' %}
 # [CYL]  Override the SMTP defaults - no need to authenticate to send email messages, so null out username
 mail.host = {{ pillar['mail_host'] }}
 {% if pillar['mail_host'] == 'smtp.gmail.com' %}
@@ -167,7 +166,7 @@ mail.port=465
 mail.protocol=smtps
 mail.smtps.starttls.enable=true
 mail.smtps.auth=true
-{%- else %}
+{%- elif pillar['mail_host'] == 'mail.securence.com' %}
 mail.port = 587
 mail.smtp.starttls.enable=false
 mail.smtp.auth=true
@@ -190,4 +189,3 @@ activities.feed.notifier.enabled = false
 
 replication.enabled=true
 replication.transfer.readonly=true
-{% endif %}
