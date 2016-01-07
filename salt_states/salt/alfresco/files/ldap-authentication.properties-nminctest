@@ -40,7 +40,7 @@ ldap.authentication.escapeCommasInBind=false
 ldap.authentication.escapeCommasInUid=false
 
 # Comma separated list of user names who should be considered administrators by default
-ldap.authentication.defaultAdministratorUserNames=Administrator,cgaley@nminc.local,{{ pillar['ldap_queryname'] }}@nminc.local
+ldap.authentication.defaultAdministratorUserNames={% for admin in pillar['default_admin'] %}{{ admin }},{% endfor %}{{ pillar['ldap_queryname'] }}
 
 # This flag enables use of this LDAP subsystem for user and group
 # synchronization. It may be that this subsytem should only be used for 
@@ -51,7 +51,7 @@ ldap.synchronization.active=true
 ldap.synchronization.java.naming.security.authentication=simple
 
 # The default principal to use (only used for LDAP sync)
-ldap.synchronization.java.naming.security.principal={{ pillar['ldap_queryname'] }}@nminc.local
+ldap.synchronization.java.naming.security.principal={{ pillar['ldap_queryname'] }}
 
 # The password for the default principal (only used for LDAP sync)
 ldap.synchronization.java.naming.security.credentials={{ pillar['ldap_querypw'] }}
@@ -88,7 +88,7 @@ ldap.synchronization.userSearchBase=ou\=Personnel,dc\=nminc,dc\=local
 ldap.synchronization.modifyTimestampAttributeName=modifyTimestamp
 
 # The timestamp format. Unfortunately, this varies between directory servers.
-ldap.synchronization.timestampFormat=yyyyMMddHHmmss.sT
+ldap.synchronization.timestampFormat=yyyyMMddHHmmss.s'Z'
 
 # The attribute name on people objects found in LDAP to use as the uid in Alfresco
 ldap.synchronization.userIdAttributeName=userPrincipalName
