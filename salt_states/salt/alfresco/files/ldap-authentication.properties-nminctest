@@ -23,7 +23,7 @@ ldap.authentication.userNameFormat=%s
 ldap.authentication.java.naming.factory.initial=com.sun.jndi.ldap.LdapCtxFactory
 
 # The URL to connect to the LDAP server 
-ldap.authentication.java.naming.provider.url=ldaps://dc01.us.nomagic.com:389
+ldap.authentication.java.naming.provider.url=ldap://dc01.us.nomagic.com:389
 
 
 # The authentication mechanism to use for password validation
