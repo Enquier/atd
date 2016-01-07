@@ -51,7 +51,7 @@ disable_bg_color:
     - user: tomcat
     - group: tomcat
     
-fix_mmsapp_footer:
+fix_mmsapp_main_footer:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers/main.controller.js
     - pattern: |
