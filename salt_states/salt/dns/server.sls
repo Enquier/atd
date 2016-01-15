@@ -14,7 +14,7 @@ named:
     - present
     - uid: 6000
     - groups: 
-      - tomcat
+      - named
     - require:
       - group: named
     - shell: /sbin/nologin
