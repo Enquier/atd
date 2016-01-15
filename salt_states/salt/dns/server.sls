@@ -48,7 +48,7 @@ install_bind:
 /usr/lib/systemd/system/named.service:
   file.managed:
     - order: 1
-    - source: salt://named/files/named.service
+    - source: salt://dns/files/named.service
     - user: root
     - group: root
     - mode: 755
