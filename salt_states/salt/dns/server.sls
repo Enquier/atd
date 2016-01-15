@@ -44,3 +44,11 @@ install_bind:
     - group: named
     - require:
       - user: named
+
+/usr/lib/systemd/system/named.service:
+  file.managed:
+    - order: 1
+    - source: salt://named/files/named.service
+    - user: root
+    - group: root
+    - mode: 755
