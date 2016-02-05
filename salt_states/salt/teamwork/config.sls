@@ -115,7 +115,25 @@ start_teamwork:
       - cmd: stop_licensed_server
       - file: copy_lic_key
       - file: rm_lock_file2
-      
+
+{% if salt['service.status']('teamwork') %}
+rstop_teamwork:
+  module.run:
+    - name: service.stop
+    - m_name: teamwork
+rstart_teamwork:
+  module.run:
+    - name: service.start
+    - m_name: teamwork
+    - require: 
+      - module: rstop_teamwork
+{% else %}
+start_lic_teamwork:
+  module.run:
+    - name: service.start
+    - m_name: teamwork
+{% endif %}
+     
 {% elif grains['TEAMWORK_UPGRADE'] == True %} 
 copy_props:
   file.managed:
@@ -221,7 +239,7 @@ rm_lock_file2:
     - require:
       - module: enable_lic_key
       
-start_teamwork:
+start_upgr_teamwork:
   module.run:
     - name: service.start
     - m_name: teamwork
@@ -229,24 +247,5 @@ start_teamwork:
       - cmd: stop_licensed_server
       - file: copy_lic_key
       - file: rm_lock_file2
-{% endif %}
-
-
-{% if salt['service.status']('teamwork') %}
-rstop_teamwork:
-  module.run:
-    - name: service.stop
-    - m_name: teamwork
-rstart_teamwork:
-  module.run:
-    - name: service.start
-    - m_name: teamwork
-    - require: 
-      - module: rstop_teamwork
-{% else %}
-start_teamwork:
-  module.run:
-    - name: service.start
-    - m_name: teamwork
 {% endif %}
 
