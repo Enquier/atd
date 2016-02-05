@@ -3,7 +3,6 @@
 
 #REMEMBER THAT FIREWALLD SOMEHOW GETS TURNED ON IN TEAMWORK
 
-{% if grains['TEAMWORK_LIC_INSTALLED'] == False %} 
 teamwork:
   group:
     - present
@@ -19,7 +18,6 @@ teamwork:
       - group: teamwork
     - shell: /bin/sh
     - createhome: True
-{% endif %}
 
 teamwork_zip_deploy:
   archive.extracted:
