@@ -146,5 +146,5 @@ TEAMWORK_UPGRADE:
     - value: True
     - require:
       - file: teamwork_sym
-      - file: set_project_permissions
+      - file: set_proj_permissions
 {% endif %}
