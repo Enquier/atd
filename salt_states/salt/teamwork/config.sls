@@ -81,6 +81,7 @@ enable_lic_key:
     - user: teamwork
     - group: teamwork
     - require:
+      - pkg: prereqs
       - file: rm_lock_file
       - file: copy_lic_key
 

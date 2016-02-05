@@ -2,6 +2,11 @@
 {% set new_ver = grains['MAGICDRAW_UPGRADE'] %}
 
 #REMEMBER THAT FIREWALLD SOMEHOW GETS TURNED ON IN TEAMWORK
+prereqs:
+  pkg.latest:
+    - names:
+      - libgcc.i686
+      - libgcc
 
 teamwork:
   group:
