@@ -34,7 +34,6 @@ teamwork_sym:
       - user
       - group  
     - require:
-      - user: teamwork
       - archive: teamwork_zip_deploy
       - module: rstop_teamwork
       
@@ -91,6 +90,13 @@ MAGICDRAW_VERSION:
 TEAMWORK_LIC_INSTALLED:
   grains.present:
     - value: False
+    - require:
+      - file: teamwork_sym
+      - file: copy_project_file
+
+TEAMWORK_UPGRADE:
+  grains.present:
+    - value: True
     - require:
       - file: teamwork_sym
       - file: copy_project_file

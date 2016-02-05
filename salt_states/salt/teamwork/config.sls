@@ -112,7 +112,10 @@ start_teamwork:
       - cmd: stop_licensed_server
       - file: copy_lic_key
       - file: rm_lock_file2
-{% else %}
+      
+{% elif grains['TEAMWORK_LIC_INSTALLED'] == False %} 
+
+
 
 {% if salt['service.status']('teamwork') %}
 rstop_teamwork:
