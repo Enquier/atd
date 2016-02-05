@@ -1,16 +1,16 @@
-{% set  prev_ver = grains['MAGICDRAW_VERSION'] %}
-{% set md_ver = grains['MAGICDRAW_UPGRADE'] %}
+{% set  md_ver = grains['MAGICDRAW_VERSION'] %}
+{% set new_ver = grains['MAGICDRAW_UPGRADE'] %}
   
 teamwork_zip_deploy:
   archive.extracted:
-    - name: /opt/local/teamwork-{{ md_ver }}
-    - source: salt://teamwork/files/MagicDraw_{{ md_ver }}_teamwork_server_no_install.zip
+    - name: /opt/local/teamwork-{{ new_ver }}
+    - source: salt://teamwork/files/MagicDraw_{{ new_ver }}_teamwork_server_no_install.zip
     - archive_format: zip
-    - onlyif: test ! -e /opt/local/teamwork-{{ md_ver }}/bin/teamwork_server.properties
+    - onlyif: test ! -e /opt/local/teamwork-{{ new_ver }}/bin/teamwork_server.properties
 
 set_permissions:
   file.directory:
-    - name: /opt/local/teamwork-{{ md_ver }}
+    - name: /opt/local/teamwork-{{ new_ver }}
     - user: teamwork
     - group: teamwork
     - recurse:
@@ -27,7 +27,7 @@ rstop_teamwork:
 teamwork_sym:
   file.symlink:
     - name: /opt/local/teamwork
-    - target: /opt/local/teamwork-{{ md_ver }}
+    - target: /opt/local/teamwork-{{ new_ver }}
     - user: teamwork
     - group: teamwork
     - recurse:
@@ -75,16 +75,20 @@ console_execute:
 
 copy_project_file:
   file.copy:
-    - name: /opt/local/teamwork-{{ md_ver }}/projects
-    - source: /opt/local/teamwork-{{ prev_ver }}/projects
+    - name: /opt/local/teamwork-{{ new_ver }}/projects
+    - source: /opt/local/teamwork-{{ md_ver }}/projects
+    - user: root
+    - group: root
+
+set_proj_permissions:
+  file.directory:
+    - name: /opt/local/teamwork-{{ new_ver }}/projects
     - user: teamwork
     - group: teamwork
-      
-MAGICDRAW_VERSION:
-  grains.present:
-    - value: {{ md_ver }}
+    - recurse:
+      - teamwork
+      - teamwork
     - require:
-      - file: teamwork_sym
       - file: copy_project_file
 
 TEAMWORK_LIC_INSTALLED:

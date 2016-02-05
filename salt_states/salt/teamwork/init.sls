@@ -1,4 +1,5 @@
 {% set  md_ver = grains['MAGICDRAW_VERSION'] %}
+{% set new_ver = grains['MAGICDRAW_UPGRADE'] %}
 
 #REMEMBER THAT FIREWALLD SOMEHOW GETS TURNED ON IN TEAMWORK
 
@@ -20,14 +21,21 @@ teamwork:
 
 teamwork_zip_deploy:
   archive.extracted:
-    - name: /opt/local/teamwork-{{ md_ver }}
-    - source: salt://teamwork/files/MagicDraw_{{ md_ver }}_teamwork_server_no_install.zip
+    - name: /opt/local/teamwork-{{ new_ver }}
+    - source: salt://teamwork/files/MagicDraw_{{ new_ver }}_teamwork_server_no_install.zip
     - archive_format: zip
     - onlyif: test ! -e /opt/local/teamwork/bin/teamwork_server.properties
 
+{% if md_ver != new_ver %}
+rstop_teamwork:
+  module.run:
+    - name: service.stop
+    - m_name: teamwork
+{% endif %}
+
 set_permissions:
   file.directory:
-    - name: /opt/local/teamwork-{{ md_ver }}
+    - name: /opt/local/teamwork-{{ new_ver }}
     - user: teamwork
     - group: teamwork
     - recurse:
@@ -39,7 +47,7 @@ set_permissions:
 teamwork_sym:
   file.symlink:
     - name: /opt/local/teamwork
-    - target: /opt/local/teamwork-{{ md_ver }}
+    - target: /opt/local/teamwork-{{ new_ver }}
     - user: teamwork
     - group: teamwork
     - recurse:
@@ -112,4 +120,30 @@ add_teamwork_systemd:
     - onchanges:
       - file: copy_service
 
-    
+{% if md_ver != new_ver %}    
+copy_project_file:
+  file.copy:
+    - name: /opt/local/teamwork-{{ new_ver }}/projects
+    - source: /opt/local/teamwork-{{ md_ver }}/projects
+    - user: root
+    - group: root
+
+set_proj_permissions:
+  file.directory:
+    - name: /opt/local/teamwork-{{ new_ver }}/projects
+    - user: teamwork
+    - group: teamwork
+    - recurse:
+      - teamwork
+      - teamwork
+    - onlyif: test ! -e /opt/local/teamwork/projects
+    - require:
+      - file: copy_project_file
+
+TEAMWORK_UPGRADE:
+  grains.present:
+    - value: True
+    - require:
+      - file: teamwork_sym
+      - file: set_project_permissions
+{% endif %}

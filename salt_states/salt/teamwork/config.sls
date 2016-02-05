@@ -1,3 +1,6 @@
+{% set  md_ver = grains['MAGICDRAW_VERSION'] %}
+{% set new_ver = grains['MAGICDRAW_UPGRADE'] %}
+
 include: 
   - teamwork
 
@@ -113,8 +116,120 @@ start_teamwork:
       - file: copy_lic_key
       - file: rm_lock_file2
       
-{% elif grains['TEAMWORK_LIC_INSTALLED'] == False %} 
+{% elif grains['TEAMWORK_UPGRADE'] == True %} 
+copy_props:
+  file.managed:
+    - name: /opt/local/teamwork/bin/teamwork_server.properties
+    - source: /opt/local/teamwork-{{ md_ver }}/bin/teamwork_server.properties
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
 
+copy_stop_props:
+  file.managed:
+    - name: /opt/local/teamwork/bin/stop_teamwork_server.properties
+    - source: /opt/local/teamwork-{{ md_ver }}/bin/stop_teamwork_server.properties
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+
+copy_muserver_props:
+  file.managed:
+    - name: /opt/local/teamwork/data/muserver.properties
+    - source: /opt/local/teamwork-{{ md_ver }}/data/muserver.properties.default
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+
+copy_tw_console_props:
+  file.managed:
+    - name: /opt/local/teamwork/bin/teamwork_console.properties
+    - source: /opt/local/teamwork-{{ md_ver }}/bin/teamwork_console.properties.default
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+      
+copy_lic_key:
+  file.managed:
+    - name: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
+    - source: salt://teamwork/files/lic/{{ pillar['tw_lic'] }}
+    - makedirs: True
+    - mode: 400
+    - user: teamwork
+    - group: teamwork
+
+rm_lock_file:
+  file.absent:
+    - name: /opt/local/teamwork/.lock
+     
+enable_lic_key:
+  module.run:
+    - name: nminc_install.teamwork
+    - lic_dir: /home/teamwork/.lic/{{ pillar['tw_lic'] }}
+    - tw_dir: /opt/local/teamwork
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - file: rm_lock_file
+      - file: copy_lic_key
+
+stop_licensed_server:
+  cmd.run:
+    - name: /opt/local/teamwork/bin/stop_teamwork_server
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - file: enable_lic_key
+
+TEAMWORK_UPGRADE:
+  grains.present:
+    - value: False
+    - require:
+      - file: copy_props
+      - file: copy_stop_props
+      - file: copy_muserver_props
+      - file: copy_tw_console_props
+
+MAGICDRAW_VERSION:
+  grains.present:
+    - value: {{ new_ver }}
+    - require:
+      - file: copy_props
+      - file: copy_stop_props
+      - file: copy_muserver_props
+      - file: copy_tw_console_props
+      
+rm_lock_file2:
+  file.absent:
+    - name: /opt/local/teamwork/.lock
+    - require:
+      - module: enable_lic_key
+      
+start_teamwork:
+  module.run:
+    - name: service.start
+    - m_name: teamwork
+    - require:
+      - cmd: stop_licensed_server
+      - file: copy_lic_key
+      - file: rm_lock_file2
+{% endif %}
 
 
 {% if salt['service.status']('teamwork') %}
@@ -135,4 +250,3 @@ start_teamwork:
     - m_name: teamwork
 {% endif %}
 
-{% endif %}
