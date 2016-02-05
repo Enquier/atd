@@ -56,7 +56,6 @@ teamwork_sym:
       - user
       - group  
     - require:
-      - user: teamwork
       - archive: teamwork_zip_deploy
       
 tw_env_vars:
