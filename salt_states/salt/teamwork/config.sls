@@ -171,6 +171,15 @@ copy_muserver_props:
       - user: teamwork
       - file: teamwork_sym
 
+update_muserver_port:
+  file.replace:
+    - name: /opt/local/teamwork/data/muserver.properties
+    - pattern: "muserver.rmiregistry.port={{ md_ver }}01"
+    - repl: "muserver.rmiregistry.port={{ new_ver }}01"
+    - require:
+      - file: copy_muserver_props
+      - archive: teamwork_zip_deploy
+
 copy_tw_console_props:
   file.managed:
     - name: /opt/local/teamwork/bin/teamwork_console.properties
@@ -215,8 +224,9 @@ stop_licensed_server:
     - require:
       - file: enable_lic_key
 
-TEAMWORK_UPGRADE:
+reset_upgrade_flag:
   grains.present:
+    - name: TEAMWORK_UPGRADE
     - value: False
     - require:
       - file: copy_props
