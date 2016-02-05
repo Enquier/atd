@@ -5,9 +5,11 @@
 prereqs:
   pkg.latest:
     - names:
-      - libgcc.i686
+      - glibc
+      - glibc.i686
       - libgcc
-
+      - libgcc.i686
+      
 teamwork:
   group:
     - present
