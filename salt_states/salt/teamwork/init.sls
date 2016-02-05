@@ -24,7 +24,7 @@ teamwork_zip_deploy:
     - name: /opt/local/teamwork-{{ new_ver }}
     - source: salt://teamwork/files/MagicDraw_{{ new_ver }}_teamwork_server_no_install.zip
     - archive_format: zip
-    - onlyif: test ! -e /opt/local/teamwork/bin/teamwork_server.properties
+    - onlyif: test ! -e /opt/local/teamwork-{{ new_ver }}/bin/teamwork_server.properties
 
 {% if md_ver != new_ver %}
 rstop_teamwork:
