@@ -91,7 +91,7 @@ stop_licensed_server:
     - user: teamwork
     - group: teamwork
     - require:
-      - file: enable_lic_key
+      - module: enable_lic_key
 
 TEAMWORK_LIC_INSTALLED:
   grains.present:
