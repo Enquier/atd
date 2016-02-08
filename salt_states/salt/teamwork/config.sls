@@ -136,10 +136,10 @@ start_lic_teamwork:
 {% endif %}
      
 {% elif grains['TEAMWORK_UPGRADE'] == True %} 
-copy_props:
+replace_props:
   file.managed:
     - name: /opt/local/teamwork/bin/teamwork_server.properties
-    - source: /opt/local/teamwork-{{ md_ver }}/bin/teamwork_server.properties
+    - source: salt://teamwork/files/teamwork_server.properties.default
     - template: jinja
     - user: teamwork
     - group: teamwork
@@ -148,10 +148,10 @@ copy_props:
       - user: teamwork
       - file: teamwork_sym
 
-copy_stop_props:
+replace_stop_props:
   file.managed:
     - name: /opt/local/teamwork/bin/stop_teamwork_server.properties
-    - source: /opt/local/teamwork-{{ md_ver }}/bin/stop_teamwork_server.properties
+    - source: salt://teamwork/files/stop_teamwork_server.properties.default
     - template: jinja
     - user: teamwork
     - group: teamwork
@@ -181,10 +181,10 @@ update_muserver_port:
       - file: copy_muserver_props
       - archive: teamwork_zip_deploy
 
-copy_tw_console_props:
+add_tw_console_props:
   file.managed:
     - name: /opt/local/teamwork/bin/teamwork_console.properties
-    - source: /opt/local/teamwork-{{ md_ver }}/bin/teamwork_console.properties
+    - source: salt://teamwork/files/teamwork_console.properties.default
     - template: jinja
     - user: teamwork
     - group: teamwork
@@ -230,19 +230,19 @@ reset_upgrade_flag:
     - name: TEAMWORK_UPGRADE
     - value: False
     - require:
-      - file: copy_props
-      - file: copy_stop_props
+      - file: replace_props
+      - file: replace_stop_props
       - file: copy_muserver_props
-      - file: copy_tw_console_props
+      - file: add_tw_console_props
 
 MAGICDRAW_VERSION:
   grains.present:
     - value: {{ new_ver }}
     - require:
-      - file: copy_props
-      - file: copy_stop_props
+      - file: replace_props
+      - file: replace_stop_props
       - file: copy_muserver_props
-      - file: copy_tw_console_props
+      - file: add_tw_console_props
       
 rm_lock_file2:
   file.absent:
