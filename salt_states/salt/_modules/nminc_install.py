@@ -1,6 +1,8 @@
 import pexpect
+import logging
 
 def teamwork (lic_dir,tw_dir):
+    log = logging.getLogger(__name__)
     inst = pexpect.spawn('%s/bin/teamwork_server_nogui -key:%s' % (tw_dir, lic_dir))
     try:
         i = inst.expect(['.\'I agree\':', 'JAVA_HOME ok: /usr/lib/jvm/java'])
@@ -8,12 +10,12 @@ def teamwork (lic_dir,tw_dir):
         return (False, str(inst))
     else:
         if i==0:
-            print('Key application required')
+            log.info('Key application required')
             inst.sendline('I agree')
             try:
                 j = inst.expect('.Apply the key\? \(y/n\)')
             except:
-                print("There was something wrong with the key")
+                log.error('There was something wrong with the key')
                 print(str(inst))
                 return False
             else:
