@@ -163,7 +163,7 @@ copy_stop_props:
 copy_muserver_props:
   file.managed:
     - name: /opt/local/teamwork/data/muserver.properties
-    - source: /opt/local/teamwork-{{ md_ver }}/data/muserver.properties.default
+    - source: /opt/local/teamwork-{{ md_ver }}/data/muserver.properties
     - template: jinja
     - user: teamwork
     - group: teamwork
@@ -184,7 +184,7 @@ update_muserver_port:
 copy_tw_console_props:
   file.managed:
     - name: /opt/local/teamwork/bin/teamwork_console.properties
-    - source: /opt/local/teamwork-{{ md_ver }}/bin/teamwork_console.properties.default
+    - source: /opt/local/teamwork-{{ md_ver }}/bin/teamwork_console.properties
     - template: jinja
     - user: teamwork
     - group: teamwork
