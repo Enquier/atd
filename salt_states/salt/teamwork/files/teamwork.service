@@ -7,7 +7,7 @@ After=network.target
 User=teamwork
 Group=teamwork
 WorkingDirectory=/opt/local/teamwork/
-ExecStart=/opt/local/teamwork/bin/teamwork_server SERVICE
+ExecStart=/opt/local/teamwork/bin/teamwork_server_nogui SERVICE
 ExecStop=/opt/local/teamwork/bin/stop_teamwork_server
 
 StandardOutput=syslog
