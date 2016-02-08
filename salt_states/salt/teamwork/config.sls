@@ -26,8 +26,8 @@ replace_props:
 
 replace_stop_props:
   file.managed:
-    - name: /opt/local/teamwork/bin/stop_teamwork_server.properties
-    - source: salt://teamwork/files/stop_teamwork_server.properties.default
+    - name: /opt/local/teamwork/bin/stop_teamwork_server_nogui.properties
+    - source: salt://teamwork/files/stop_teamwork_server_nogui.properties.default
     - template: jinja
     - user: teamwork
     - group: teamwork
@@ -138,8 +138,8 @@ start_lic_teamwork:
 {% elif grains['TEAMWORK_UPGRADE'] == True %} 
 replace_props:
   file.managed:
-    - name: /opt/local/teamwork/bin/teamwork_server.properties
-    - source: salt://teamwork/files/teamwork_server.properties.default
+    - name: /opt/local/teamwork/bin/teamwork_server_nogui.properties
+    - source: salt://teamwork/files/teamwork_server_nogui.properties.default
     - template: jinja
     - user: teamwork
     - group: teamwork
