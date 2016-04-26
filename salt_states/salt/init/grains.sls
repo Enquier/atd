@@ -12,11 +12,11 @@ nodename:
 farm_name:
   grains.present:
     - value: {{ nodedict[0] }}
-    
-sync:
-  module.run:
-    - name: saltutil.sync_all
+      
+init/{{ nodename }}/grains_complete:
+  event.send:
+    - { 'name' : '{{ grains['id'] }}' }
     - require:
-      - grains: nodename
       - grains: farm_name
+      - grains: nodename
       - grains: domain

@@ -1,0 +1,20 @@
+grains_sls:
+  local.state.apply:
+    - tgt: {{ data.name }}
+    - arg:
+      - dns
+update_dns:
+  local.state.apply:
+    - tgt: 'dns_type:master'
+    - expr_form: grain
+    - arg:
+      - dns.records
+      
+event_fire:
+  local.event.send:
+    - tgt: {{ data.name }}
+    - arg:
+      - name: '/init/{{ data.name }}/domain_complete'
+    - require:
+      - local: grains_sls
+      - local: update_dns
