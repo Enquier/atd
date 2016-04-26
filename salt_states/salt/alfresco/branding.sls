@@ -27,6 +27,14 @@ include:
     - require:
       - sls: tomcat
 
+fix_share_footer:
+  file.managed:
+    - name: {{ pillar['tomcat_home'] }}/webapps/alfresco/WEB-INF/classes/alfresco/site-webscripts/org/alfresco/components/footer/footer.get_en.properties
+    - source: salt://alfresco/files/branding/footer.get_en.properties.default
+    - replace: True
+    - user: tomcat
+    - group: tomcat
+
 {% if grains['farm_name'] == 'ea' %}
 
  {# Update branding for nomagic server #}
@@ -57,7 +65,7 @@ fix_mmsapp_main_footer:
     - pattern: |
         \$rootScope.mms_footer = '.*';
     - repl: |
-        $rootScope.mms_footer = 'No Magic Inc CONFDENTIAL * Not for Public Release or Redistribution';
+        $rootScope.mms_footer = 'No Magic Inc CONFIDENTIAL * Not for Public Release or Redistribution';
  
 fix_mmsapp_footer:
   file.replace:
@@ -65,7 +73,9 @@ fix_mmsapp_footer:
     - pattern: |
         \$rootScope.mms_footer = '.*';
     - repl: |
-        $rootScope.mms_footer = 'No Magic Inc CONFDENTIAL * Not for Public Release or Redistribution';
+        $rootScope.mms_footer = 'No Magic Inc CONFIDENTIAL * Not for Public Release or Redistribution';
+
+
           
 {% elif 'www' in grains['farm_name'] %}
 

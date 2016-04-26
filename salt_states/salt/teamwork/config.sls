@@ -223,7 +223,7 @@ stop_licensed_server:
     - user: teamwork
     - group: teamwork
     - require:
-      - file: enable_lic_key
+      - module: enable_lic_key
 
 reset_upgrade_flag:
   grains.present:

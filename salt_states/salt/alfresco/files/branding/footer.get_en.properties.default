@@ -1,0 +1,7 @@
+{% if grains['farm_name'] == 'ea' %}
+{% set footer = 'No Magic Inc CONFIDENTIAL * Not for Public Release or Redistribution' %}
+{% else %}
+{% set footer = 'OpenMBEE by No Magic Inc * THIS SOFTWARE IS PROVIDED AS IS AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES' %}
+{% endif %}
+label.copyright={{ footer }}
+label.copyright.enterprise={{ footer }}

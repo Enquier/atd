@@ -49,7 +49,7 @@
       <#if errorDisplay == "container">
       <@markup id="error">
          <#if error>
-         <div class="error">${msg("message.loginautherror")} {% if grains['farm_name'] == 'ea' %}<a href=http://dc01.us.nomagic.com/AdaxesSelfService/>Forgot Password?</a>{% endif %}</div>
+         <div class="error">${msg("message.loginautherror")} {% if grains['farm_name'] == 'ea' %}Forgot Password?{% endif %}</div>
          <#else>
          <script type="text/javascript">//<![CDATA[
             document.cookie = "_alfTest=_alfTest";
@@ -87,7 +87,7 @@
       
 {%- if grains['farm_name'] == 'ea' -%}      
       <@markup id="footer">
-        <span class="faded tiny">No Magic Inc CONFDENTIAL * Not for Public Release or Redistribution</span>
+        <span class="faded tiny">No Magic Inc CONFIDENTIAL * Not for Public Release or Redistribution</span>
       </@markup>
 {% else %}
     <@markup id="footer">
