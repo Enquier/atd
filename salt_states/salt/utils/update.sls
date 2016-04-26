@@ -27,7 +27,7 @@ saltstack-repo:
 salt-minion:
   pkg.installed:
     - name: salt-minion
-    - version: 2015.8.1-1.el{{ rhel }}
+    - version: 2015.8.8-2.el{{ rhel }}
     - order: last
     - require:
       - pkgrepo: saltstack-repo
