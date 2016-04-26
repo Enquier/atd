@@ -4,5 +4,3 @@ init_sls:
     - tgt: {{ data.name }}
     - arg:
       - init
-
-  

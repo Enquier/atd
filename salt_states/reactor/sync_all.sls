@@ -6,6 +6,6 @@ event_fire:
   local.event.send:
     - tgt: {{ data.name }}
     - arg:
-      - name: '/init/{{ data.name }}/init_complete'
+      - name: '/init/{{ data.name }}/sync_complete'
     - require:
       - local: sync_all

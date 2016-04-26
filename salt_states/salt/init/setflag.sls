@@ -1,3 +1,4 @@
+{% if grains['init'] == False %}
 init:
   grains.present:
     - value: True
@@ -14,3 +15,12 @@ salt-minion:
     - require:
       - pkg: at
       - service: at
+      
+      
+ init/{{ grains['id'] }}/init_complete:
+  event.send:
+    - { 'name' : '{{ grains['id'] }}' }
+    - require:
+      - grains: init
+      - cmd: salt-minion
+{% endif %}
