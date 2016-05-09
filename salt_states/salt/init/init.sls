@@ -18,7 +18,7 @@ install_pexpect:
 init/{{ grains['id'] }}/prereq_complete:
   event.send:
     - data:
-        name : "{{ grains['id'] }}"
+        response : "Pre-requisite package installation has completed!"
     - require:
       - pkg: install_prereqs
       - pip: install_pexpect

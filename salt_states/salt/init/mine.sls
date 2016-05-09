@@ -4,6 +4,7 @@
     
 init/{{ grains['id'] }}/mine_complete:
   event.send:
-    - { 'name' : '{{ grains['id'] }}' }
+    - data:
+        response : "Mine configuration has completed!"
     - require:
       - file: /etc/salt/minion.d/mine.conf
