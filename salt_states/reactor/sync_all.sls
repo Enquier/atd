@@ -1,12 +1,12 @@
 sync_all:
   local.saltutil.sync_all:
-    - tgt: {{ data['id'] }}
+    - tgt: {{ data.id }}
     
 event_fire:
   local.event.send:
-    - tgt: {{ data.name }}
+    - tgt: {{ data.id }}
     - arg:
-      - name: '/init/{{ data.name }}/sync_complete'
+      - name: '/init/{{ data.id }}/sync_complete'
       - data: 
           response: 'Sync of grains and mine Complete!'
     - require:
