@@ -26,3 +26,12 @@ teamwork-internal		| LOCAL | 18201 Internal Teamwork Server
 
 CONFIG FILES
 ==========
+
+
+
+BOOTSTRAP
+========
+If you need to update the salt-bootstrap manually independent of salt it is located in /etc/salt/cloud.deploy.d
+or if the update has been pushed to production you can:
+
+sudo salt-cloud -u to update the script
