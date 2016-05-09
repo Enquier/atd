@@ -1,6 +1,6 @@
 {# When a server finishes deploying, run init #}       
 grains_sls:
   local.state.apply:
-    - tgt: {{ name }}
+    - tgt: {{ data.id }}
     - arg:
       - init.grains
