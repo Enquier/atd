@@ -14,7 +14,8 @@ event_fire:
   local.event.send:
     - tgt: {{ data.id }}
     - arg:
-      - name: '/init/{{ data.id }}/domain_complete'
+      - tag: '/init/{{ data.id }}/domain_complete'
+      - data: '{"response" : "Domain Name Service update complete!"}
     - require:
       - local: grains_sls
       - local: update_dns
