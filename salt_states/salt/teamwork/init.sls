@@ -130,28 +130,19 @@ add_teamwork_systemd:
 remove_new_project_file:
   file.absent:
     - name: /opt/local/teamwork-{{ new_ver }}/projects
-    
-copy_old_project_file:
-  file.directory:
-    - name: /opt/local/teamwork-{{ new_ver }}/projects
-    - source: /opt/local/teamwork-{{ md_ver }}/projects
-    - user: root
-    - group: root
-    - require:
-      - file: remove_new_project_file
 
 set_proj_permissions:
   file.directory:
     - name: /opt/local/teamwork-{{ new_ver }}/projects
+    - source: /opt/local/teamwork-{{ md_ver }}/projects
     - user: teamwork
     - group: teamwork
     - recurse:
       - teamwork
       - teamwork
-    - onlyif: test ! -e /opt/local/teamwork/projects
     - require:
-      - file: copy_old_project_file
-
+      - file: remove_new_project_file
+      
 TEAMWORK_UPGRADE:
   grains.present:
     - value: True
