@@ -132,7 +132,7 @@ remove_new_project_file:
     - name: /opt/local/teamwork-{{ new_ver }}/projects
     
 copy_old_project_file:
-  file.copy:
+  file.recurse:
     - name: /opt/local/teamwork-{{ new_ver }}/projects
     - source: /opt/local/teamwork-{{ md_ver }}/projects
     - user: root
