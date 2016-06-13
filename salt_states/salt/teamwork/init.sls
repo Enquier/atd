@@ -133,6 +133,7 @@ copy_project_file:
     - source: /opt/local/teamwork-{{ md_ver }}/projects
     - user: root
     - group: root
+    - force: True
 
 set_proj_permissions:
   file.directory:
