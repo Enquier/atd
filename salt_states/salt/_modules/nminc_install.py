@@ -3,7 +3,7 @@ import logging
 
 def teamwork (lic_dir,tw_dir):
     log = logging.getLogger(__name__)
-    inst = pexpect.spawn('%s/bin/teamwork_server NOGUI -key:%s' % (tw_dir, lic_dir))
+    inst = pexpect.spawn('%s/bin/teamwork_server_nogui -key:%s' % (tw_dir, lic_dir))
     try:
         i = inst.expect(['.\'I agree\':', 'JAVA_HOME ok: /usr/lib/jvm/java'])
     except EOFError:
