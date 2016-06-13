@@ -230,6 +230,7 @@ reset_upgrade_flag:
     - name: TEAMWORK_UPGRADE
     - value: False
     - require:
+      - module: enable_lic_key
       - file: replace_props
       - file: replace_stop_props
       - file: copy_muserver_props
@@ -239,6 +240,7 @@ MAGICDRAW_VERSION:
   grains.present:
     - value: {{ new_ver }}
     - require:
+      - module: enable_lic_key
       - file: replace_props
       - file: replace_stop_props
       - file: copy_muserver_props
