@@ -25,9 +25,8 @@ saltstack-repo:
       - pkgrepo: epel_repo_install
 
 salt-minion:
-  pkg.installed:
-    - name: salt-minion
-    - version: 2015.8.8-2.el{{ rhel }}
+  pkg.latest:
+    - name: salt
     - order: last
     - require:
       - pkgrepo: saltstack-repo
@@ -37,7 +36,7 @@ salt-minion:
     - require:
       - pkg: salt-minion
   cmd.wait:
-    - name: 'echo systemctl restart salt-minion | at now + 10 minutes'
+    - name: 'echo systemctl restart salt-minion | at now + 1 minutes'
     - watch:
       - pkg: salt-minion
     - require:
