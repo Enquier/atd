@@ -137,9 +137,6 @@ set_proj_permissions:
     - source: /opt/local/teamwork-{{ md_ver }}/projects
     - user: teamwork
     - group: teamwork
-    - recurse:
-      - user: teamwork
-      - group: teamwork
     - require:
       - file: remove_new_project_file
       
