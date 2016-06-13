@@ -138,8 +138,8 @@ set_proj_permissions:
     - user: teamwork
     - group: teamwork
     - recurse:
-      - teamwork
-      - teamwork
+      - user: teamwork
+      - group: teamwork
     - require:
       - file: remove_new_project_file
       
