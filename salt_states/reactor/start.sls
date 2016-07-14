@@ -1,5 +1,5 @@
-{% if data.id == 'salt-minion' %}
+{% if grains['init'] == True %}
 highstate_run:
   cmd.state.highstate:
-    - tgt: salt-minion
+    - tgt: {{ data.id }}
 {% endif %}
