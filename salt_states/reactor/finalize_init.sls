@@ -9,7 +9,7 @@ event_fire:
     - tgt: {{ data.id }}
     - arg:
       - tag: '/init/{{ data.id }}/init_complete'
-      - data: '{"response" : "Intialization Complete! Running HighState..."}'
+      - data: '{'response' : 'Intialization Complete! Running HighState...'}'
     - require:
       - local: flag_for_done
 
