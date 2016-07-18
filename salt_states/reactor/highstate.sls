@@ -1,4 +1,5 @@
 {# When an server starts, run mine_set then highstate. Skips if just created #}
+
 {% if grains['init'] == True %}
 
 highstate_run:
@@ -6,4 +7,10 @@ highstate_run:
     - tgt: {{ data.id }}
     - ret: local
     
+{% else %}
+init_sls:
+  local.state.apply:
+    - tgt: {{ data.id }}
+    - arg:
+      - init
 {% endif %}
