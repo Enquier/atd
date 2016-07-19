@@ -2,7 +2,6 @@
 Installs pip and dependencies for custom modules
 #}
 
-
 install_prereqs:
   pkg.installed:
     - names:
@@ -22,4 +21,3 @@ init/{{ grains['id'] }}/prereq_complete:
     - require:
       - pkg: install_prereqs
       - pip: install_pexpect
-      
