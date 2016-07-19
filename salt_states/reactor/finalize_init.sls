@@ -1,5 +1,5 @@
 flag_for_done:
-  local.state.apply:
+  local.state.sls:
     - tgt: {{ data.id }}
     - arg:
       - init.setflag

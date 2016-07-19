@@ -1,6 +1,6 @@
 {# When a server finishes deploying, run init #}       
 init_sls:
-  local.state.apply:
+  local.state.sls:
     - tgt: {{ data.id }}
     - arg:
       - init.mine

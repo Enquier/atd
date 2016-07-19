@@ -1,10 +1,10 @@
 grains_sls:
-  local.state.apply:
+  local.state.sls:
     - tgt: {{ data.id }}
     - arg:
       - dns
 update_dns:
-  local.state.apply:
+  local.state.sls:
     - tgt: 'dns_type:master'
     - expr_form: grain
     - arg:

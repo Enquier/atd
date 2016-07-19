@@ -5,7 +5,7 @@ highstate_run:
     - ret: local
 {% else %}
 init_sls:
-  local.state.apply:
+  local.state.sls:
     - tgt: {{ data.id }}
     - arg:
       - init

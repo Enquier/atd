@@ -5,7 +5,7 @@ minion_term:
     - match: {{ data.name }}
 
 update_dns:
-  local.state.apply:
+  local.state.sls:
     - tgt: 'dns_type:master'
     - expr_form: grain
     - arg:
