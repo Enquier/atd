@@ -7,6 +7,6 @@ event_fire:
     - tgt: {{ data.id }}
     - arg:
       - tag: '/init/{{ data.id }}/sync_complete'
-      - data: '{'response' : 'Sync of grains and mine Complete!'}'
+      - data: "{'response' : 'Sync of grains and mine Complete!'}"
     - require:
       - local: sync_all
