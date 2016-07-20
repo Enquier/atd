@@ -9,7 +9,7 @@ base:
    - utils
    - utils.epel_repo
    - utils.update
- #  - utils.selinux
+   - utils.selinux
 ##   - ldap
    - sshd
    
