@@ -1,4 +1,3 @@
-{% if grains['init'] == False %}
 init:
   grains.present:
     - value: True
@@ -23,4 +22,3 @@ salt-minion:
     - require:
       - grains: init
       - cmd: salt-minion
-{% endif %}
