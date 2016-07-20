@@ -39,7 +39,4 @@ update_hostnamectl:
   event.send:
     - data:
       - response: "Domain Name Service update complete!"
-    - require:
-      - local: dns_sls
-      - local: update_dns
 {% endif %}
