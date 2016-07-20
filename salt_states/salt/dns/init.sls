@@ -31,3 +31,15 @@ update_hostnamectl:
     - require:
       - file: set_hosts
       - file: set_hostname
+
+{% if grains['init']== False %}      
+event_fire:
+  local.event.send:
+    - tgt: {{ data.id }}
+    - arg:
+      - tag: '/init/{{ data.id }}/domain_complete'
+      - data: "{'response' : 'Domain Name Service update complete!'}"
+    - require:
+      - local: dns_sls
+      - local: update_dns
+{% endif %}
