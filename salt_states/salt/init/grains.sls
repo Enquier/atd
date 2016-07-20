@@ -16,7 +16,7 @@ farm_name:
 init/{{ nodename }}/grains_complete:
   event.send:
     - data: 
-        response : "Grains setup and population has completed!"
+        response: "Grains setup and population has completed!"
     - require:
       - grains: farm_name
       - grains: nodename
