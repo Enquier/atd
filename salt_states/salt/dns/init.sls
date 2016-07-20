@@ -35,7 +35,7 @@ update_hostnamectl:
       - file: set_hostname
 
 {% if grains['init']== False %}      
-/init/{{ nodename }}/domain_complete:
+init/{{ nodename }}/domain_complete:
   event.send:
     - data:
       - response: "Domain Name Service update complete!"
