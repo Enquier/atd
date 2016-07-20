@@ -8,5 +8,3 @@ highstate_run:
   local.state.highstate:
     - tgt: {{ data.id }}
     - ret: local
-    - require:
-      - local: flag_for_done
