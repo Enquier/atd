@@ -19,3 +19,4 @@ highstate_run:
     - ret: local
     - require:
       - local: event_fire
+      - local: flag_for_done
