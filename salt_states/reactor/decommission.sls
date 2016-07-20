@@ -5,8 +5,8 @@ minion_term:
     - match: {{ data.name }}
 
 mine_sync:
-  mine.update
-    - tgt: 'dns_type:master'
+  local.mine.update
+    - tgt: 'node_type:ns'
     - expr_form: grain
 
 update_dns:
