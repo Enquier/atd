@@ -17,5 +17,5 @@ event_fire:
       - tag: '/init/{{ data.id }}/domain_complete'
       - data: "{'response' : 'Domain Name Service update complete!'}"
     - require:
-      - local: grains_sls
+      - local: dns_sls
       - local: update_dns
