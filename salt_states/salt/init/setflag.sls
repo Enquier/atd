@@ -16,7 +16,7 @@ salt-minion:
       - service: at
       
       
- init/{{ grains['id'] }}/init_complete:
+init/{{ grains['id'] }}/init_complete:
   event.send:
     - { 'name' : '{{ grains['id'] }}' }
     - require:
