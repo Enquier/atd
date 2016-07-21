@@ -4,6 +4,7 @@ Developed for JPL/NASA Summer 2014
 #}
 include: 
   - database
+  - database.installPostgresql
 
 configure_minion_postgresql:
   file.append:

@@ -36,6 +36,7 @@ postgresql-server:
    - require:
      - user: postgres
      - group: postgres
+     - cmd: postgres_initdb
 
 /var/lib/pgsql/9.3/data/pg_hba.conf:
   file.managed:
