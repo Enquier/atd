@@ -47,7 +47,7 @@ function setFileVariables() {
     if [[ $hname == *europa* ]]; then
         mmsappZip=`ls -t $ampPath/evm*europa*.zip | grep $grepString | head -1`
     else
-        mmsappZip=`ls -t $ampPath/evm*.zip | grep $grepString | grep -v europa | head -1`
+        mmsappZip=`ls -t $ampPath/evm* | grep $grepString | grep -v europa | head -1`
     fi
 
     echo repoAmpFile:"   "$repoAmpFile
