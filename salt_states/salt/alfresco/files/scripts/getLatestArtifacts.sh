@@ -142,8 +142,8 @@ function downloadArtifact() {
     fi
 
     # download the actual file
-    echo "curl -s $ARTIFACTORY_URL/$repository/$package/$artifactId/$version/$srcFilename > $path/$filename"
-    curl -s $ARTIFACTORY_URL/$repository/$package/$artifactId/$version/$srcFilename > $path/$filename
+    echo "curl -s $ARTIFACTORY_URL:8443/$repository/$package/$artifactId/$version/$srcFilename > $path/$filename"
+    curl -s $ARTIFACTORY_URL:8443/$repository/$package/$artifactId/$version/$srcFilename > $path/$filename
     if [ $owner ]; then
       chown $owner $path/$filename
     fi
