@@ -34,7 +34,7 @@ postgres:
     - gid: 2000
   user:
     - present
-    - uid: 2000
+    - uid: 26
     - groups:
       - postgres
     - require:
