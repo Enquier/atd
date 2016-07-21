@@ -20,7 +20,7 @@ if [ ! -a $path ]; then
   mkdir $path
 fi
 
-ARTIFACTORY_URL='https://build.nminc.co/artifactory'
+ARTIFACTORY_URL='https://build.nminc.co:8443/artifactory'
 
 # @param releaseOrSnapshot  Specify release or snapshot to download
 # @param mmsVersion   Specify mms version (e.g., 2.0)
@@ -109,7 +109,7 @@ function getVersions() {
   if [ $mmsVersion ]; then
     latestVersion=$mmsVersion
   else
-    latestVersion=`curl -s $ARTIFACTORY_URL:8443/$repository/$package/$artifactId/maven-metadata.xml | grep latest | sed 's/<latest>//g' | sed 's/<\/latest>//g' | sed 's/ //g'`
+    latestVersion=`curl -s $ARTIFACTORY_URL/$repository/$package/$artifactId/maven-metadata.xml | grep latest | sed 's/<latest>//g' | sed 's/<\/latest>//g' | sed 's/ //g'`
   fi
   echo "    latestVersion: $latestVersion"
 }
@@ -142,8 +142,8 @@ function downloadArtifact() {
     fi
 
     # download the actual file
-    echo "curl -s $ARTIFACTORY_URL:8443/$repository/$package/$artifactId/$version/$srcFilename > $path/$filename"
-    curl -s $ARTIFACTORY_URL:8443/$repository/$package/$artifactId/$version/$srcFilename > $path/$filename
+    echo "curl -s $ARTIFACTORY_URL/$repository/$package/$artifactId/$version/$srcFilename > $path/$filename"
+    curl -s $ARTIFACTORY_URL/$repository/$package/$artifactId/$version/$srcFilename > $path/$filename
     if [ $owner ]; then
       chown $owner $path/$filename
     fi
