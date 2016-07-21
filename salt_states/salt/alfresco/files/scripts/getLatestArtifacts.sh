@@ -109,7 +109,7 @@ function getVersions() {
   if [ $mmsVersion ]; then
     latestVersion=$mmsVersion
   else
-    latestVersion=`curl -s $ARTIFACTORY_URL/$repository/$package/$artifactId/maven-metadata.xml | grep latest | sed 's/<latest>//g' | sed 's/<\/latest>//g' | sed 's/ //g'`
+    latestVersion=`curl -s $ARTIFACTORY_URL:8443/$repository/$package/$artifactId/maven-metadata.xml | grep latest | sed 's/<latest>//g' | sed 's/<\/latest>//g' | sed 's/ //g'`
   fi
   echo "    latestVersion: $latestVersion"
 }
