@@ -30,8 +30,8 @@ function main() {
   mainMmsVersion=$2
 
   # always grab the alfresco extensions
-   getLatestArtifact "libs-release-local" "org/sharextras" "javascript-console-repo" "amp"
-   getLatestArtifact "libs-release-local" "org/sharextras" "javascript-console-share" "amp"
+   getLatestArtifact "libs-release-local" "org/sharextras" "javascript-console-repo" "amp" "1.0"
+   getLatestArtifact "libs-release-local" "org/sharextras" "javascript-console-share" "amp" "1.0"
    getLatestArtifact "ext-release-local" "gov/nasa/jpl/alfresco/share" "media-viewers" "jar"
   
   # docbookgen is needed for configuration
@@ -62,8 +62,7 @@ function main() {
 
   getLatestArtifact $repoRepository "gov/nasa/jpl" $repoName "amp" $mainMmsVersion
   getLatestArtifact $repoRepository "gov/nasa/jpl" $shareName "amp" $mainMmsVersion
-
-  getNonMavenLatestArtifacts $repoRepository "gov/nasa/jpl" "evm" "zip" $mainMmsVersion
+  getLatestArtifact $repoRepository "gov/nasa/jpl" "evm" "zip" $mainMmsVersion
 
   # Need to get our patched alfresco-repository job that fixes heisenbug
   downloadArtifact "libs-release-local" "org/alfresco" "alfresco-repository" "jar" $alfrescoRepoJarVersion
