@@ -20,7 +20,7 @@ if [ ! -a $path ]; then
   mkdir $path
 fi
 
-ARTIFACTORY_URL='{{ ARTIFACTORY_HOME }}'
+ARTIFACTORY_URL='{{ grains['ARTIFACTORY_HOME'] }}'
 
 # @param releaseOrSnapshot  Specify release or snapshot to download
 # @param mmsVersion   Specify mms version (e.g., 2.0)
