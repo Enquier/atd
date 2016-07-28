@@ -44,23 +44,16 @@ base:
    - dns
    - ldap
    - activemq
-   - apache
-   - apache.mod_jk
-   - apache.enable_modjk
    - apache.alfresco_modrewrite
-   - tomcat
-   - tomcat.setenv
-   - tomcat.apache_apr
    - tomcat.server_config
    - utils.swftools
 {% if mms == False %}   
-   - database
-   - database.installPostgresql
    - database.postgresqlAlfDBcreate 
    - alfresco
    - alfresco.deploy
    - alfresco.amps_deploy
    - alfresco.configure
+   - alfresco.branding
    - alfresco.start
    - alfresco.set_mms_release_grain
 {% endif %}
