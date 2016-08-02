@@ -13,8 +13,8 @@ decompress_modjk:
     - source: http://apache.cs.utah.edu/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.41-src.tar.gz
     - archive_format: tar
     - if_missing: /usr/src/tomcat-connectors-1.2.41-src
-    - source_hash: md5=7e6f4e4dbf5261f42ddd1fdbb9ac3e32
-
+    - source_hash: md5=1e459bf50a78cab05a6c6d07fb1580e7
+    
 mod_jk_deps:
   pkg.installed:
     - names:
