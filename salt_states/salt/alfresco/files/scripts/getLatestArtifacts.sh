@@ -48,7 +48,7 @@ function main() {
   # find the artifact name (based on enterprise)
   repoName="mms-repo"
   shareName="mms-share"
-  alfrescoRepoJarVersion="4.2.f"
+  alfrescoRepoJarVersion="{{ alf_ver }}"
   if hash salt-call 2>/dev/null; then
     alf_license=`salt-call -g | awk '/ALFRESCO_LICENSE_TYPE/{getline; print}' | awk '{$1=$1}1'`
   else
