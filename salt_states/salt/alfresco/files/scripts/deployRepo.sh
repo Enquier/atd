@@ -60,7 +60,7 @@ function main() {
     if [[ $alf_license == enterprise ]]; then
       installJar $path/alfresco-repository-4.2.3.3.jar
     else
-      installJar $path/alfresco-repository-4.2.e.jar
+      installJar $path/alfresco-repository-{{ alf_ver }}.jar
     fi
     hname=`hostname`
     updateRepo $hname

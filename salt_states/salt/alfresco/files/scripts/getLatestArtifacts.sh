@@ -1,3 +1,4 @@
+{% set alf_ver = grains['ALFRESCO_VERSION'] %}
 
 #!/bin/bash
 
@@ -7,8 +8,8 @@ if [ -a {{ pillar['tomcat_home'] }} ]; then
     export path="{{ pillar['tomcat_home'] }}/amps"
     export owner="tomcat:tomcat"
 else
-    if [ -a /opt/local/alfresco-4.2.e ]; then
-        export path="/opt/local/alfresco-4.2.e/amps"
+    if [ -a /opt/local/alfresco-{{ alf_ver }} ]; then
+        export path="/opt/local/alfresco-{{ alf_ver }}/amps"
         export owner="alfresco:alfresco"
     else
         export path="."
