@@ -34,6 +34,12 @@ update_hostnamectl:
       - file: set_hosts
       - file: set_hostname
 
+update_mine:
+  module.run:
+    - name: mine.update
+    - user: root
+    - group: root
+    
 {% if grains['init']== False %}      
 init/{{ nodename }}/domain_complete:
   event.send:
