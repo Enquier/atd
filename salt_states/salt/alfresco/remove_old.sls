@@ -33,16 +33,3 @@ remove_zip_deployments:
   file.absent:
     - name: /usr/src/alfresco_deploy
 
-{% if grains['ALFRESCO_LICENSE_TYPE'] == 'community' %}
-
-remove_zip_file_ent:
-  file.absent:
-    - name: /tmp/alfresco-community.zip 
-
-{% elif grains['ALFRESCO_LICENSE_TYPE'] == 'enterprise' %}
- 
-remove_zip_file_ent:
-  file.absent:
-    - name: /tmp/alfresco-enterprise.zip
-
-{% endif %}

@@ -15,37 +15,38 @@ include:
 {% elif grains['ALFRESCO_LICENSE_TYPE'] == 'enterprise' %}
   {% set edition = "alfresco-enterprise" %}
 {% endif %}
+{% set alf_ver = grains['ALFRESCO_VERSION'] %}
 
 {% if 1 == salt['cmd.retcode']('test -e tomcat_home/webapps/alfresco.war') %}
 alfresco_copy_bins:
   file.recurse:
     - name: {{ pillar['tomcat_home'] }}/bin
-    - source: salt://alfresco/files/{{ edition }}/bin
+    - source: salt://alfresco/files/{{ edition }}-{{ alf_ver }}/bin
 
 alfresco_copy_licenses:
   file.recurse:
     - name: {{ pillar['tomcat_home'] }}/licenses
-    - source: salt://alfresco/files/{{ edition }}/licenses
+    - source: salt://alfresco/files/{{ edition }}-{{ alf_ver }}/licenses
 
 alfresco_copy_endorsed:
   file.recurse:
     - name: {{ pillar['tomcat_home'] }}/endorsed
-    - source: salt://alfresco/files/{{ edition }}/web-server/endorsed
+    - source: salt://alfresco/files/{{ edition }}-{{ alf_ver }}/web-server/endorsed
 
 alfresco_copy_lib:
   file.recurse:
     - name: {{ pillar['tomcat_home'] }}/lib
-    - source: salt://alfresco/files/{{ edition }}/web-server/lib
+    - source: salt://alfresco/files/{{ edition }}-{{ alf_ver }}/web-server/lib
 
 alfresco_copy_shared:
   file.recurse:
     - name: {{ pillar['tomcat_home'] }}/shared
-    - source: salt://alfresco/files/{{ edition }}/web-server/shared
+    - source: salt://alfresco/files/{{ edition }}-{{ alf_ver }}/web-server/shared
 
 alfresco_copy_webapps:
   file.recurse:
     - name: {{ pillar['tomcat_home'] }}/webapps
-    - source: salt://alfresco/files/{{ edition }}/web-server/webapps
+    - source: salt://alfresco/files/{{ edition }}-{{ alf_ver }}/web-server/webapps
 {% endif %}
 
 /mnt/alf_data:
