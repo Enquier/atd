@@ -76,6 +76,7 @@ change_tomcat_ownership:
     - user: tomcat
     - group: tomcat
     - makedirs: False
+    - follow_symlinks=True
     - recurse:
       - user
       - group
