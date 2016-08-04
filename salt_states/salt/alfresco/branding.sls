@@ -46,6 +46,8 @@ disable_bg_color:
     - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: "elems\\[ii\\]\\.setAttribute*"
     - repl: "//elems[ii].setAttribute"
+    - require:
+      - sls: alfresco.amps_deploy
 
 {{ pillar['tomcat_home'] }}/webapps/share/scripts/vieweditor/images/icon.png:
   file.managed:
@@ -53,13 +55,17 @@ disable_bg_color:
     - replace: True
     - user: tomcat
     - group: tomcat
-    
+    - require:
+      - sls: alfresco.amps_deploy
+
 {{ pillar['tomcat_home'] }}/webapps/share/scripts/vieweditor/images/bg.png:
   file.managed:
     - source: salt://alfresco/files/branding/openmbee.png
     - replace: True
     - user: tomcat
     - group: tomcat
+    - require:
+      - sls: alfresco.amps_deploy
     
 fix_mmsapp_main_footer:
   file.replace:
@@ -68,7 +74,9 @@ fix_mmsapp_main_footer:
         \$rootScope.mms_footer = '.*';
     - repl: |
         $rootScope.mms_footer = 'No Magic Inc CONFIDENTIAL * Not for Public Release or Redistribution';
- 
+    - require:
+      - sls: alfresco.amps_deploy
+
 fix_mmsapp_footer:
   file.replace:
     - name: {{ pillar['tomcat_home'] }}/webapps/alfresco/mmsapp/js/mms/controllers.js
@@ -76,7 +84,8 @@ fix_mmsapp_footer:
         \$rootScope.mms_footer = '.*';
     - repl: |
         $rootScope.mms_footer = 'No Magic Inc CONFIDENTIAL * Not for Public Release or Redistribution';
-
+    - require:
+       - sls: alfresco.amps_deploy
 
           
 {% elif 'www' in grains['farm_name'] %}
@@ -87,12 +96,16 @@ disable_bg_color:
     - name: {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl
     - pattern: "elems\\[ii\\]\\.setAttribute*"
     - repl: "//elems[ii].setAttribute"
+    - require:
+      - sls: alfresco.amps_deploy
 
 {{ pillar['tomcat_home'] }}/webapps/alfresco/scripts/vieweditor/images/icon.png:
   file.managed:
     - source: salt://alfresco/files/branding/OPENMBEE_LOGO_SMALL.png
     - user: tomcat
     - group: tomcat
+    - require:
+      - sls: alfresco.amps_deploy
     
 {{ pillar['tomcat_home'] }}/webapps/share/scripts/vieweditor/images/bg.png:
   file.managed:
@@ -100,6 +113,8 @@ disable_bg_color:
     - replace: True
     - user: tomcat
     - group: tomcat
+    - require:
+      - sls: alfresco.amps_deploy
     
 fix_mmsapp_main_footer:
   file.replace:
@@ -108,6 +123,8 @@ fix_mmsapp_main_footer:
         \$rootScope.mms_footer = '.*';
     - repl: |
         $rootScope.mms_footer = 'THIS SOFTWARE IS PROVIDED AS IS AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE';
+    - require:
+      - sls: alfresco.amps_deploy
 
 fix_mmsapp_footer:
   file.replace:
@@ -116,7 +133,8 @@ fix_mmsapp_footer:
         \$rootScope.mms_footer = '.*';
     - repl: |
         $rootScope.mms_footer = 'THIS SOFTWARE IS PROVIDED AS IS AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE';
-
+    - require:
+      - sls: alfresco.amps_deploy
     
 {% endif %}
 
