@@ -54,7 +54,7 @@ base:
    - alfresco.amps_deploy
    - alfresco.configure
    - alfresco.branding
-   - alfresco.start
+ #  - alfresco.start
    - alfresco.set_mms_release_grain
 {% endif %}
    
