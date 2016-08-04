@@ -3,6 +3,7 @@ Salt Formula by Ian Weaklim weaklim@jpl.nasa.gov ianw@uwyo.edu
 Developed for JPL/NASA Summer 2014
 #}
 include:
+ - alfresco.deploy
  - alfresco.amps_deploy
 
 {{ pillar['tomcat_home'] }}/shared/classes/alfresco-global.properties:
