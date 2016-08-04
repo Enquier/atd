@@ -3,9 +3,9 @@ Salt Formula by Ian Weaklim weaklim@jpl.nasa.gov ianw@uwyo.edu
 Developed for JPL/NASA Summer 2014
 #}
 include:
-  - alfresco.configure
   - alfresco.deploy
   - alfresco.amps_deploy
+  - alfresco.configure
   - tomcat
 
 {{ pillar['tomcat_home'] }}/webapps/share/WEB-INF/classes/alfresco/web-extension/site-webscripts/org/alfresco/components/guest/login.get.html.ftl:
