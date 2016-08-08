@@ -37,12 +37,11 @@ configure_mms_database:
 remove_sql_template:
   file.absent:
     - name: /usr/tmp/mms.sql
-    - user: postgres
     - require:
       - cmd: configure_mms_database
 
 MMS_DB_INSTALLED:
-  grain.present:
+  grains.present:
     - value: True
     - require: 
       - cmd: configure_mms_database
