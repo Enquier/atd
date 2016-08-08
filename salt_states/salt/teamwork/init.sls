@@ -71,6 +71,15 @@ tw_env_vars:
       - export TEAMWORK_HOME
       
 
+nogui_execute:
+  file.managed:
+    - name: /opt/local/teamwork/bin/teamwork_server_nogui
+    - mode: 755
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - file: teamwork_sym
+
 server_execute:
   file.managed:
     - name: /opt/local/teamwork/bin/teamwork_server
@@ -79,6 +88,7 @@ server_execute:
     - group: teamwork
     - require:
       - file: teamwork_sym
+
 
 admin_execute:
   file.managed:
