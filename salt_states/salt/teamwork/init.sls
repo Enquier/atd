@@ -127,6 +127,12 @@ add_teamwork_systemd:
       - file: copy_service
 
 {% if md_ver != new_ver %}    
+backup_proj:
+  file.directory:
+    - name: /tmp/projects
+    - source: /opt/local/teamwork-{{ md_ver }}/projects
+    - user: root
+
 remove_new_project_file:
   file.absent:
     - name: /opt/local/teamwork-{{ new_ver }}/projects
@@ -137,8 +143,12 @@ set_proj_permissions:
     - source: /opt/local/teamwork-{{ md_ver }}/projects
     - user: teamwork
     - group: teamwork
+    - recurse:
+      - user
+      - group
     - require:
       - file: remove_new_project_file
+      - file: backup_proj
       
 TEAMWORK_UPGRADE:
   grains.present:
