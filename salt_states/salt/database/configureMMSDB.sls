@@ -18,7 +18,7 @@ create_mms_user:
 
 
 
-{% if grains.['MMS_DB_INSTALLED'] == False %}
+{% if grains['MMS_DB_INSTALLED'] == False %}
 copy_sql_template:
   file.managed:
     - name: /usr/tmp/mms.sql
