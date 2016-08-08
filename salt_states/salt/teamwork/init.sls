@@ -34,7 +34,7 @@ teamwork_zip_deploy:
     - onlyif: test ! -e /opt/local/teamwork-{{ new_ver }}/bin/teamwork_server.properties
 
 {% if md_ver != new_ver %}
-rstop_teamwork:
+stop_teamwork:
   module.run:
     - name: service.stop
     - m_name: teamwork
