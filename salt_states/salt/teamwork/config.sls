@@ -47,7 +47,6 @@ add_muserver_props:
       - archive: teamwork_zip_deploy
       - user: teamwork
       - file: teamwork_sym
-{% endif %}
 {% elif %}
 add_muserver_props:
   file.managed:
