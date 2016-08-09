@@ -1,4 +1,4 @@
-{% set  md_ver = grains['MAGICDRAW_VERSION'] %}
+{% set  md_ver = grains['MAGICDRAW_UPDGRADE'] %}
 ldap.connection.timeout=500
 ldap.user.data.retrieval.enabled=true
 server.synchronize.scheduler.enable=true

@@ -35,7 +35,20 @@ replace_stop_props:
       - archive: teamwork_zip_deploy
       - user: teamwork
       - file: teamwork_sym
-
+{% if grains['domain'] == 'nminc.co' %}
+add_muserver_props:
+  file.managed:
+    - name: /opt/local/teamwork/data/muserver.properties
+    - source: salt://teamwork/files/muserver.properties.ldap
+    - template: jinja
+    - user: teamwork
+    - group: teamwork
+    - require:
+      - archive: teamwork_zip_deploy
+      - user: teamwork
+      - file: teamwork_sym
+{% endif %}
+{% elif %}
 add_muserver_props:
   file.managed:
     - name: /opt/local/teamwork/data/muserver.properties
@@ -47,7 +60,7 @@ add_muserver_props:
       - archive: teamwork_zip_deploy
       - user: teamwork
       - file: teamwork_sym
-
+{% endif %}
 add_tw_console_props:
   file.managed:
     - name: /opt/local/teamwork/bin/teamwork_console.properties
