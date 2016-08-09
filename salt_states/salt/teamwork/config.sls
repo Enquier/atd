@@ -26,8 +26,8 @@ replace_props:
 
 replace_stop_props:
   file.managed:
-    - name: /opt/local/teamwork/bin/stop_teamwork_server_nogui.properties
-    - source: salt://teamwork/files/stop_teamwork_server_nogui.properties.default
+    - name: /opt/local/teamwork/bin/stop_teamwork_server.properties
+    - source: salt://teamwork/files/stop_teamwork_server.properties.default
     - template: jinja
     - user: teamwork
     - group: teamwork

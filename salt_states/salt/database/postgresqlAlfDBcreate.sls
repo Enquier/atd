@@ -28,26 +28,11 @@ create_alfresco_db:
     - name: alfresco
     - template: template1
 
-create_mms_db:
-  postgres_database.present:
-    - name: mms
-    - template: template1
-
 create_alfresco_user:
   postgres_user.present:
     - name: alfresco
     - createdb: alfresco
     - user: postgres
     - password: alfresco
-    - require:
-      - sls: database.installPostgresql
-
-
-create_mms_user:
-  postgres_user.present:
-    - name: mmsuser
-    - createdb: mms
-    - user: postgres
-    - password: mmspassword
     - require:
       - sls: database.installPostgresql
